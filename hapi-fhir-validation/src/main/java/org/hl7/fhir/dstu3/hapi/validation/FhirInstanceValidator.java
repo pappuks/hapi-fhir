@@ -98,6 +98,10 @@ public class FhirInstanceValidator extends BaseValidatorBridge implements IValid
 		return profile;
 	}
 
+	public void flushCaches() {
+		myWrappedWorkerContext = null;
+	}
+
 	/**
 	 * Returns the "best practice" warning level (default is {@link BestPracticeWarningLevel#Hint}).
 	 * <p>
@@ -183,8 +187,6 @@ public class FhirInstanceValidator extends BaseValidatorBridge implements IValid
 		myStructureDefintion = theStructureDefintion;
 	}
 
-
-
 	protected List<ValidationMessage> validate(final FhirContext theCtx, String theInput, EncodingEnum theEncoding) {
 
 		WorkerContextWrapper wrappedWorkerContext = myWrappedWorkerContext;
@@ -229,6 +231,7 @@ public class FhirInstanceValidator extends BaseValidatorBridge implements IValid
 				try {
 					v.validate(null, messages, document, profile.getUrl());
 				} catch (Exception e) {
+					ourLog.error("Failure during validation", e);
 					throw new InternalErrorException("Unexpected failure while validating resource", e);
 				}
 			}
@@ -506,13 +509,13 @@ public class FhirInstanceValidator extends BaseValidatorBridge implements IValid
 		}
 
 		@Override
-		public String getVersion() {
-			return myWrap.getVersion();
+		public UcumService getUcumService() {
+			throw new UnsupportedOperationException();
 		}
 
 		@Override
-		public UcumService getUcumService() {
-			throw new UnsupportedOperationException();
+		public String getVersion() {
+			return myWrap.getVersion();
 		}
 
 		@Override

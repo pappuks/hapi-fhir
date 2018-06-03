@@ -91,6 +91,7 @@ public class TestDstu3Config extends BaseJavaConfigDstu3 {
 		return retVal;
 	}
 
+	@Override
 	@Bean()
 	public LocalContainerEntityManagerFactoryBean entityManagerFactory() {
 		LocalContainerEntityManagerFactoryBean retVal = super.entityManagerFactory();
@@ -132,7 +133,7 @@ public class TestDstu3Config extends BaseJavaConfigDstu3 {
 		requestValidator.setFailOnSeverity(null);
 		requestValidator.setAddResponseHeaderOnSeverity(null);
 		requestValidator.setAddResponseOutcomeHeaderOnSeverity(ResultSeverityEnum.INFORMATION);
-		requestValidator.addValidatorModule(instanceValidatorDstu3());
+//		requestValidator.addValidatorModule(instanceValidatorDstu3());
 		requestValidator.setIgnoreValidatorExceptions(true);
 
 		return requestValidator;

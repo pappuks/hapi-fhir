@@ -44,11 +44,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.util.AopTestUtils;
 import org.springframework.transaction.PlatformTransactionManager;
-import org.springframework.transaction.TransactionDefinition;
-import org.springframework.transaction.TransactionStatus;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.transaction.support.TransactionCallbackWithoutResult;
-import org.springframework.transaction.support.TransactionTemplate;
 
 import javax.persistence.EntityManager;
 import java.io.IOException;
@@ -216,6 +212,9 @@ public abstract class BaseJpaR4Test extends BaseJpaTest {
 	@Qualifier("myStructureDefinitionDaoR4")
 	protected IFhirResourceDao<StructureDefinition> myStructureDefinitionDao;
 	@Autowired
+	@Qualifier("myConsentDaoR4")
+	protected IFhirResourceDao<Consent> myConsentDao;
+	@Autowired
 	@Qualifier("mySubscriptionDaoR4")
 	protected IFhirResourceDaoSubscription<Subscription> mySubscriptionDao;
 	@Autowired
@@ -283,12 +282,13 @@ public abstract class BaseJpaR4Test extends BaseJpaTest {
 	}
 
 	@Before
-	@Transactional
 	public void beforeFlushFT() {
-		FullTextEntityManager ftem = Search.getFullTextEntityManager(myEntityManager);
-		ftem.purgeAll(ResourceTable.class);
-		ftem.purgeAll(ResourceIndexedSearchParamString.class);
-		ftem.flushToIndexes();
+		runInTransaction(()->{
+			FullTextEntityManager ftem = Search.getFullTextEntityManager(myEntityManager);
+			ftem.purgeAll(ResourceTable.class);
+			ftem.purgeAll(ResourceIndexedSearchParamString.class);
+			ftem.flushToIndexes();
+		});
 
 		myDaoConfig.setSchedulingDisabled(true);
 		myDaoConfig.setIndexMissingFields(DaoConfig.IndexEnabledEnum.ENABLED);

@@ -31,7 +31,6 @@ import ca.uhn.fhir.jpa.util.ScrollableResultsIterator;
 import ca.uhn.fhir.rest.api.server.RequestDetails;
 import ca.uhn.fhir.rest.server.exceptions.InternalErrorException;
 import ca.uhn.fhir.rest.server.exceptions.InvalidRequestException;
-import ca.uhn.fhir.rest.server.exceptions.PreconditionFailedException;
 import ca.uhn.fhir.rest.server.exceptions.UnprocessableEntityException;
 import ca.uhn.fhir.util.ObjectUtil;
 import ca.uhn.fhir.util.StopWatch;
@@ -56,7 +55,10 @@ import org.hl7.fhir.r4.model.CodeSystem;
 import org.hl7.fhir.r4.model.Coding;
 import org.hl7.fhir.r4.model.ConceptMap;
 import org.hl7.fhir.r4.model.ValueSet;
+import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.ApplicationContextAware;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.scheduling.annotation.Scheduled;
@@ -80,7 +82,7 @@ import java.util.stream.Collectors;
 import static org.apache.commons.lang3.StringUtils.isBlank;
 import static org.apache.commons.lang3.StringUtils.isNotBlank;
 
-public abstract class BaseHapiTerminologySvcImpl implements IHapiTerminologySvc {
+public abstract class BaseHapiTerminologySvcImpl implements IHapiTerminologySvc, ApplicationContextAware {
 	public static final int DEFAULT_FETCH_SIZE = 250;
 
 	private static final org.slf4j.Logger ourLog = org.slf4j.LoggerFactory.getLogger(BaseHapiTerminologySvcImpl.class);
@@ -123,14 +125,11 @@ public abstract class BaseHapiTerminologySvcImpl implements IHapiTerminologySvc 
 	private boolean myProcessDeferred = true;
 	@Autowired
 	private PlatformTransactionManager myTransactionMgr;
-	@Autowired(required = false)
 	private IFhirResourceDaoCodeSystem<?, ?, ?> myCodeSystemResourceDao;
-
 	private Cache<TranslationQuery, List<TermConceptMapGroupElementTarget>> myTranslationCache;
 	private Cache<TranslationQuery, List<TermConceptMapGroupElement>> myTranslationWithReverseCache;
-
-
 	private int myFetchSize = DEFAULT_FETCH_SIZE;
+	private ApplicationContext myApplicationContext;
 
 	private void addCodeIfNotAlreadyAdded(String theCodeSystem, ValueSet.ValueSetExpansionComponent theExpansionComponent, Set<String> theAddedCodes, TermConcept theConcept) {
 		if (theAddedCodes.add(theConcept.getCode())) {
@@ -207,6 +206,32 @@ public abstract class BaseHapiTerminologySvcImpl implements IHapiTerminologySvc 
 				.build();
 	}
 
+	/**
+	 * This method is present only for unit tests, do not call from client code
+	 */
+	@VisibleForTesting
+	public void clearDeferred() {
+		myDeferredValueSets.clear();
+		myDeferredConceptMaps.clear();
+		myDeferredConcepts.clear();
+	}
+
+	/**
+	 * This method is present only for unit tests, do not call from client code
+	 */
+	@VisibleForTesting
+	public void clearTranslationCache() {
+		myTranslationCache.invalidateAll();
+	}
+
+	/**
+	 * This method is present only for unit tests, do not call from client code
+	 */
+	@VisibleForTesting()
+	public void clearTranslationWithReverseCache() {
+		myTranslationWithReverseCache.invalidateAll();
+	}
+
 	protected abstract IIdType createOrUpdateCodeSystem(CodeSystem theCodeSystemResource);
 
 	protected abstract void createOrUpdateConceptMap(ConceptMap theNextConceptMap);
@@ -218,7 +243,7 @@ public abstract class BaseHapiTerminologySvcImpl implements IHapiTerminologySvc 
 		ourLog.info(" * Deleting code system {}", theCodeSystem.getPid());
 
 		myEntityManager.flush();
-		TermCodeSystem cs = myCodeSystemDao.findOne(theCodeSystem.getPid());
+		TermCodeSystem cs = myCodeSystemDao.findById(theCodeSystem.getPid()).orElseThrow(IllegalStateException::new);
 		cs.setCurrentVersion(null);
 		myCodeSystemDao.save(cs);
 		myCodeSystemDao.flush();
@@ -227,8 +252,8 @@ public abstract class BaseHapiTerminologySvcImpl implements IHapiTerminologySvc 
 		for (TermCodeSystemVersion next : myCodeSystemVersionDao.findByCodeSystemResource(theCodeSystem.getPid())) {
 			myConceptParentChildLinkDao.deleteByCodeSystemVersion(next.getPid());
 			for (TermConcept nextConcept : myConceptDao.findByCodeSystemVersion(next.getPid())) {
-				myConceptPropertyDao.delete(nextConcept.getProperties());
-				myConceptDesignationDao.delete(nextConcept.getDesignations());
+				myConceptPropertyDao.deleteAll(nextConcept.getProperties());
+				myConceptDesignationDao.deleteAll(nextConcept.getDesignations());
 				myConceptDao.delete(nextConcept);
 			}
 			if (next.getCodeSystem().getCurrentVersion() == next) {
@@ -614,7 +639,7 @@ public abstract class BaseHapiTerminologySvcImpl implements IHapiTerminologySvc 
 			while (relCount < count && myConceptLinksToSaveLater.size() > 0) {
 				TermConceptParentChildLink next = myConceptLinksToSaveLater.remove(0);
 
-				if (myConceptDao.findOne(next.getChild().getId()) == null || myConceptDao.findOne(next.getParent().getId()) == null) {
+				if (!myConceptDao.findById(next.getChild().getId()).isPresent() || !myConceptDao.findById(next.getParent().getId()).isPresent()) {
 					ourLog.warn("Not inserting link from child {} to parent {} because it appears to have been deleted", next.getParent().getCode(), next.getChild().getCode());
 					continue;
 				}
@@ -789,8 +814,18 @@ public abstract class BaseHapiTerminologySvcImpl implements IHapiTerminologySvc 
 	}
 
 	@Override
+	public void setApplicationContext(ApplicationContext theApplicationContext) throws BeansException {
+		myApplicationContext = theApplicationContext;
+	}
+
+	@Override
 	public void setProcessDeferred(boolean theProcessDeferred) {
 		myProcessDeferred = theProcessDeferred;
+	}
+
+	@PostConstruct
+	public void start() {
+		myCodeSystemResourceDao = myApplicationContext.getBean(IFhirResourceDaoCodeSystem.class);
 	}
 
 	@Override
@@ -815,7 +850,7 @@ public abstract class BaseHapiTerminologySvcImpl implements IHapiTerminologySvc 
 			ourLog.info(" * Deleting code system version {}", next.getPid());
 			myConceptParentChildLinkDao.deleteByCodeSystemVersion(next.getPid());
 			for (TermConcept nextConcept : myConceptDao.findByCodeSystemVersion(next.getPid())) {
-				myConceptPropertyDao.delete(nextConcept.getProperties());
+				myConceptPropertyDao.deleteAll(nextConcept.getProperties());
 				myConceptDao.delete(nextConcept);
 			}
 		}
@@ -1256,32 +1291,6 @@ public abstract class BaseHapiTerminologySvcImpl implements IHapiTerminologySvc 
 	@VisibleForTesting
 	public static void clearOurLastResultsFromTranslationWithReverseCache() {
 		ourLastResultsFromTranslationWithReverseCache = false;
-	}
-
-	/**
-	 * This method is present only for unit tests, do not call from client code
-	 */
-	@VisibleForTesting
-	public void clearTranslationCache() {
-		myTranslationCache.invalidateAll();
-	}
-
-	/**
-	 * This method is present only for unit tests, do not call from client code
-	 */
-	@VisibleForTesting
-	public void clearDeferred() {
-		myDeferredValueSets.clear();
-		myDeferredConceptMaps.clear();
-		myDeferredConcepts.clear();
-	}
-
-	/**
-	 * This method is present only for unit tests, do not call from client code
-	 */
-	@VisibleForTesting()
-	public void clearTranslationWithReverseCache() {
-		myTranslationWithReverseCache.invalidateAll();
 	}
 
 	/**

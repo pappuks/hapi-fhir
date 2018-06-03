@@ -28,10 +28,11 @@ import ca.uhn.fhir.jpa.sp.SearchParamPresenceSvcImpl;
 import ca.uhn.fhir.jpa.subscription.email.SubscriptionEmailInterceptor;
 import ca.uhn.fhir.jpa.subscription.resthook.SubscriptionRestHookInterceptor;
 import ca.uhn.fhir.jpa.subscription.websocket.SubscriptionWebsocketInterceptor;
+import ca.uhn.fhir.jpa.util.IReindexController;
+import ca.uhn.fhir.jpa.util.ReindexController;
 import org.hibernate.jpa.HibernatePersistenceProvider;
 import org.springframework.beans.factory.annotation.Autowire;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Lazy;
@@ -48,7 +49,7 @@ import org.springframework.scheduling.concurrent.ConcurrentTaskScheduler;
 import org.springframework.scheduling.concurrent.ScheduledExecutorFactoryBean;
 import org.springframework.scheduling.config.ScheduledTaskRegistrar;
 
-import javax.annotation.Resource;
+import javax.annotation.Nonnull;
 
 @Configuration
 @EnableScheduling
@@ -59,18 +60,15 @@ public abstract class BaseConfig implements SchedulingConfigurer {
 
 	@Autowired
 	protected Environment myEnv;
-	@Resource
-	private ApplicationContext myAppCtx;
 
 	@Override
-	public void configureTasks(ScheduledTaskRegistrar theTaskRegistrar) {
+	public void configureTasks(@Nonnull ScheduledTaskRegistrar theTaskRegistrar) {
 		theTaskRegistrar.setTaskScheduler(taskScheduler());
 	}
 
 	@Bean(autowire = Autowire.BY_TYPE)
 	public DatabaseBackedPagingProvider databaseBackedPagingProvider() {
-		DatabaseBackedPagingProvider retVal = new DatabaseBackedPagingProvider();
-		return retVal;
+		return new DatabaseBackedPagingProvider();
 	}
 
 	/**
@@ -92,8 +90,13 @@ public abstract class BaseConfig implements SchedulingConfigurer {
 	}
 
 	@Bean
-	public HibernateJpaDialect hibernateJpaDialectIntance() {
+	public HibernateJpaDialect hibernateJpaDialectInstance() {
 		return new HibernateJpaDialect();
+	}
+
+	@Bean
+	public IReindexController reindexController() {
+		return new ReindexController();
 	}
 
 	@Bean()
@@ -166,6 +169,5 @@ public abstract class BaseConfig implements SchedulingConfigurer {
 	public static PropertySourcesPlaceholderConfigurer propertySourcesPlaceholderConfigurer() {
 		return new PropertySourcesPlaceholderConfigurer();
 	}
-
 
 }

@@ -73,7 +73,10 @@ import org.hl7.fhir.r4.model.BaseResource;
 import org.hl7.fhir.r4.model.Bundle.HTTPVerb;
 import org.hl7.fhir.r4.model.CanonicalType;
 import org.hl7.fhir.r4.model.Reference;
+import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.ApplicationContextAware;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Slice;
@@ -95,12 +98,13 @@ import java.text.Normalizer;
 import java.util.*;
 import java.util.Map.Entry;
 import java.util.concurrent.atomic.AtomicInteger;
+import java.util.stream.Collectors;
 
 import static org.apache.commons.lang3.StringUtils.*;
 
 @SuppressWarnings("WeakerAccess")
 @Repository
-public abstract class BaseHapiFhirDao<T extends IBaseResource> implements IDao {
+public abstract class BaseHapiFhirDao<T extends IBaseResource> implements IDao, ApplicationContextAware {
 
 	public static final long INDEX_STATUS_INDEXED = 1L;
 	public static final long INDEX_STATUS_INDEXING_FAILED = 2L;
@@ -186,9 +190,6 @@ public abstract class BaseHapiFhirDao<T extends IBaseResource> implements IDao {
 	@Autowired
 	private PlatformTransactionManager myPlatformTransactionManager;
 	@Autowired
-	private List<IFhirResourceDao<?>> myResourceDaos;
-	private Map<Class<? extends IBaseResource>, IFhirResourceDao<?>> myResourceTypeToDao;
-	@Autowired
 	private ISearchDao mySearchDao;
 	@Autowired
 	private ISearchParamExtractor mySearchParamExtractor;
@@ -200,6 +201,8 @@ public abstract class BaseHapiFhirDao<T extends IBaseResource> implements IDao {
 	private ISearchResultDao mySearchResultDao;
 	@Autowired
 	private IResourceIndexedCompositeStringUniqueDao myResourceIndexedCompositeStringUniqueDao;
+	private ApplicationContext myApplicationContext;
+	private Map<Class<? extends IBaseResource>, IFhirResourceDao<?>> myResourceTypeToDao;
 
 	protected void clearRequestAsProcessingSubRequest(ServletRequestDetails theRequestDetails) {
 		if (theRequestDetails != null) {
@@ -369,22 +372,22 @@ public abstract class BaseHapiFhirDao<T extends IBaseResource> implements IDao {
 	}
 
 	private void expungeCurrentVersionOfResource(Long theResourceId) {
-		ResourceTable resource = myResourceTableDao.findOne(theResourceId);
+		ResourceTable resource = myResourceTableDao.findById(theResourceId).orElseThrow(IllegalStateException::new);
 
 		ResourceHistoryTable currentVersion = myResourceHistoryTableDao.findForIdAndVersion(resource.getId(), resource.getVersion());
 		expungeHistoricalVersion(currentVersion.getId());
 
 		ourLog.info("Deleting current version of resource {}", resource.getIdDt().getValue());
 
-		myResourceIndexedSearchParamUriDao.delete(resource.getParamsUri());
-		myResourceIndexedSearchParamCoordsDao.delete(resource.getParamsCoords());
-		myResourceIndexedSearchParamDateDao.delete(resource.getParamsDate());
-		myResourceIndexedSearchParamNumberDao.delete(resource.getParamsNumber());
-		myResourceIndexedSearchParamQuantityDao.delete(resource.getParamsQuantity());
-		myResourceIndexedSearchParamStringDao.delete(resource.getParamsString());
-		myResourceIndexedSearchParamTokenDao.delete(resource.getParamsToken());
+		myResourceIndexedSearchParamUriDao.deleteAll(resource.getParamsUri());
+		myResourceIndexedSearchParamCoordsDao.deleteAll(resource.getParamsCoords());
+		myResourceIndexedSearchParamDateDao.deleteAll(resource.getParamsDate());
+		myResourceIndexedSearchParamNumberDao.deleteAll(resource.getParamsNumber());
+		myResourceIndexedSearchParamQuantityDao.deleteAll(resource.getParamsQuantity());
+		myResourceIndexedSearchParamStringDao.deleteAll(resource.getParamsString());
+		myResourceIndexedSearchParamTokenDao.deleteAll(resource.getParamsToken());
 
-		myResourceTagDao.delete(resource.getTags());
+		myResourceTagDao.deleteAll(resource.getTags());
 		resource.getTags().clear();
 
 		if (resource.getForcedId() != null) {
@@ -399,15 +402,15 @@ public abstract class BaseHapiFhirDao<T extends IBaseResource> implements IDao {
 	}
 
 	protected void expungeHistoricalVersion(Long theNextVersionId) {
-		ResourceHistoryTable version = myResourceHistoryTableDao.findOne(theNextVersionId);
+		ResourceHistoryTable version = myResourceHistoryTableDao.findById(theNextVersionId).orElseThrow(IllegalArgumentException::new);
 		ourLog.info("Deleting resource version {}", version.getIdDt().getValue());
 
-		myResourceHistoryTagDao.delete(version.getTags());
+		myResourceHistoryTagDao.deleteAll(version.getTags());
 		myResourceHistoryTableDao.delete(version);
 	}
 
 	protected void expungeHistoricalVersionsOfId(Long theResourceId, AtomicInteger theRemainingCount) {
-		ResourceTable resource = myResourceTableDao.findOne(theResourceId);
+		ResourceTable resource = myResourceTableDao.findById(theResourceId).orElseThrow(IllegalArgumentException::new);
 
 		Pageable page = new PageRequest(0, theRemainingCount.get());
 
@@ -509,6 +512,7 @@ public abstract class BaseHapiFhirDao<T extends IBaseResource> implements IDao {
 	@SuppressWarnings("unchecked")
 	protected Set<String> extractResourceLinks(ResourceTable theEntity, IBaseResource theResource, Set<ResourceLink> theLinks, Date theUpdateTime) {
 		HashSet<String> retVal = new HashSet<>();
+		String resourceType = theEntity.getResourceType();
 
 		/*
 		 * For now we don't try to load any of the links in a bundle if it's the actual bundle we're storing..
@@ -577,6 +581,9 @@ public abstract class BaseHapiFhirDao<T extends IBaseResource> implements IDao {
 						continue;
 					}
 				} else if (myContext.getElementDefinition((Class<? extends IBase>) nextObject.getClass()).getName().equals("uri")) {
+					continue;
+				} else if (resourceType.equals("Consent") && nextPathAndRef.getPath().equals("Consent.source")) {
+					// Consent#source-identifier has a path that isn't typed - This is a one-off to deal with that
 					continue;
 				} else {
 					if (!multiType) {
@@ -694,6 +701,49 @@ public abstract class BaseHapiFhirDao<T extends IBaseResource> implements IDao {
 
 		return retVal;
 	}
+
+
+	@SuppressWarnings("unchecked")
+	public <R extends IBaseResource> IFhirResourceDao<R> getDao(Class<R> theType) {
+		Map<Class<? extends IBaseResource>, IFhirResourceDao<?>> resourceTypeToDao = getDaos();
+		IFhirResourceDao<R> dao = (IFhirResourceDao<R>) resourceTypeToDao.get(theType);
+		return dao;
+	}
+
+	protected IFhirResourceDao<?> getDaoOrThrowException(Class<? extends IBaseResource> theClass) {
+		IFhirResourceDao<? extends IBaseResource> retVal = getDao(theClass);
+		if (retVal == null) {
+			List<String> supportedResourceTypes = getDaos()
+				.keySet()
+				.stream()
+				.map(t->myContext.getResourceDefinition(t).getName())
+				.sorted()
+				.collect(Collectors.toList());
+			throw new InvalidRequestException("Unable to process request, this server does not know how to handle resources of type " + getContext().getResourceDefinition(theClass).getName() + " - Can handle: " + supportedResourceTypes);
+		}
+		return retVal;
+	}
+
+
+	private Map<Class<? extends IBaseResource>, IFhirResourceDao<?>> getDaos() {
+		if (myResourceTypeToDao == null) {
+			Map<Class<? extends IBaseResource>, IFhirResourceDao<?>> theResourceTypeToDao = new HashMap<>();
+			Map<String, IFhirResourceDao> daos = myApplicationContext.getBeansOfType(IFhirResourceDao.class, false, false);
+			for (IFhirResourceDao<?> next : daos.values()) {
+				theResourceTypeToDao.put(next.getResourceType(), next);
+			}
+
+			if (this instanceof IFhirResourceDao<?>) {
+				IFhirResourceDao<?> thiz = (IFhirResourceDao<?>) this;
+				theResourceTypeToDao.put(thiz.getResourceType(), thiz);
+			}
+
+			myResourceTypeToDao = theResourceTypeToDao;
+		}
+
+		return Collections.unmodifiableMap(myResourceTypeToDao);
+	}
+
 
 	protected Set<ResourceIndexedSearchParamCoords> extractSearchParamCoords(ResourceTable theEntity, IBaseResource theResource) {
 		return mySearchParamExtractor.extractSearchParamCoords(theEntity, theResource);
@@ -896,6 +946,11 @@ public abstract class BaseHapiFhirDao<T extends IBaseResource> implements IDao {
 		return myConfig;
 	}
 
+	@Override
+	public void setApplicationContext(ApplicationContext theApplicationContext) throws BeansException {
+		myApplicationContext = theApplicationContext;
+	}
+
 	public void setConfig(DaoConfig theConfig) {
 		myConfig = theConfig;
 	}
@@ -920,26 +975,6 @@ public abstract class BaseHapiFhirDao<T extends IBaseResource> implements IDao {
 			}
 			return retVal;
 		}
-	}
-
-	@SuppressWarnings("unchecked")
-	public <R extends IBaseResource> IFhirResourceDao<R> getDao(Class<R> theType) {
-		if (myResourceTypeToDao == null) {
-			Map<Class<? extends IBaseResource>, IFhirResourceDao<?>> theResourceTypeToDao = new HashMap<>();
-			for (IFhirResourceDao<?> next : myResourceDaos) {
-				theResourceTypeToDao.put(next.getResourceType(), next);
-			}
-
-			if (this instanceof IFhirResourceDao<?>) {
-				IFhirResourceDao<?> thiz = (IFhirResourceDao<?>) this;
-				theResourceTypeToDao.put(thiz.getResourceType(), thiz);
-			}
-
-			myResourceTypeToDao = theResourceTypeToDao;
-		}
-
-		IFhirResourceDao<R> dao = (IFhirResourceDao<R>) myResourceTypeToDao.get(theType);
-		return dao;
 	}
 
 	public IResourceIndexedCompositeStringUniqueDao getResourceIndexedCompositeStringUniqueDao() {
@@ -1213,9 +1248,12 @@ public abstract class BaseHapiFhirDao<T extends IBaseResource> implements IDao {
 				case JSON:
 					bytes = encoded.getBytes(Charsets.UTF_8);
 					break;
-				default:
 				case JSONC:
 					bytes = GZipUtil.compress(encoded);
+					break;
+				default:
+				case DEL:
+					bytes = new byte[0];
 					break;
 			}
 

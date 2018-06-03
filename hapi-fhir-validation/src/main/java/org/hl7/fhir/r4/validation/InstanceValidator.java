@@ -596,7 +596,7 @@ public class InstanceValidator extends BaseValidator implements IResourceValidat
 
   private void checkElementUsage(List<ValidationMessage> errors, Element element, NodeStack stack) {
     String elementUsage = element.getUserString("elementSupported");
-	  hint(errors, IssueType.INFORMATIONAL, element.line(),element.col(), stack.getLiteralPath(), elementUsage == null || elementUsage.equals("Y"), "Instance includes element that is not marked as 'mustSupport' and was validated against profiles declaring mustSupport=true");
+	 hint(errors, IssueType.INFORMATIONAL, element.line(),element.col(), stack.getLiteralPath(), elementUsage==null || elementUsage.equals("Y"), "Instance includes element that is not marked as 'mustSupport' in the corresponding profile and was validated against a profile containing mustSupport=true elements.");
     if (element.hasChildren()) {
       String prevName = "";
       int elementCount = 0;
@@ -1575,9 +1575,12 @@ public class InstanceValidator extends BaseValidator implements IResourceValidat
 
     if (pol.checkExists()) {
       if (we == null) {
-        if (fetcher == null)
-          throw new FHIRException("Resource resolution services not provided");
-        we = fetcher.fetch(hostContext.appContext, ref);
+        if (fetcher == null) {
+          if (!refType.equals("contained"))
+            throw new FHIRException("Resource resolution services not provided");
+        } else {
+          we = fetcher.fetch(hostContext.appContext, ref);
+        }
       }
       rule(errors, IssueType.STRUCTURE, element.line(), element.col(), path, we != null, "Unable to resolve resource '"+ref+"'");
     }
@@ -2310,7 +2313,7 @@ public class InstanceValidator extends BaseValidator implements IResourceValidat
    *          - the candidate that might be in the slice
    * @param path
    *          - for reporting any errors. the XPath for the element
-   * @param slice
+   * @param slicer
    *          - the definition of how slicing is determined
    * @param ed
    *          - the slice for which to test membership
@@ -2579,25 +2582,29 @@ public class InstanceValidator extends BaseValidator implements IResourceValidat
         validateQuestionnaireResponseItemType(errors, answer, ns, "Reference");
         break;
       case QUANTITY:
-        if (validateQuestionnaireResponseItemType(errors, answer, ns, "Quantity").equals("Quantity"))
+        if ("Quantity".equals(validateQuestionnaireResponseItemType(errors, answer, ns, "Quantity")))
           if (qItem.hasExtension("???"))
             validateQuestionnaireResponseItemQuantity(errors, answer, ns);
         break;
       case CHOICE:
         String itemType=validateQuestionnaireResponseItemType(errors, answer, ns, "Coding", "date", "time", "integer", "string");
-        if (itemType.equals("Coding")) validateAnswerCode(errors, answer, ns, qsrc, qItem, false);
-        else if (itemType.equals("date")) checkOption(errors, answer, ns, qsrc, qItem, "date");
-        else if (itemType.equals("time")) checkOption(errors, answer, ns, qsrc, qItem, "time");
-        else if (itemType.equals("integer")) checkOption(errors, answer, ns, qsrc, qItem, "integer");
-        else if (itemType.equals("string")) checkOption(errors, answer, ns, qsrc, qItem, "string");
+        if (itemType != null) {
+			  if (itemType.equals("Coding")) validateAnswerCode(errors, answer, ns, qsrc, qItem, false);
+			  else if (itemType.equals("date")) checkOption(errors, answer, ns, qsrc, qItem, "date");
+			  else if (itemType.equals("time")) checkOption(errors, answer, ns, qsrc, qItem, "time");
+			  else if (itemType.equals("integer")) checkOption(errors, answer, ns, qsrc, qItem, "integer");
+			  else if (itemType.equals("string")) checkOption(errors, answer, ns, qsrc, qItem, "string");
+		  }
         break;
       case OPENCHOICE:
         itemType=validateQuestionnaireResponseItemType(errors, answer, ns, "Coding", "date", "time", "integer", "string");
-        if (itemType.equals("Coding")) validateAnswerCode(errors, answer, ns, qsrc, qItem, true);
-        else if (itemType.equals("date")) checkOption(errors, answer, ns, qsrc, qItem, "date");
-        else if (itemType.equals("time")) checkOption(errors, answer, ns, qsrc, qItem, "time");
-        else if (itemType.equals("integer")) checkOption(errors, answer, ns, qsrc, qItem, "integer");
-        else if (itemType.equals("string")) checkOption(errors, answer, ns, qsrc, qItem, "string", true);
+        if (itemType != null) {
+			  if (itemType.equals("Coding")) validateAnswerCode(errors, answer, ns, qsrc, qItem, true);
+			  else if (itemType.equals("date")) checkOption(errors, answer, ns, qsrc, qItem, "date");
+			  else if (itemType.equals("time")) checkOption(errors, answer, ns, qsrc, qItem, "time");
+			  else if (itemType.equals("integer")) checkOption(errors, answer, ns, qsrc, qItem, "integer");
+			  else if (itemType.equals("string")) checkOption(errors, answer, ns, qsrc, qItem, "string", true);
+		  }
         break;
 			case QUESTION:
 			case NULL:
@@ -2608,21 +2615,18 @@ public class InstanceValidator extends BaseValidator implements IResourceValidat
     }
     if (qItem.getType() == null) {
       fail(errors, IssueType.REQUIRED, element.line(), element.col(), stack.getLiteralPath(), false, "Definition for item "+qItem.getLinkId() + " does not contain a type");
-    } else if (qItem.getType() == QuestionnaireItemType.GROUP) {
-      validateQuestionannaireResponseItems(qsrc, qItem.getItem(), errors, element, stack, inProgress);
-    } else {
+    } else if (qItem.getType() == QuestionnaireItemType.DISPLAY) {
       List<Element> items = new ArrayList<Element>();
       element.getNamedChildren("item", items);
-      for (Element item : items) {
-        NodeStack ns = stack.push(item, -1, null, null);
-        rule(errors, IssueType.STRUCTURE, answers.get(0).line(), answers.get(0).col(), stack.getLiteralPath(), false, "Items not of type group should not have items - Item with linkId {0} of type {1} has {2} item(s)", qItem.getLinkId(), qItem.getType(), items.size());
-      }
+      rule(errors, IssueType.STRUCTURE, element.line(), element.col(), stack.getLiteralPath(), items.isEmpty(), "Items not of type DISPLAY should not have items - linkId {0}", qItem.getLinkId());
+    } else {
+      validateQuestionannaireResponseItems(qsrc, qItem.getItem(), errors, element, stack, inProgress);
     }
   }
 
   private void validateQuestionannaireResponseItem(Questionnaire qsrc, QuestionnaireItemComponent qItem, List<ValidationMessage> errors, List<Element> elements, NodeStack stack, boolean inProgress) {
     if (elements.size() > 1)
-      rule(errors, IssueType.INVALID, elements.get(1).line(), elements.get(1).col(), stack.getLiteralPath(), qItem.getRepeats(), "Only one response item with this linkId allowed");
+      rule(errors, IssueType.INVALID, elements.get(1).line(), elements.get(1).col(), stack.getLiteralPath(), qItem.getRepeats(), "Only one response item with this linkId allowed - " + qItem.getLinkId());
     for (Element element : elements) {
       NodeStack ns = stack.push(element, -1, null, null);
       validateQuestionannaireResponseItem(qsrc, qItem, errors, element, ns, inProgress);
@@ -2688,6 +2692,11 @@ public class InstanceValidator extends BaseValidator implements IResourceValidat
   private String validateQuestionnaireResponseItemType(List<ValidationMessage> errors, Element element, NodeStack stack, String... types) {
     List<Element> values = new ArrayList<Element>();
     element.getNamedChildrenWithWildcard("value[x]", values);
+    for (int i = 0; i < types.length; i++) {
+      if (types[i].equals("text")) {
+        types[i] = "string";
+      }
+    }
     if (values.size() > 0) {
       NodeStack ns = stack.push(values.get(0), -1, null, null);
       CommaSeparatedStringBuilder l = new CommaSeparatedStringBuilder();
@@ -3621,7 +3630,9 @@ public class InstanceValidator extends BaseValidator implements IResourceValidat
     // all observations should have a subject, a performer, and a time
 
     bpCheck(errors, IssueType.INVALID, element.line(), element.col(), stack.getLiteralPath(), element.getNamedChild("subject") != null, "All observations should have a subject");
-    bpCheck(errors, IssueType.INVALID, element.line(), element.col(), stack.getLiteralPath(), element.getNamedChild("performer") != null, "All observations should have a performer");
+	  List<Element> performers = new ArrayList<>();
+	  element.getNamedChildren("performer", performers);
+	  bpCheck(errors, IssueType.INVALID, element.line(), element.col(), stack.getLiteralPath(), performers.size() > 0, "All observations should have a performer");
     bpCheck(errors, IssueType.INVALID, element.line(), element.col(), stack.getLiteralPath(), element.getNamedChild("effectiveDateTime") != null || element.getNamedChild("effectivePeriod") != null,
         "All observations should have an effectiveDateTime or an effectivePeriod");
   }

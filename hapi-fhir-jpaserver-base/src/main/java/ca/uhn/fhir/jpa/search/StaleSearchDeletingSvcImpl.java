@@ -67,17 +67,16 @@ public class StaleSearchDeletingSvcImpl implements IStaleSearchDeletingSvc {
 	private PlatformTransactionManager myTransactionManager;
 
 	private void deleteSearch(final Long theSearchPid) {
-		Search searchToDelete = mySearchDao.findOne(theSearchPid);
-		if (searchToDelete != null) {
+		mySearchDao.findById(theSearchPid).ifPresent(searchToDelete -> {
 			ourLog.info("Deleting search {}/{} - Created[{}] -- Last returned[{}]", searchToDelete.getId(), searchToDelete.getUuid(), new InstantType(searchToDelete.getCreated()), new InstantType(searchToDelete.getSearchLastReturned()));
 			mySearchIncludeDao.deleteForSearch(searchToDelete.getId());
 			mySearchResultDao.deleteForSearch(searchToDelete.getId());
 			mySearchDao.delete(searchToDelete);
-		}
+		});
 	}
 
 	@Override
-	@Transactional(propagation = Propagation.NOT_SUPPORTED)
+	@Transactional(propagation = Propagation.NEVER)
 	public void pollForStaleSearchesAndDeleteThem() {
 		if (!myDaoConfig.isExpireSearchResults()) {
 			return;
@@ -127,7 +126,7 @@ public class StaleSearchDeletingSvcImpl implements IStaleSearchDeletingSvc {
 	}
 
 	@Scheduled(fixedDelay = DEFAULT_CUTOFF_SLACK)
-	@Transactional(propagation = Propagation.NOT_SUPPORTED)
+	@Transactional(propagation = Propagation.NEVER)
 	@Override
 	public synchronized void schedulePollForStaleSearches() {
 		if (!myDaoConfig.isSchedulingDisabled()) {

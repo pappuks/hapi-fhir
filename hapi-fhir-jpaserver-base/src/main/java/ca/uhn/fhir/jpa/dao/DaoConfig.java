@@ -3,9 +3,11 @@ package ca.uhn.fhir.jpa.dao;
 import ca.uhn.fhir.jpa.entity.ResourceEncodingEnum;
 import ca.uhn.fhir.jpa.util.JpaConstants;
 import ca.uhn.fhir.rest.server.interceptor.IServerInterceptor;
+import com.google.common.collect.Sets;
 import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.Validate;
 import org.apache.commons.lang3.time.DateUtils;
+import org.hl7.fhir.r4.model.Bundle;
 
 import java.util.*;
 
@@ -51,18 +53,31 @@ public class DaoConfig {
 	 */
 	public static final Long DEFAULT_REUSE_CACHED_SEARCH_RESULTS_FOR_MILLIS = DateUtils.MILLIS_PER_MINUTE;
 	/**
-	 * Default value for {@link #setMaximumSearchResultCountInTransaction(Integer)}
-	 *
-	 * @see #setMaximumSearchResultCountInTransaction(Integer)
-	 */
-	private static final Integer DEFAULT_MAXIMUM_SEARCH_RESULT_COUNT_IN_TRANSACTION = null;
-	private IndexEnabledEnum myIndexMissingFieldsEnabled = IndexEnabledEnum.DISABLED;
-	/**
 	 * Default value for {@link #setTranslationCachesExpireAfterWriteInMinutes(Long)}: 60 minutes
 	 *
 	 * @see #setTranslationCachesExpireAfterWriteInMinutes(Long)
 	 */
 	public static final Long DEFAULT_TRANSLATION_CACHES_EXPIRE_AFTER_WRITE_IN_MINUTES = 60L;
+	/**
+	 * Default value for {@link #setMaximumSearchResultCountInTransaction(Integer)}
+	 *
+	 * @see #setMaximumSearchResultCountInTransaction(Integer)
+	 */
+	private static final Integer DEFAULT_MAXIMUM_SEARCH_RESULT_COUNT_IN_TRANSACTION = null;
+	/**
+	 * Default {@link #setBundleTypesAllowedForStorage(Set)} value:
+	 * <ul>
+	 * <li>collection</li>
+	 * <li>document</li>
+	 * <li>message</li>
+	 * </ul>
+	 */
+	private static final Set<String> DEFAULT_BUNDLE_TYPES_ALLOWED_FOR_STORAGE = Collections.unmodifiableSet(new TreeSet<>(Sets.newHashSet(
+		Bundle.BundleType.COLLECTION.toCode(),
+		Bundle.BundleType.DOCUMENT.toCode(),
+		Bundle.BundleType.MESSAGE.toCode()
+	)));
+	private IndexEnabledEnum myIndexMissingFieldsEnabled = IndexEnabledEnum.DISABLED;
 	/**
 	 * update setter javadoc if default changes
 	 */
@@ -127,6 +142,8 @@ public class DaoConfig {
 	private IdStrategyEnum myResourceServerIdStrategy = IdStrategyEnum.SEQUENTIAL_NUMERIC;
 	private boolean myMarkResourcesForReindexingUponSearchParameterChange;
 	private boolean myExpungeEnabled;
+	private int myReindexThreadCount;
+	private Set<String> myBundleTypesAllowedForStorage;
 
 	/**
 	 * Constructor
@@ -136,6 +153,8 @@ public class DaoConfig {
 		setSubscriptionPollDelay(0);
 		setSubscriptionPurgeInactiveAfterMillis(Long.MAX_VALUE);
 		setMarkResourcesForReindexingUponSearchParameterChange(true);
+		setReindexThreadCount(Runtime.getRuntime().availableProcessors());
+		setBundleTypesAllowedForStorage(DEFAULT_BUNDLE_TYPES_ALLOWED_FOR_STORAGE);
 	}
 
 	/**
@@ -152,6 +171,26 @@ public class DaoConfig {
 		myTreatReferencesAsLogical.add(theTreatReferencesAsLogical);
 	}
 
+	/**
+	 * This setting specifies the bundle types (<code>Bundle.type</code>) that
+	 * are allowed to be stored as-is on the /Bundle endpoint.
+	 *
+	 * @see #DEFAULT_BUNDLE_TYPES_ALLOWED_FOR_STORAGE
+	 */
+	public Set<String> getBundleTypesAllowedForStorage() {
+		return myBundleTypesAllowedForStorage;
+	}
+
+	/**
+	 * This setting specifies the bundle types (<code>Bundle.type</code>) that
+	 * are allowed to be stored as-is on the /Bundle endpoint.
+	 *
+	 * @see #DEFAULT_BUNDLE_TYPES_ALLOWED_FOR_STORAGE
+	 */
+	public void setBundleTypesAllowedForStorage(Set<String> theBundleTypesAllowedForStorage) {
+		Validate.notNull(theBundleTypesAllowedForStorage, "theBundleTypesAllowedForStorage must not be null");
+		myBundleTypesAllowedForStorage = theBundleTypesAllowedForStorage;
+	}
 
 	/**
 	 * Specifies the highest number that a client is permitted to use in a
@@ -417,11 +456,8 @@ public class DaoConfig {
 	/**
 	 * This may be used to optionally register server interceptors directly against the DAOs.
 	 */
-	public void setInterceptors(IServerInterceptor... theInterceptor) {
-		setInterceptors(new ArrayList<IServerInterceptor>());
-		if (theInterceptor != null && theInterceptor.length != 0) {
-			getInterceptors().addAll(Arrays.asList(theInterceptor));
-		}
+	public void setInterceptors(List<IServerInterceptor> theInterceptors) {
+		myInterceptors = theInterceptors;
 	}
 
 	/**
@@ -468,6 +504,35 @@ public class DaoConfig {
 	 */
 	public void setMaximumSearchResultCountInTransaction(Integer theMaximumSearchResultCountInTransaction) {
 		myMaximumSearchResultCountInTransaction = theMaximumSearchResultCountInTransaction;
+	}
+
+	/**
+	 * This setting controls the number of threads allocated to resource reindexing
+	 * (which is only ever used if SearchParameters change, or a manual reindex is
+	 * triggered due to a HAPI FHIR upgrade or some other reason).
+	 * <p>
+	 * The default value is set to the number of available processors
+	 * (via <code>Runtime.getRuntime().availableProcessors()</code>). Value
+	 * for this setting must be a positive integer.
+	 * </p>
+	 */
+	public int getReindexThreadCount() {
+		return myReindexThreadCount;
+	}
+
+	/**
+	 * This setting controls the number of threads allocated to resource reindexing
+	 * (which is only ever used if SearchParameters change, or a manual reindex is
+	 * triggered due to a HAPI FHIR upgrade or some other reason).
+	 * <p>
+	 * The default value is set to the number of available processors
+	 * (via <code>Runtime.getRuntime().availableProcessors()</code>). Value
+	 * for this setting must be a positive integer.
+	 * </p>
+	 */
+	public void setReindexThreadCount(int theReindexThreadCount) {
+		myReindexThreadCount = theReindexThreadCount;
+		myReindexThreadCount = Math.max(myReindexThreadCount, 1); // Minimum of 1
 	}
 
 	public ResourceEncodingEnum getResourceEncoding() {
@@ -1134,8 +1199,11 @@ public class DaoConfig {
 	/**
 	 * This may be used to optionally register server interceptors directly against the DAOs.
 	 */
-	public void setInterceptors(List<IServerInterceptor> theInterceptors) {
-		myInterceptors = theInterceptors;
+	public void setInterceptors(IServerInterceptor... theInterceptor) {
+		setInterceptors(new ArrayList<IServerInterceptor>());
+		if (theInterceptor != null && theInterceptor.length != 0) {
+			getInterceptors().addAll(Arrays.asList(theInterceptor));
+		}
 	}
 
 	/**

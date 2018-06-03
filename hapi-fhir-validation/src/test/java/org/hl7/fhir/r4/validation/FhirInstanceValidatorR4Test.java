@@ -38,10 +38,12 @@ import org.mockito.stubbing.Answer;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.*;
+import java.util.stream.Collectors;
 import java.util.zip.GZIPInputStream;
 
 import static org.hamcrest.Matchers.*;
 import static org.junit.Assert.*;
+import static org.mockito.ArgumentMatchers.nullable;
 import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
@@ -69,6 +71,21 @@ public class FhirInstanceValidatorR4Test {
 		myValidConcepts.add(theSystem + "___" + theCode);
 	}
 
+	/**
+	 * An invalid local reference should not cause a ServiceException.
+	 */
+	@Test
+	public void testInvalidLocalReference() {
+		QuestionnaireResponse resource = new QuestionnaireResponse();
+		resource.setStatus(QuestionnaireResponse.QuestionnaireResponseStatus.COMPLETED);
+
+		resource.setSubject(new Reference("#invalid-ref"));
+
+		ValidationResult output = myVal.validateWithResult(resource);
+		List<SingleValidationMessage> nonInfo = logResultsAndReturnNonInformationalOnes(output);
+		assertThat(nonInfo, hasSize(2));
+	}
+
 	@SuppressWarnings("unchecked")
 	@Before
 	public void before() {
@@ -86,19 +103,19 @@ public class FhirInstanceValidatorR4Test {
 
 		myValidConcepts = new ArrayList<>();
 
-		when(myMockSupport.expandValueSet(any(FhirContext.class), any(ConceptSetComponent.class))).thenAnswer(new Answer<ValueSetExpansionComponent>() {
+		when(myMockSupport.expandValueSet(nullable(FhirContext.class), nullable(ConceptSetComponent.class))).thenAnswer(new Answer<ValueSetExpansionComponent>() {
 			@Override
 			public ValueSetExpansionComponent answer(InvocationOnMock theInvocation) throws Throwable {
 				ConceptSetComponent arg = (ConceptSetComponent) theInvocation.getArguments()[ 0 ];
 				ValueSetExpansionComponent retVal = mySupportedCodeSystemsForExpansion.get(arg.getSystem());
 				if (retVal == null) {
-					retVal = myDefaultValidationSupport.expandValueSet(any(FhirContext.class), arg);
+					retVal = myDefaultValidationSupport.expandValueSet(nullable(FhirContext.class), arg);
 				}
 				ourLog.debug("expandValueSet({}) : {}", new Object[] {theInvocation.getArguments()[ 0 ], retVal});
 				return retVal;
 			}
 		});
-		when(myMockSupport.isCodeSystemSupported(any(FhirContext.class), any(String.class))).thenAnswer(new Answer<Boolean>() {
+		when(myMockSupport.isCodeSystemSupported(nullable(FhirContext.class), nullable(String.class))).thenAnswer(new Answer<Boolean>() {
 			@Override
 			public Boolean answer(InvocationOnMock theInvocation) throws Throwable {
 				boolean retVal = myValidSystems.contains(theInvocation.getArguments()[ 1 ]);
@@ -106,7 +123,7 @@ public class FhirInstanceValidatorR4Test {
 				return retVal;
 			}
 		});
-		when(myMockSupport.fetchResource(any(FhirContext.class), any(Class.class), any(String.class))).thenAnswer(new Answer<IBaseResource>() {
+		when(myMockSupport.fetchResource(nullable(FhirContext.class), nullable(Class.class), nullable(String.class))).thenAnswer(new Answer<IBaseResource>() {
 			@Override
 			public IBaseResource answer(InvocationOnMock theInvocation) throws Throwable {
 				IBaseResource retVal;
@@ -120,7 +137,7 @@ public class FhirInstanceValidatorR4Test {
 				return retVal;
 			}
 		});
-		when(myMockSupport.validateCode(any(FhirContext.class), any(String.class), any(String.class), any(String.class))).thenAnswer(new Answer<CodeValidationResult>() {
+		when(myMockSupport.validateCode(nullable(FhirContext.class), nullable(String.class), nullable(String.class), nullable(String.class))).thenAnswer(new Answer<CodeValidationResult>() {
 			@Override
 			public CodeValidationResult answer(InvocationOnMock theInvocation) throws Throwable {
 				FhirContext ctx = (FhirContext) theInvocation.getArguments()[ 0 ];
@@ -136,7 +153,7 @@ public class FhirInstanceValidatorR4Test {
 				return retVal;
 			}
 		});
-		when(myMockSupport.fetchCodeSystem(any(FhirContext.class), any(String.class))).thenAnswer(new Answer<CodeSystem>() {
+		when(myMockSupport.fetchCodeSystem(nullable(FhirContext.class), nullable(String.class))).thenAnswer(new Answer<CodeSystem>() {
 			@Override
 			public CodeSystem answer(InvocationOnMock theInvocation) throws Throwable {
 				CodeSystem retVal = myDefaultValidationSupport.fetchCodeSystem((FhirContext) theInvocation.getArguments()[ 0 ], (String) theInvocation.getArguments()[ 1 ]);
@@ -144,7 +161,7 @@ public class FhirInstanceValidatorR4Test {
 				return retVal;
 			}
 		});
-		when(myMockSupport.fetchStructureDefinition(any(FhirContext.class), any(String.class))).thenAnswer(new Answer<StructureDefinition>() {
+		when(myMockSupport.fetchStructureDefinition(nullable(FhirContext.class), nullable(String.class))).thenAnswer(new Answer<StructureDefinition>() {
 			@Override
 			public StructureDefinition answer(InvocationOnMock theInvocation) throws Throwable {
 				StructureDefinition retVal = myDefaultValidationSupport.fetchStructureDefinition((FhirContext) theInvocation.getArguments()[ 0 ], (String) theInvocation.getArguments()[ 1 ]);
@@ -152,7 +169,7 @@ public class FhirInstanceValidatorR4Test {
 				return retVal;
 			}
 		});
-		when(myMockSupport.fetchAllStructureDefinitions(any(FhirContext.class))).thenAnswer(new Answer<List<StructureDefinition>>() {
+		when(myMockSupport.fetchAllStructureDefinitions(nullable(FhirContext.class))).thenAnswer(new Answer<List<StructureDefinition>>() {
 			@Override
 			public List<StructureDefinition> answer(InvocationOnMock theInvocation) throws Throwable {
 				List<StructureDefinition> retVal = myDefaultValidationSupport.fetchAllStructureDefinitions((FhirContext) theInvocation.getArguments()[ 0 ]);
@@ -191,7 +208,6 @@ public class FhirInstanceValidatorR4Test {
 
 			retVal.add(next);
 		}
-
 		return retVal;
 	}
 
@@ -411,11 +427,8 @@ public class FhirInstanceValidatorR4Test {
 		ourLog.info("Took {} ms -- {}ms / pass", delay, per);
 	}
 
-	/**
-	 * // TODO: reenable
-	 */
 	@Test
-	 @Ignore
+	@Ignore
 	public void testValidateBuiltInProfiles() throws Exception {
 		org.hl7.fhir.r4.model.Bundle bundle;
 		String name = "profiles-resources";
@@ -442,15 +455,22 @@ public class FhirInstanceValidatorR4Test {
 			ourLog.trace(ourCtx.newXmlParser().setPrettyPrint(true).encodeResourceToString(next));
 
 			ValidationResult output = myVal.validateWithResult(next);
-			List<SingleValidationMessage> errors = logResultsAndReturnNonInformationalOnes(output);
+			List<SingleValidationMessage> results = logResultsAndReturnAll(output);
 
 			// This isn't a validator problem but a definition problem.. it should get fixed at some point and
-			// we can remove this
-			if (next.getId().equalsIgnoreCase("http://hl7.org/fhir/OperationDefinition/StructureDefinition-generate")) {
-				assertEquals(1, errors.size());
-				assertEquals("A search type can only be specified for parameters of type string [searchType implies type = 'string']", errors.get(0).getMessage());
+			// we can remove this. Tracker #17207 was filed about this
+			// https://gforge.hl7.org/gf/project/fhir/tracker/?action=TrackerItemEdit&tracker_item_id=17207
+			if (next.getId().equalsIgnoreCase("http://hl7.org/fhir/OperationDefinition/StructureDefinition-snapshot")) {
+				assertEquals(1, results.size());
+				assertEquals("A search type can only be specified for parameters of type string [searchType.exists() implies type = 'string']", results.get(0).getMessage());
 				continue;
 			}
+
+
+			List<SingleValidationMessage> errors = results
+				.stream()
+				.filter(t -> t.getSeverity() != ResultSeverityEnum.INFORMATION)
+				.collect(Collectors.toList());
 
 			assertThat("Failed to validate " + i.getFullUrl() + " - " + errors, errors, empty());
 		}
@@ -1034,6 +1054,24 @@ public class FhirInstanceValidatorR4Test {
 			all.get(0).getMessage());
 		assertEquals(ResultSeverityEnum.WARNING, all.get(0).getSeverity());
 
+	}
+
+	@Test
+	public void testMultiplePerformer() {
+		Observation o = new Observation();
+		Practitioner p1 = new Practitioner();
+		Practitioner p2 = new Practitioner();
+
+		o.addPerformer(new Reference(p1));
+		o.addPerformer(new Reference(p2));
+
+		ValidationResult output = myVal.validateWithResult(o);
+		List<SingleValidationMessage> valMessages = logResultsAndReturnAll(output);
+		List<String> messages = new ArrayList<>();
+		for (String msg : messages) {
+			messages.add(msg);
+		}
+		assertThat(messages, not(hasItem("All observations should have a performer")));
 	}
 
 	@Test
