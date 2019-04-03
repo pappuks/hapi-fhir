@@ -1,10 +1,12 @@
 package ca.uhn.fhir.jpa.dao.r4;
 
 import ca.uhn.fhir.jpa.dao.DaoConfig;
-import ca.uhn.fhir.jpa.dao.SearchParameterMap;
+import ca.uhn.fhir.jpa.searchparam.SearchParameterMap;
 import ca.uhn.fhir.jpa.dao.data.ISearchDao;
 import ca.uhn.fhir.jpa.entity.Search;
+import ca.uhn.fhir.jpa.model.search.SearchStatusEnum;
 import ca.uhn.fhir.jpa.search.StaleSearchDeletingSvcImpl;
+import ca.uhn.fhir.jpa.util.TestUtil;
 import ca.uhn.fhir.util.StopWatch;
 import ca.uhn.fhir.rest.api.server.IBundleProvider;
 import ca.uhn.fhir.rest.param.StringParam;
@@ -28,10 +30,10 @@ import javax.annotation.Nullable;
 import java.util.Date;
 import java.util.concurrent.atomic.AtomicLong;
 
-import static ca.uhn.fhir.jpa.util.TestUtil.sleepAtLeast;
 import static org.hamcrest.Matchers.containsInAnyOrder;
 import static org.junit.Assert.*;
 
+@SuppressWarnings("Duplicates")
 public class FhirResourceDaoR4SearchPageExpiryTest extends BaseJpaR4Test {
 	private static final Logger ourLog = LoggerFactory.getLogger(FhirResourceDaoR4SearchPageExpiryTest.class);
 
@@ -98,7 +100,7 @@ public class FhirResourceDaoR4SearchPageExpiryTest extends BaseJpaR4Test {
 		}
 		assertEquals(searchUuid1, searchUuid2);
 
-		sleepAtLeast(501);
+		TestUtil.sleepAtLeast(501);
 
 		// We're now past 500ms so we shouldn't reuse the search
 
@@ -272,7 +274,7 @@ public class FhirResourceDaoR4SearchPageExpiryTest extends BaseJpaR4Test {
 		}
 		assertEquals(searchUuid1, searchUuid2);
 
-		sleepAtLeast(501);
+		TestUtil.sleepAtLeast(501);
 
 		// We're now past 500ms so we shouldn't reuse the search
 
@@ -358,7 +360,7 @@ public class FhirResourceDaoR4SearchPageExpiryTest extends BaseJpaR4Test {
 				}
 			});
 			if (search == null) {
-				sleepAtLeast(100);
+				TestUtil.sleepAtLeast(100);
 			}
 		}
 		assertNotNull("Search " + bundleProvider.getUuid() + " not found on disk after 10 seconds", search);
@@ -404,8 +406,8 @@ public class FhirResourceDaoR4SearchPageExpiryTest extends BaseJpaR4Test {
 				Search search = null;
 				for (int i = 0; i < 20 && search == null; i++) {
 					search = theSearchEntityDao.findByUuid(theUuid);
-					if (search == null) {
-						sleepAtLeast(100);
+					if (search == null || search.getStatus() == SearchStatusEnum.LOADING) {
+						TestUtil.sleepAtLeast(100);
 					}
 				}
 				assertNotNull(search);

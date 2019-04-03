@@ -6,6 +6,7 @@ import org.hl7.fhir.exceptions.FHIRException;
 import org.hl7.fhir.r4.context.IWorkerContext;
 import org.hl7.fhir.r4.model.CanonicalType;
 import org.hl7.fhir.r4.model.CodeSystem;
+import org.hl7.fhir.r4.model.Enumerations.PublicationStatus;
 import org.hl7.fhir.r4.model.Identifier;
 import org.hl7.fhir.r4.model.Meta;
 import org.hl7.fhir.r4.model.UriType;
@@ -61,25 +62,30 @@ public class ValueSetUtilities {
     vs.addIdentifier().setSystem("urn:ietf:rfc:3986").setValue(oid);
   }
 
-  public static void markStatus(ValueSet vs, String wg, StandardsStatus status, String pckage, String fmm, IWorkerContext context) throws FHIRException {
+  public static void markStatus(ValueSet vs, String wg, StandardsStatus status, String pckage, String fmm, IWorkerContext context, String normativeVersion) throws FHIRException {
     if (vs.hasUserData("external.url"))
       return;
     
     if (wg != null) {
       if (!ToolingExtensions.hasExtension(vs, ToolingExtensions.EXT_WORKGROUP) || 
-          (Utilities.existsInList(ToolingExtensions.readStringExtension(vs, ToolingExtensions.EXT_WORKGROUP), "fhir", "vocab") && !Utilities.existsInList(wg, "fhir", "vocab"))) {
+          (!Utilities.existsInList(ToolingExtensions.readStringExtension(vs, ToolingExtensions.EXT_WORKGROUP), "fhir", "vocab") && Utilities.existsInList(wg, "fhir", "vocab"))) {
         ToolingExtensions.setCodeExtension(vs, ToolingExtensions.EXT_WORKGROUP, wg);
       }
     }
     if (status != null) {
-      StandardsStatus ss = StandardsStatus.fromCode(ToolingExtensions.readStringExtension(vs, ToolingExtensions.EXT_BALLOT_STATUS));
+      StandardsStatus ss = ToolingExtensions.getStandardsStatus(vs);
       if (ss == null || ss.isLowerThan(status)) 
-        ToolingExtensions.setStringExtension(vs, ToolingExtensions.EXT_BALLOT_STATUS, status.toDisplay());
+        ToolingExtensions.setStandardsStatus(vs, status, normativeVersion);
       if (pckage != null) {
         if (!vs.hasUserData("ballot.package"))        
           vs.setUserData("ballot.package", pckage);
         else if (!pckage.equals(vs.getUserString("ballot.package")))
-          System.out.println("Code System "+vs.getUrl()+": ownership clash "+pckage+" vs "+vs.getUserString("ballot.package"));
+          if (!"infrastructure".equals(vs.getUserString("ballot.package")))
+          System.out.println("Value Set "+vs.getUrl()+": ownership clash "+pckage+" vs "+vs.getUserString("ballot.package"));
+      }
+      if (status == StandardsStatus.NORMATIVE) {
+        vs.setExperimental(false);
+        vs.setStatus(PublicationStatus.ACTIVE);
       }
     }
     if (fmm != null) {
@@ -88,13 +94,13 @@ public class ValueSetUtilities {
         ToolingExtensions.setIntegerExtension(vs, ToolingExtensions.EXT_FMM_LEVEL, Integer.parseInt(fmm));
     }
     if (vs.hasUserData("cs"))
-      CodeSystemUtilities.markStatus((CodeSystem) vs.getUserData("cs"), wg, status, pckage, fmm);
+      CodeSystemUtilities.markStatus((CodeSystem) vs.getUserData("cs"), wg, status, pckage, fmm, normativeVersion);
     else if (status == StandardsStatus.NORMATIVE && context != null) {
       for (ConceptSetComponent csc : vs.getCompose().getInclude()) {
         if (csc.hasSystem()) {
           CodeSystem cs = context.fetchCodeSystem(csc.getSystem());
           if (cs != null) {
-            CodeSystemUtilities.markStatus(cs, wg, status, pckage, fmm);
+            CodeSystemUtilities.markStatus(cs, wg, status, pckage, fmm, normativeVersion);
           }
         }
       }

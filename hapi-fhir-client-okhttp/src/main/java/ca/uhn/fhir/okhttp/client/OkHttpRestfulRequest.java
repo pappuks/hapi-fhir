@@ -1,6 +1,7 @@
 package ca.uhn.fhir.okhttp.client;
 
 import java.io.IOException;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
@@ -8,7 +9,7 @@ import java.util.Map;
  * #%L
  * HAPI FHIR OkHttp Client
  * %%
- * Copyright (C) 2014 - 2018 University Health Network
+ * Copyright (C) 2014 - 2019 University Health Network
  * %%
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -74,11 +75,11 @@ public class OkHttpRestfulRequest implements IHttpRequest {
 
     @Override
     public Map<String, List<String>> getAllHeaders() {
-        return myRequestBuilder.build().headers().toMultimap();
+        return Collections.unmodifiableMap(myRequestBuilder.build().headers().toMultimap());
     }
 
     @Override
-    public String getRequestBodyFromStream() throws IOException {
+    public String getRequestBodyFromStream() {
         // returning null to indicate this is not supported, as documented in IHttpRequest's contract
         return null;
     }
@@ -92,5 +93,10 @@ public class OkHttpRestfulRequest implements IHttpRequest {
     public String getHttpVerbName() {
         return myRequestTypeEnum.name();
     }
+
+	@Override
+	public void removeHeaders(String theHeaderName) {
+    	myRequestBuilder.removeHeader(theHeaderName);
+	}
 
 }

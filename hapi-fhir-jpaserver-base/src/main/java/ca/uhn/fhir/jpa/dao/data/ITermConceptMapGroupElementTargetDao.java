@@ -10,7 +10,7 @@ import org.springframework.data.repository.query.Param;
  * #%L
  * HAPI FHIR JPA Server
  * %%
- * Copyright (C) 2014 - 2018 University Health Network
+ * Copyright (C) 2014 - 2019 University Health Network
  * %%
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -27,7 +27,7 @@ import org.springframework.data.repository.query.Param;
  */
 
 public interface ITermConceptMapGroupElementTargetDao extends JpaRepository<TermConceptMapGroupElementTarget, Long> {
-	@Query("DELETE FROM TermConceptMapGroupElementTarget t WHERE t.myConceptMapGroupElement.myConceptMapGroup.myConceptMap.myId = :pid")
+	@Query("DELETE FROM TermConceptMapGroupElementTarget t WHERE t.myId = :pid")
 	@Modifying
 	void deleteTermConceptMapGroupElementTargetById(@Param("pid") Long theId);
 }

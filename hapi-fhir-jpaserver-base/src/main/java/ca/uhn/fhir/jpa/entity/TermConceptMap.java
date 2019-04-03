@@ -4,7 +4,7 @@ package ca.uhn.fhir.jpa.entity;
  * #%L
  * HAPI FHIR JPA Server
  * %%
- * Copyright (C) 2014 - 2018 University Health Network
+ * Copyright (C) 2014 - 2019 University Health Network
  * %%
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,6 +20,7 @@ package ca.uhn.fhir.jpa.entity;
  * #L%
  */
 
+import ca.uhn.fhir.jpa.model.entity.ResourceTable;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 
@@ -115,11 +116,12 @@ public class TermConceptMap implements Serializable {
 		return new ToStringBuilder(this, ToStringStyle.MULTI_LINE_STYLE)
 			.append("myId", myId)
 			.append("myResource", myResource.toString())
+			.append(myResource != null ? ("myResource=" + myResource.toString()) : ("myResource=(null)"))
 			.append("myResourcePid", myResourcePid)
 			.append("mySource", mySource)
 			.append("myTarget", myTarget)
 			.append("myUrl", myUrl)
-			.append("myConceptMapGroups - size", myConceptMapGroups.size())
+			.append(myConceptMapGroups != null ? ("myConceptMapGroups - size=" + myConceptMapGroups.size()) : ("myConceptMapGroups=(null)"))
 			.toString();
 	}
 }

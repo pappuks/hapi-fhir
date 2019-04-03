@@ -29,7 +29,7 @@ package org.hl7.fhir.r4.model.codesystems;
   
 */
 
-// Generated on Sun, May 6, 2018 17:51-0400 for FHIR v3.4.0
+// Generated on Thu, Dec 27, 2018 10:06-0500 for FHIR v4.0.0
 
 
 import org.hl7.fhir.exceptions.FHIRException;
@@ -100,7 +100,7 @@ public enum DiagnosisRole {
           }
         }
         public String getSystem() {
-          return "http://hl7.org/fhir/diagnosis-role";
+          return "http://terminology.hl7.org/CodeSystem/diagnosis-role";
         }
         public String getDefinition() {
           switch (this) {

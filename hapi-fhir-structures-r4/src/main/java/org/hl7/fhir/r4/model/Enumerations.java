@@ -29,7 +29,7 @@ package org.hl7.fhir.r4.model;
   
 */
 
-// Generated on Sun, May 6, 2018 17:51-0400 for FHIR v3.4.0
+// Generated on Thu, Dec 27, 2018 10:06-0500 for FHIR v4.0.0
 
 
 import org.hl7.fhir.instance.model.api.*;
@@ -38,20 +38,25 @@ import org.hl7.fhir.exceptions.FHIRException;
 public class Enumerations {
 
 // In here: 
-//   AbstractType: A list of the base types defined by this version of the FHIR specification - types that are defined, but for which only specializations actually are created
+//   AbstractType: A list of the base types defined by this version of the FHIR specification - types that are defined, but for which only specializations actually are created.
 //   AdministrativeGender: The gender of a person used for administrative purposes.
 //   AgeUnits: A valueSet of UCUM codes for representing age value units.
 //   BindingStrength: Indication of the degree of conformance expectations associated with a binding.
 //   ConceptMapEquivalence: The degree of equivalence between concepts.
 //   DataAbsentReason: Used to specify why the normally expected content of the data element is missing.
-//   DataType: A version specific list of the data types defined by the FHIR specification for use as an element  type (any of the FHIR defined data types)
+//   DataType: A version specific list of the data types defined by the FHIR specification for use as an element  type (any of the FHIR defined data types).
+//   DefinitionResourceType: A list of all the definition resource types defined in this version of the FHIR specification.
 //   DocumentReferenceStatus: The status of the document reference.
-//   FHIRAllTypes: A list of all the concrete types defined in this version of the FHIR specification - Abstract Types, Data Types and Resource Types
-//   FHIRDefinedType: A list of all the concrete types defined in this version of the FHIR specification - Data Types and Resource Types
+//   EventResourceType: A list of all the event resource types defined in this version of the FHIR specification.
+//   FHIRAllTypes: A list of all the concrete types defined in this version of the FHIR specification - Abstract Types, Data Types and Resource Types.
+//   FHIRDefinedType: A list of all the concrete types defined in this version of the FHIR specification - Data Types and Resource Types.
+//   FHIRVersion: All published FHIR Versions.
+//   KnowledgeResourceType: A list of all the knowledge resource types defined in this version of the FHIR specification.
 //   MessageEvent: One of the message events defined as part of this version of FHIR.
 //   NoteType: The presentation types of notes.
 //   PublicationStatus: The lifecycle status of an artifact.
 //   RemittanceOutcome: The outcome of the processing.
+//   RequestResourceType: A list of all the request resource types defined in this version of the FHIR specification.
 //   ResourceType: One of the resource types defined as part of this version of FHIR.
 //   SearchParamType: Data types allowed to be used for search parameters.
 //   SpecialValues: A set of generally useful codes defined so they can be included in value sets.
@@ -148,19 +153,19 @@ public class Enumerations {
 
     public enum AdministrativeGender {
         /**
-         * Male
+         * Male.
          */
         MALE, 
         /**
-         * Female
+         * Female.
          */
         FEMALE, 
         /**
-         * Other
+         * Other.
          */
         OTHER, 
         /**
-         * Unknown
+         * Unknown.
          */
         UNKNOWN, 
         /**
@@ -200,10 +205,10 @@ public class Enumerations {
         }
         public String getDefinition() {
           switch (this) {
-            case MALE: return "Male";
-            case FEMALE: return "Female";
-            case OTHER: return "Other";
-            case UNKNOWN: return "Unknown";
+            case MALE: return "Male.";
+            case FEMALE: return "Female.";
+            case OTHER: return "Other.";
+            case UNKNOWN: return "Unknown.";
             default: return "?";
           }
         }
@@ -422,7 +427,7 @@ public class Enumerations {
 
     public enum BindingStrength {
         /**
-         * To be conformant, the concept in this element SHALL be from the specified value set
+         * To be conformant, the concept in this element SHALL be from the specified value set.
          */
         REQUIRED, 
         /**
@@ -474,7 +479,7 @@ public class Enumerations {
         }
         public String getDefinition() {
           switch (this) {
-            case REQUIRED: return "To be conformant, the concept in this element SHALL be from the specified value set";
+            case REQUIRED: return "To be conformant, the concept in this element SHALL be from the specified value set.";
             case EXTENSIBLE: return "To be conformant, the concept in this element SHALL be from the specified value set if any of the codes within the value set can apply to the concept being communicated.  If the value set does not cover the concept (based on human review), alternate codings (or, data type allowing, text) may be included instead.";
             case PREFERRED: return "Instances are encouraged to draw from the specified codes for interoperability purposes but are not required to do so to be considered conformant.";
             case EXAMPLE: return "Instances are not expected or even encouraged to draw from the specified value set.  The value set merely provides examples of the types of concepts intended to be included.";
@@ -543,7 +548,7 @@ public class Enumerations {
 
     public enum ConceptMapEquivalence {
         /**
-         * The concepts are related to each other, and have at least some overlap in meaning, but the exact relationship is not known
+         * The concepts are related to each other, and have at least some overlap in meaning, but the exact relationship is not known.
          */
         RELATEDTO, 
         /**
@@ -643,7 +648,7 @@ public class Enumerations {
         }
         public String getDefinition() {
           switch (this) {
-            case RELATEDTO: return "The concepts are related to each other, and have at least some overlap in meaning, but the exact relationship is not known";
+            case RELATEDTO: return "The concepts are related to each other, and have at least some overlap in meaning, but the exact relationship is not known.";
             case EQUIVALENT: return "The definitions of the concepts mean the same thing (including when structural implications of meaning are considered) (i.e. extensionally identical).";
             case EQUAL: return "The definitions of the concepts are exactly the same (i.e. only grammatical differences) and structural implications of meaning are identical or irrelevant (i.e. intentionally identical).";
             case WIDER: return "The target mapping is wider in meaning than the source concept.";
@@ -784,7 +789,7 @@ public class Enumerations {
          */
         MASKED, 
         /**
-         * There is no proper value for this element (e.g. last menstrual period for a male)
+         * There is no proper value for this element (e.g. last menstrual period for a male).
          */
         NOTAPPLICABLE, 
         /**
@@ -816,7 +821,7 @@ public class Enumerations {
          */
         NOTPERFORMED, 
         /**
-         * The value is not permitted in this context (e.g. due to profiles, or the base data types)
+         * The value is not permitted in this context (e.g. due to profiles, or the base data types).
          */
         NOTPERMITTED, 
         /**
@@ -880,21 +885,21 @@ public class Enumerations {
         }
         public String getSystem() {
           switch (this) {
-            case UNKNOWN: return "http://hl7.org/fhir/data-absent-reason";
-            case ASKEDUNKNOWN: return "http://hl7.org/fhir/data-absent-reason";
-            case TEMPUNKNOWN: return "http://hl7.org/fhir/data-absent-reason";
-            case NOTASKED: return "http://hl7.org/fhir/data-absent-reason";
-            case ASKEDDECLINED: return "http://hl7.org/fhir/data-absent-reason";
-            case MASKED: return "http://hl7.org/fhir/data-absent-reason";
-            case NOTAPPLICABLE: return "http://hl7.org/fhir/data-absent-reason";
-            case UNSUPPORTED: return "http://hl7.org/fhir/data-absent-reason";
-            case ASTEXT: return "http://hl7.org/fhir/data-absent-reason";
-            case ERROR: return "http://hl7.org/fhir/data-absent-reason";
-            case NOTANUMBER: return "http://hl7.org/fhir/data-absent-reason";
-            case NEGATIVEINFINITY: return "http://hl7.org/fhir/data-absent-reason";
-            case POSITIVEINFINITY: return "http://hl7.org/fhir/data-absent-reason";
-            case NOTPERFORMED: return "http://hl7.org/fhir/data-absent-reason";
-            case NOTPERMITTED: return "http://hl7.org/fhir/data-absent-reason";
+            case UNKNOWN: return "http://terminology.hl7.org/CodeSystem/data-absent-reason";
+            case ASKEDUNKNOWN: return "http://terminology.hl7.org/CodeSystem/data-absent-reason";
+            case TEMPUNKNOWN: return "http://terminology.hl7.org/CodeSystem/data-absent-reason";
+            case NOTASKED: return "http://terminology.hl7.org/CodeSystem/data-absent-reason";
+            case ASKEDDECLINED: return "http://terminology.hl7.org/CodeSystem/data-absent-reason";
+            case MASKED: return "http://terminology.hl7.org/CodeSystem/data-absent-reason";
+            case NOTAPPLICABLE: return "http://terminology.hl7.org/CodeSystem/data-absent-reason";
+            case UNSUPPORTED: return "http://terminology.hl7.org/CodeSystem/data-absent-reason";
+            case ASTEXT: return "http://terminology.hl7.org/CodeSystem/data-absent-reason";
+            case ERROR: return "http://terminology.hl7.org/CodeSystem/data-absent-reason";
+            case NOTANUMBER: return "http://terminology.hl7.org/CodeSystem/data-absent-reason";
+            case NEGATIVEINFINITY: return "http://terminology.hl7.org/CodeSystem/data-absent-reason";
+            case POSITIVEINFINITY: return "http://terminology.hl7.org/CodeSystem/data-absent-reason";
+            case NOTPERFORMED: return "http://terminology.hl7.org/CodeSystem/data-absent-reason";
+            case NOTPERMITTED: return "http://terminology.hl7.org/CodeSystem/data-absent-reason";
             default: return "?";
           }
         }
@@ -906,7 +911,7 @@ public class Enumerations {
             case NOTASKED: return "The workflow didn't lead to this value being known.";
             case ASKEDDECLINED: return "The source was asked but declined to answer.";
             case MASKED: return "The information is not available due to security, privacy or related reasons.";
-            case NOTAPPLICABLE: return "There is no proper value for this element (e.g. last menstrual period for a male)";
+            case NOTAPPLICABLE: return "There is no proper value for this element (e.g. last menstrual period for a male).";
             case UNSUPPORTED: return "The source system wasn't capable of supporting this element.";
             case ASTEXT: return "The content of the data is represented in the resource narrative.";
             case ERROR: return "Some system or workflow process error means that the information is not available.";
@@ -914,7 +919,7 @@ public class Enumerations {
             case NEGATIVEINFINITY: return "The numeric value is excessively low and unrepresentable due to a floating point processing error.";
             case POSITIVEINFINITY: return "The numeric value is excessively high and unrepresentable due to a floating point processing error.";
             case NOTPERFORMED: return "The value is not available because the observation procedure (test, etc.) was not performed.";
-            case NOTPERMITTED: return "The value is not permitted in this context (e.g. due to profiles, or the base data types)";
+            case NOTPERMITTED: return "The value is not permitted in this context (e.g. due to profiles, or the base data types).";
             default: return "?";
           }
         }
@@ -1125,6 +1130,10 @@ public class Enumerations {
          */
         ELEMENTDEFINITION, 
         /**
+         * A expression that is evaluated in a specified context and returns a value. The context of use of the expression must specify the context in which the expression is evaluated, and how the result of the expression is used.
+         */
+        EXPRESSION, 
+        /**
          * Optional Extension Element - found in all resources.
          */
         EXTENSION, 
@@ -1133,7 +1142,7 @@ public class Enumerations {
          */
         HUMANNAME, 
         /**
-         * A technical identifier - identifies some entity uniquely and unambiguously.
+         * An identifier - identifies some entity uniquely and unambiguously. Typically this is used for business identifiers.
          */
         IDENTIFIER, 
         /**
@@ -1149,7 +1158,11 @@ public class Enumerations {
          */
         MONEY, 
         /**
-         * A human-readable formatted text, including images.
+         * null
+         */
+        MONEYQUANTITY, 
+        /**
+         * A human-readable summary of the resource conveying the essential clinical and business information for the resource.
          */
         NARRATIVE, 
         /**
@@ -1160,6 +1173,10 @@ public class Enumerations {
          * A time period defined by a start and end date and optionally time.
          */
         PERIOD, 
+        /**
+         * A populatioof people with some set of grouping criteria.
+         */
+        POPULATION, 
         /**
          * The marketing status describes the date when a medicinal product is actually put on the market or the date as of which it is no longer available.
          */
@@ -1205,10 +1222,6 @@ public class Enumerations {
          */
         SUBSTANCEAMOUNT, 
         /**
-         * Chemical substances are a single substance type whose primary defining element is the molecular structure. Chemical substances shall be defined on the basis of their complete covalent molecular structure; the presence of a salt (counter-ion) and/or solvates (water, alcohols) is also captured. Purity, grade, physical form or particle size are not taken into account in the definition of a chemical substance or in the assignment of a Substance ID.
-         */
-        SUBSTANCEMOIETY, 
-        /**
          * Specifies an event that may occur multiple times. Timing schedules are used to record when things are planned, expected or requested to occur. The most common usage is in dosage instructions for medications. They are also used when planning care of various kinds, and may be used for reporting the schedule to which past regular activities were carried out.
          */
         TIMING, 
@@ -1229,7 +1242,7 @@ public class Enumerations {
          */
         BOOLEAN, 
         /**
-         * A URI that is a reference to a canonical URI on a FHIR resource
+         * A URI that is a reference to a canonical URL on a FHIR resource
          */
         CANONICAL, 
         /**
@@ -1341,6 +1354,8 @@ public class Enumerations {
           return ELEMENT;
         if ("ElementDefinition".equals(codeString))
           return ELEMENTDEFINITION;
+        if ("Expression".equals(codeString))
+          return EXPRESSION;
         if ("Extension".equals(codeString))
           return EXTENSION;
         if ("HumanName".equals(codeString))
@@ -1353,12 +1368,16 @@ public class Enumerations {
           return META;
         if ("Money".equals(codeString))
           return MONEY;
+        if ("MoneyQuantity".equals(codeString))
+          return MONEYQUANTITY;
         if ("Narrative".equals(codeString))
           return NARRATIVE;
         if ("ParameterDefinition".equals(codeString))
           return PARAMETERDEFINITION;
         if ("Period".equals(codeString))
           return PERIOD;
+        if ("Population".equals(codeString))
+          return POPULATION;
         if ("ProdCharacteristic".equals(codeString))
           return PRODCHARACTERISTIC;
         if ("ProductShelfLife".equals(codeString))
@@ -1381,8 +1400,6 @@ public class Enumerations {
           return SIMPLEQUANTITY;
         if ("SubstanceAmount".equals(codeString))
           return SUBSTANCEAMOUNT;
-        if ("SubstanceMoiety".equals(codeString))
-          return SUBSTANCEMOIETY;
         if ("Timing".equals(codeString))
           return TIMING;
         if ("TriggerDefinition".equals(codeString))
@@ -1450,15 +1467,18 @@ public class Enumerations {
             case DURATION: return "Duration";
             case ELEMENT: return "Element";
             case ELEMENTDEFINITION: return "ElementDefinition";
+            case EXPRESSION: return "Expression";
             case EXTENSION: return "Extension";
             case HUMANNAME: return "HumanName";
             case IDENTIFIER: return "Identifier";
             case MARKETINGSTATUS: return "MarketingStatus";
             case META: return "Meta";
             case MONEY: return "Money";
+            case MONEYQUANTITY: return "MoneyQuantity";
             case NARRATIVE: return "Narrative";
             case PARAMETERDEFINITION: return "ParameterDefinition";
             case PERIOD: return "Period";
+            case POPULATION: return "Population";
             case PRODCHARACTERISTIC: return "ProdCharacteristic";
             case PRODUCTSHELFLIFE: return "ProductShelfLife";
             case QUANTITY: return "Quantity";
@@ -1470,7 +1490,6 @@ public class Enumerations {
             case SIGNATURE: return "Signature";
             case SIMPLEQUANTITY: return "SimpleQuantity";
             case SUBSTANCEAMOUNT: return "SubstanceAmount";
-            case SUBSTANCEMOIETY: return "SubstanceMoiety";
             case TIMING: return "Timing";
             case TRIGGERDEFINITION: return "TriggerDefinition";
             case USAGECONTEXT: return "UsageContext";
@@ -1516,15 +1535,18 @@ public class Enumerations {
             case DURATION: return "http://hl7.org/fhir/data-types";
             case ELEMENT: return "http://hl7.org/fhir/data-types";
             case ELEMENTDEFINITION: return "http://hl7.org/fhir/data-types";
+            case EXPRESSION: return "http://hl7.org/fhir/data-types";
             case EXTENSION: return "http://hl7.org/fhir/data-types";
             case HUMANNAME: return "http://hl7.org/fhir/data-types";
             case IDENTIFIER: return "http://hl7.org/fhir/data-types";
             case MARKETINGSTATUS: return "http://hl7.org/fhir/data-types";
             case META: return "http://hl7.org/fhir/data-types";
             case MONEY: return "http://hl7.org/fhir/data-types";
+            case MONEYQUANTITY: return "http://hl7.org/fhir/data-types";
             case NARRATIVE: return "http://hl7.org/fhir/data-types";
             case PARAMETERDEFINITION: return "http://hl7.org/fhir/data-types";
             case PERIOD: return "http://hl7.org/fhir/data-types";
+            case POPULATION: return "http://hl7.org/fhir/data-types";
             case PRODCHARACTERISTIC: return "http://hl7.org/fhir/data-types";
             case PRODUCTSHELFLIFE: return "http://hl7.org/fhir/data-types";
             case QUANTITY: return "http://hl7.org/fhir/data-types";
@@ -1536,7 +1558,6 @@ public class Enumerations {
             case SIGNATURE: return "http://hl7.org/fhir/data-types";
             case SIMPLEQUANTITY: return "http://hl7.org/fhir/data-types";
             case SUBSTANCEAMOUNT: return "http://hl7.org/fhir/data-types";
-            case SUBSTANCEMOIETY: return "http://hl7.org/fhir/data-types";
             case TIMING: return "http://hl7.org/fhir/data-types";
             case TRIGGERDEFINITION: return "http://hl7.org/fhir/data-types";
             case USAGECONTEXT: return "http://hl7.org/fhir/data-types";
@@ -1582,15 +1603,18 @@ public class Enumerations {
             case DURATION: return "A length of time.";
             case ELEMENT: return "Base definition for all elements in a resource.";
             case ELEMENTDEFINITION: return "Captures constraints on each element within the resource, profile, or extension.";
+            case EXPRESSION: return "A expression that is evaluated in a specified context and returns a value. The context of use of the expression must specify the context in which the expression is evaluated, and how the result of the expression is used.";
             case EXTENSION: return "Optional Extension Element - found in all resources.";
             case HUMANNAME: return "A human's name with the ability to identify parts and usage.";
-            case IDENTIFIER: return "A technical identifier - identifies some entity uniquely and unambiguously.";
+            case IDENTIFIER: return "An identifier - identifies some entity uniquely and unambiguously. Typically this is used for business identifiers.";
             case MARKETINGSTATUS: return "The marketing status describes the date when a medicinal product is actually put on the market or the date as of which it is no longer available.";
             case META: return "The metadata about a resource. This is content in the resource that is maintained by the infrastructure. Changes to the content might not always be associated with version changes to the resource.";
             case MONEY: return "An amount of economic utility in some recognized currency.";
-            case NARRATIVE: return "A human-readable formatted text, including images.";
+            case MONEYQUANTITY: return "";
+            case NARRATIVE: return "A human-readable summary of the resource conveying the essential clinical and business information for the resource.";
             case PARAMETERDEFINITION: return "The parameters to the module. This collection specifies both the input and output parameters. Input parameters are provided by the caller as part of the $evaluate operation. Output parameters are included in the GuidanceResponse.";
             case PERIOD: return "A time period defined by a start and end date and optionally time.";
+            case POPULATION: return "A populatioof people with some set of grouping criteria.";
             case PRODCHARACTERISTIC: return "The marketing status describes the date when a medicinal product is actually put on the market or the date as of which it is no longer available.";
             case PRODUCTSHELFLIFE: return "The shelf-life and storage information for a medicinal product item or container can be described using this class.";
             case QUANTITY: return "A measured amount (or an amount that can potentially be measured). Note that measured amounts include amounts that are not precisely quantified, including amounts involving arbitrary units and floating currencies.";
@@ -1602,13 +1626,12 @@ public class Enumerations {
             case SIGNATURE: return "A signature along with supporting context. The signature may be a digital signature that is cryptographic in nature, or some other signature acceptable to the domain. This other signature may be as simple as a graphical image representing a hand-written signature, or a signature ceremony Different signature approaches have different utilities.";
             case SIMPLEQUANTITY: return "";
             case SUBSTANCEAMOUNT: return "Chemical substances are a single substance type whose primary defining element is the molecular structure. Chemical substances shall be defined on the basis of their complete covalent molecular structure; the presence of a salt (counter-ion) and/or solvates (water, alcohols) is also captured. Purity, grade, physical form or particle size are not taken into account in the definition of a chemical substance or in the assignment of a Substance ID.";
-            case SUBSTANCEMOIETY: return "Chemical substances are a single substance type whose primary defining element is the molecular structure. Chemical substances shall be defined on the basis of their complete covalent molecular structure; the presence of a salt (counter-ion) and/or solvates (water, alcohols) is also captured. Purity, grade, physical form or particle size are not taken into account in the definition of a chemical substance or in the assignment of a Substance ID.";
             case TIMING: return "Specifies an event that may occur multiple times. Timing schedules are used to record when things are planned, expected or requested to occur. The most common usage is in dosage instructions for medications. They are also used when planning care of various kinds, and may be used for reporting the schedule to which past regular activities were carried out.";
             case TRIGGERDEFINITION: return "A description of a triggering event. Triggering events can be named events, data events, or periodic, as determined by the type element.";
             case USAGECONTEXT: return "Specifies clinical/business/etc. metadata that can be used to retrieve, index and/or categorize an artifact. This metadata can either be specific to the applicable population (e.g., age category, DRG) or the specific context of care (e.g., venue, care setting, provider of care).";
             case BASE64BINARY: return "A stream of bytes";
             case BOOLEAN: return "Value of \"true\" or \"false\"";
-            case CANONICAL: return "A URI that is a reference to a canonical URI on a FHIR resource";
+            case CANONICAL: return "A URI that is a reference to a canonical URL on a FHIR resource";
             case CODE: return "A string which has at least one character and no leading or trailing whitespace and where there is no whitespace other than single spaces in the contents";
             case DATE: return "A date or partial date (e.g. just year or year + month). There is no time zone. The format is a union of the schema types gYear, gYearMonth and date.  Dates SHALL be valid dates.";
             case DATETIME: return "A date, date-time or partial date (e.g. just year or year + month).  If hours and minutes are specified, a time zone SHALL be populated. The format is a union of the schema types gYear, gYearMonth, date and dateTime. Seconds must be provided due to schema type constraints but may be zero-filled and may be ignored.                 Dates SHALL be valid dates.";
@@ -1648,15 +1671,18 @@ public class Enumerations {
             case DURATION: return "Duration";
             case ELEMENT: return "Element";
             case ELEMENTDEFINITION: return "ElementDefinition";
+            case EXPRESSION: return "Expression";
             case EXTENSION: return "Extension";
             case HUMANNAME: return "HumanName";
             case IDENTIFIER: return "Identifier";
             case MARKETINGSTATUS: return "MarketingStatus";
             case META: return "Meta";
             case MONEY: return "Money";
+            case MONEYQUANTITY: return "MoneyQuantity";
             case NARRATIVE: return "Narrative";
             case PARAMETERDEFINITION: return "ParameterDefinition";
             case PERIOD: return "Period";
+            case POPULATION: return "Population";
             case PRODCHARACTERISTIC: return "ProdCharacteristic";
             case PRODUCTSHELFLIFE: return "ProductShelfLife";
             case QUANTITY: return "Quantity";
@@ -1668,7 +1694,6 @@ public class Enumerations {
             case SIGNATURE: return "Signature";
             case SIMPLEQUANTITY: return "SimpleQuantity";
             case SUBSTANCEAMOUNT: return "SubstanceAmount";
-            case SUBSTANCEMOIETY: return "SubstanceMoiety";
             case TIMING: return "Timing";
             case TRIGGERDEFINITION: return "TriggerDefinition";
             case USAGECONTEXT: return "UsageContext";
@@ -1736,6 +1761,8 @@ public class Enumerations {
           return DataType.ELEMENT;
         if ("ElementDefinition".equals(codeString))
           return DataType.ELEMENTDEFINITION;
+        if ("Expression".equals(codeString))
+          return DataType.EXPRESSION;
         if ("Extension".equals(codeString))
           return DataType.EXTENSION;
         if ("HumanName".equals(codeString))
@@ -1748,12 +1775,16 @@ public class Enumerations {
           return DataType.META;
         if ("Money".equals(codeString))
           return DataType.MONEY;
+        if ("MoneyQuantity".equals(codeString))
+          return DataType.MONEYQUANTITY;
         if ("Narrative".equals(codeString))
           return DataType.NARRATIVE;
         if ("ParameterDefinition".equals(codeString))
           return DataType.PARAMETERDEFINITION;
         if ("Period".equals(codeString))
           return DataType.PERIOD;
+        if ("Population".equals(codeString))
+          return DataType.POPULATION;
         if ("ProdCharacteristic".equals(codeString))
           return DataType.PRODCHARACTERISTIC;
         if ("ProductShelfLife".equals(codeString))
@@ -1776,8 +1807,6 @@ public class Enumerations {
           return DataType.SIMPLEQUANTITY;
         if ("SubstanceAmount".equals(codeString))
           return DataType.SUBSTANCEAMOUNT;
-        if ("SubstanceMoiety".equals(codeString))
-          return DataType.SUBSTANCEMOIETY;
         if ("Timing".equals(codeString))
           return DataType.TIMING;
         if ("TriggerDefinition".equals(codeString))
@@ -1868,6 +1897,8 @@ public class Enumerations {
           return new Enumeration<DataType>(this, DataType.ELEMENT);
         if ("ElementDefinition".equals(codeString))
           return new Enumeration<DataType>(this, DataType.ELEMENTDEFINITION);
+        if ("Expression".equals(codeString))
+          return new Enumeration<DataType>(this, DataType.EXPRESSION);
         if ("Extension".equals(codeString))
           return new Enumeration<DataType>(this, DataType.EXTENSION);
         if ("HumanName".equals(codeString))
@@ -1880,12 +1911,16 @@ public class Enumerations {
           return new Enumeration<DataType>(this, DataType.META);
         if ("Money".equals(codeString))
           return new Enumeration<DataType>(this, DataType.MONEY);
+        if ("MoneyQuantity".equals(codeString))
+          return new Enumeration<DataType>(this, DataType.MONEYQUANTITY);
         if ("Narrative".equals(codeString))
           return new Enumeration<DataType>(this, DataType.NARRATIVE);
         if ("ParameterDefinition".equals(codeString))
           return new Enumeration<DataType>(this, DataType.PARAMETERDEFINITION);
         if ("Period".equals(codeString))
           return new Enumeration<DataType>(this, DataType.PERIOD);
+        if ("Population".equals(codeString))
+          return new Enumeration<DataType>(this, DataType.POPULATION);
         if ("ProdCharacteristic".equals(codeString))
           return new Enumeration<DataType>(this, DataType.PRODCHARACTERISTIC);
         if ("ProductShelfLife".equals(codeString))
@@ -1908,8 +1943,6 @@ public class Enumerations {
           return new Enumeration<DataType>(this, DataType.SIMPLEQUANTITY);
         if ("SubstanceAmount".equals(codeString))
           return new Enumeration<DataType>(this, DataType.SUBSTANCEAMOUNT);
-        if ("SubstanceMoiety".equals(codeString))
-          return new Enumeration<DataType>(this, DataType.SUBSTANCEMOIETY);
         if ("Timing".equals(codeString))
           return new Enumeration<DataType>(this, DataType.TIMING);
         if ("TriggerDefinition".equals(codeString))
@@ -1993,6 +2026,8 @@ public class Enumerations {
         return "Element";
       if (code == DataType.ELEMENTDEFINITION)
         return "ElementDefinition";
+      if (code == DataType.EXPRESSION)
+        return "Expression";
       if (code == DataType.EXTENSION)
         return "Extension";
       if (code == DataType.HUMANNAME)
@@ -2005,12 +2040,16 @@ public class Enumerations {
         return "Meta";
       if (code == DataType.MONEY)
         return "Money";
+      if (code == DataType.MONEYQUANTITY)
+        return "MoneyQuantity";
       if (code == DataType.NARRATIVE)
         return "Narrative";
       if (code == DataType.PARAMETERDEFINITION)
         return "ParameterDefinition";
       if (code == DataType.PERIOD)
         return "Period";
+      if (code == DataType.POPULATION)
+        return "Population";
       if (code == DataType.PRODCHARACTERISTIC)
         return "ProdCharacteristic";
       if (code == DataType.PRODUCTSHELFLIFE)
@@ -2033,8 +2072,6 @@ public class Enumerations {
         return "SimpleQuantity";
       if (code == DataType.SUBSTANCEAMOUNT)
         return "SubstanceAmount";
-      if (code == DataType.SUBSTANCEMOIETY)
-        return "SubstanceMoiety";
       if (code == DataType.TIMING)
         return "Timing";
       if (code == DataType.TRIGGERDEFINITION)
@@ -2084,6 +2121,159 @@ public class Enumerations {
       return "?";
       }
     public String toSystem(DataType code) {
+      return code.getSystem();
+      }
+    }
+
+    public enum DefinitionResourceType {
+        /**
+         * This resource allows for the definition of some activity to be performed, independent of a particular patient, practitioner, or other performance context.
+         */
+        ACTIVITYDEFINITION, 
+        /**
+         * The EventDefinition resource provides a reusable description of when a particular event can occur.
+         */
+        EVENTDEFINITION, 
+        /**
+         * The Measure resource provides the definition of a quality measure.
+         */
+        MEASURE, 
+        /**
+         * A formal computable definition of an operation (on the RESTful interface) or a named query (using the search interaction).
+         */
+        OPERATIONDEFINITION, 
+        /**
+         * This resource allows for the definition of various types of plans as a sharable, consumable, and executable artifact. The resource is general enough to support the description of a broad range of clinical artifacts such as clinical decision support rules, order sets and protocols.
+         */
+        PLANDEFINITION, 
+        /**
+         * A structured set of questions intended to guide the collection of answers from end-users. Questionnaires provide detailed control over order, presentation, phraseology and grouping to allow coherent, consistent data collection.
+         */
+        QUESTIONNAIRE, 
+        /**
+         * added to help the parsers
+         */
+        NULL;
+        public static DefinitionResourceType fromCode(String codeString) throws FHIRException {
+            if (codeString == null || "".equals(codeString))
+                return null;
+        if ("ActivityDefinition".equals(codeString))
+          return ACTIVITYDEFINITION;
+        if ("EventDefinition".equals(codeString))
+          return EVENTDEFINITION;
+        if ("Measure".equals(codeString))
+          return MEASURE;
+        if ("OperationDefinition".equals(codeString))
+          return OPERATIONDEFINITION;
+        if ("PlanDefinition".equals(codeString))
+          return PLANDEFINITION;
+        if ("Questionnaire".equals(codeString))
+          return QUESTIONNAIRE;
+        throw new FHIRException("Unknown DefinitionResourceType code '"+codeString+"'");
+        }
+        public String toCode() {
+          switch (this) {
+            case ACTIVITYDEFINITION: return "ActivityDefinition";
+            case EVENTDEFINITION: return "EventDefinition";
+            case MEASURE: return "Measure";
+            case OPERATIONDEFINITION: return "OperationDefinition";
+            case PLANDEFINITION: return "PlanDefinition";
+            case QUESTIONNAIRE: return "Questionnaire";
+            default: return "?";
+          }
+        }
+        public String getSystem() {
+          switch (this) {
+            case ACTIVITYDEFINITION: return "http://hl7.org/fhir/definition-resource-types";
+            case EVENTDEFINITION: return "http://hl7.org/fhir/definition-resource-types";
+            case MEASURE: return "http://hl7.org/fhir/definition-resource-types";
+            case OPERATIONDEFINITION: return "http://hl7.org/fhir/definition-resource-types";
+            case PLANDEFINITION: return "http://hl7.org/fhir/definition-resource-types";
+            case QUESTIONNAIRE: return "http://hl7.org/fhir/definition-resource-types";
+            default: return "?";
+          }
+        }
+        public String getDefinition() {
+          switch (this) {
+            case ACTIVITYDEFINITION: return "This resource allows for the definition of some activity to be performed, independent of a particular patient, practitioner, or other performance context.";
+            case EVENTDEFINITION: return "The EventDefinition resource provides a reusable description of when a particular event can occur.";
+            case MEASURE: return "The Measure resource provides the definition of a quality measure.";
+            case OPERATIONDEFINITION: return "A formal computable definition of an operation (on the RESTful interface) or a named query (using the search interaction).";
+            case PLANDEFINITION: return "This resource allows for the definition of various types of plans as a sharable, consumable, and executable artifact. The resource is general enough to support the description of a broad range of clinical artifacts such as clinical decision support rules, order sets and protocols.";
+            case QUESTIONNAIRE: return "A structured set of questions intended to guide the collection of answers from end-users. Questionnaires provide detailed control over order, presentation, phraseology and grouping to allow coherent, consistent data collection.";
+            default: return "?";
+          }
+        }
+        public String getDisplay() {
+          switch (this) {
+            case ACTIVITYDEFINITION: return "ActivityDefinition";
+            case EVENTDEFINITION: return "EventDefinition";
+            case MEASURE: return "Measure";
+            case OPERATIONDEFINITION: return "OperationDefinition";
+            case PLANDEFINITION: return "PlanDefinition";
+            case QUESTIONNAIRE: return "Questionnaire";
+            default: return "?";
+          }
+        }
+    }
+
+  public static class DefinitionResourceTypeEnumFactory implements EnumFactory<DefinitionResourceType> {
+    public DefinitionResourceType fromCode(String codeString) throws IllegalArgumentException {
+      if (codeString == null || "".equals(codeString))
+            if (codeString == null || "".equals(codeString))
+                return null;
+        if ("ActivityDefinition".equals(codeString))
+          return DefinitionResourceType.ACTIVITYDEFINITION;
+        if ("EventDefinition".equals(codeString))
+          return DefinitionResourceType.EVENTDEFINITION;
+        if ("Measure".equals(codeString))
+          return DefinitionResourceType.MEASURE;
+        if ("OperationDefinition".equals(codeString))
+          return DefinitionResourceType.OPERATIONDEFINITION;
+        if ("PlanDefinition".equals(codeString))
+          return DefinitionResourceType.PLANDEFINITION;
+        if ("Questionnaire".equals(codeString))
+          return DefinitionResourceType.QUESTIONNAIRE;
+        throw new IllegalArgumentException("Unknown DefinitionResourceType code '"+codeString+"'");
+        }
+        public Enumeration<DefinitionResourceType> fromType(Base code) throws FHIRException {
+          if (code == null)
+            return null;
+          if (code.isEmpty())
+            return new Enumeration<DefinitionResourceType>(this);
+          String codeString = ((PrimitiveType) code).asStringValue();
+          if (codeString == null || "".equals(codeString))
+            return null;
+        if ("ActivityDefinition".equals(codeString))
+          return new Enumeration<DefinitionResourceType>(this, DefinitionResourceType.ACTIVITYDEFINITION);
+        if ("EventDefinition".equals(codeString))
+          return new Enumeration<DefinitionResourceType>(this, DefinitionResourceType.EVENTDEFINITION);
+        if ("Measure".equals(codeString))
+          return new Enumeration<DefinitionResourceType>(this, DefinitionResourceType.MEASURE);
+        if ("OperationDefinition".equals(codeString))
+          return new Enumeration<DefinitionResourceType>(this, DefinitionResourceType.OPERATIONDEFINITION);
+        if ("PlanDefinition".equals(codeString))
+          return new Enumeration<DefinitionResourceType>(this, DefinitionResourceType.PLANDEFINITION);
+        if ("Questionnaire".equals(codeString))
+          return new Enumeration<DefinitionResourceType>(this, DefinitionResourceType.QUESTIONNAIRE);
+        throw new FHIRException("Unknown DefinitionResourceType code '"+codeString+"'");
+        }
+    public String toCode(DefinitionResourceType code) {
+      if (code == DefinitionResourceType.ACTIVITYDEFINITION)
+        return "ActivityDefinition";
+      if (code == DefinitionResourceType.EVENTDEFINITION)
+        return "EventDefinition";
+      if (code == DefinitionResourceType.MEASURE)
+        return "Measure";
+      if (code == DefinitionResourceType.OPERATIONDEFINITION)
+        return "OperationDefinition";
+      if (code == DefinitionResourceType.PLANDEFINITION)
+        return "PlanDefinition";
+      if (code == DefinitionResourceType.QUESTIONNAIRE)
+        return "Questionnaire";
+      return "?";
+      }
+    public String toSystem(DefinitionResourceType code) {
       return code.getSystem();
       }
     }
@@ -2193,6 +2383,607 @@ public class Enumerations {
       }
     }
 
+    public enum EventResourceType {
+        /**
+         * Item containing charge code(s) associated with the provision of healthcare provider products.
+         */
+        CHARGEITEM, 
+        /**
+         * Remittance resource.
+         */
+        CLAIMRESPONSE, 
+        /**
+         * A clinical assessment performed when planning treatments and management strategies for a patient.
+         */
+        CLINICALIMPRESSION, 
+        /**
+         * A record of information transmitted from a sender to a receiver.
+         */
+        COMMUNICATION, 
+        /**
+         * A set of resources composed into a single coherent clinical statement with clinical attestation.
+         */
+        COMPOSITION, 
+        /**
+         * Detailed information about conditions, problems or diagnoses.
+         */
+        CONDITION, 
+        /**
+         * A healthcare consumer's policy choices to permits or denies recipients or roles to perform actions for specific purposes and periods of time.
+         */
+        CONSENT, 
+        /**
+         * Insurance or medical plan or a payment agreement.
+         */
+        COVERAGE, 
+        /**
+         * Record of use of a device.
+         */
+        DEVICEUSESTATEMENT, 
+        /**
+         * A Diagnostic report - a combination of request information, atomic results, images, interpretation, as well as formatted reports.
+         */
+        DIAGNOSTICREPORT, 
+        /**
+         * A list that defines a set of documents.
+         */
+        DOCUMENTMANIFEST, 
+        /**
+         * A reference to a document.
+         */
+        DOCUMENTREFERENCE, 
+        /**
+         * An interaction during which services are provided to the patient.
+         */
+        ENCOUNTER, 
+        /**
+         * EnrollmentResponse resource.
+         */
+        ENROLLMENTRESPONSE, 
+        /**
+         * An association of a Patient with an Organization and  Healthcare Provider(s) for a period of time that the Organization assumes some level of responsibility.
+         */
+        EPISODEOFCARE, 
+        /**
+         * Explanation of Benefit resource.
+         */
+        EXPLANATIONOFBENEFIT, 
+        /**
+         * Information about patient's relatives, relevant for patient.
+         */
+        FAMILYMEMBERHISTORY, 
+        /**
+         * The formal response to a guidance request.
+         */
+        GUIDANCERESPONSE, 
+        /**
+         * A set of images produced in single study (one or more series of references images).
+         */
+        IMAGINGSTUDY, 
+        /**
+         * Immunization event information.
+         */
+        IMMUNIZATION, 
+        /**
+         * Results of a measure evaluation.
+         */
+        MEASUREREPORT, 
+        /**
+         * A photo, video, or audio recording acquired or used in healthcare. The actual content may be inline or provided by direct reference.
+         */
+        MEDIA, 
+        /**
+         * Administration of medication to a patient.
+         */
+        MEDICATIONADMINISTRATION, 
+        /**
+         * Dispensing a medication to a named patient.
+         */
+        MEDICATIONDISPENSE, 
+        /**
+         * Record of medication being taken by a patient.
+         */
+        MEDICATIONSTATEMENT, 
+        /**
+         * Measurements and simple assertions.
+         */
+        OBSERVATION, 
+        /**
+         * PaymentNotice request.
+         */
+        PAYMENTNOTICE, 
+        /**
+         * PaymentReconciliation resource.
+         */
+        PAYMENTRECONCILIATION, 
+        /**
+         * An action that is being or was performed on a patient.
+         */
+        PROCEDURE, 
+        /**
+         * ProcessResponse resource.
+         */
+        PROCESSRESPONSE, 
+        /**
+         * A structured set of questions and their answers.
+         */
+        QUESTIONNAIRERESPONSE, 
+        /**
+         * Potential outcomes for a subject with likelihood.
+         */
+        RISKASSESSMENT, 
+        /**
+         * Delivery of bulk Supplies.
+         */
+        SUPPLYDELIVERY, 
+        /**
+         * A task to be performed.
+         */
+        TASK, 
+        /**
+         * added to help the parsers
+         */
+        NULL;
+        public static EventResourceType fromCode(String codeString) throws FHIRException {
+            if (codeString == null || "".equals(codeString))
+                return null;
+        if ("ChargeItem".equals(codeString))
+          return CHARGEITEM;
+        if ("ClaimResponse".equals(codeString))
+          return CLAIMRESPONSE;
+        if ("ClinicalImpression".equals(codeString))
+          return CLINICALIMPRESSION;
+        if ("Communication".equals(codeString))
+          return COMMUNICATION;
+        if ("Composition".equals(codeString))
+          return COMPOSITION;
+        if ("Condition".equals(codeString))
+          return CONDITION;
+        if ("Consent".equals(codeString))
+          return CONSENT;
+        if ("Coverage".equals(codeString))
+          return COVERAGE;
+        if ("DeviceUseStatement".equals(codeString))
+          return DEVICEUSESTATEMENT;
+        if ("DiagnosticReport".equals(codeString))
+          return DIAGNOSTICREPORT;
+        if ("DocumentManifest".equals(codeString))
+          return DOCUMENTMANIFEST;
+        if ("DocumentReference".equals(codeString))
+          return DOCUMENTREFERENCE;
+        if ("Encounter".equals(codeString))
+          return ENCOUNTER;
+        if ("EnrollmentResponse".equals(codeString))
+          return ENROLLMENTRESPONSE;
+        if ("EpisodeOfCare".equals(codeString))
+          return EPISODEOFCARE;
+        if ("ExplanationOfBenefit".equals(codeString))
+          return EXPLANATIONOFBENEFIT;
+        if ("FamilyMemberHistory".equals(codeString))
+          return FAMILYMEMBERHISTORY;
+        if ("GuidanceResponse".equals(codeString))
+          return GUIDANCERESPONSE;
+        if ("ImagingStudy".equals(codeString))
+          return IMAGINGSTUDY;
+        if ("Immunization".equals(codeString))
+          return IMMUNIZATION;
+        if ("MeasureReport".equals(codeString))
+          return MEASUREREPORT;
+        if ("Media".equals(codeString))
+          return MEDIA;
+        if ("MedicationAdministration".equals(codeString))
+          return MEDICATIONADMINISTRATION;
+        if ("MedicationDispense".equals(codeString))
+          return MEDICATIONDISPENSE;
+        if ("MedicationStatement".equals(codeString))
+          return MEDICATIONSTATEMENT;
+        if ("Observation".equals(codeString))
+          return OBSERVATION;
+        if ("PaymentNotice".equals(codeString))
+          return PAYMENTNOTICE;
+        if ("PaymentReconciliation".equals(codeString))
+          return PAYMENTRECONCILIATION;
+        if ("Procedure".equals(codeString))
+          return PROCEDURE;
+        if ("ProcessResponse".equals(codeString))
+          return PROCESSRESPONSE;
+        if ("QuestionnaireResponse".equals(codeString))
+          return QUESTIONNAIRERESPONSE;
+        if ("RiskAssessment".equals(codeString))
+          return RISKASSESSMENT;
+        if ("SupplyDelivery".equals(codeString))
+          return SUPPLYDELIVERY;
+        if ("Task".equals(codeString))
+          return TASK;
+        throw new FHIRException("Unknown EventResourceType code '"+codeString+"'");
+        }
+        public String toCode() {
+          switch (this) {
+            case CHARGEITEM: return "ChargeItem";
+            case CLAIMRESPONSE: return "ClaimResponse";
+            case CLINICALIMPRESSION: return "ClinicalImpression";
+            case COMMUNICATION: return "Communication";
+            case COMPOSITION: return "Composition";
+            case CONDITION: return "Condition";
+            case CONSENT: return "Consent";
+            case COVERAGE: return "Coverage";
+            case DEVICEUSESTATEMENT: return "DeviceUseStatement";
+            case DIAGNOSTICREPORT: return "DiagnosticReport";
+            case DOCUMENTMANIFEST: return "DocumentManifest";
+            case DOCUMENTREFERENCE: return "DocumentReference";
+            case ENCOUNTER: return "Encounter";
+            case ENROLLMENTRESPONSE: return "EnrollmentResponse";
+            case EPISODEOFCARE: return "EpisodeOfCare";
+            case EXPLANATIONOFBENEFIT: return "ExplanationOfBenefit";
+            case FAMILYMEMBERHISTORY: return "FamilyMemberHistory";
+            case GUIDANCERESPONSE: return "GuidanceResponse";
+            case IMAGINGSTUDY: return "ImagingStudy";
+            case IMMUNIZATION: return "Immunization";
+            case MEASUREREPORT: return "MeasureReport";
+            case MEDIA: return "Media";
+            case MEDICATIONADMINISTRATION: return "MedicationAdministration";
+            case MEDICATIONDISPENSE: return "MedicationDispense";
+            case MEDICATIONSTATEMENT: return "MedicationStatement";
+            case OBSERVATION: return "Observation";
+            case PAYMENTNOTICE: return "PaymentNotice";
+            case PAYMENTRECONCILIATION: return "PaymentReconciliation";
+            case PROCEDURE: return "Procedure";
+            case PROCESSRESPONSE: return "ProcessResponse";
+            case QUESTIONNAIRERESPONSE: return "QuestionnaireResponse";
+            case RISKASSESSMENT: return "RiskAssessment";
+            case SUPPLYDELIVERY: return "SupplyDelivery";
+            case TASK: return "Task";
+            default: return "?";
+          }
+        }
+        public String getSystem() {
+          switch (this) {
+            case CHARGEITEM: return "http://hl7.org/fhir/event-resource-types";
+            case CLAIMRESPONSE: return "http://hl7.org/fhir/event-resource-types";
+            case CLINICALIMPRESSION: return "http://hl7.org/fhir/event-resource-types";
+            case COMMUNICATION: return "http://hl7.org/fhir/event-resource-types";
+            case COMPOSITION: return "http://hl7.org/fhir/event-resource-types";
+            case CONDITION: return "http://hl7.org/fhir/event-resource-types";
+            case CONSENT: return "http://hl7.org/fhir/event-resource-types";
+            case COVERAGE: return "http://hl7.org/fhir/event-resource-types";
+            case DEVICEUSESTATEMENT: return "http://hl7.org/fhir/event-resource-types";
+            case DIAGNOSTICREPORT: return "http://hl7.org/fhir/event-resource-types";
+            case DOCUMENTMANIFEST: return "http://hl7.org/fhir/event-resource-types";
+            case DOCUMENTREFERENCE: return "http://hl7.org/fhir/event-resource-types";
+            case ENCOUNTER: return "http://hl7.org/fhir/event-resource-types";
+            case ENROLLMENTRESPONSE: return "http://hl7.org/fhir/event-resource-types";
+            case EPISODEOFCARE: return "http://hl7.org/fhir/event-resource-types";
+            case EXPLANATIONOFBENEFIT: return "http://hl7.org/fhir/event-resource-types";
+            case FAMILYMEMBERHISTORY: return "http://hl7.org/fhir/event-resource-types";
+            case GUIDANCERESPONSE: return "http://hl7.org/fhir/event-resource-types";
+            case IMAGINGSTUDY: return "http://hl7.org/fhir/event-resource-types";
+            case IMMUNIZATION: return "http://hl7.org/fhir/event-resource-types";
+            case MEASUREREPORT: return "http://hl7.org/fhir/event-resource-types";
+            case MEDIA: return "http://hl7.org/fhir/event-resource-types";
+            case MEDICATIONADMINISTRATION: return "http://hl7.org/fhir/event-resource-types";
+            case MEDICATIONDISPENSE: return "http://hl7.org/fhir/event-resource-types";
+            case MEDICATIONSTATEMENT: return "http://hl7.org/fhir/event-resource-types";
+            case OBSERVATION: return "http://hl7.org/fhir/event-resource-types";
+            case PAYMENTNOTICE: return "http://hl7.org/fhir/event-resource-types";
+            case PAYMENTRECONCILIATION: return "http://hl7.org/fhir/event-resource-types";
+            case PROCEDURE: return "http://hl7.org/fhir/event-resource-types";
+            case PROCESSRESPONSE: return "http://hl7.org/fhir/event-resource-types";
+            case QUESTIONNAIRERESPONSE: return "http://hl7.org/fhir/event-resource-types";
+            case RISKASSESSMENT: return "http://hl7.org/fhir/event-resource-types";
+            case SUPPLYDELIVERY: return "http://hl7.org/fhir/event-resource-types";
+            case TASK: return "http://hl7.org/fhir/event-resource-types";
+            default: return "?";
+          }
+        }
+        public String getDefinition() {
+          switch (this) {
+            case CHARGEITEM: return "Item containing charge code(s) associated with the provision of healthcare provider products.";
+            case CLAIMRESPONSE: return "Remittance resource.";
+            case CLINICALIMPRESSION: return "A clinical assessment performed when planning treatments and management strategies for a patient.";
+            case COMMUNICATION: return "A record of information transmitted from a sender to a receiver.";
+            case COMPOSITION: return "A set of resources composed into a single coherent clinical statement with clinical attestation.";
+            case CONDITION: return "Detailed information about conditions, problems or diagnoses.";
+            case CONSENT: return "A healthcare consumer's policy choices to permits or denies recipients or roles to perform actions for specific purposes and periods of time.";
+            case COVERAGE: return "Insurance or medical plan or a payment agreement.";
+            case DEVICEUSESTATEMENT: return "Record of use of a device.";
+            case DIAGNOSTICREPORT: return "A Diagnostic report - a combination of request information, atomic results, images, interpretation, as well as formatted reports.";
+            case DOCUMENTMANIFEST: return "A list that defines a set of documents.";
+            case DOCUMENTREFERENCE: return "A reference to a document.";
+            case ENCOUNTER: return "An interaction during which services are provided to the patient.";
+            case ENROLLMENTRESPONSE: return "EnrollmentResponse resource.";
+            case EPISODEOFCARE: return "An association of a Patient with an Organization and  Healthcare Provider(s) for a period of time that the Organization assumes some level of responsibility.";
+            case EXPLANATIONOFBENEFIT: return "Explanation of Benefit resource.";
+            case FAMILYMEMBERHISTORY: return "Information about patient's relatives, relevant for patient.";
+            case GUIDANCERESPONSE: return "The formal response to a guidance request.";
+            case IMAGINGSTUDY: return "A set of images produced in single study (one or more series of references images).";
+            case IMMUNIZATION: return "Immunization event information.";
+            case MEASUREREPORT: return "Results of a measure evaluation.";
+            case MEDIA: return "A photo, video, or audio recording acquired or used in healthcare. The actual content may be inline or provided by direct reference.";
+            case MEDICATIONADMINISTRATION: return "Administration of medication to a patient.";
+            case MEDICATIONDISPENSE: return "Dispensing a medication to a named patient.";
+            case MEDICATIONSTATEMENT: return "Record of medication being taken by a patient.";
+            case OBSERVATION: return "Measurements and simple assertions.";
+            case PAYMENTNOTICE: return "PaymentNotice request.";
+            case PAYMENTRECONCILIATION: return "PaymentReconciliation resource.";
+            case PROCEDURE: return "An action that is being or was performed on a patient.";
+            case PROCESSRESPONSE: return "ProcessResponse resource.";
+            case QUESTIONNAIRERESPONSE: return "A structured set of questions and their answers.";
+            case RISKASSESSMENT: return "Potential outcomes for a subject with likelihood.";
+            case SUPPLYDELIVERY: return "Delivery of bulk Supplies.";
+            case TASK: return "A task to be performed.";
+            default: return "?";
+          }
+        }
+        public String getDisplay() {
+          switch (this) {
+            case CHARGEITEM: return "ChargeItem";
+            case CLAIMRESPONSE: return "ClaimResponse";
+            case CLINICALIMPRESSION: return "ClinicalImpression";
+            case COMMUNICATION: return "Communication";
+            case COMPOSITION: return "Composition";
+            case CONDITION: return "Condition";
+            case CONSENT: return "Consent";
+            case COVERAGE: return "Coverage";
+            case DEVICEUSESTATEMENT: return "DeviceUseStatement";
+            case DIAGNOSTICREPORT: return "DiagnosticReport";
+            case DOCUMENTMANIFEST: return "DocumentManifest";
+            case DOCUMENTREFERENCE: return "DocumentReference";
+            case ENCOUNTER: return "Encounter";
+            case ENROLLMENTRESPONSE: return "EnrollmentResponse";
+            case EPISODEOFCARE: return "EpisodeOfCare";
+            case EXPLANATIONOFBENEFIT: return "ExplanationOfBenefit";
+            case FAMILYMEMBERHISTORY: return "FamilyMemberHistory";
+            case GUIDANCERESPONSE: return "GuidanceResponse";
+            case IMAGINGSTUDY: return "ImagingStudy";
+            case IMMUNIZATION: return "Immunization";
+            case MEASUREREPORT: return "MeasureReport";
+            case MEDIA: return "Media";
+            case MEDICATIONADMINISTRATION: return "MedicationAdministration";
+            case MEDICATIONDISPENSE: return "MedicationDispense";
+            case MEDICATIONSTATEMENT: return "MedicationStatement";
+            case OBSERVATION: return "Observation";
+            case PAYMENTNOTICE: return "PaymentNotice";
+            case PAYMENTRECONCILIATION: return "PaymentReconciliation";
+            case PROCEDURE: return "Procedure";
+            case PROCESSRESPONSE: return "ProcessResponse";
+            case QUESTIONNAIRERESPONSE: return "QuestionnaireResponse";
+            case RISKASSESSMENT: return "RiskAssessment";
+            case SUPPLYDELIVERY: return "SupplyDelivery";
+            case TASK: return "Task";
+            default: return "?";
+          }
+        }
+    }
+
+  public static class EventResourceTypeEnumFactory implements EnumFactory<EventResourceType> {
+    public EventResourceType fromCode(String codeString) throws IllegalArgumentException {
+      if (codeString == null || "".equals(codeString))
+            if (codeString == null || "".equals(codeString))
+                return null;
+        if ("ChargeItem".equals(codeString))
+          return EventResourceType.CHARGEITEM;
+        if ("ClaimResponse".equals(codeString))
+          return EventResourceType.CLAIMRESPONSE;
+        if ("ClinicalImpression".equals(codeString))
+          return EventResourceType.CLINICALIMPRESSION;
+        if ("Communication".equals(codeString))
+          return EventResourceType.COMMUNICATION;
+        if ("Composition".equals(codeString))
+          return EventResourceType.COMPOSITION;
+        if ("Condition".equals(codeString))
+          return EventResourceType.CONDITION;
+        if ("Consent".equals(codeString))
+          return EventResourceType.CONSENT;
+        if ("Coverage".equals(codeString))
+          return EventResourceType.COVERAGE;
+        if ("DeviceUseStatement".equals(codeString))
+          return EventResourceType.DEVICEUSESTATEMENT;
+        if ("DiagnosticReport".equals(codeString))
+          return EventResourceType.DIAGNOSTICREPORT;
+        if ("DocumentManifest".equals(codeString))
+          return EventResourceType.DOCUMENTMANIFEST;
+        if ("DocumentReference".equals(codeString))
+          return EventResourceType.DOCUMENTREFERENCE;
+        if ("Encounter".equals(codeString))
+          return EventResourceType.ENCOUNTER;
+        if ("EnrollmentResponse".equals(codeString))
+          return EventResourceType.ENROLLMENTRESPONSE;
+        if ("EpisodeOfCare".equals(codeString))
+          return EventResourceType.EPISODEOFCARE;
+        if ("ExplanationOfBenefit".equals(codeString))
+          return EventResourceType.EXPLANATIONOFBENEFIT;
+        if ("FamilyMemberHistory".equals(codeString))
+          return EventResourceType.FAMILYMEMBERHISTORY;
+        if ("GuidanceResponse".equals(codeString))
+          return EventResourceType.GUIDANCERESPONSE;
+        if ("ImagingStudy".equals(codeString))
+          return EventResourceType.IMAGINGSTUDY;
+        if ("Immunization".equals(codeString))
+          return EventResourceType.IMMUNIZATION;
+        if ("MeasureReport".equals(codeString))
+          return EventResourceType.MEASUREREPORT;
+        if ("Media".equals(codeString))
+          return EventResourceType.MEDIA;
+        if ("MedicationAdministration".equals(codeString))
+          return EventResourceType.MEDICATIONADMINISTRATION;
+        if ("MedicationDispense".equals(codeString))
+          return EventResourceType.MEDICATIONDISPENSE;
+        if ("MedicationStatement".equals(codeString))
+          return EventResourceType.MEDICATIONSTATEMENT;
+        if ("Observation".equals(codeString))
+          return EventResourceType.OBSERVATION;
+        if ("PaymentNotice".equals(codeString))
+          return EventResourceType.PAYMENTNOTICE;
+        if ("PaymentReconciliation".equals(codeString))
+          return EventResourceType.PAYMENTRECONCILIATION;
+        if ("Procedure".equals(codeString))
+          return EventResourceType.PROCEDURE;
+        if ("ProcessResponse".equals(codeString))
+          return EventResourceType.PROCESSRESPONSE;
+        if ("QuestionnaireResponse".equals(codeString))
+          return EventResourceType.QUESTIONNAIRERESPONSE;
+        if ("RiskAssessment".equals(codeString))
+          return EventResourceType.RISKASSESSMENT;
+        if ("SupplyDelivery".equals(codeString))
+          return EventResourceType.SUPPLYDELIVERY;
+        if ("Task".equals(codeString))
+          return EventResourceType.TASK;
+        throw new IllegalArgumentException("Unknown EventResourceType code '"+codeString+"'");
+        }
+        public Enumeration<EventResourceType> fromType(Base code) throws FHIRException {
+          if (code == null)
+            return null;
+          if (code.isEmpty())
+            return new Enumeration<EventResourceType>(this);
+          String codeString = ((PrimitiveType) code).asStringValue();
+          if (codeString == null || "".equals(codeString))
+            return null;
+        if ("ChargeItem".equals(codeString))
+          return new Enumeration<EventResourceType>(this, EventResourceType.CHARGEITEM);
+        if ("ClaimResponse".equals(codeString))
+          return new Enumeration<EventResourceType>(this, EventResourceType.CLAIMRESPONSE);
+        if ("ClinicalImpression".equals(codeString))
+          return new Enumeration<EventResourceType>(this, EventResourceType.CLINICALIMPRESSION);
+        if ("Communication".equals(codeString))
+          return new Enumeration<EventResourceType>(this, EventResourceType.COMMUNICATION);
+        if ("Composition".equals(codeString))
+          return new Enumeration<EventResourceType>(this, EventResourceType.COMPOSITION);
+        if ("Condition".equals(codeString))
+          return new Enumeration<EventResourceType>(this, EventResourceType.CONDITION);
+        if ("Consent".equals(codeString))
+          return new Enumeration<EventResourceType>(this, EventResourceType.CONSENT);
+        if ("Coverage".equals(codeString))
+          return new Enumeration<EventResourceType>(this, EventResourceType.COVERAGE);
+        if ("DeviceUseStatement".equals(codeString))
+          return new Enumeration<EventResourceType>(this, EventResourceType.DEVICEUSESTATEMENT);
+        if ("DiagnosticReport".equals(codeString))
+          return new Enumeration<EventResourceType>(this, EventResourceType.DIAGNOSTICREPORT);
+        if ("DocumentManifest".equals(codeString))
+          return new Enumeration<EventResourceType>(this, EventResourceType.DOCUMENTMANIFEST);
+        if ("DocumentReference".equals(codeString))
+          return new Enumeration<EventResourceType>(this, EventResourceType.DOCUMENTREFERENCE);
+        if ("Encounter".equals(codeString))
+          return new Enumeration<EventResourceType>(this, EventResourceType.ENCOUNTER);
+        if ("EnrollmentResponse".equals(codeString))
+          return new Enumeration<EventResourceType>(this, EventResourceType.ENROLLMENTRESPONSE);
+        if ("EpisodeOfCare".equals(codeString))
+          return new Enumeration<EventResourceType>(this, EventResourceType.EPISODEOFCARE);
+        if ("ExplanationOfBenefit".equals(codeString))
+          return new Enumeration<EventResourceType>(this, EventResourceType.EXPLANATIONOFBENEFIT);
+        if ("FamilyMemberHistory".equals(codeString))
+          return new Enumeration<EventResourceType>(this, EventResourceType.FAMILYMEMBERHISTORY);
+        if ("GuidanceResponse".equals(codeString))
+          return new Enumeration<EventResourceType>(this, EventResourceType.GUIDANCERESPONSE);
+        if ("ImagingStudy".equals(codeString))
+          return new Enumeration<EventResourceType>(this, EventResourceType.IMAGINGSTUDY);
+        if ("Immunization".equals(codeString))
+          return new Enumeration<EventResourceType>(this, EventResourceType.IMMUNIZATION);
+        if ("MeasureReport".equals(codeString))
+          return new Enumeration<EventResourceType>(this, EventResourceType.MEASUREREPORT);
+        if ("Media".equals(codeString))
+          return new Enumeration<EventResourceType>(this, EventResourceType.MEDIA);
+        if ("MedicationAdministration".equals(codeString))
+          return new Enumeration<EventResourceType>(this, EventResourceType.MEDICATIONADMINISTRATION);
+        if ("MedicationDispense".equals(codeString))
+          return new Enumeration<EventResourceType>(this, EventResourceType.MEDICATIONDISPENSE);
+        if ("MedicationStatement".equals(codeString))
+          return new Enumeration<EventResourceType>(this, EventResourceType.MEDICATIONSTATEMENT);
+        if ("Observation".equals(codeString))
+          return new Enumeration<EventResourceType>(this, EventResourceType.OBSERVATION);
+        if ("PaymentNotice".equals(codeString))
+          return new Enumeration<EventResourceType>(this, EventResourceType.PAYMENTNOTICE);
+        if ("PaymentReconciliation".equals(codeString))
+          return new Enumeration<EventResourceType>(this, EventResourceType.PAYMENTRECONCILIATION);
+        if ("Procedure".equals(codeString))
+          return new Enumeration<EventResourceType>(this, EventResourceType.PROCEDURE);
+        if ("ProcessResponse".equals(codeString))
+          return new Enumeration<EventResourceType>(this, EventResourceType.PROCESSRESPONSE);
+        if ("QuestionnaireResponse".equals(codeString))
+          return new Enumeration<EventResourceType>(this, EventResourceType.QUESTIONNAIRERESPONSE);
+        if ("RiskAssessment".equals(codeString))
+          return new Enumeration<EventResourceType>(this, EventResourceType.RISKASSESSMENT);
+        if ("SupplyDelivery".equals(codeString))
+          return new Enumeration<EventResourceType>(this, EventResourceType.SUPPLYDELIVERY);
+        if ("Task".equals(codeString))
+          return new Enumeration<EventResourceType>(this, EventResourceType.TASK);
+        throw new FHIRException("Unknown EventResourceType code '"+codeString+"'");
+        }
+    public String toCode(EventResourceType code) {
+      if (code == EventResourceType.CHARGEITEM)
+        return "ChargeItem";
+      if (code == EventResourceType.CLAIMRESPONSE)
+        return "ClaimResponse";
+      if (code == EventResourceType.CLINICALIMPRESSION)
+        return "ClinicalImpression";
+      if (code == EventResourceType.COMMUNICATION)
+        return "Communication";
+      if (code == EventResourceType.COMPOSITION)
+        return "Composition";
+      if (code == EventResourceType.CONDITION)
+        return "Condition";
+      if (code == EventResourceType.CONSENT)
+        return "Consent";
+      if (code == EventResourceType.COVERAGE)
+        return "Coverage";
+      if (code == EventResourceType.DEVICEUSESTATEMENT)
+        return "DeviceUseStatement";
+      if (code == EventResourceType.DIAGNOSTICREPORT)
+        return "DiagnosticReport";
+      if (code == EventResourceType.DOCUMENTMANIFEST)
+        return "DocumentManifest";
+      if (code == EventResourceType.DOCUMENTREFERENCE)
+        return "DocumentReference";
+      if (code == EventResourceType.ENCOUNTER)
+        return "Encounter";
+      if (code == EventResourceType.ENROLLMENTRESPONSE)
+        return "EnrollmentResponse";
+      if (code == EventResourceType.EPISODEOFCARE)
+        return "EpisodeOfCare";
+      if (code == EventResourceType.EXPLANATIONOFBENEFIT)
+        return "ExplanationOfBenefit";
+      if (code == EventResourceType.FAMILYMEMBERHISTORY)
+        return "FamilyMemberHistory";
+      if (code == EventResourceType.GUIDANCERESPONSE)
+        return "GuidanceResponse";
+      if (code == EventResourceType.IMAGINGSTUDY)
+        return "ImagingStudy";
+      if (code == EventResourceType.IMMUNIZATION)
+        return "Immunization";
+      if (code == EventResourceType.MEASUREREPORT)
+        return "MeasureReport";
+      if (code == EventResourceType.MEDIA)
+        return "Media";
+      if (code == EventResourceType.MEDICATIONADMINISTRATION)
+        return "MedicationAdministration";
+      if (code == EventResourceType.MEDICATIONDISPENSE)
+        return "MedicationDispense";
+      if (code == EventResourceType.MEDICATIONSTATEMENT)
+        return "MedicationStatement";
+      if (code == EventResourceType.OBSERVATION)
+        return "Observation";
+      if (code == EventResourceType.PAYMENTNOTICE)
+        return "PaymentNotice";
+      if (code == EventResourceType.PAYMENTRECONCILIATION)
+        return "PaymentReconciliation";
+      if (code == EventResourceType.PROCEDURE)
+        return "Procedure";
+      if (code == EventResourceType.PROCESSRESPONSE)
+        return "ProcessResponse";
+      if (code == EventResourceType.QUESTIONNAIRERESPONSE)
+        return "QuestionnaireResponse";
+      if (code == EventResourceType.RISKASSESSMENT)
+        return "RiskAssessment";
+      if (code == EventResourceType.SUPPLYDELIVERY)
+        return "SupplyDelivery";
+      if (code == EventResourceType.TASK)
+        return "Task";
+      return "?";
+      }
+    public String toSystem(EventResourceType code) {
+      return code.getSystem();
+      }
+    }
+
     public enum FHIRAllTypes {
         /**
          * An address expressed using postal conventions (as opposed to GPS or other location definition formats).  This data type may be used to convey addresses for use in delivering mail as well as for visiting locations which might not be valid for mail delivery.  There are a variety of postal address formats defined around the world.
@@ -2263,6 +3054,10 @@ public class Enumerations {
          */
         ELEMENTDEFINITION, 
         /**
+         * A expression that is evaluated in a specified context and returns a value. The context of use of the expression must specify the context in which the expression is evaluated, and how the result of the expression is used.
+         */
+        EXPRESSION, 
+        /**
          * Optional Extension Element - found in all resources.
          */
         EXTENSION, 
@@ -2271,7 +3066,7 @@ public class Enumerations {
          */
         HUMANNAME, 
         /**
-         * A technical identifier - identifies some entity uniquely and unambiguously.
+         * An identifier - identifies some entity uniquely and unambiguously. Typically this is used for business identifiers.
          */
         IDENTIFIER, 
         /**
@@ -2287,7 +3082,11 @@ public class Enumerations {
          */
         MONEY, 
         /**
-         * A human-readable formatted text, including images.
+         * null
+         */
+        MONEYQUANTITY, 
+        /**
+         * A human-readable summary of the resource conveying the essential clinical and business information for the resource.
          */
         NARRATIVE, 
         /**
@@ -2298,6 +3097,10 @@ public class Enumerations {
          * A time period defined by a start and end date and optionally time.
          */
         PERIOD, 
+        /**
+         * A populatioof people with some set of grouping criteria.
+         */
+        POPULATION, 
         /**
          * The marketing status describes the date when a medicinal product is actually put on the market or the date as of which it is no longer available.
          */
@@ -2343,10 +3146,6 @@ public class Enumerations {
          */
         SUBSTANCEAMOUNT, 
         /**
-         * Chemical substances are a single substance type whose primary defining element is the molecular structure. Chemical substances shall be defined on the basis of their complete covalent molecular structure; the presence of a salt (counter-ion) and/or solvates (water, alcohols) is also captured. Purity, grade, physical form or particle size are not taken into account in the definition of a chemical substance or in the assignment of a Substance ID.
-         */
-        SUBSTANCEMOIETY, 
-        /**
          * Specifies an event that may occur multiple times. Timing schedules are used to record when things are planned, expected or requested to occur. The most common usage is in dosage instructions for medications. They are also used when planning care of various kinds, and may be used for reporting the schedule to which past regular activities were carried out.
          */
         TIMING, 
@@ -2367,7 +3166,7 @@ public class Enumerations {
          */
         BOOLEAN, 
         /**
-         * A URI that is a reference to a canonical URI on a FHIR resource
+         * A URI that is a reference to a canonical URL on a FHIR resource
          */
         CANONICAL, 
         /**
@@ -2471,7 +3270,7 @@ public class Enumerations {
          */
         BASIC, 
         /**
-         * A binary resource can contain any content, whether text, image, pdf, zip archive, etc.
+         * A resource that represents the data of a single raw artifact as digital content accessible in its native format.  A Binary resource can contain any content, whether text, image, pdf, zip archive, etc.
          */
         BINARY, 
         /**
@@ -2488,7 +3287,7 @@ into another (possibly the same) biological entity.
          */
         BUNDLE, 
         /**
-         * A Capability Statement documents a set of capabilities (behaviors) of a FHIR Server that may be used as a statement of actual server functionality or a statement of required or desired server implementation.
+         * A Capability Statement documents a set of capabilities (behaviors) of a FHIR Server for a particular version of FHIR that may be used as a statement of actual server functionality or a statement of required or desired server implementation.
          */
         CAPABILITYSTATEMENT, 
         /**
@@ -2500,11 +3299,19 @@ into another (possibly the same) biological entity.
          */
         CARETEAM, 
         /**
+         * Catalog entries are wrappers that contextualize items included in a catalog.
+         */
+        CATALOGENTRY, 
+        /**
          * The resource ChargeItem describes the provision of healthcare provider products for a certain patient, therefore referring not only to the product, but containing in addition details of the provision, like date, time, amounts and participating organizations and persons. Main Usage of the ChargeItem is to enable the billing process and internal cost allocation.
          */
         CHARGEITEM, 
         /**
-         * A provider issued list of services and products provided, or to be provided, to a patient which is provided to an insurer for payment recovery.
+         * The ChargeItemDefinition resource provides the properties that apply to the (billing) codes necessary to calculate costs and prices. The properties may differ largely depending on type and realm, therefore this resource gives only a rough structure and requires profiling for each type of billing code system.
+         */
+        CHARGEITEMDEFINITION, 
+        /**
+         * A provider issued list of professional services and products which have been provided, or are to be provided, to a patient which is sent to an insurer for reimbursement.
          */
         CLAIM, 
         /**
@@ -2520,7 +3327,7 @@ into another (possibly the same) biological entity.
          */
         CODESYSTEM, 
         /**
-         * An occurrence of information being transmitted; e.g. an alert that was sent to a responsible provider, a public health agency was notified about a reportable condition.
+         * An occurrence of information being transmitted; e.g. an alert that was sent to a responsible provider, a public health agency that was notified about a reportable condition.
          */
         COMMUNICATION, 
         /**
@@ -2536,7 +3343,7 @@ into another (possibly the same) biological entity.
          */
         COMPOSITION, 
         /**
-         * A statement of relationships from one set of concepts to one or more other concepts - either code systems or data elements, or classes in class models.
+         * A statement of relationships from one set of concepts to one or more other concepts - either concepts in code systems, or data element/data element concepts, or classes in class models.
          */
         CONCEPTMAP, 
         /**
@@ -2548,25 +3355,33 @@ into another (possibly the same) biological entity.
          */
         CONSENT, 
         /**
-         * A formal agreement between parties regarding the conduct of business, exchange of information or other matters.
+         * Legally enforceable, formally recorded unilateral or bilateral directive i.e., a policy or agreement.
          */
         CONTRACT, 
         /**
-         * Financial instrument which may be used to reimburse or pay for health care products and services.
+         * Financial instrument which may be used to reimburse or pay for health care products and services. Includes both insurance and self-payment.
          */
         COVERAGE, 
+        /**
+         * The CoverageEligibilityRequest provides patient and insurance coverage information to an insurer for them to respond, in the form of an CoverageEligibilityResponse, with information regarding whether the stated coverage is valid and in-force and optionally to provide the insurance details of the policy.
+         */
+        COVERAGEELIGIBILITYREQUEST, 
+        /**
+         * This resource provides eligibility and plan details from the processing of an CoverageEligibilityRequest resource.
+         */
+        COVERAGEELIGIBILITYRESPONSE, 
         /**
          * Indicates an actual or potential clinical issue with or between one or more active or proposed clinical actions for a patient; e.g. Drug-drug interaction, Ineffective treatment frequency, Procedure-condition conflict, etc.
          */
         DETECTEDISSUE, 
         /**
-         * This resource identifies an instance or a type of a manufactured item that is used in the provision of healthcare without being substantially changed through that activity. The device may be a medical or non-medical device.  Medical devices include durable (reusable) medical equipment, implantable devices, as well as disposable equipment used for diagnostic, treatment, and research for healthcare and public health.  Non-medical devices may include items such as a machine, cellphone, computer, application, etc.
+         * A type of a manufactured item that is used in the provision of healthcare without being substantially changed through that activity. The device may be a medical or non-medical device.
          */
         DEVICE, 
         /**
          * The characteristics, operational status and capabilities of a medical-related component of a medical device.
          */
-        DEVICECOMPONENT, 
+        DEVICEDEFINITION, 
         /**
          * Describes a measurement, calculation or setting capability of a medical device.
          */
@@ -2588,7 +3403,7 @@ into another (possibly the same) biological entity.
          */
         DOCUMENTMANIFEST, 
         /**
-         * A reference to a document.
+         * A reference to a document of any kind for any purpose. Provides metadata about the document so that the document can be discovered and managed. The scope of a document is any seralized object with a mime-type, so includes formal patient centric documents (CDA), cliical notes, scanned paper, and non-patient specific documents like policy text.
          */
         DOCUMENTREFERENCE, 
         /**
@@ -2596,13 +3411,9 @@ into another (possibly the same) biological entity.
          */
         DOMAINRESOURCE, 
         /**
-         * The EligibilityRequest provides patient and insurance coverage information to an insurer for them to respond, in the form of an EligibilityResponse, with information regarding whether the stated coverage is valid and in-force and optionally to provide the insurance details of the policy.
+         * The EffectEvidenceSynthesis resource describes the difference in an outcome between exposures states in a population where the effect estimate is derived from a combination of research studies.
          */
-        ELIGIBILITYREQUEST, 
-        /**
-         * This resource provides eligibility and plan details from the processing of an Eligibility resource.
-         */
-        ELIGIBILITYRESPONSE, 
+        EFFECTEVIDENCESYNTHESIS, 
         /**
          * An interaction between a patient and healthcare provider(s) for the purpose of providing healthcare service(s) or assessing the health status of a patient.
          */
@@ -2616,13 +3427,9 @@ into another (possibly the same) biological entity.
          */
         ENROLLMENTREQUEST, 
         /**
-         * This resource provides enrollment and plan details from the processing of an Enrollment resource.
+         * This resource provides enrollment and plan details from the processing of an EnrollmentRequest resource.
          */
         ENROLLMENTRESPONSE, 
-        /**
-         * Catalog entries are wrappers that contextualize items included in a catalog.
-         */
-        ENTRYDEFINITION, 
         /**
          * An association between a patient and an organization / healthcare provider(s) during which time encounters may occur. The managing organization assumes a level of responsibility for the patient during this time.
          */
@@ -2632,13 +3439,17 @@ into another (possibly the same) biological entity.
          */
         EVENTDEFINITION, 
         /**
+         * The Evidence resource describes the conditional state (population and any exposures being compared within the population) and outcome (if specified) that the knowledge (evidence, assertion, recommendation) is about.
+         */
+        EVIDENCE, 
+        /**
+         * The EvidenceVariable resource describes a "PICO" element that knowledge (evidence, assertion, recommendation) is about.
+         */
+        EVIDENCEVARIABLE, 
+        /**
          * Example of workflow instance.
          */
         EXAMPLESCENARIO, 
-        /**
-         * Resource to define constraints on the Expansion of a FHIR ValueSet.
-         */
-        EXPANSIONPROFILE, 
         /**
          * This resource provides: the claim details; adjudication details from the processing of a Claim; and optionally account balance information, for informing the subscriber of the benefits provided.
          */
@@ -2660,7 +3471,7 @@ into another (possibly the same) biological entity.
          */
         GRAPHDEFINITION, 
         /**
-         * Represents a defined collection of entities that may be discussed or acted upon collectively but which are not expected to act collectively and are not formally or legally recognized; i.e. a collection of entities that isn't an Organization.
+         * Represents a defined collection of entities that may be discussed or acted upon collectively but which are not expected to act collectively, and are not formally or legally recognized; i.e. a collection of entities that isn't an Organization.
          */
         GROUP, 
         /**
@@ -2688,27 +3499,27 @@ into another (possibly the same) biological entity.
          */
         IMMUNIZATIONRECOMMENDATION, 
         /**
-         * A set of rules of how FHIR is used to solve a particular problem. This resource is used to gather all the parts of an implementation guide into a logical whole and to publish a computable definition of all the parts.
+         * A set of rules of how a particular interoperability or standards problem is solved - typically through the use of FHIR resources. This resource is used to gather all the parts of an implementation guide into a logical whole and to publish a computable definition of all the parts.
          */
         IMPLEMENTATIONGUIDE, 
+        /**
+         * Details of a Health Insurance product/plan provided by an organization.
+         */
+        INSURANCEPLAN, 
         /**
          * Invoice containing collected ChargeItems from an Account with calculated individual and total price for Billing purpose.
          */
         INVOICE, 
         /**
-         * A physical, countable instance of an item, for example one box or one unit.
-         */
-        ITEMINSTANCE, 
-        /**
          * The Library resource is a general-purpose container for knowledge asset definitions. It can be used to describe and expose existing knowledge assets such as logic libraries and information model descriptions, as well as to describe a collection of knowledge assets.
          */
         LIBRARY, 
         /**
-         * Identifies two or more records (resource instances) that are referring to the same real-world "occurrence".
+         * Identifies two or more records (resource instances) that refer to the same real-world "occurrence".
          */
         LINKAGE, 
         /**
-         * A set of information summarized from a list of other resources.
+         * A list is a curated collection of resources.
          */
         LIST, 
         /**
@@ -2748,7 +3559,9 @@ into another (possibly the same) biological entity.
          */
         MEDICATIONREQUEST, 
         /**
-         * A record of a medication that is being consumed by a patient.   A MedicationStatement may indicate that the patient may be taking the medication now, or has taken the medication in the past or will be taking the medication in the future.  The source of this information can be the patient, significant other (such as a family member or spouse), or a clinician.  A common scenario where this information is captured is during the history taking process during a patient visit or stay.   The medication information may come from sources such as the patient's memory, from a prescription bottle,  or from a list of medications the patient, clinician or other party maintains. The primary difference between a medication statement and a medication administration is that the medication administration has complete administration information and is based on actual administration information from the person who administered the medication.  A medication statement is often, if not always, less specific.  There is no required date/time when the medication was administered, in fact we only know that a source has reported the patient is taking this medication, where details such as time, quantity, or rate or even medication product may be incomplete or missing or less precise.  As stated earlier, the medication statement information may come from the patient's memory, from a prescription bottle or from a list of medications the patient, clinician or other party maintains.  Medication administration is more formal and is not missing detailed information.
+         * A record of a medication that is being consumed by a patient.   A MedicationStatement may indicate that the patient may be taking the medication now or has taken the medication in the past or will be taking the medication in the future.  The source of this information can be the patient, significant other (such as a family member or spouse), or a clinician.  A common scenario where this information is captured is during the history taking process during a patient visit or stay.   The medication information may come from sources such as the patient's memory, from a prescription bottle,  or from a list of medications the patient, clinician or other party maintains. 
+
+The primary difference between a medication statement and a medication administration is that the medication administration has complete administration information and is based on actual administration information from the person who administered the medication.  A medication statement is often, if not always, less specific.  There is no required date/time when the medication was administered, in fact we only know that a source has reported the patient is taking this medication, where details such as time, quantity, or rate or even medication product may be incomplete or missing or less precise.  As stated earlier, the medication statement information may come from the patient's memory, from a prescription bottle or from a list of medications the patient, clinician or other party maintains.  Medication administration is more formal and is not missing detailed information.
          */
         MEDICATIONSTATEMENT, 
         /**
@@ -2762,15 +3575,23 @@ into another (possibly the same) biological entity.
         /**
          * The clinical particulars - indications, contraindications etc. of a medicinal product, including for regulatory purposes.
          */
-        MEDICINALPRODUCTCLINICALS, 
+        MEDICINALPRODUCTCONTRAINDICATION, 
         /**
-         * A detailed description of a device, typically as part of a regulated medicinal product. It is not intended to relace the Device resource, which covers use of device instances.
+         * Indication for the Medicinal Product.
          */
-        MEDICINALPRODUCTDEVICESPEC, 
+        MEDICINALPRODUCTINDICATION, 
         /**
          * An ingredient of a manufactured item or pharmaceutical product.
          */
         MEDICINALPRODUCTINGREDIENT, 
+        /**
+         * The interactions of the medicinal product with other medicinal products, or other forms of interactions.
+         */
+        MEDICINALPRODUCTINTERACTION, 
+        /**
+         * The manufactured item as contained in the packaged medicinal product.
+         */
+        MEDICINALPRODUCTMANUFACTURED, 
         /**
          * A medicinal product in a container or package.
          */
@@ -2780,6 +3601,10 @@ into another (possibly the same) biological entity.
          */
         MEDICINALPRODUCTPHARMACEUTICAL, 
         /**
+         * Describe the undesirable effects of the medicinal product.
+         */
+        MEDICINALPRODUCTUNDESIRABLEEFFECT, 
+        /**
          * Defines the characteristics of a message that can be shared between systems, including the type of event that initiates the message, the content to be transmitted and what response(s), if any, are permitted.
          */
         MESSAGEDEFINITION, 
@@ -2787,6 +3612,10 @@ into another (possibly the same) biological entity.
          * The header for a message exchange that is either requesting or responding to an action.  The reference(s) that are the subject of the action as well as other information related to the action are typically transmitted in a bundle in which the MessageHeader resource instance is the first resource in the bundle.
          */
         MESSAGEHEADER, 
+        /**
+         * Raw data describing a biological sequence.
+         */
+        MOLECULARSEQUENCE, 
         /**
          * A curated namespace that issues unique symbols within that namespace for the identification of concepts, people, devices, etc.  Represents a "System" used within the Identifier and Coding data types.
          */
@@ -2804,27 +3633,23 @@ into another (possibly the same) biological entity.
          */
         OBSERVATIONDEFINITION, 
         /**
-         * A person's work information, structured to facilitate individual, population, and public health use; not intended to support billing.
-         */
-        OCCUPATIONALDATA, 
-        /**
          * A formal computable definition of an operation (on the RESTful interface) or a named query (using the search interaction).
          */
         OPERATIONDEFINITION, 
         /**
-         * A collection of error, warning or information messages that result from a system action.
+         * A collection of error, warning, or information messages that result from a system action.
          */
         OPERATIONOUTCOME, 
         /**
-         * A formally or informally recognized grouping of people or organizations formed for the purpose of achieving some form of collective action.  Includes companies, institutions, corporations, departments, community groups, healthcare practice groups, etc.
+         * A formally or informally recognized grouping of people or organizations formed for the purpose of achieving some form of collective action.  Includes companies, institutions, corporations, departments, community groups, healthcare practice groups, payer/insurer, etc.
          */
         ORGANIZATION, 
         /**
-         * A specific set of Roles/Locations/specialties/services that a practitioner may perform at an organization for a period of time.
+         * Defines an affiliation/assotiation/relationship between 2 distinct oganizations, that is not a part-of relationship/sub-division relationship.
          */
-        ORGANIZATIONROLE, 
+        ORGANIZATIONAFFILIATION, 
         /**
-         * This special resource type is used to represent an operation request and response (operations.html). It has no other use, and there is no RESTful endpoint associated with it.
+         * This resource is a non-persisted resource used to pass information into and back from an [operation](operations.html). It has no other use, and there is no RESTful endpoint associated with it.
          */
         PARAMETERS, 
         /**
@@ -2836,7 +3661,7 @@ into another (possibly the same) biological entity.
          */
         PAYMENTNOTICE, 
         /**
-         * This resource provides payment details and claim references supporting a bulk payment.
+         * This resource provides the details including amount of a payment and allocates the payment items being paid.
          */
         PAYMENTRECONCILIATION, 
         /**
@@ -2856,21 +3681,9 @@ into another (possibly the same) biological entity.
          */
         PRACTITIONERROLE, 
         /**
-         * An action that is or was performed on a patient. This can be a physical intervention like an operation, or less invasive like counseling or hypnotherapy.
+         * An action that is or was performed on or for a patient. This can be a physical intervention like an operation, or less invasive like long term services, counseling, or hypnotherapy.
          */
         PROCEDURE, 
-        /**
-         * This resource provides the target, request and response, and action details for an action to be performed by the target on or about existing resources.
-         */
-        PROCESSREQUEST, 
-        /**
-         * This resource provides processing status, errors and notes from the processing of a resource.
-         */
-        PROCESSRESPONSE, 
-        /**
-         * Details of a Health Insurance product/plan provided by an organization.
-         */
-        PRODUCTPLAN, 
         /**
          * Provenance of a resource is a record that describes entities and processes involved in producing and delivering or otherwise influencing that resource. Provenance provides a critical foundation for assessing authenticity, enabling trust, and allowing reproducibility. Provenance assertions are a form of contextual metadata and can themselves become important records with their own provenance. Provenance statement indicates clinical significance in terms of confidence in authenticity, reliability, and trustworthiness, integrity, and stage in lifecycle (e.g. Document Completion - has the artifact been legally authenticated), all of which may impact security, privacy, and trust policies.
          */
@@ -2892,6 +3705,14 @@ into another (possibly the same) biological entity.
          */
         REQUESTGROUP, 
         /**
+         * The ResearchDefinition resource describes the conditional state (population and any exposures being compared within the population) and outcome (if specified) that the knowledge (evidence, assertion, recommendation) is about.
+         */
+        RESEARCHDEFINITION, 
+        /**
+         * The ResearchElementDefinition resource describes a "PICO" element that knowledge (evidence, assertion, recommendation) is about.
+         */
+        RESEARCHELEMENTDEFINITION, 
+        /**
          * A process where a researcher or organization plans and then executes a series of steps intended to increase the field of healthcare-related knowledge.  This includes studies of safety, efficacy, comparative effectiveness and other information about medications, devices, therapies and other interventional and investigative techniques.  A ResearchStudy involves the gathering of information about human or animal subjects.
          */
         RESEARCHSTUDY, 
@@ -2908,6 +3729,10 @@ into another (possibly the same) biological entity.
          */
         RISKASSESSMENT, 
         /**
+         * The RiskEvidenceSynthesis resource describes the likelihood of an outcome in a population plus exposure state where the risk estimate is derived from a combination of research studies.
+         */
+        RISKEVIDENCESYNTHESIS, 
+        /**
          * A container for slots of time that may be available for booking appointments.
          */
         SCHEDULE, 
@@ -2915,10 +3740,6 @@ into another (possibly the same) biological entity.
          * A search parameter that defines a named search item that can be used to search/filter on a resource.
          */
         SEARCHPARAMETER, 
-        /**
-         * Raw data describing a biological sequence.
-         */
-        SEQUENCE, 
         /**
          * A record of a request for service such as diagnostic investigations, treatments, or operations to be performed.
          */
@@ -2952,13 +3773,25 @@ into another (possibly the same) biological entity.
          */
         SUBSTANCE, 
         /**
+         * Nucleic acids are defined by three distinct elements: the base, sugar and linkage. Individual substance/moiety IDs will be created for each of these elements. The nucleotide sequence will be always entered in the 5’-3’ direction.
+         */
+        SUBSTANCENUCLEICACID, 
+        /**
          * Todo.
          */
         SUBSTANCEPOLYMER, 
         /**
+         * A SubstanceProtein is defined as a single unit of a linear amino acid sequence, or a combination of subunits that are either covalently linked or have a defined invariant stoichiometric relationship. This includes all synthetic, recombinant and purified SubstanceProteins of defined sequence, whether the use is therapeutic or prophylactic. This set of elements will be used to describe albumins, coagulation factors, cytokines, growth factors, peptide/SubstanceProtein hormones, enzymes, toxins, toxoids, recombinant vaccines, and immunomodulators.
+         */
+        SUBSTANCEPROTEIN, 
+        /**
          * Todo.
          */
         SUBSTANCEREFERENCEINFORMATION, 
+        /**
+         * Source material shall capture information on the taxonomic and anatomical origins as well as the fraction of a material that can result in or can be modified to form a substance. This set of data elements shall be used to define polymer substances isolated from biological matrices. Taxonomic and anatomical origins shall be described using a controlled vocabulary as required. This information is captured for naturally derived polymers ( . starch) and structurally diverse substances. For Organisms belonging to the Kingdom Plantae the Substance level defines the fresh material of a single species or infraspecies, the Herbal Drug and the Herbal preparation. For Herbal preparations, the fraction information will be captured at the Substance information level and additional information for herbal extracts will be captured at the Specified Substance Group 1 information level. See for further explanation the Substance Class: Structurally Diverse and the herbal annex.
+         */
+        SUBSTANCESOURCEMATERIAL, 
         /**
          * The detailed description of a substance, typically at a level beyond what is used for prescribing.
          */
@@ -2976,7 +3809,7 @@ into another (possibly the same) biological entity.
          */
         TASK, 
         /**
-         * A Terminology Capabilities documents a set of capabilities (behaviors) of a FHIR Server that may be used as a statement of actual server functionality or a statement of required or desired server implementation.
+         * A TerminologyCapabilities resource documents a set of capabilities (behaviors) of a FHIR Terminology Server that may be used as a statement of actual server functionality or a statement of required or desired server implementation.
          */
         TERMINOLOGYCAPABILITIES, 
         /**
@@ -2988,11 +3821,7 @@ into another (possibly the same) biological entity.
          */
         TESTSCRIPT, 
         /**
-         * Information about a user's current session.
-         */
-        USERSESSION, 
-        /**
-         * A ValueSet resource specifies a set of codes drawn from one or more code systems, intended for use in a particular context. Value sets link between [[[CodeSystem]]] definitions and their use in [coded elements](terminologies.html).
+         * A ValueSet resource instance specifies a set of codes drawn from one or more code systems, intended for use in a particular context. Value sets link between [[[CodeSystem]]] definitions and their use in [coded elements](terminologies.html).
          */
         VALUESET, 
         /**
@@ -3000,7 +3829,7 @@ into another (possibly the same) biological entity.
          */
         VERIFICATIONRESULT, 
         /**
-         * An authorization for the supply of glasses and/or contact lenses to a patient.
+         * An authorization for the provision of glasses and/or contact lenses to a patient.
          */
         VISIONPRESCRIPTION, 
         /**
@@ -3052,6 +3881,8 @@ into another (possibly the same) biological entity.
           return ELEMENT;
         if ("ElementDefinition".equals(codeString))
           return ELEMENTDEFINITION;
+        if ("Expression".equals(codeString))
+          return EXPRESSION;
         if ("Extension".equals(codeString))
           return EXTENSION;
         if ("HumanName".equals(codeString))
@@ -3064,12 +3895,16 @@ into another (possibly the same) biological entity.
           return META;
         if ("Money".equals(codeString))
           return MONEY;
+        if ("MoneyQuantity".equals(codeString))
+          return MONEYQUANTITY;
         if ("Narrative".equals(codeString))
           return NARRATIVE;
         if ("ParameterDefinition".equals(codeString))
           return PARAMETERDEFINITION;
         if ("Period".equals(codeString))
           return PERIOD;
+        if ("Population".equals(codeString))
+          return POPULATION;
         if ("ProdCharacteristic".equals(codeString))
           return PRODCHARACTERISTIC;
         if ("ProductShelfLife".equals(codeString))
@@ -3092,8 +3927,6 @@ into another (possibly the same) biological entity.
           return SIMPLEQUANTITY;
         if ("SubstanceAmount".equals(codeString))
           return SUBSTANCEAMOUNT;
-        if ("SubstanceMoiety".equals(codeString))
-          return SUBSTANCEMOIETY;
         if ("Timing".equals(codeString))
           return TIMING;
         if ("TriggerDefinition".equals(codeString))
@@ -3170,8 +4003,12 @@ into another (possibly the same) biological entity.
           return CAREPLAN;
         if ("CareTeam".equals(codeString))
           return CARETEAM;
+        if ("CatalogEntry".equals(codeString))
+          return CATALOGENTRY;
         if ("ChargeItem".equals(codeString))
           return CHARGEITEM;
+        if ("ChargeItemDefinition".equals(codeString))
+          return CHARGEITEMDEFINITION;
         if ("Claim".equals(codeString))
           return CLAIM;
         if ("ClaimResponse".equals(codeString))
@@ -3198,12 +4035,16 @@ into another (possibly the same) biological entity.
           return CONTRACT;
         if ("Coverage".equals(codeString))
           return COVERAGE;
+        if ("CoverageEligibilityRequest".equals(codeString))
+          return COVERAGEELIGIBILITYREQUEST;
+        if ("CoverageEligibilityResponse".equals(codeString))
+          return COVERAGEELIGIBILITYRESPONSE;
         if ("DetectedIssue".equals(codeString))
           return DETECTEDISSUE;
         if ("Device".equals(codeString))
           return DEVICE;
-        if ("DeviceComponent".equals(codeString))
-          return DEVICECOMPONENT;
+        if ("DeviceDefinition".equals(codeString))
+          return DEVICEDEFINITION;
         if ("DeviceMetric".equals(codeString))
           return DEVICEMETRIC;
         if ("DeviceRequest".equals(codeString))
@@ -3218,10 +4059,8 @@ into another (possibly the same) biological entity.
           return DOCUMENTREFERENCE;
         if ("DomainResource".equals(codeString))
           return DOMAINRESOURCE;
-        if ("EligibilityRequest".equals(codeString))
-          return ELIGIBILITYREQUEST;
-        if ("EligibilityResponse".equals(codeString))
-          return ELIGIBILITYRESPONSE;
+        if ("EffectEvidenceSynthesis".equals(codeString))
+          return EFFECTEVIDENCESYNTHESIS;
         if ("Encounter".equals(codeString))
           return ENCOUNTER;
         if ("Endpoint".equals(codeString))
@@ -3230,16 +4069,16 @@ into another (possibly the same) biological entity.
           return ENROLLMENTREQUEST;
         if ("EnrollmentResponse".equals(codeString))
           return ENROLLMENTRESPONSE;
-        if ("EntryDefinition".equals(codeString))
-          return ENTRYDEFINITION;
         if ("EpisodeOfCare".equals(codeString))
           return EPISODEOFCARE;
         if ("EventDefinition".equals(codeString))
           return EVENTDEFINITION;
+        if ("Evidence".equals(codeString))
+          return EVIDENCE;
+        if ("EvidenceVariable".equals(codeString))
+          return EVIDENCEVARIABLE;
         if ("ExampleScenario".equals(codeString))
           return EXAMPLESCENARIO;
-        if ("ExpansionProfile".equals(codeString))
-          return EXPANSIONPROFILE;
         if ("ExplanationOfBenefit".equals(codeString))
           return EXPLANATIONOFBENEFIT;
         if ("FamilyMemberHistory".equals(codeString))
@@ -3266,10 +4105,10 @@ into another (possibly the same) biological entity.
           return IMMUNIZATIONRECOMMENDATION;
         if ("ImplementationGuide".equals(codeString))
           return IMPLEMENTATIONGUIDE;
+        if ("InsurancePlan".equals(codeString))
+          return INSURANCEPLAN;
         if ("Invoice".equals(codeString))
           return INVOICE;
-        if ("ItemInstance".equals(codeString))
-          return ITEMINSTANCE;
         if ("Library".equals(codeString))
           return LIBRARY;
         if ("Linkage".equals(codeString))
@@ -3300,20 +4139,28 @@ into another (possibly the same) biological entity.
           return MEDICINALPRODUCT;
         if ("MedicinalProductAuthorization".equals(codeString))
           return MEDICINALPRODUCTAUTHORIZATION;
-        if ("MedicinalProductClinicals".equals(codeString))
-          return MEDICINALPRODUCTCLINICALS;
-        if ("MedicinalProductDeviceSpec".equals(codeString))
-          return MEDICINALPRODUCTDEVICESPEC;
+        if ("MedicinalProductContraindication".equals(codeString))
+          return MEDICINALPRODUCTCONTRAINDICATION;
+        if ("MedicinalProductIndication".equals(codeString))
+          return MEDICINALPRODUCTINDICATION;
         if ("MedicinalProductIngredient".equals(codeString))
           return MEDICINALPRODUCTINGREDIENT;
+        if ("MedicinalProductInteraction".equals(codeString))
+          return MEDICINALPRODUCTINTERACTION;
+        if ("MedicinalProductManufactured".equals(codeString))
+          return MEDICINALPRODUCTMANUFACTURED;
         if ("MedicinalProductPackaged".equals(codeString))
           return MEDICINALPRODUCTPACKAGED;
         if ("MedicinalProductPharmaceutical".equals(codeString))
           return MEDICINALPRODUCTPHARMACEUTICAL;
+        if ("MedicinalProductUndesirableEffect".equals(codeString))
+          return MEDICINALPRODUCTUNDESIRABLEEFFECT;
         if ("MessageDefinition".equals(codeString))
           return MESSAGEDEFINITION;
         if ("MessageHeader".equals(codeString))
           return MESSAGEHEADER;
+        if ("MolecularSequence".equals(codeString))
+          return MOLECULARSEQUENCE;
         if ("NamingSystem".equals(codeString))
           return NAMINGSYSTEM;
         if ("NutritionOrder".equals(codeString))
@@ -3322,16 +4169,14 @@ into another (possibly the same) biological entity.
           return OBSERVATION;
         if ("ObservationDefinition".equals(codeString))
           return OBSERVATIONDEFINITION;
-        if ("OccupationalData".equals(codeString))
-          return OCCUPATIONALDATA;
         if ("OperationDefinition".equals(codeString))
           return OPERATIONDEFINITION;
         if ("OperationOutcome".equals(codeString))
           return OPERATIONOUTCOME;
         if ("Organization".equals(codeString))
           return ORGANIZATION;
-        if ("OrganizationRole".equals(codeString))
-          return ORGANIZATIONROLE;
+        if ("OrganizationAffiliation".equals(codeString))
+          return ORGANIZATIONAFFILIATION;
         if ("Parameters".equals(codeString))
           return PARAMETERS;
         if ("Patient".equals(codeString))
@@ -3350,12 +4195,6 @@ into another (possibly the same) biological entity.
           return PRACTITIONERROLE;
         if ("Procedure".equals(codeString))
           return PROCEDURE;
-        if ("ProcessRequest".equals(codeString))
-          return PROCESSREQUEST;
-        if ("ProcessResponse".equals(codeString))
-          return PROCESSRESPONSE;
-        if ("ProductPlan".equals(codeString))
-          return PRODUCTPLAN;
         if ("Provenance".equals(codeString))
           return PROVENANCE;
         if ("Questionnaire".equals(codeString))
@@ -3366,6 +4205,10 @@ into another (possibly the same) biological entity.
           return RELATEDPERSON;
         if ("RequestGroup".equals(codeString))
           return REQUESTGROUP;
+        if ("ResearchDefinition".equals(codeString))
+          return RESEARCHDEFINITION;
+        if ("ResearchElementDefinition".equals(codeString))
+          return RESEARCHELEMENTDEFINITION;
         if ("ResearchStudy".equals(codeString))
           return RESEARCHSTUDY;
         if ("ResearchSubject".equals(codeString))
@@ -3374,12 +4217,12 @@ into another (possibly the same) biological entity.
           return RESOURCE;
         if ("RiskAssessment".equals(codeString))
           return RISKASSESSMENT;
+        if ("RiskEvidenceSynthesis".equals(codeString))
+          return RISKEVIDENCESYNTHESIS;
         if ("Schedule".equals(codeString))
           return SCHEDULE;
         if ("SearchParameter".equals(codeString))
           return SEARCHPARAMETER;
-        if ("Sequence".equals(codeString))
-          return SEQUENCE;
         if ("ServiceRequest".equals(codeString))
           return SERVICEREQUEST;
         if ("Slot".equals(codeString))
@@ -3396,10 +4239,16 @@ into another (possibly the same) biological entity.
           return SUBSCRIPTION;
         if ("Substance".equals(codeString))
           return SUBSTANCE;
+        if ("SubstanceNucleicAcid".equals(codeString))
+          return SUBSTANCENUCLEICACID;
         if ("SubstancePolymer".equals(codeString))
           return SUBSTANCEPOLYMER;
+        if ("SubstanceProtein".equals(codeString))
+          return SUBSTANCEPROTEIN;
         if ("SubstanceReferenceInformation".equals(codeString))
           return SUBSTANCEREFERENCEINFORMATION;
+        if ("SubstanceSourceMaterial".equals(codeString))
+          return SUBSTANCESOURCEMATERIAL;
         if ("SubstanceSpecification".equals(codeString))
           return SUBSTANCESPECIFICATION;
         if ("SupplyDelivery".equals(codeString))
@@ -3414,8 +4263,6 @@ into another (possibly the same) biological entity.
           return TESTREPORT;
         if ("TestScript".equals(codeString))
           return TESTSCRIPT;
-        if ("UserSession".equals(codeString))
-          return USERSESSION;
         if ("ValueSet".equals(codeString))
           return VALUESET;
         if ("VerificationResult".equals(codeString))
@@ -3447,15 +4294,18 @@ into another (possibly the same) biological entity.
             case DURATION: return "Duration";
             case ELEMENT: return "Element";
             case ELEMENTDEFINITION: return "ElementDefinition";
+            case EXPRESSION: return "Expression";
             case EXTENSION: return "Extension";
             case HUMANNAME: return "HumanName";
             case IDENTIFIER: return "Identifier";
             case MARKETINGSTATUS: return "MarketingStatus";
             case META: return "Meta";
             case MONEY: return "Money";
+            case MONEYQUANTITY: return "MoneyQuantity";
             case NARRATIVE: return "Narrative";
             case PARAMETERDEFINITION: return "ParameterDefinition";
             case PERIOD: return "Period";
+            case POPULATION: return "Population";
             case PRODCHARACTERISTIC: return "ProdCharacteristic";
             case PRODUCTSHELFLIFE: return "ProductShelfLife";
             case QUANTITY: return "Quantity";
@@ -3467,7 +4317,6 @@ into another (possibly the same) biological entity.
             case SIGNATURE: return "Signature";
             case SIMPLEQUANTITY: return "SimpleQuantity";
             case SUBSTANCEAMOUNT: return "SubstanceAmount";
-            case SUBSTANCEMOIETY: return "SubstanceMoiety";
             case TIMING: return "Timing";
             case TRIGGERDEFINITION: return "TriggerDefinition";
             case USAGECONTEXT: return "UsageContext";
@@ -3506,7 +4355,9 @@ into another (possibly the same) biological entity.
             case CAPABILITYSTATEMENT: return "CapabilityStatement";
             case CAREPLAN: return "CarePlan";
             case CARETEAM: return "CareTeam";
+            case CATALOGENTRY: return "CatalogEntry";
             case CHARGEITEM: return "ChargeItem";
+            case CHARGEITEMDEFINITION: return "ChargeItemDefinition";
             case CLAIM: return "Claim";
             case CLAIMRESPONSE: return "ClaimResponse";
             case CLINICALIMPRESSION: return "ClinicalImpression";
@@ -3520,9 +4371,11 @@ into another (possibly the same) biological entity.
             case CONSENT: return "Consent";
             case CONTRACT: return "Contract";
             case COVERAGE: return "Coverage";
+            case COVERAGEELIGIBILITYREQUEST: return "CoverageEligibilityRequest";
+            case COVERAGEELIGIBILITYRESPONSE: return "CoverageEligibilityResponse";
             case DETECTEDISSUE: return "DetectedIssue";
             case DEVICE: return "Device";
-            case DEVICECOMPONENT: return "DeviceComponent";
+            case DEVICEDEFINITION: return "DeviceDefinition";
             case DEVICEMETRIC: return "DeviceMetric";
             case DEVICEREQUEST: return "DeviceRequest";
             case DEVICEUSESTATEMENT: return "DeviceUseStatement";
@@ -3530,17 +4383,16 @@ into another (possibly the same) biological entity.
             case DOCUMENTMANIFEST: return "DocumentManifest";
             case DOCUMENTREFERENCE: return "DocumentReference";
             case DOMAINRESOURCE: return "DomainResource";
-            case ELIGIBILITYREQUEST: return "EligibilityRequest";
-            case ELIGIBILITYRESPONSE: return "EligibilityResponse";
+            case EFFECTEVIDENCESYNTHESIS: return "EffectEvidenceSynthesis";
             case ENCOUNTER: return "Encounter";
             case ENDPOINT: return "Endpoint";
             case ENROLLMENTREQUEST: return "EnrollmentRequest";
             case ENROLLMENTRESPONSE: return "EnrollmentResponse";
-            case ENTRYDEFINITION: return "EntryDefinition";
             case EPISODEOFCARE: return "EpisodeOfCare";
             case EVENTDEFINITION: return "EventDefinition";
+            case EVIDENCE: return "Evidence";
+            case EVIDENCEVARIABLE: return "EvidenceVariable";
             case EXAMPLESCENARIO: return "ExampleScenario";
-            case EXPANSIONPROFILE: return "ExpansionProfile";
             case EXPLANATIONOFBENEFIT: return "ExplanationOfBenefit";
             case FAMILYMEMBERHISTORY: return "FamilyMemberHistory";
             case FLAG: return "Flag";
@@ -3554,8 +4406,8 @@ into another (possibly the same) biological entity.
             case IMMUNIZATIONEVALUATION: return "ImmunizationEvaluation";
             case IMMUNIZATIONRECOMMENDATION: return "ImmunizationRecommendation";
             case IMPLEMENTATIONGUIDE: return "ImplementationGuide";
+            case INSURANCEPLAN: return "InsurancePlan";
             case INVOICE: return "Invoice";
-            case ITEMINSTANCE: return "ItemInstance";
             case LIBRARY: return "Library";
             case LINKAGE: return "Linkage";
             case LIST: return "List";
@@ -3571,22 +4423,25 @@ into another (possibly the same) biological entity.
             case MEDICATIONSTATEMENT: return "MedicationStatement";
             case MEDICINALPRODUCT: return "MedicinalProduct";
             case MEDICINALPRODUCTAUTHORIZATION: return "MedicinalProductAuthorization";
-            case MEDICINALPRODUCTCLINICALS: return "MedicinalProductClinicals";
-            case MEDICINALPRODUCTDEVICESPEC: return "MedicinalProductDeviceSpec";
+            case MEDICINALPRODUCTCONTRAINDICATION: return "MedicinalProductContraindication";
+            case MEDICINALPRODUCTINDICATION: return "MedicinalProductIndication";
             case MEDICINALPRODUCTINGREDIENT: return "MedicinalProductIngredient";
+            case MEDICINALPRODUCTINTERACTION: return "MedicinalProductInteraction";
+            case MEDICINALPRODUCTMANUFACTURED: return "MedicinalProductManufactured";
             case MEDICINALPRODUCTPACKAGED: return "MedicinalProductPackaged";
             case MEDICINALPRODUCTPHARMACEUTICAL: return "MedicinalProductPharmaceutical";
+            case MEDICINALPRODUCTUNDESIRABLEEFFECT: return "MedicinalProductUndesirableEffect";
             case MESSAGEDEFINITION: return "MessageDefinition";
             case MESSAGEHEADER: return "MessageHeader";
+            case MOLECULARSEQUENCE: return "MolecularSequence";
             case NAMINGSYSTEM: return "NamingSystem";
             case NUTRITIONORDER: return "NutritionOrder";
             case OBSERVATION: return "Observation";
             case OBSERVATIONDEFINITION: return "ObservationDefinition";
-            case OCCUPATIONALDATA: return "OccupationalData";
             case OPERATIONDEFINITION: return "OperationDefinition";
             case OPERATIONOUTCOME: return "OperationOutcome";
             case ORGANIZATION: return "Organization";
-            case ORGANIZATIONROLE: return "OrganizationRole";
+            case ORGANIZATIONAFFILIATION: return "OrganizationAffiliation";
             case PARAMETERS: return "Parameters";
             case PATIENT: return "Patient";
             case PAYMENTNOTICE: return "PaymentNotice";
@@ -3596,21 +4451,20 @@ into another (possibly the same) biological entity.
             case PRACTITIONER: return "Practitioner";
             case PRACTITIONERROLE: return "PractitionerRole";
             case PROCEDURE: return "Procedure";
-            case PROCESSREQUEST: return "ProcessRequest";
-            case PROCESSRESPONSE: return "ProcessResponse";
-            case PRODUCTPLAN: return "ProductPlan";
             case PROVENANCE: return "Provenance";
             case QUESTIONNAIRE: return "Questionnaire";
             case QUESTIONNAIRERESPONSE: return "QuestionnaireResponse";
             case RELATEDPERSON: return "RelatedPerson";
             case REQUESTGROUP: return "RequestGroup";
+            case RESEARCHDEFINITION: return "ResearchDefinition";
+            case RESEARCHELEMENTDEFINITION: return "ResearchElementDefinition";
             case RESEARCHSTUDY: return "ResearchStudy";
             case RESEARCHSUBJECT: return "ResearchSubject";
             case RESOURCE: return "Resource";
             case RISKASSESSMENT: return "RiskAssessment";
+            case RISKEVIDENCESYNTHESIS: return "RiskEvidenceSynthesis";
             case SCHEDULE: return "Schedule";
             case SEARCHPARAMETER: return "SearchParameter";
-            case SEQUENCE: return "Sequence";
             case SERVICEREQUEST: return "ServiceRequest";
             case SLOT: return "Slot";
             case SPECIMEN: return "Specimen";
@@ -3619,8 +4473,11 @@ into another (possibly the same) biological entity.
             case STRUCTUREMAP: return "StructureMap";
             case SUBSCRIPTION: return "Subscription";
             case SUBSTANCE: return "Substance";
+            case SUBSTANCENUCLEICACID: return "SubstanceNucleicAcid";
             case SUBSTANCEPOLYMER: return "SubstancePolymer";
+            case SUBSTANCEPROTEIN: return "SubstanceProtein";
             case SUBSTANCEREFERENCEINFORMATION: return "SubstanceReferenceInformation";
+            case SUBSTANCESOURCEMATERIAL: return "SubstanceSourceMaterial";
             case SUBSTANCESPECIFICATION: return "SubstanceSpecification";
             case SUPPLYDELIVERY: return "SupplyDelivery";
             case SUPPLYREQUEST: return "SupplyRequest";
@@ -3628,7 +4485,6 @@ into another (possibly the same) biological entity.
             case TERMINOLOGYCAPABILITIES: return "TerminologyCapabilities";
             case TESTREPORT: return "TestReport";
             case TESTSCRIPT: return "TestScript";
-            case USERSESSION: return "UserSession";
             case VALUESET: return "ValueSet";
             case VERIFICATIONRESULT: return "VerificationResult";
             case VISIONPRESCRIPTION: return "VisionPrescription";
@@ -3656,15 +4512,18 @@ into another (possibly the same) biological entity.
             case DURATION: return "http://hl7.org/fhir/data-types";
             case ELEMENT: return "http://hl7.org/fhir/data-types";
             case ELEMENTDEFINITION: return "http://hl7.org/fhir/data-types";
+            case EXPRESSION: return "http://hl7.org/fhir/data-types";
             case EXTENSION: return "http://hl7.org/fhir/data-types";
             case HUMANNAME: return "http://hl7.org/fhir/data-types";
             case IDENTIFIER: return "http://hl7.org/fhir/data-types";
             case MARKETINGSTATUS: return "http://hl7.org/fhir/data-types";
             case META: return "http://hl7.org/fhir/data-types";
             case MONEY: return "http://hl7.org/fhir/data-types";
+            case MONEYQUANTITY: return "http://hl7.org/fhir/data-types";
             case NARRATIVE: return "http://hl7.org/fhir/data-types";
             case PARAMETERDEFINITION: return "http://hl7.org/fhir/data-types";
             case PERIOD: return "http://hl7.org/fhir/data-types";
+            case POPULATION: return "http://hl7.org/fhir/data-types";
             case PRODCHARACTERISTIC: return "http://hl7.org/fhir/data-types";
             case PRODUCTSHELFLIFE: return "http://hl7.org/fhir/data-types";
             case QUANTITY: return "http://hl7.org/fhir/data-types";
@@ -3676,7 +4535,6 @@ into another (possibly the same) biological entity.
             case SIGNATURE: return "http://hl7.org/fhir/data-types";
             case SIMPLEQUANTITY: return "http://hl7.org/fhir/data-types";
             case SUBSTANCEAMOUNT: return "http://hl7.org/fhir/data-types";
-            case SUBSTANCEMOIETY: return "http://hl7.org/fhir/data-types";
             case TIMING: return "http://hl7.org/fhir/data-types";
             case TRIGGERDEFINITION: return "http://hl7.org/fhir/data-types";
             case USAGECONTEXT: return "http://hl7.org/fhir/data-types";
@@ -3715,7 +4573,9 @@ into another (possibly the same) biological entity.
             case CAPABILITYSTATEMENT: return "http://hl7.org/fhir/resource-types";
             case CAREPLAN: return "http://hl7.org/fhir/resource-types";
             case CARETEAM: return "http://hl7.org/fhir/resource-types";
+            case CATALOGENTRY: return "http://hl7.org/fhir/resource-types";
             case CHARGEITEM: return "http://hl7.org/fhir/resource-types";
+            case CHARGEITEMDEFINITION: return "http://hl7.org/fhir/resource-types";
             case CLAIM: return "http://hl7.org/fhir/resource-types";
             case CLAIMRESPONSE: return "http://hl7.org/fhir/resource-types";
             case CLINICALIMPRESSION: return "http://hl7.org/fhir/resource-types";
@@ -3729,9 +4589,11 @@ into another (possibly the same) biological entity.
             case CONSENT: return "http://hl7.org/fhir/resource-types";
             case CONTRACT: return "http://hl7.org/fhir/resource-types";
             case COVERAGE: return "http://hl7.org/fhir/resource-types";
+            case COVERAGEELIGIBILITYREQUEST: return "http://hl7.org/fhir/resource-types";
+            case COVERAGEELIGIBILITYRESPONSE: return "http://hl7.org/fhir/resource-types";
             case DETECTEDISSUE: return "http://hl7.org/fhir/resource-types";
             case DEVICE: return "http://hl7.org/fhir/resource-types";
-            case DEVICECOMPONENT: return "http://hl7.org/fhir/resource-types";
+            case DEVICEDEFINITION: return "http://hl7.org/fhir/resource-types";
             case DEVICEMETRIC: return "http://hl7.org/fhir/resource-types";
             case DEVICEREQUEST: return "http://hl7.org/fhir/resource-types";
             case DEVICEUSESTATEMENT: return "http://hl7.org/fhir/resource-types";
@@ -3739,17 +4601,16 @@ into another (possibly the same) biological entity.
             case DOCUMENTMANIFEST: return "http://hl7.org/fhir/resource-types";
             case DOCUMENTREFERENCE: return "http://hl7.org/fhir/resource-types";
             case DOMAINRESOURCE: return "http://hl7.org/fhir/resource-types";
-            case ELIGIBILITYREQUEST: return "http://hl7.org/fhir/resource-types";
-            case ELIGIBILITYRESPONSE: return "http://hl7.org/fhir/resource-types";
+            case EFFECTEVIDENCESYNTHESIS: return "http://hl7.org/fhir/resource-types";
             case ENCOUNTER: return "http://hl7.org/fhir/resource-types";
             case ENDPOINT: return "http://hl7.org/fhir/resource-types";
             case ENROLLMENTREQUEST: return "http://hl7.org/fhir/resource-types";
             case ENROLLMENTRESPONSE: return "http://hl7.org/fhir/resource-types";
-            case ENTRYDEFINITION: return "http://hl7.org/fhir/resource-types";
             case EPISODEOFCARE: return "http://hl7.org/fhir/resource-types";
             case EVENTDEFINITION: return "http://hl7.org/fhir/resource-types";
+            case EVIDENCE: return "http://hl7.org/fhir/resource-types";
+            case EVIDENCEVARIABLE: return "http://hl7.org/fhir/resource-types";
             case EXAMPLESCENARIO: return "http://hl7.org/fhir/resource-types";
-            case EXPANSIONPROFILE: return "http://hl7.org/fhir/resource-types";
             case EXPLANATIONOFBENEFIT: return "http://hl7.org/fhir/resource-types";
             case FAMILYMEMBERHISTORY: return "http://hl7.org/fhir/resource-types";
             case FLAG: return "http://hl7.org/fhir/resource-types";
@@ -3763,8 +4624,8 @@ into another (possibly the same) biological entity.
             case IMMUNIZATIONEVALUATION: return "http://hl7.org/fhir/resource-types";
             case IMMUNIZATIONRECOMMENDATION: return "http://hl7.org/fhir/resource-types";
             case IMPLEMENTATIONGUIDE: return "http://hl7.org/fhir/resource-types";
+            case INSURANCEPLAN: return "http://hl7.org/fhir/resource-types";
             case INVOICE: return "http://hl7.org/fhir/resource-types";
-            case ITEMINSTANCE: return "http://hl7.org/fhir/resource-types";
             case LIBRARY: return "http://hl7.org/fhir/resource-types";
             case LINKAGE: return "http://hl7.org/fhir/resource-types";
             case LIST: return "http://hl7.org/fhir/resource-types";
@@ -3780,22 +4641,25 @@ into another (possibly the same) biological entity.
             case MEDICATIONSTATEMENT: return "http://hl7.org/fhir/resource-types";
             case MEDICINALPRODUCT: return "http://hl7.org/fhir/resource-types";
             case MEDICINALPRODUCTAUTHORIZATION: return "http://hl7.org/fhir/resource-types";
-            case MEDICINALPRODUCTCLINICALS: return "http://hl7.org/fhir/resource-types";
-            case MEDICINALPRODUCTDEVICESPEC: return "http://hl7.org/fhir/resource-types";
+            case MEDICINALPRODUCTCONTRAINDICATION: return "http://hl7.org/fhir/resource-types";
+            case MEDICINALPRODUCTINDICATION: return "http://hl7.org/fhir/resource-types";
             case MEDICINALPRODUCTINGREDIENT: return "http://hl7.org/fhir/resource-types";
+            case MEDICINALPRODUCTINTERACTION: return "http://hl7.org/fhir/resource-types";
+            case MEDICINALPRODUCTMANUFACTURED: return "http://hl7.org/fhir/resource-types";
             case MEDICINALPRODUCTPACKAGED: return "http://hl7.org/fhir/resource-types";
             case MEDICINALPRODUCTPHARMACEUTICAL: return "http://hl7.org/fhir/resource-types";
+            case MEDICINALPRODUCTUNDESIRABLEEFFECT: return "http://hl7.org/fhir/resource-types";
             case MESSAGEDEFINITION: return "http://hl7.org/fhir/resource-types";
             case MESSAGEHEADER: return "http://hl7.org/fhir/resource-types";
+            case MOLECULARSEQUENCE: return "http://hl7.org/fhir/resource-types";
             case NAMINGSYSTEM: return "http://hl7.org/fhir/resource-types";
             case NUTRITIONORDER: return "http://hl7.org/fhir/resource-types";
             case OBSERVATION: return "http://hl7.org/fhir/resource-types";
             case OBSERVATIONDEFINITION: return "http://hl7.org/fhir/resource-types";
-            case OCCUPATIONALDATA: return "http://hl7.org/fhir/resource-types";
             case OPERATIONDEFINITION: return "http://hl7.org/fhir/resource-types";
             case OPERATIONOUTCOME: return "http://hl7.org/fhir/resource-types";
             case ORGANIZATION: return "http://hl7.org/fhir/resource-types";
-            case ORGANIZATIONROLE: return "http://hl7.org/fhir/resource-types";
+            case ORGANIZATIONAFFILIATION: return "http://hl7.org/fhir/resource-types";
             case PARAMETERS: return "http://hl7.org/fhir/resource-types";
             case PATIENT: return "http://hl7.org/fhir/resource-types";
             case PAYMENTNOTICE: return "http://hl7.org/fhir/resource-types";
@@ -3805,21 +4669,20 @@ into another (possibly the same) biological entity.
             case PRACTITIONER: return "http://hl7.org/fhir/resource-types";
             case PRACTITIONERROLE: return "http://hl7.org/fhir/resource-types";
             case PROCEDURE: return "http://hl7.org/fhir/resource-types";
-            case PROCESSREQUEST: return "http://hl7.org/fhir/resource-types";
-            case PROCESSRESPONSE: return "http://hl7.org/fhir/resource-types";
-            case PRODUCTPLAN: return "http://hl7.org/fhir/resource-types";
             case PROVENANCE: return "http://hl7.org/fhir/resource-types";
             case QUESTIONNAIRE: return "http://hl7.org/fhir/resource-types";
             case QUESTIONNAIRERESPONSE: return "http://hl7.org/fhir/resource-types";
             case RELATEDPERSON: return "http://hl7.org/fhir/resource-types";
             case REQUESTGROUP: return "http://hl7.org/fhir/resource-types";
+            case RESEARCHDEFINITION: return "http://hl7.org/fhir/resource-types";
+            case RESEARCHELEMENTDEFINITION: return "http://hl7.org/fhir/resource-types";
             case RESEARCHSTUDY: return "http://hl7.org/fhir/resource-types";
             case RESEARCHSUBJECT: return "http://hl7.org/fhir/resource-types";
             case RESOURCE: return "http://hl7.org/fhir/resource-types";
             case RISKASSESSMENT: return "http://hl7.org/fhir/resource-types";
+            case RISKEVIDENCESYNTHESIS: return "http://hl7.org/fhir/resource-types";
             case SCHEDULE: return "http://hl7.org/fhir/resource-types";
             case SEARCHPARAMETER: return "http://hl7.org/fhir/resource-types";
-            case SEQUENCE: return "http://hl7.org/fhir/resource-types";
             case SERVICEREQUEST: return "http://hl7.org/fhir/resource-types";
             case SLOT: return "http://hl7.org/fhir/resource-types";
             case SPECIMEN: return "http://hl7.org/fhir/resource-types";
@@ -3828,8 +4691,11 @@ into another (possibly the same) biological entity.
             case STRUCTUREMAP: return "http://hl7.org/fhir/resource-types";
             case SUBSCRIPTION: return "http://hl7.org/fhir/resource-types";
             case SUBSTANCE: return "http://hl7.org/fhir/resource-types";
+            case SUBSTANCENUCLEICACID: return "http://hl7.org/fhir/resource-types";
             case SUBSTANCEPOLYMER: return "http://hl7.org/fhir/resource-types";
+            case SUBSTANCEPROTEIN: return "http://hl7.org/fhir/resource-types";
             case SUBSTANCEREFERENCEINFORMATION: return "http://hl7.org/fhir/resource-types";
+            case SUBSTANCESOURCEMATERIAL: return "http://hl7.org/fhir/resource-types";
             case SUBSTANCESPECIFICATION: return "http://hl7.org/fhir/resource-types";
             case SUPPLYDELIVERY: return "http://hl7.org/fhir/resource-types";
             case SUPPLYREQUEST: return "http://hl7.org/fhir/resource-types";
@@ -3837,7 +4703,6 @@ into another (possibly the same) biological entity.
             case TERMINOLOGYCAPABILITIES: return "http://hl7.org/fhir/resource-types";
             case TESTREPORT: return "http://hl7.org/fhir/resource-types";
             case TESTSCRIPT: return "http://hl7.org/fhir/resource-types";
-            case USERSESSION: return "http://hl7.org/fhir/resource-types";
             case VALUESET: return "http://hl7.org/fhir/resource-types";
             case VERIFICATIONRESULT: return "http://hl7.org/fhir/resource-types";
             case VISIONPRESCRIPTION: return "http://hl7.org/fhir/resource-types";
@@ -3865,15 +4730,18 @@ into another (possibly the same) biological entity.
             case DURATION: return "A length of time.";
             case ELEMENT: return "Base definition for all elements in a resource.";
             case ELEMENTDEFINITION: return "Captures constraints on each element within the resource, profile, or extension.";
+            case EXPRESSION: return "A expression that is evaluated in a specified context and returns a value. The context of use of the expression must specify the context in which the expression is evaluated, and how the result of the expression is used.";
             case EXTENSION: return "Optional Extension Element - found in all resources.";
             case HUMANNAME: return "A human's name with the ability to identify parts and usage.";
-            case IDENTIFIER: return "A technical identifier - identifies some entity uniquely and unambiguously.";
+            case IDENTIFIER: return "An identifier - identifies some entity uniquely and unambiguously. Typically this is used for business identifiers.";
             case MARKETINGSTATUS: return "The marketing status describes the date when a medicinal product is actually put on the market or the date as of which it is no longer available.";
             case META: return "The metadata about a resource. This is content in the resource that is maintained by the infrastructure. Changes to the content might not always be associated with version changes to the resource.";
             case MONEY: return "An amount of economic utility in some recognized currency.";
-            case NARRATIVE: return "A human-readable formatted text, including images.";
+            case MONEYQUANTITY: return "";
+            case NARRATIVE: return "A human-readable summary of the resource conveying the essential clinical and business information for the resource.";
             case PARAMETERDEFINITION: return "The parameters to the module. This collection specifies both the input and output parameters. Input parameters are provided by the caller as part of the $evaluate operation. Output parameters are included in the GuidanceResponse.";
             case PERIOD: return "A time period defined by a start and end date and optionally time.";
+            case POPULATION: return "A populatioof people with some set of grouping criteria.";
             case PRODCHARACTERISTIC: return "The marketing status describes the date when a medicinal product is actually put on the market or the date as of which it is no longer available.";
             case PRODUCTSHELFLIFE: return "The shelf-life and storage information for a medicinal product item or container can be described using this class.";
             case QUANTITY: return "A measured amount (or an amount that can potentially be measured). Note that measured amounts include amounts that are not precisely quantified, including amounts involving arbitrary units and floating currencies.";
@@ -3885,13 +4753,12 @@ into another (possibly the same) biological entity.
             case SIGNATURE: return "A signature along with supporting context. The signature may be a digital signature that is cryptographic in nature, or some other signature acceptable to the domain. This other signature may be as simple as a graphical image representing a hand-written signature, or a signature ceremony Different signature approaches have different utilities.";
             case SIMPLEQUANTITY: return "";
             case SUBSTANCEAMOUNT: return "Chemical substances are a single substance type whose primary defining element is the molecular structure. Chemical substances shall be defined on the basis of their complete covalent molecular structure; the presence of a salt (counter-ion) and/or solvates (water, alcohols) is also captured. Purity, grade, physical form or particle size are not taken into account in the definition of a chemical substance or in the assignment of a Substance ID.";
-            case SUBSTANCEMOIETY: return "Chemical substances are a single substance type whose primary defining element is the molecular structure. Chemical substances shall be defined on the basis of their complete covalent molecular structure; the presence of a salt (counter-ion) and/or solvates (water, alcohols) is also captured. Purity, grade, physical form or particle size are not taken into account in the definition of a chemical substance or in the assignment of a Substance ID.";
             case TIMING: return "Specifies an event that may occur multiple times. Timing schedules are used to record when things are planned, expected or requested to occur. The most common usage is in dosage instructions for medications. They are also used when planning care of various kinds, and may be used for reporting the schedule to which past regular activities were carried out.";
             case TRIGGERDEFINITION: return "A description of a triggering event. Triggering events can be named events, data events, or periodic, as determined by the type element.";
             case USAGECONTEXT: return "Specifies clinical/business/etc. metadata that can be used to retrieve, index and/or categorize an artifact. This metadata can either be specific to the applicable population (e.g., age category, DRG) or the specific context of care (e.g., venue, care setting, provider of care).";
             case BASE64BINARY: return "A stream of bytes";
             case BOOLEAN: return "Value of \"true\" or \"false\"";
-            case CANONICAL: return "A URI that is a reference to a canonical URI on a FHIR resource";
+            case CANONICAL: return "A URI that is a reference to a canonical URL on a FHIR resource";
             case CODE: return "A string which has at least one character and no leading or trailing whitespace and where there is no whitespace other than single spaces in the contents";
             case DATE: return "A date or partial date (e.g. just year or year + month). There is no time zone. The format is a union of the schema types gYear, gYearMonth and date.  Dates SHALL be valid dates.";
             case DATETIME: return "A date, date-time or partial date (e.g. just year or year + month).  If hours and minutes are specified, a time zone SHALL be populated. The format is a union of the schema types gYear, gYearMonth, date and dateTime. Seconds must be provided due to schema type constraints but may be zero-filled and may be ignored.                 Dates SHALL be valid dates.";
@@ -3917,66 +4784,69 @@ into another (possibly the same) biological entity.
             case APPOINTMENTRESPONSE: return "A reply to an appointment request for a patient and/or practitioner(s), such as a confirmation or rejection.";
             case AUDITEVENT: return "A record of an event made for purposes of maintaining a security log. Typical uses include detection of intrusion attempts and monitoring for inappropriate usage.";
             case BASIC: return "Basic is used for handling concepts not yet defined in FHIR, narrative-only resources that don't map to an existing resource, and custom resources not appropriate for inclusion in the FHIR specification.";
-            case BINARY: return "A binary resource can contain any content, whether text, image, pdf, zip archive, etc.";
+            case BINARY: return "A resource that represents the data of a single raw artifact as digital content accessible in its native format.  A Binary resource can contain any content, whether text, image, pdf, zip archive, etc.";
             case BIOLOGICALLYDERIVEDPRODUCT: return "A material substance originating from a biological entity intended to be transplanted or infused\ninto another (possibly the same) biological entity.";
             case BODYSTRUCTURE: return "Record details about an anatomical structure.  This resource may be used when a coded concept does not provide the necessary detail needed for the use case.";
             case BUNDLE: return "A container for a collection of resources.";
-            case CAPABILITYSTATEMENT: return "A Capability Statement documents a set of capabilities (behaviors) of a FHIR Server that may be used as a statement of actual server functionality or a statement of required or desired server implementation.";
+            case CAPABILITYSTATEMENT: return "A Capability Statement documents a set of capabilities (behaviors) of a FHIR Server for a particular version of FHIR that may be used as a statement of actual server functionality or a statement of required or desired server implementation.";
             case CAREPLAN: return "Describes the intention of how one or more practitioners intend to deliver care for a particular patient, group or community for a period of time, possibly limited to care for a specific condition or set of conditions.";
             case CARETEAM: return "The Care Team includes all the people and organizations who plan to participate in the coordination and delivery of care for a patient.";
+            case CATALOGENTRY: return "Catalog entries are wrappers that contextualize items included in a catalog.";
             case CHARGEITEM: return "The resource ChargeItem describes the provision of healthcare provider products for a certain patient, therefore referring not only to the product, but containing in addition details of the provision, like date, time, amounts and participating organizations and persons. Main Usage of the ChargeItem is to enable the billing process and internal cost allocation.";
-            case CLAIM: return "A provider issued list of services and products provided, or to be provided, to a patient which is provided to an insurer for payment recovery.";
+            case CHARGEITEMDEFINITION: return "The ChargeItemDefinition resource provides the properties that apply to the (billing) codes necessary to calculate costs and prices. The properties may differ largely depending on type and realm, therefore this resource gives only a rough structure and requires profiling for each type of billing code system.";
+            case CLAIM: return "A provider issued list of professional services and products which have been provided, or are to be provided, to a patient which is sent to an insurer for reimbursement.";
             case CLAIMRESPONSE: return "This resource provides the adjudication details from the processing of a Claim resource.";
             case CLINICALIMPRESSION: return "A record of a clinical assessment performed to determine what problem(s) may affect the patient and before planning the treatments or management strategies that are best to manage a patient's condition. Assessments are often 1:1 with a clinical consultation / encounter,  but this varies greatly depending on the clinical workflow. This resource is called \"ClinicalImpression\" rather than \"ClinicalAssessment\" to avoid confusion with the recording of assessment tools such as Apgar score.";
             case CODESYSTEM: return "The CodeSystem resource is used to declare the existence of and describe a code system or code system supplement and its key properties, and optionally define a part or all of its content.";
-            case COMMUNICATION: return "An occurrence of information being transmitted; e.g. an alert that was sent to a responsible provider, a public health agency was notified about a reportable condition.";
+            case COMMUNICATION: return "An occurrence of information being transmitted; e.g. an alert that was sent to a responsible provider, a public health agency that was notified about a reportable condition.";
             case COMMUNICATIONREQUEST: return "A request to convey information; e.g. the CDS system proposes that an alert be sent to a responsible provider, the CDS system proposes that the public health agency be notified about a reportable condition.";
             case COMPARTMENTDEFINITION: return "A compartment definition that defines how resources are accessed on a server.";
             case COMPOSITION: return "A set of healthcare-related information that is assembled together into a single logical package that provides a single coherent statement of meaning, establishes its own context and that has clinical attestation with regard to who is making the statement. A Composition defines the structure and narrative content necessary for a document. However, a Composition alone does not constitute a document. Rather, the Composition must be the first entry in a Bundle where Bundle.type=document, and any other resources referenced from Composition must be included as subsequent entries in the Bundle (for example Patient, Practitioner, Encounter, etc.).";
-            case CONCEPTMAP: return "A statement of relationships from one set of concepts to one or more other concepts - either code systems or data elements, or classes in class models.";
+            case CONCEPTMAP: return "A statement of relationships from one set of concepts to one or more other concepts - either concepts in code systems, or data element/data element concepts, or classes in class models.";
             case CONDITION: return "A clinical condition, problem, diagnosis, or other event, situation, issue, or clinical concept that has risen to a level of concern.";
             case CONSENT: return "A record of a healthcare consumer’s  choices, which permits or denies identified recipient(s) or recipient role(s) to perform one or more actions within a given policy context, for specific purposes and periods of time.";
-            case CONTRACT: return "A formal agreement between parties regarding the conduct of business, exchange of information or other matters.";
-            case COVERAGE: return "Financial instrument which may be used to reimburse or pay for health care products and services.";
+            case CONTRACT: return "Legally enforceable, formally recorded unilateral or bilateral directive i.e., a policy or agreement.";
+            case COVERAGE: return "Financial instrument which may be used to reimburse or pay for health care products and services. Includes both insurance and self-payment.";
+            case COVERAGEELIGIBILITYREQUEST: return "The CoverageEligibilityRequest provides patient and insurance coverage information to an insurer for them to respond, in the form of an CoverageEligibilityResponse, with information regarding whether the stated coverage is valid and in-force and optionally to provide the insurance details of the policy.";
+            case COVERAGEELIGIBILITYRESPONSE: return "This resource provides eligibility and plan details from the processing of an CoverageEligibilityRequest resource.";
             case DETECTEDISSUE: return "Indicates an actual or potential clinical issue with or between one or more active or proposed clinical actions for a patient; e.g. Drug-drug interaction, Ineffective treatment frequency, Procedure-condition conflict, etc.";
-            case DEVICE: return "This resource identifies an instance or a type of a manufactured item that is used in the provision of healthcare without being substantially changed through that activity. The device may be a medical or non-medical device.  Medical devices include durable (reusable) medical equipment, implantable devices, as well as disposable equipment used for diagnostic, treatment, and research for healthcare and public health.  Non-medical devices may include items such as a machine, cellphone, computer, application, etc.";
-            case DEVICECOMPONENT: return "The characteristics, operational status and capabilities of a medical-related component of a medical device.";
+            case DEVICE: return "A type of a manufactured item that is used in the provision of healthcare without being substantially changed through that activity. The device may be a medical or non-medical device.";
+            case DEVICEDEFINITION: return "The characteristics, operational status and capabilities of a medical-related component of a medical device.";
             case DEVICEMETRIC: return "Describes a measurement, calculation or setting capability of a medical device.";
             case DEVICEREQUEST: return "Represents a request for a patient to employ a medical device. The device may be an implantable device, or an external assistive device, such as a walker.";
             case DEVICEUSESTATEMENT: return "A record of a device being used by a patient where the record is the result of a report from the patient or another clinician.";
             case DIAGNOSTICREPORT: return "The findings and interpretation of diagnostic  tests performed on patients, groups of patients, devices, and locations, and/or specimens derived from these. The report includes clinical context such as requesting and provider information, and some mix of atomic results, images, textual and coded interpretations, and formatted representation of diagnostic reports.";
             case DOCUMENTMANIFEST: return "A collection of documents compiled for a purpose together with metadata that applies to the collection.";
-            case DOCUMENTREFERENCE: return "A reference to a document.";
+            case DOCUMENTREFERENCE: return "A reference to a document of any kind for any purpose. Provides metadata about the document so that the document can be discovered and managed. The scope of a document is any seralized object with a mime-type, so includes formal patient centric documents (CDA), cliical notes, scanned paper, and non-patient specific documents like policy text.";
             case DOMAINRESOURCE: return "A resource that includes narrative, extensions, and contained resources.";
-            case ELIGIBILITYREQUEST: return "The EligibilityRequest provides patient and insurance coverage information to an insurer for them to respond, in the form of an EligibilityResponse, with information regarding whether the stated coverage is valid and in-force and optionally to provide the insurance details of the policy.";
-            case ELIGIBILITYRESPONSE: return "This resource provides eligibility and plan details from the processing of an Eligibility resource.";
+            case EFFECTEVIDENCESYNTHESIS: return "The EffectEvidenceSynthesis resource describes the difference in an outcome between exposures states in a population where the effect estimate is derived from a combination of research studies.";
             case ENCOUNTER: return "An interaction between a patient and healthcare provider(s) for the purpose of providing healthcare service(s) or assessing the health status of a patient.";
             case ENDPOINT: return "The technical details of an endpoint that can be used for electronic services, such as for web services providing XDS.b or a REST endpoint for another FHIR server. This may include any security context information.";
             case ENROLLMENTREQUEST: return "This resource provides the insurance enrollment details to the insurer regarding a specified coverage.";
-            case ENROLLMENTRESPONSE: return "This resource provides enrollment and plan details from the processing of an Enrollment resource.";
-            case ENTRYDEFINITION: return "Catalog entries are wrappers that contextualize items included in a catalog.";
+            case ENROLLMENTRESPONSE: return "This resource provides enrollment and plan details from the processing of an EnrollmentRequest resource.";
             case EPISODEOFCARE: return "An association between a patient and an organization / healthcare provider(s) during which time encounters may occur. The managing organization assumes a level of responsibility for the patient during this time.";
             case EVENTDEFINITION: return "The EventDefinition resource provides a reusable description of when a particular event can occur.";
+            case EVIDENCE: return "The Evidence resource describes the conditional state (population and any exposures being compared within the population) and outcome (if specified) that the knowledge (evidence, assertion, recommendation) is about.";
+            case EVIDENCEVARIABLE: return "The EvidenceVariable resource describes a \"PICO\" element that knowledge (evidence, assertion, recommendation) is about.";
             case EXAMPLESCENARIO: return "Example of workflow instance.";
-            case EXPANSIONPROFILE: return "Resource to define constraints on the Expansion of a FHIR ValueSet.";
             case EXPLANATIONOFBENEFIT: return "This resource provides: the claim details; adjudication details from the processing of a Claim; and optionally account balance information, for informing the subscriber of the benefits provided.";
             case FAMILYMEMBERHISTORY: return "Significant health conditions for a person related to the patient relevant in the context of care for the patient.";
             case FLAG: return "Prospective warnings of potential issues when providing care to the patient.";
             case GOAL: return "Describes the intended objective(s) for a patient, group or organization care, for example, weight loss, restoring an activity of daily living, obtaining herd immunity via immunization, meeting a process improvement objective, etc.";
             case GRAPHDEFINITION: return "A formal computable definition of a graph of resources - that is, a coherent set of resources that form a graph by following references. The Graph Definition resource defines a set and makes rules about the set.";
-            case GROUP: return "Represents a defined collection of entities that may be discussed or acted upon collectively but which are not expected to act collectively and are not formally or legally recognized; i.e. a collection of entities that isn't an Organization.";
+            case GROUP: return "Represents a defined collection of entities that may be discussed or acted upon collectively but which are not expected to act collectively, and are not formally or legally recognized; i.e. a collection of entities that isn't an Organization.";
             case GUIDANCERESPONSE: return "A guidance response is the formal response to a guidance request, including any output parameters returned by the evaluation, as well as the description of any proposed actions to be taken.";
             case HEALTHCARESERVICE: return "The details of a healthcare service available at a location.";
             case IMAGINGSTUDY: return "Representation of the content produced in a DICOM imaging study. A study comprises a set of series, each of which includes a set of Service-Object Pair Instances (SOP Instances - images or other data) acquired or produced in a common context.  A series is of only one modality (e.g. X-ray, CT, MR, ultrasound), but a study may have multiple series of different modalities.";
             case IMMUNIZATION: return "Describes the event of a patient being administered a vaccine or a record of an immunization as reported by a patient, a clinician or another party.";
             case IMMUNIZATIONEVALUATION: return "Describes a comparison of an immunization event against published recommendations to determine if the administration is \"valid\" in relation to those  recommendations.";
             case IMMUNIZATIONRECOMMENDATION: return "A patient's point-in-time set of recommendations (i.e. forecasting) according to a published schedule with optional supporting justification.";
-            case IMPLEMENTATIONGUIDE: return "A set of rules of how FHIR is used to solve a particular problem. This resource is used to gather all the parts of an implementation guide into a logical whole and to publish a computable definition of all the parts.";
+            case IMPLEMENTATIONGUIDE: return "A set of rules of how a particular interoperability or standards problem is solved - typically through the use of FHIR resources. This resource is used to gather all the parts of an implementation guide into a logical whole and to publish a computable definition of all the parts.";
+            case INSURANCEPLAN: return "Details of a Health Insurance product/plan provided by an organization.";
             case INVOICE: return "Invoice containing collected ChargeItems from an Account with calculated individual and total price for Billing purpose.";
-            case ITEMINSTANCE: return "A physical, countable instance of an item, for example one box or one unit.";
             case LIBRARY: return "The Library resource is a general-purpose container for knowledge asset definitions. It can be used to describe and expose existing knowledge assets such as logic libraries and information model descriptions, as well as to describe a collection of knowledge assets.";
-            case LINKAGE: return "Identifies two or more records (resource instances) that are referring to the same real-world \"occurrence\".";
-            case LIST: return "A set of information summarized from a list of other resources.";
+            case LINKAGE: return "Identifies two or more records (resource instances) that refer to the same real-world \"occurrence\".";
+            case LIST: return "A list is a curated collection of resources.";
             case LOCATION: return "Details and position information for a physical place where services are provided and resources and participants may be stored, found, contained, or accommodated.";
             case MEASURE: return "The Measure resource provides the definition of a quality measure.";
             case MEASUREREPORT: return "The MeasureReport resource contains the results of the calculation of a measure; and optionally a reference to the resources involved in that calculation.";
@@ -3986,49 +4856,51 @@ into another (possibly the same) biological entity.
             case MEDICATIONDISPENSE: return "Indicates that a medication product is to be or has been dispensed for a named person/patient.  This includes a description of the medication product (supply) provided and the instructions for administering the medication.  The medication dispense is the result of a pharmacy system responding to a medication order.";
             case MEDICATIONKNOWLEDGE: return "Information about a medication that is used to support knowledge.";
             case MEDICATIONREQUEST: return "An order or request for both supply of the medication and the instructions for administration of the medication to a patient. The resource is called \"MedicationRequest\" rather than \"MedicationPrescription\" or \"MedicationOrder\" to generalize the use across inpatient and outpatient settings, including care plans, etc., and to harmonize with workflow patterns.";
-            case MEDICATIONSTATEMENT: return "A record of a medication that is being consumed by a patient.   A MedicationStatement may indicate that the patient may be taking the medication now, or has taken the medication in the past or will be taking the medication in the future.  The source of this information can be the patient, significant other (such as a family member or spouse), or a clinician.  A common scenario where this information is captured is during the history taking process during a patient visit or stay.   The medication information may come from sources such as the patient's memory, from a prescription bottle,  or from a list of medications the patient, clinician or other party maintains. \r\rThe primary difference between a medication statement and a medication administration is that the medication administration has complete administration information and is based on actual administration information from the person who administered the medication.  A medication statement is often, if not always, less specific.  There is no required date/time when the medication was administered, in fact we only know that a source has reported the patient is taking this medication, where details such as time, quantity, or rate or even medication product may be incomplete or missing or less precise.  As stated earlier, the medication statement information may come from the patient's memory, from a prescription bottle or from a list of medications the patient, clinician or other party maintains.  Medication administration is more formal and is not missing detailed information.";
+            case MEDICATIONSTATEMENT: return "A record of a medication that is being consumed by a patient.   A MedicationStatement may indicate that the patient may be taking the medication now or has taken the medication in the past or will be taking the medication in the future.  The source of this information can be the patient, significant other (such as a family member or spouse), or a clinician.  A common scenario where this information is captured is during the history taking process during a patient visit or stay.   The medication information may come from sources such as the patient's memory, from a prescription bottle,  or from a list of medications the patient, clinician or other party maintains. \n\nThe primary difference between a medication statement and a medication administration is that the medication administration has complete administration information and is based on actual administration information from the person who administered the medication.  A medication statement is often, if not always, less specific.  There is no required date/time when the medication was administered, in fact we only know that a source has reported the patient is taking this medication, where details such as time, quantity, or rate or even medication product may be incomplete or missing or less precise.  As stated earlier, the medication statement information may come from the patient's memory, from a prescription bottle or from a list of medications the patient, clinician or other party maintains.  Medication administration is more formal and is not missing detailed information.";
             case MEDICINALPRODUCT: return "Detailed definition of a medicinal product, typically for uses other than direct patient care (e.g. regulatory use).";
             case MEDICINALPRODUCTAUTHORIZATION: return "The regulatory authorization of a medicinal product.";
-            case MEDICINALPRODUCTCLINICALS: return "The clinical particulars - indications, contraindications etc. of a medicinal product, including for regulatory purposes.";
-            case MEDICINALPRODUCTDEVICESPEC: return "A detailed description of a device, typically as part of a regulated medicinal product. It is not intended to relace the Device resource, which covers use of device instances.";
+            case MEDICINALPRODUCTCONTRAINDICATION: return "The clinical particulars - indications, contraindications etc. of a medicinal product, including for regulatory purposes.";
+            case MEDICINALPRODUCTINDICATION: return "Indication for the Medicinal Product.";
             case MEDICINALPRODUCTINGREDIENT: return "An ingredient of a manufactured item or pharmaceutical product.";
+            case MEDICINALPRODUCTINTERACTION: return "The interactions of the medicinal product with other medicinal products, or other forms of interactions.";
+            case MEDICINALPRODUCTMANUFACTURED: return "The manufactured item as contained in the packaged medicinal product.";
             case MEDICINALPRODUCTPACKAGED: return "A medicinal product in a container or package.";
             case MEDICINALPRODUCTPHARMACEUTICAL: return "A pharmaceutical product described in terms of its composition and dose form.";
+            case MEDICINALPRODUCTUNDESIRABLEEFFECT: return "Describe the undesirable effects of the medicinal product.";
             case MESSAGEDEFINITION: return "Defines the characteristics of a message that can be shared between systems, including the type of event that initiates the message, the content to be transmitted and what response(s), if any, are permitted.";
             case MESSAGEHEADER: return "The header for a message exchange that is either requesting or responding to an action.  The reference(s) that are the subject of the action as well as other information related to the action are typically transmitted in a bundle in which the MessageHeader resource instance is the first resource in the bundle.";
+            case MOLECULARSEQUENCE: return "Raw data describing a biological sequence.";
             case NAMINGSYSTEM: return "A curated namespace that issues unique symbols within that namespace for the identification of concepts, people, devices, etc.  Represents a \"System\" used within the Identifier and Coding data types.";
             case NUTRITIONORDER: return "A request to supply a diet, formula feeding (enteral) or oral nutritional supplement to a patient/resident.";
             case OBSERVATION: return "Measurements and simple assertions made about a patient, device or other subject.";
             case OBSERVATIONDEFINITION: return "Set of definitional characteristics for a kind of observation or measurement produced or consumed by an orderable health care service.";
-            case OCCUPATIONALDATA: return "A person's work information, structured to facilitate individual, population, and public health use; not intended to support billing.";
             case OPERATIONDEFINITION: return "A formal computable definition of an operation (on the RESTful interface) or a named query (using the search interaction).";
-            case OPERATIONOUTCOME: return "A collection of error, warning or information messages that result from a system action.";
-            case ORGANIZATION: return "A formally or informally recognized grouping of people or organizations formed for the purpose of achieving some form of collective action.  Includes companies, institutions, corporations, departments, community groups, healthcare practice groups, etc.";
-            case ORGANIZATIONROLE: return "A specific set of Roles/Locations/specialties/services that a practitioner may perform at an organization for a period of time.";
-            case PARAMETERS: return "This special resource type is used to represent an operation request and response (operations.html). It has no other use, and there is no RESTful endpoint associated with it.";
+            case OPERATIONOUTCOME: return "A collection of error, warning, or information messages that result from a system action.";
+            case ORGANIZATION: return "A formally or informally recognized grouping of people or organizations formed for the purpose of achieving some form of collective action.  Includes companies, institutions, corporations, departments, community groups, healthcare practice groups, payer/insurer, etc.";
+            case ORGANIZATIONAFFILIATION: return "Defines an affiliation/assotiation/relationship between 2 distinct oganizations, that is not a part-of relationship/sub-division relationship.";
+            case PARAMETERS: return "This resource is a non-persisted resource used to pass information into and back from an [operation](operations.html). It has no other use, and there is no RESTful endpoint associated with it.";
             case PATIENT: return "Demographics and other administrative information about an individual or animal receiving care or other health-related services.";
             case PAYMENTNOTICE: return "This resource provides the status of the payment for goods and services rendered, and the request and response resource references.";
-            case PAYMENTRECONCILIATION: return "This resource provides payment details and claim references supporting a bulk payment.";
+            case PAYMENTRECONCILIATION: return "This resource provides the details including amount of a payment and allocates the payment items being paid.";
             case PERSON: return "Demographics and administrative information about a person independent of a specific health-related context.";
             case PLANDEFINITION: return "This resource allows for the definition of various types of plans as a sharable, consumable, and executable artifact. The resource is general enough to support the description of a broad range of clinical artifacts such as clinical decision support rules, order sets and protocols.";
             case PRACTITIONER: return "A person who is directly or indirectly involved in the provisioning of healthcare.";
             case PRACTITIONERROLE: return "A specific set of Roles/Locations/specialties/services that a practitioner may perform at an organization for a period of time.";
-            case PROCEDURE: return "An action that is or was performed on a patient. This can be a physical intervention like an operation, or less invasive like counseling or hypnotherapy.";
-            case PROCESSREQUEST: return "This resource provides the target, request and response, and action details for an action to be performed by the target on or about existing resources.";
-            case PROCESSRESPONSE: return "This resource provides processing status, errors and notes from the processing of a resource.";
-            case PRODUCTPLAN: return "Details of a Health Insurance product/plan provided by an organization.";
+            case PROCEDURE: return "An action that is or was performed on or for a patient. This can be a physical intervention like an operation, or less invasive like long term services, counseling, or hypnotherapy.";
             case PROVENANCE: return "Provenance of a resource is a record that describes entities and processes involved in producing and delivering or otherwise influencing that resource. Provenance provides a critical foundation for assessing authenticity, enabling trust, and allowing reproducibility. Provenance assertions are a form of contextual metadata and can themselves become important records with their own provenance. Provenance statement indicates clinical significance in terms of confidence in authenticity, reliability, and trustworthiness, integrity, and stage in lifecycle (e.g. Document Completion - has the artifact been legally authenticated), all of which may impact security, privacy, and trust policies.";
             case QUESTIONNAIRE: return "A structured set of questions intended to guide the collection of answers from end-users. Questionnaires provide detailed control over order, presentation, phraseology and grouping to allow coherent, consistent data collection.";
             case QUESTIONNAIRERESPONSE: return "A structured set of questions and their answers. The questions are ordered and grouped into coherent subsets, corresponding to the structure of the grouping of the questionnaire being responded to.";
             case RELATEDPERSON: return "Information about a person that is involved in the care for a patient, but who is not the target of healthcare, nor has a formal responsibility in the care process.";
             case REQUESTGROUP: return "A group of related requests that can be used to capture intended activities that have inter-dependencies such as \"give this medication after that one\".";
+            case RESEARCHDEFINITION: return "The ResearchDefinition resource describes the conditional state (population and any exposures being compared within the population) and outcome (if specified) that the knowledge (evidence, assertion, recommendation) is about.";
+            case RESEARCHELEMENTDEFINITION: return "The ResearchElementDefinition resource describes a \"PICO\" element that knowledge (evidence, assertion, recommendation) is about.";
             case RESEARCHSTUDY: return "A process where a researcher or organization plans and then executes a series of steps intended to increase the field of healthcare-related knowledge.  This includes studies of safety, efficacy, comparative effectiveness and other information about medications, devices, therapies and other interventional and investigative techniques.  A ResearchStudy involves the gathering of information about human or animal subjects.";
             case RESEARCHSUBJECT: return "A physical entity which is the primary unit of operational and/or administrative interest in a study.";
             case RESOURCE: return "This is the base resource type for everything.";
             case RISKASSESSMENT: return "An assessment of the likely outcome(s) for a patient or other subject as well as the likelihood of each outcome.";
+            case RISKEVIDENCESYNTHESIS: return "The RiskEvidenceSynthesis resource describes the likelihood of an outcome in a population plus exposure state where the risk estimate is derived from a combination of research studies.";
             case SCHEDULE: return "A container for slots of time that may be available for booking appointments.";
             case SEARCHPARAMETER: return "A search parameter that defines a named search item that can be used to search/filter on a resource.";
-            case SEQUENCE: return "Raw data describing a biological sequence.";
             case SERVICEREQUEST: return "A record of a request for service such as diagnostic investigations, treatments, or operations to be performed.";
             case SLOT: return "A slot of time on a schedule that may be available for booking appointments.";
             case SPECIMEN: return "A sample to be used for analysis.";
@@ -4037,19 +4909,21 @@ into another (possibly the same) biological entity.
             case STRUCTUREMAP: return "A Map of relationships between 2 structures that can be used to transform data.";
             case SUBSCRIPTION: return "The subscription resource is used to define a push-based subscription from a server to another system. Once a subscription is registered with the server, the server checks every resource that is created or updated, and if the resource matches the given criteria, it sends a message on the defined \"channel\" so that another system can take an appropriate action.";
             case SUBSTANCE: return "A homogeneous material with a definite composition.";
+            case SUBSTANCENUCLEICACID: return "Nucleic acids are defined by three distinct elements: the base, sugar and linkage. Individual substance/moiety IDs will be created for each of these elements. The nucleotide sequence will be always entered in the 5’-3’ direction.";
             case SUBSTANCEPOLYMER: return "Todo.";
+            case SUBSTANCEPROTEIN: return "A SubstanceProtein is defined as a single unit of a linear amino acid sequence, or a combination of subunits that are either covalently linked or have a defined invariant stoichiometric relationship. This includes all synthetic, recombinant and purified SubstanceProteins of defined sequence, whether the use is therapeutic or prophylactic. This set of elements will be used to describe albumins, coagulation factors, cytokines, growth factors, peptide/SubstanceProtein hormones, enzymes, toxins, toxoids, recombinant vaccines, and immunomodulators.";
             case SUBSTANCEREFERENCEINFORMATION: return "Todo.";
+            case SUBSTANCESOURCEMATERIAL: return "Source material shall capture information on the taxonomic and anatomical origins as well as the fraction of a material that can result in or can be modified to form a substance. This set of data elements shall be used to define polymer substances isolated from biological matrices. Taxonomic and anatomical origins shall be described using a controlled vocabulary as required. This information is captured for naturally derived polymers ( . starch) and structurally diverse substances. For Organisms belonging to the Kingdom Plantae the Substance level defines the fresh material of a single species or infraspecies, the Herbal Drug and the Herbal preparation. For Herbal preparations, the fraction information will be captured at the Substance information level and additional information for herbal extracts will be captured at the Specified Substance Group 1 information level. See for further explanation the Substance Class: Structurally Diverse and the herbal annex.";
             case SUBSTANCESPECIFICATION: return "The detailed description of a substance, typically at a level beyond what is used for prescribing.";
             case SUPPLYDELIVERY: return "Record of delivery of what is supplied.";
             case SUPPLYREQUEST: return "A record of a request for a medication, substance or device used in the healthcare setting.";
             case TASK: return "A task to be performed.";
-            case TERMINOLOGYCAPABILITIES: return "A Terminology Capabilities documents a set of capabilities (behaviors) of a FHIR Server that may be used as a statement of actual server functionality or a statement of required or desired server implementation.";
+            case TERMINOLOGYCAPABILITIES: return "A TerminologyCapabilities resource documents a set of capabilities (behaviors) of a FHIR Terminology Server that may be used as a statement of actual server functionality or a statement of required or desired server implementation.";
             case TESTREPORT: return "A summary of information based on the results of executing a TestScript.";
             case TESTSCRIPT: return "A structured set of tests against a FHIR server or client implementation to determine compliance against the FHIR specification.";
-            case USERSESSION: return "Information about a user's current session.";
-            case VALUESET: return "A ValueSet resource specifies a set of codes drawn from one or more code systems, intended for use in a particular context. Value sets link between [[[CodeSystem]]] definitions and their use in [coded elements](terminologies.html).";
+            case VALUESET: return "A ValueSet resource instance specifies a set of codes drawn from one or more code systems, intended for use in a particular context. Value sets link between [[[CodeSystem]]] definitions and their use in [coded elements](terminologies.html).";
             case VERIFICATIONRESULT: return "Describes validation requirements, source(s), status and dates for one or more elements.";
-            case VISIONPRESCRIPTION: return "An authorization for the supply of glasses and/or contact lenses to a patient.";
+            case VISIONPRESCRIPTION: return "An authorization for the provision of glasses and/or contact lenses to a patient.";
             case TYPE: return "A place holder that means any kind of data type";
             case ANY: return "A place holder that means any kind of resource";
             default: return "?";
@@ -4074,15 +4948,18 @@ into another (possibly the same) biological entity.
             case DURATION: return "Duration";
             case ELEMENT: return "Element";
             case ELEMENTDEFINITION: return "ElementDefinition";
+            case EXPRESSION: return "Expression";
             case EXTENSION: return "Extension";
             case HUMANNAME: return "HumanName";
             case IDENTIFIER: return "Identifier";
             case MARKETINGSTATUS: return "MarketingStatus";
             case META: return "Meta";
             case MONEY: return "Money";
+            case MONEYQUANTITY: return "MoneyQuantity";
             case NARRATIVE: return "Narrative";
             case PARAMETERDEFINITION: return "ParameterDefinition";
             case PERIOD: return "Period";
+            case POPULATION: return "Population";
             case PRODCHARACTERISTIC: return "ProdCharacteristic";
             case PRODUCTSHELFLIFE: return "ProductShelfLife";
             case QUANTITY: return "Quantity";
@@ -4094,7 +4971,6 @@ into another (possibly the same) biological entity.
             case SIGNATURE: return "Signature";
             case SIMPLEQUANTITY: return "SimpleQuantity";
             case SUBSTANCEAMOUNT: return "SubstanceAmount";
-            case SUBSTANCEMOIETY: return "SubstanceMoiety";
             case TIMING: return "Timing";
             case TRIGGERDEFINITION: return "TriggerDefinition";
             case USAGECONTEXT: return "UsageContext";
@@ -4133,7 +5009,9 @@ into another (possibly the same) biological entity.
             case CAPABILITYSTATEMENT: return "CapabilityStatement";
             case CAREPLAN: return "CarePlan";
             case CARETEAM: return "CareTeam";
+            case CATALOGENTRY: return "CatalogEntry";
             case CHARGEITEM: return "ChargeItem";
+            case CHARGEITEMDEFINITION: return "ChargeItemDefinition";
             case CLAIM: return "Claim";
             case CLAIMRESPONSE: return "ClaimResponse";
             case CLINICALIMPRESSION: return "ClinicalImpression";
@@ -4147,9 +5025,11 @@ into another (possibly the same) biological entity.
             case CONSENT: return "Consent";
             case CONTRACT: return "Contract";
             case COVERAGE: return "Coverage";
+            case COVERAGEELIGIBILITYREQUEST: return "CoverageEligibilityRequest";
+            case COVERAGEELIGIBILITYRESPONSE: return "CoverageEligibilityResponse";
             case DETECTEDISSUE: return "DetectedIssue";
             case DEVICE: return "Device";
-            case DEVICECOMPONENT: return "DeviceComponent";
+            case DEVICEDEFINITION: return "DeviceDefinition";
             case DEVICEMETRIC: return "DeviceMetric";
             case DEVICEREQUEST: return "DeviceRequest";
             case DEVICEUSESTATEMENT: return "DeviceUseStatement";
@@ -4157,17 +5037,16 @@ into another (possibly the same) biological entity.
             case DOCUMENTMANIFEST: return "DocumentManifest";
             case DOCUMENTREFERENCE: return "DocumentReference";
             case DOMAINRESOURCE: return "DomainResource";
-            case ELIGIBILITYREQUEST: return "EligibilityRequest";
-            case ELIGIBILITYRESPONSE: return "EligibilityResponse";
+            case EFFECTEVIDENCESYNTHESIS: return "EffectEvidenceSynthesis";
             case ENCOUNTER: return "Encounter";
             case ENDPOINT: return "Endpoint";
             case ENROLLMENTREQUEST: return "EnrollmentRequest";
             case ENROLLMENTRESPONSE: return "EnrollmentResponse";
-            case ENTRYDEFINITION: return "EntryDefinition";
             case EPISODEOFCARE: return "EpisodeOfCare";
             case EVENTDEFINITION: return "EventDefinition";
+            case EVIDENCE: return "Evidence";
+            case EVIDENCEVARIABLE: return "EvidenceVariable";
             case EXAMPLESCENARIO: return "ExampleScenario";
-            case EXPANSIONPROFILE: return "ExpansionProfile";
             case EXPLANATIONOFBENEFIT: return "ExplanationOfBenefit";
             case FAMILYMEMBERHISTORY: return "FamilyMemberHistory";
             case FLAG: return "Flag";
@@ -4181,8 +5060,8 @@ into another (possibly the same) biological entity.
             case IMMUNIZATIONEVALUATION: return "ImmunizationEvaluation";
             case IMMUNIZATIONRECOMMENDATION: return "ImmunizationRecommendation";
             case IMPLEMENTATIONGUIDE: return "ImplementationGuide";
+            case INSURANCEPLAN: return "InsurancePlan";
             case INVOICE: return "Invoice";
-            case ITEMINSTANCE: return "ItemInstance";
             case LIBRARY: return "Library";
             case LINKAGE: return "Linkage";
             case LIST: return "List";
@@ -4198,22 +5077,25 @@ into another (possibly the same) biological entity.
             case MEDICATIONSTATEMENT: return "MedicationStatement";
             case MEDICINALPRODUCT: return "MedicinalProduct";
             case MEDICINALPRODUCTAUTHORIZATION: return "MedicinalProductAuthorization";
-            case MEDICINALPRODUCTCLINICALS: return "MedicinalProductClinicals";
-            case MEDICINALPRODUCTDEVICESPEC: return "MedicinalProductDeviceSpec";
+            case MEDICINALPRODUCTCONTRAINDICATION: return "MedicinalProductContraindication";
+            case MEDICINALPRODUCTINDICATION: return "MedicinalProductIndication";
             case MEDICINALPRODUCTINGREDIENT: return "MedicinalProductIngredient";
+            case MEDICINALPRODUCTINTERACTION: return "MedicinalProductInteraction";
+            case MEDICINALPRODUCTMANUFACTURED: return "MedicinalProductManufactured";
             case MEDICINALPRODUCTPACKAGED: return "MedicinalProductPackaged";
             case MEDICINALPRODUCTPHARMACEUTICAL: return "MedicinalProductPharmaceutical";
+            case MEDICINALPRODUCTUNDESIRABLEEFFECT: return "MedicinalProductUndesirableEffect";
             case MESSAGEDEFINITION: return "MessageDefinition";
             case MESSAGEHEADER: return "MessageHeader";
+            case MOLECULARSEQUENCE: return "MolecularSequence";
             case NAMINGSYSTEM: return "NamingSystem";
             case NUTRITIONORDER: return "NutritionOrder";
             case OBSERVATION: return "Observation";
             case OBSERVATIONDEFINITION: return "ObservationDefinition";
-            case OCCUPATIONALDATA: return "OccupationalData";
             case OPERATIONDEFINITION: return "OperationDefinition";
             case OPERATIONOUTCOME: return "OperationOutcome";
             case ORGANIZATION: return "Organization";
-            case ORGANIZATIONROLE: return "OrganizationRole";
+            case ORGANIZATIONAFFILIATION: return "OrganizationAffiliation";
             case PARAMETERS: return "Parameters";
             case PATIENT: return "Patient";
             case PAYMENTNOTICE: return "PaymentNotice";
@@ -4223,21 +5105,20 @@ into another (possibly the same) biological entity.
             case PRACTITIONER: return "Practitioner";
             case PRACTITIONERROLE: return "PractitionerRole";
             case PROCEDURE: return "Procedure";
-            case PROCESSREQUEST: return "ProcessRequest";
-            case PROCESSRESPONSE: return "ProcessResponse";
-            case PRODUCTPLAN: return "ProductPlan";
             case PROVENANCE: return "Provenance";
             case QUESTIONNAIRE: return "Questionnaire";
             case QUESTIONNAIRERESPONSE: return "QuestionnaireResponse";
             case RELATEDPERSON: return "RelatedPerson";
             case REQUESTGROUP: return "RequestGroup";
+            case RESEARCHDEFINITION: return "ResearchDefinition";
+            case RESEARCHELEMENTDEFINITION: return "ResearchElementDefinition";
             case RESEARCHSTUDY: return "ResearchStudy";
             case RESEARCHSUBJECT: return "ResearchSubject";
             case RESOURCE: return "Resource";
             case RISKASSESSMENT: return "RiskAssessment";
+            case RISKEVIDENCESYNTHESIS: return "RiskEvidenceSynthesis";
             case SCHEDULE: return "Schedule";
             case SEARCHPARAMETER: return "SearchParameter";
-            case SEQUENCE: return "Sequence";
             case SERVICEREQUEST: return "ServiceRequest";
             case SLOT: return "Slot";
             case SPECIMEN: return "Specimen";
@@ -4246,8 +5127,11 @@ into another (possibly the same) biological entity.
             case STRUCTUREMAP: return "StructureMap";
             case SUBSCRIPTION: return "Subscription";
             case SUBSTANCE: return "Substance";
+            case SUBSTANCENUCLEICACID: return "SubstanceNucleicAcid";
             case SUBSTANCEPOLYMER: return "SubstancePolymer";
+            case SUBSTANCEPROTEIN: return "SubstanceProtein";
             case SUBSTANCEREFERENCEINFORMATION: return "SubstanceReferenceInformation";
+            case SUBSTANCESOURCEMATERIAL: return "SubstanceSourceMaterial";
             case SUBSTANCESPECIFICATION: return "SubstanceSpecification";
             case SUPPLYDELIVERY: return "SupplyDelivery";
             case SUPPLYREQUEST: return "SupplyRequest";
@@ -4255,7 +5139,6 @@ into another (possibly the same) biological entity.
             case TERMINOLOGYCAPABILITIES: return "TerminologyCapabilities";
             case TESTREPORT: return "TestReport";
             case TESTSCRIPT: return "TestScript";
-            case USERSESSION: return "UserSession";
             case VALUESET: return "ValueSet";
             case VERIFICATIONRESULT: return "VerificationResult";
             case VISIONPRESCRIPTION: return "VisionPrescription";
@@ -4305,6 +5188,8 @@ into another (possibly the same) biological entity.
           return FHIRAllTypes.ELEMENT;
         if ("ElementDefinition".equals(codeString))
           return FHIRAllTypes.ELEMENTDEFINITION;
+        if ("Expression".equals(codeString))
+          return FHIRAllTypes.EXPRESSION;
         if ("Extension".equals(codeString))
           return FHIRAllTypes.EXTENSION;
         if ("HumanName".equals(codeString))
@@ -4317,12 +5202,16 @@ into another (possibly the same) biological entity.
           return FHIRAllTypes.META;
         if ("Money".equals(codeString))
           return FHIRAllTypes.MONEY;
+        if ("MoneyQuantity".equals(codeString))
+          return FHIRAllTypes.MONEYQUANTITY;
         if ("Narrative".equals(codeString))
           return FHIRAllTypes.NARRATIVE;
         if ("ParameterDefinition".equals(codeString))
           return FHIRAllTypes.PARAMETERDEFINITION;
         if ("Period".equals(codeString))
           return FHIRAllTypes.PERIOD;
+        if ("Population".equals(codeString))
+          return FHIRAllTypes.POPULATION;
         if ("ProdCharacteristic".equals(codeString))
           return FHIRAllTypes.PRODCHARACTERISTIC;
         if ("ProductShelfLife".equals(codeString))
@@ -4345,8 +5234,6 @@ into another (possibly the same) biological entity.
           return FHIRAllTypes.SIMPLEQUANTITY;
         if ("SubstanceAmount".equals(codeString))
           return FHIRAllTypes.SUBSTANCEAMOUNT;
-        if ("SubstanceMoiety".equals(codeString))
-          return FHIRAllTypes.SUBSTANCEMOIETY;
         if ("Timing".equals(codeString))
           return FHIRAllTypes.TIMING;
         if ("TriggerDefinition".equals(codeString))
@@ -4423,8 +5310,12 @@ into another (possibly the same) biological entity.
           return FHIRAllTypes.CAREPLAN;
         if ("CareTeam".equals(codeString))
           return FHIRAllTypes.CARETEAM;
+        if ("CatalogEntry".equals(codeString))
+          return FHIRAllTypes.CATALOGENTRY;
         if ("ChargeItem".equals(codeString))
           return FHIRAllTypes.CHARGEITEM;
+        if ("ChargeItemDefinition".equals(codeString))
+          return FHIRAllTypes.CHARGEITEMDEFINITION;
         if ("Claim".equals(codeString))
           return FHIRAllTypes.CLAIM;
         if ("ClaimResponse".equals(codeString))
@@ -4451,12 +5342,16 @@ into another (possibly the same) biological entity.
           return FHIRAllTypes.CONTRACT;
         if ("Coverage".equals(codeString))
           return FHIRAllTypes.COVERAGE;
+        if ("CoverageEligibilityRequest".equals(codeString))
+          return FHIRAllTypes.COVERAGEELIGIBILITYREQUEST;
+        if ("CoverageEligibilityResponse".equals(codeString))
+          return FHIRAllTypes.COVERAGEELIGIBILITYRESPONSE;
         if ("DetectedIssue".equals(codeString))
           return FHIRAllTypes.DETECTEDISSUE;
         if ("Device".equals(codeString))
           return FHIRAllTypes.DEVICE;
-        if ("DeviceComponent".equals(codeString))
-          return FHIRAllTypes.DEVICECOMPONENT;
+        if ("DeviceDefinition".equals(codeString))
+          return FHIRAllTypes.DEVICEDEFINITION;
         if ("DeviceMetric".equals(codeString))
           return FHIRAllTypes.DEVICEMETRIC;
         if ("DeviceRequest".equals(codeString))
@@ -4471,10 +5366,8 @@ into another (possibly the same) biological entity.
           return FHIRAllTypes.DOCUMENTREFERENCE;
         if ("DomainResource".equals(codeString))
           return FHIRAllTypes.DOMAINRESOURCE;
-        if ("EligibilityRequest".equals(codeString))
-          return FHIRAllTypes.ELIGIBILITYREQUEST;
-        if ("EligibilityResponse".equals(codeString))
-          return FHIRAllTypes.ELIGIBILITYRESPONSE;
+        if ("EffectEvidenceSynthesis".equals(codeString))
+          return FHIRAllTypes.EFFECTEVIDENCESYNTHESIS;
         if ("Encounter".equals(codeString))
           return FHIRAllTypes.ENCOUNTER;
         if ("Endpoint".equals(codeString))
@@ -4483,16 +5376,16 @@ into another (possibly the same) biological entity.
           return FHIRAllTypes.ENROLLMENTREQUEST;
         if ("EnrollmentResponse".equals(codeString))
           return FHIRAllTypes.ENROLLMENTRESPONSE;
-        if ("EntryDefinition".equals(codeString))
-          return FHIRAllTypes.ENTRYDEFINITION;
         if ("EpisodeOfCare".equals(codeString))
           return FHIRAllTypes.EPISODEOFCARE;
         if ("EventDefinition".equals(codeString))
           return FHIRAllTypes.EVENTDEFINITION;
+        if ("Evidence".equals(codeString))
+          return FHIRAllTypes.EVIDENCE;
+        if ("EvidenceVariable".equals(codeString))
+          return FHIRAllTypes.EVIDENCEVARIABLE;
         if ("ExampleScenario".equals(codeString))
           return FHIRAllTypes.EXAMPLESCENARIO;
-        if ("ExpansionProfile".equals(codeString))
-          return FHIRAllTypes.EXPANSIONPROFILE;
         if ("ExplanationOfBenefit".equals(codeString))
           return FHIRAllTypes.EXPLANATIONOFBENEFIT;
         if ("FamilyMemberHistory".equals(codeString))
@@ -4519,10 +5412,10 @@ into another (possibly the same) biological entity.
           return FHIRAllTypes.IMMUNIZATIONRECOMMENDATION;
         if ("ImplementationGuide".equals(codeString))
           return FHIRAllTypes.IMPLEMENTATIONGUIDE;
+        if ("InsurancePlan".equals(codeString))
+          return FHIRAllTypes.INSURANCEPLAN;
         if ("Invoice".equals(codeString))
           return FHIRAllTypes.INVOICE;
-        if ("ItemInstance".equals(codeString))
-          return FHIRAllTypes.ITEMINSTANCE;
         if ("Library".equals(codeString))
           return FHIRAllTypes.LIBRARY;
         if ("Linkage".equals(codeString))
@@ -4553,20 +5446,28 @@ into another (possibly the same) biological entity.
           return FHIRAllTypes.MEDICINALPRODUCT;
         if ("MedicinalProductAuthorization".equals(codeString))
           return FHIRAllTypes.MEDICINALPRODUCTAUTHORIZATION;
-        if ("MedicinalProductClinicals".equals(codeString))
-          return FHIRAllTypes.MEDICINALPRODUCTCLINICALS;
-        if ("MedicinalProductDeviceSpec".equals(codeString))
-          return FHIRAllTypes.MEDICINALPRODUCTDEVICESPEC;
+        if ("MedicinalProductContraindication".equals(codeString))
+          return FHIRAllTypes.MEDICINALPRODUCTCONTRAINDICATION;
+        if ("MedicinalProductIndication".equals(codeString))
+          return FHIRAllTypes.MEDICINALPRODUCTINDICATION;
         if ("MedicinalProductIngredient".equals(codeString))
           return FHIRAllTypes.MEDICINALPRODUCTINGREDIENT;
+        if ("MedicinalProductInteraction".equals(codeString))
+          return FHIRAllTypes.MEDICINALPRODUCTINTERACTION;
+        if ("MedicinalProductManufactured".equals(codeString))
+          return FHIRAllTypes.MEDICINALPRODUCTMANUFACTURED;
         if ("MedicinalProductPackaged".equals(codeString))
           return FHIRAllTypes.MEDICINALPRODUCTPACKAGED;
         if ("MedicinalProductPharmaceutical".equals(codeString))
           return FHIRAllTypes.MEDICINALPRODUCTPHARMACEUTICAL;
+        if ("MedicinalProductUndesirableEffect".equals(codeString))
+          return FHIRAllTypes.MEDICINALPRODUCTUNDESIRABLEEFFECT;
         if ("MessageDefinition".equals(codeString))
           return FHIRAllTypes.MESSAGEDEFINITION;
         if ("MessageHeader".equals(codeString))
           return FHIRAllTypes.MESSAGEHEADER;
+        if ("MolecularSequence".equals(codeString))
+          return FHIRAllTypes.MOLECULARSEQUENCE;
         if ("NamingSystem".equals(codeString))
           return FHIRAllTypes.NAMINGSYSTEM;
         if ("NutritionOrder".equals(codeString))
@@ -4575,16 +5476,14 @@ into another (possibly the same) biological entity.
           return FHIRAllTypes.OBSERVATION;
         if ("ObservationDefinition".equals(codeString))
           return FHIRAllTypes.OBSERVATIONDEFINITION;
-        if ("OccupationalData".equals(codeString))
-          return FHIRAllTypes.OCCUPATIONALDATA;
         if ("OperationDefinition".equals(codeString))
           return FHIRAllTypes.OPERATIONDEFINITION;
         if ("OperationOutcome".equals(codeString))
           return FHIRAllTypes.OPERATIONOUTCOME;
         if ("Organization".equals(codeString))
           return FHIRAllTypes.ORGANIZATION;
-        if ("OrganizationRole".equals(codeString))
-          return FHIRAllTypes.ORGANIZATIONROLE;
+        if ("OrganizationAffiliation".equals(codeString))
+          return FHIRAllTypes.ORGANIZATIONAFFILIATION;
         if ("Parameters".equals(codeString))
           return FHIRAllTypes.PARAMETERS;
         if ("Patient".equals(codeString))
@@ -4603,12 +5502,6 @@ into another (possibly the same) biological entity.
           return FHIRAllTypes.PRACTITIONERROLE;
         if ("Procedure".equals(codeString))
           return FHIRAllTypes.PROCEDURE;
-        if ("ProcessRequest".equals(codeString))
-          return FHIRAllTypes.PROCESSREQUEST;
-        if ("ProcessResponse".equals(codeString))
-          return FHIRAllTypes.PROCESSRESPONSE;
-        if ("ProductPlan".equals(codeString))
-          return FHIRAllTypes.PRODUCTPLAN;
         if ("Provenance".equals(codeString))
           return FHIRAllTypes.PROVENANCE;
         if ("Questionnaire".equals(codeString))
@@ -4619,6 +5512,10 @@ into another (possibly the same) biological entity.
           return FHIRAllTypes.RELATEDPERSON;
         if ("RequestGroup".equals(codeString))
           return FHIRAllTypes.REQUESTGROUP;
+        if ("ResearchDefinition".equals(codeString))
+          return FHIRAllTypes.RESEARCHDEFINITION;
+        if ("ResearchElementDefinition".equals(codeString))
+          return FHIRAllTypes.RESEARCHELEMENTDEFINITION;
         if ("ResearchStudy".equals(codeString))
           return FHIRAllTypes.RESEARCHSTUDY;
         if ("ResearchSubject".equals(codeString))
@@ -4627,12 +5524,12 @@ into another (possibly the same) biological entity.
           return FHIRAllTypes.RESOURCE;
         if ("RiskAssessment".equals(codeString))
           return FHIRAllTypes.RISKASSESSMENT;
+        if ("RiskEvidenceSynthesis".equals(codeString))
+          return FHIRAllTypes.RISKEVIDENCESYNTHESIS;
         if ("Schedule".equals(codeString))
           return FHIRAllTypes.SCHEDULE;
         if ("SearchParameter".equals(codeString))
           return FHIRAllTypes.SEARCHPARAMETER;
-        if ("Sequence".equals(codeString))
-          return FHIRAllTypes.SEQUENCE;
         if ("ServiceRequest".equals(codeString))
           return FHIRAllTypes.SERVICEREQUEST;
         if ("Slot".equals(codeString))
@@ -4649,10 +5546,16 @@ into another (possibly the same) biological entity.
           return FHIRAllTypes.SUBSCRIPTION;
         if ("Substance".equals(codeString))
           return FHIRAllTypes.SUBSTANCE;
+        if ("SubstanceNucleicAcid".equals(codeString))
+          return FHIRAllTypes.SUBSTANCENUCLEICACID;
         if ("SubstancePolymer".equals(codeString))
           return FHIRAllTypes.SUBSTANCEPOLYMER;
+        if ("SubstanceProtein".equals(codeString))
+          return FHIRAllTypes.SUBSTANCEPROTEIN;
         if ("SubstanceReferenceInformation".equals(codeString))
           return FHIRAllTypes.SUBSTANCEREFERENCEINFORMATION;
+        if ("SubstanceSourceMaterial".equals(codeString))
+          return FHIRAllTypes.SUBSTANCESOURCEMATERIAL;
         if ("SubstanceSpecification".equals(codeString))
           return FHIRAllTypes.SUBSTANCESPECIFICATION;
         if ("SupplyDelivery".equals(codeString))
@@ -4667,8 +5570,6 @@ into another (possibly the same) biological entity.
           return FHIRAllTypes.TESTREPORT;
         if ("TestScript".equals(codeString))
           return FHIRAllTypes.TESTSCRIPT;
-        if ("UserSession".equals(codeString))
-          return FHIRAllTypes.USERSESSION;
         if ("ValueSet".equals(codeString))
           return FHIRAllTypes.VALUESET;
         if ("VerificationResult".equals(codeString))
@@ -4723,6 +5624,8 @@ into another (possibly the same) biological entity.
           return new Enumeration<FHIRAllTypes>(this, FHIRAllTypes.ELEMENT);
         if ("ElementDefinition".equals(codeString))
           return new Enumeration<FHIRAllTypes>(this, FHIRAllTypes.ELEMENTDEFINITION);
+        if ("Expression".equals(codeString))
+          return new Enumeration<FHIRAllTypes>(this, FHIRAllTypes.EXPRESSION);
         if ("Extension".equals(codeString))
           return new Enumeration<FHIRAllTypes>(this, FHIRAllTypes.EXTENSION);
         if ("HumanName".equals(codeString))
@@ -4735,12 +5638,16 @@ into another (possibly the same) biological entity.
           return new Enumeration<FHIRAllTypes>(this, FHIRAllTypes.META);
         if ("Money".equals(codeString))
           return new Enumeration<FHIRAllTypes>(this, FHIRAllTypes.MONEY);
+        if ("MoneyQuantity".equals(codeString))
+          return new Enumeration<FHIRAllTypes>(this, FHIRAllTypes.MONEYQUANTITY);
         if ("Narrative".equals(codeString))
           return new Enumeration<FHIRAllTypes>(this, FHIRAllTypes.NARRATIVE);
         if ("ParameterDefinition".equals(codeString))
           return new Enumeration<FHIRAllTypes>(this, FHIRAllTypes.PARAMETERDEFINITION);
         if ("Period".equals(codeString))
           return new Enumeration<FHIRAllTypes>(this, FHIRAllTypes.PERIOD);
+        if ("Population".equals(codeString))
+          return new Enumeration<FHIRAllTypes>(this, FHIRAllTypes.POPULATION);
         if ("ProdCharacteristic".equals(codeString))
           return new Enumeration<FHIRAllTypes>(this, FHIRAllTypes.PRODCHARACTERISTIC);
         if ("ProductShelfLife".equals(codeString))
@@ -4763,8 +5670,6 @@ into another (possibly the same) biological entity.
           return new Enumeration<FHIRAllTypes>(this, FHIRAllTypes.SIMPLEQUANTITY);
         if ("SubstanceAmount".equals(codeString))
           return new Enumeration<FHIRAllTypes>(this, FHIRAllTypes.SUBSTANCEAMOUNT);
-        if ("SubstanceMoiety".equals(codeString))
-          return new Enumeration<FHIRAllTypes>(this, FHIRAllTypes.SUBSTANCEMOIETY);
         if ("Timing".equals(codeString))
           return new Enumeration<FHIRAllTypes>(this, FHIRAllTypes.TIMING);
         if ("TriggerDefinition".equals(codeString))
@@ -4841,8 +5746,12 @@ into another (possibly the same) biological entity.
           return new Enumeration<FHIRAllTypes>(this, FHIRAllTypes.CAREPLAN);
         if ("CareTeam".equals(codeString))
           return new Enumeration<FHIRAllTypes>(this, FHIRAllTypes.CARETEAM);
+        if ("CatalogEntry".equals(codeString))
+          return new Enumeration<FHIRAllTypes>(this, FHIRAllTypes.CATALOGENTRY);
         if ("ChargeItem".equals(codeString))
           return new Enumeration<FHIRAllTypes>(this, FHIRAllTypes.CHARGEITEM);
+        if ("ChargeItemDefinition".equals(codeString))
+          return new Enumeration<FHIRAllTypes>(this, FHIRAllTypes.CHARGEITEMDEFINITION);
         if ("Claim".equals(codeString))
           return new Enumeration<FHIRAllTypes>(this, FHIRAllTypes.CLAIM);
         if ("ClaimResponse".equals(codeString))
@@ -4869,12 +5778,16 @@ into another (possibly the same) biological entity.
           return new Enumeration<FHIRAllTypes>(this, FHIRAllTypes.CONTRACT);
         if ("Coverage".equals(codeString))
           return new Enumeration<FHIRAllTypes>(this, FHIRAllTypes.COVERAGE);
+        if ("CoverageEligibilityRequest".equals(codeString))
+          return new Enumeration<FHIRAllTypes>(this, FHIRAllTypes.COVERAGEELIGIBILITYREQUEST);
+        if ("CoverageEligibilityResponse".equals(codeString))
+          return new Enumeration<FHIRAllTypes>(this, FHIRAllTypes.COVERAGEELIGIBILITYRESPONSE);
         if ("DetectedIssue".equals(codeString))
           return new Enumeration<FHIRAllTypes>(this, FHIRAllTypes.DETECTEDISSUE);
         if ("Device".equals(codeString))
           return new Enumeration<FHIRAllTypes>(this, FHIRAllTypes.DEVICE);
-        if ("DeviceComponent".equals(codeString))
-          return new Enumeration<FHIRAllTypes>(this, FHIRAllTypes.DEVICECOMPONENT);
+        if ("DeviceDefinition".equals(codeString))
+          return new Enumeration<FHIRAllTypes>(this, FHIRAllTypes.DEVICEDEFINITION);
         if ("DeviceMetric".equals(codeString))
           return new Enumeration<FHIRAllTypes>(this, FHIRAllTypes.DEVICEMETRIC);
         if ("DeviceRequest".equals(codeString))
@@ -4889,10 +5802,8 @@ into another (possibly the same) biological entity.
           return new Enumeration<FHIRAllTypes>(this, FHIRAllTypes.DOCUMENTREFERENCE);
         if ("DomainResource".equals(codeString))
           return new Enumeration<FHIRAllTypes>(this, FHIRAllTypes.DOMAINRESOURCE);
-        if ("EligibilityRequest".equals(codeString))
-          return new Enumeration<FHIRAllTypes>(this, FHIRAllTypes.ELIGIBILITYREQUEST);
-        if ("EligibilityResponse".equals(codeString))
-          return new Enumeration<FHIRAllTypes>(this, FHIRAllTypes.ELIGIBILITYRESPONSE);
+        if ("EffectEvidenceSynthesis".equals(codeString))
+          return new Enumeration<FHIRAllTypes>(this, FHIRAllTypes.EFFECTEVIDENCESYNTHESIS);
         if ("Encounter".equals(codeString))
           return new Enumeration<FHIRAllTypes>(this, FHIRAllTypes.ENCOUNTER);
         if ("Endpoint".equals(codeString))
@@ -4901,16 +5812,16 @@ into another (possibly the same) biological entity.
           return new Enumeration<FHIRAllTypes>(this, FHIRAllTypes.ENROLLMENTREQUEST);
         if ("EnrollmentResponse".equals(codeString))
           return new Enumeration<FHIRAllTypes>(this, FHIRAllTypes.ENROLLMENTRESPONSE);
-        if ("EntryDefinition".equals(codeString))
-          return new Enumeration<FHIRAllTypes>(this, FHIRAllTypes.ENTRYDEFINITION);
         if ("EpisodeOfCare".equals(codeString))
           return new Enumeration<FHIRAllTypes>(this, FHIRAllTypes.EPISODEOFCARE);
         if ("EventDefinition".equals(codeString))
           return new Enumeration<FHIRAllTypes>(this, FHIRAllTypes.EVENTDEFINITION);
+        if ("Evidence".equals(codeString))
+          return new Enumeration<FHIRAllTypes>(this, FHIRAllTypes.EVIDENCE);
+        if ("EvidenceVariable".equals(codeString))
+          return new Enumeration<FHIRAllTypes>(this, FHIRAllTypes.EVIDENCEVARIABLE);
         if ("ExampleScenario".equals(codeString))
           return new Enumeration<FHIRAllTypes>(this, FHIRAllTypes.EXAMPLESCENARIO);
-        if ("ExpansionProfile".equals(codeString))
-          return new Enumeration<FHIRAllTypes>(this, FHIRAllTypes.EXPANSIONPROFILE);
         if ("ExplanationOfBenefit".equals(codeString))
           return new Enumeration<FHIRAllTypes>(this, FHIRAllTypes.EXPLANATIONOFBENEFIT);
         if ("FamilyMemberHistory".equals(codeString))
@@ -4937,10 +5848,10 @@ into another (possibly the same) biological entity.
           return new Enumeration<FHIRAllTypes>(this, FHIRAllTypes.IMMUNIZATIONRECOMMENDATION);
         if ("ImplementationGuide".equals(codeString))
           return new Enumeration<FHIRAllTypes>(this, FHIRAllTypes.IMPLEMENTATIONGUIDE);
+        if ("InsurancePlan".equals(codeString))
+          return new Enumeration<FHIRAllTypes>(this, FHIRAllTypes.INSURANCEPLAN);
         if ("Invoice".equals(codeString))
           return new Enumeration<FHIRAllTypes>(this, FHIRAllTypes.INVOICE);
-        if ("ItemInstance".equals(codeString))
-          return new Enumeration<FHIRAllTypes>(this, FHIRAllTypes.ITEMINSTANCE);
         if ("Library".equals(codeString))
           return new Enumeration<FHIRAllTypes>(this, FHIRAllTypes.LIBRARY);
         if ("Linkage".equals(codeString))
@@ -4971,20 +5882,28 @@ into another (possibly the same) biological entity.
           return new Enumeration<FHIRAllTypes>(this, FHIRAllTypes.MEDICINALPRODUCT);
         if ("MedicinalProductAuthorization".equals(codeString))
           return new Enumeration<FHIRAllTypes>(this, FHIRAllTypes.MEDICINALPRODUCTAUTHORIZATION);
-        if ("MedicinalProductClinicals".equals(codeString))
-          return new Enumeration<FHIRAllTypes>(this, FHIRAllTypes.MEDICINALPRODUCTCLINICALS);
-        if ("MedicinalProductDeviceSpec".equals(codeString))
-          return new Enumeration<FHIRAllTypes>(this, FHIRAllTypes.MEDICINALPRODUCTDEVICESPEC);
+        if ("MedicinalProductContraindication".equals(codeString))
+          return new Enumeration<FHIRAllTypes>(this, FHIRAllTypes.MEDICINALPRODUCTCONTRAINDICATION);
+        if ("MedicinalProductIndication".equals(codeString))
+          return new Enumeration<FHIRAllTypes>(this, FHIRAllTypes.MEDICINALPRODUCTINDICATION);
         if ("MedicinalProductIngredient".equals(codeString))
           return new Enumeration<FHIRAllTypes>(this, FHIRAllTypes.MEDICINALPRODUCTINGREDIENT);
+        if ("MedicinalProductInteraction".equals(codeString))
+          return new Enumeration<FHIRAllTypes>(this, FHIRAllTypes.MEDICINALPRODUCTINTERACTION);
+        if ("MedicinalProductManufactured".equals(codeString))
+          return new Enumeration<FHIRAllTypes>(this, FHIRAllTypes.MEDICINALPRODUCTMANUFACTURED);
         if ("MedicinalProductPackaged".equals(codeString))
           return new Enumeration<FHIRAllTypes>(this, FHIRAllTypes.MEDICINALPRODUCTPACKAGED);
         if ("MedicinalProductPharmaceutical".equals(codeString))
           return new Enumeration<FHIRAllTypes>(this, FHIRAllTypes.MEDICINALPRODUCTPHARMACEUTICAL);
+        if ("MedicinalProductUndesirableEffect".equals(codeString))
+          return new Enumeration<FHIRAllTypes>(this, FHIRAllTypes.MEDICINALPRODUCTUNDESIRABLEEFFECT);
         if ("MessageDefinition".equals(codeString))
           return new Enumeration<FHIRAllTypes>(this, FHIRAllTypes.MESSAGEDEFINITION);
         if ("MessageHeader".equals(codeString))
           return new Enumeration<FHIRAllTypes>(this, FHIRAllTypes.MESSAGEHEADER);
+        if ("MolecularSequence".equals(codeString))
+          return new Enumeration<FHIRAllTypes>(this, FHIRAllTypes.MOLECULARSEQUENCE);
         if ("NamingSystem".equals(codeString))
           return new Enumeration<FHIRAllTypes>(this, FHIRAllTypes.NAMINGSYSTEM);
         if ("NutritionOrder".equals(codeString))
@@ -4993,16 +5912,14 @@ into another (possibly the same) biological entity.
           return new Enumeration<FHIRAllTypes>(this, FHIRAllTypes.OBSERVATION);
         if ("ObservationDefinition".equals(codeString))
           return new Enumeration<FHIRAllTypes>(this, FHIRAllTypes.OBSERVATIONDEFINITION);
-        if ("OccupationalData".equals(codeString))
-          return new Enumeration<FHIRAllTypes>(this, FHIRAllTypes.OCCUPATIONALDATA);
         if ("OperationDefinition".equals(codeString))
           return new Enumeration<FHIRAllTypes>(this, FHIRAllTypes.OPERATIONDEFINITION);
         if ("OperationOutcome".equals(codeString))
           return new Enumeration<FHIRAllTypes>(this, FHIRAllTypes.OPERATIONOUTCOME);
         if ("Organization".equals(codeString))
           return new Enumeration<FHIRAllTypes>(this, FHIRAllTypes.ORGANIZATION);
-        if ("OrganizationRole".equals(codeString))
-          return new Enumeration<FHIRAllTypes>(this, FHIRAllTypes.ORGANIZATIONROLE);
+        if ("OrganizationAffiliation".equals(codeString))
+          return new Enumeration<FHIRAllTypes>(this, FHIRAllTypes.ORGANIZATIONAFFILIATION);
         if ("Parameters".equals(codeString))
           return new Enumeration<FHIRAllTypes>(this, FHIRAllTypes.PARAMETERS);
         if ("Patient".equals(codeString))
@@ -5021,12 +5938,6 @@ into another (possibly the same) biological entity.
           return new Enumeration<FHIRAllTypes>(this, FHIRAllTypes.PRACTITIONERROLE);
         if ("Procedure".equals(codeString))
           return new Enumeration<FHIRAllTypes>(this, FHIRAllTypes.PROCEDURE);
-        if ("ProcessRequest".equals(codeString))
-          return new Enumeration<FHIRAllTypes>(this, FHIRAllTypes.PROCESSREQUEST);
-        if ("ProcessResponse".equals(codeString))
-          return new Enumeration<FHIRAllTypes>(this, FHIRAllTypes.PROCESSRESPONSE);
-        if ("ProductPlan".equals(codeString))
-          return new Enumeration<FHIRAllTypes>(this, FHIRAllTypes.PRODUCTPLAN);
         if ("Provenance".equals(codeString))
           return new Enumeration<FHIRAllTypes>(this, FHIRAllTypes.PROVENANCE);
         if ("Questionnaire".equals(codeString))
@@ -5037,6 +5948,10 @@ into another (possibly the same) biological entity.
           return new Enumeration<FHIRAllTypes>(this, FHIRAllTypes.RELATEDPERSON);
         if ("RequestGroup".equals(codeString))
           return new Enumeration<FHIRAllTypes>(this, FHIRAllTypes.REQUESTGROUP);
+        if ("ResearchDefinition".equals(codeString))
+          return new Enumeration<FHIRAllTypes>(this, FHIRAllTypes.RESEARCHDEFINITION);
+        if ("ResearchElementDefinition".equals(codeString))
+          return new Enumeration<FHIRAllTypes>(this, FHIRAllTypes.RESEARCHELEMENTDEFINITION);
         if ("ResearchStudy".equals(codeString))
           return new Enumeration<FHIRAllTypes>(this, FHIRAllTypes.RESEARCHSTUDY);
         if ("ResearchSubject".equals(codeString))
@@ -5045,12 +5960,12 @@ into another (possibly the same) biological entity.
           return new Enumeration<FHIRAllTypes>(this, FHIRAllTypes.RESOURCE);
         if ("RiskAssessment".equals(codeString))
           return new Enumeration<FHIRAllTypes>(this, FHIRAllTypes.RISKASSESSMENT);
+        if ("RiskEvidenceSynthesis".equals(codeString))
+          return new Enumeration<FHIRAllTypes>(this, FHIRAllTypes.RISKEVIDENCESYNTHESIS);
         if ("Schedule".equals(codeString))
           return new Enumeration<FHIRAllTypes>(this, FHIRAllTypes.SCHEDULE);
         if ("SearchParameter".equals(codeString))
           return new Enumeration<FHIRAllTypes>(this, FHIRAllTypes.SEARCHPARAMETER);
-        if ("Sequence".equals(codeString))
-          return new Enumeration<FHIRAllTypes>(this, FHIRAllTypes.SEQUENCE);
         if ("ServiceRequest".equals(codeString))
           return new Enumeration<FHIRAllTypes>(this, FHIRAllTypes.SERVICEREQUEST);
         if ("Slot".equals(codeString))
@@ -5067,10 +5982,16 @@ into another (possibly the same) biological entity.
           return new Enumeration<FHIRAllTypes>(this, FHIRAllTypes.SUBSCRIPTION);
         if ("Substance".equals(codeString))
           return new Enumeration<FHIRAllTypes>(this, FHIRAllTypes.SUBSTANCE);
+        if ("SubstanceNucleicAcid".equals(codeString))
+          return new Enumeration<FHIRAllTypes>(this, FHIRAllTypes.SUBSTANCENUCLEICACID);
         if ("SubstancePolymer".equals(codeString))
           return new Enumeration<FHIRAllTypes>(this, FHIRAllTypes.SUBSTANCEPOLYMER);
+        if ("SubstanceProtein".equals(codeString))
+          return new Enumeration<FHIRAllTypes>(this, FHIRAllTypes.SUBSTANCEPROTEIN);
         if ("SubstanceReferenceInformation".equals(codeString))
           return new Enumeration<FHIRAllTypes>(this, FHIRAllTypes.SUBSTANCEREFERENCEINFORMATION);
+        if ("SubstanceSourceMaterial".equals(codeString))
+          return new Enumeration<FHIRAllTypes>(this, FHIRAllTypes.SUBSTANCESOURCEMATERIAL);
         if ("SubstanceSpecification".equals(codeString))
           return new Enumeration<FHIRAllTypes>(this, FHIRAllTypes.SUBSTANCESPECIFICATION);
         if ("SupplyDelivery".equals(codeString))
@@ -5085,8 +6006,6 @@ into another (possibly the same) biological entity.
           return new Enumeration<FHIRAllTypes>(this, FHIRAllTypes.TESTREPORT);
         if ("TestScript".equals(codeString))
           return new Enumeration<FHIRAllTypes>(this, FHIRAllTypes.TESTSCRIPT);
-        if ("UserSession".equals(codeString))
-          return new Enumeration<FHIRAllTypes>(this, FHIRAllTypes.USERSESSION);
         if ("ValueSet".equals(codeString))
           return new Enumeration<FHIRAllTypes>(this, FHIRAllTypes.VALUESET);
         if ("VerificationResult".equals(codeString))
@@ -5134,6 +6053,8 @@ into another (possibly the same) biological entity.
         return "Element";
       if (code == FHIRAllTypes.ELEMENTDEFINITION)
         return "ElementDefinition";
+      if (code == FHIRAllTypes.EXPRESSION)
+        return "Expression";
       if (code == FHIRAllTypes.EXTENSION)
         return "Extension";
       if (code == FHIRAllTypes.HUMANNAME)
@@ -5146,12 +6067,16 @@ into another (possibly the same) biological entity.
         return "Meta";
       if (code == FHIRAllTypes.MONEY)
         return "Money";
+      if (code == FHIRAllTypes.MONEYQUANTITY)
+        return "MoneyQuantity";
       if (code == FHIRAllTypes.NARRATIVE)
         return "Narrative";
       if (code == FHIRAllTypes.PARAMETERDEFINITION)
         return "ParameterDefinition";
       if (code == FHIRAllTypes.PERIOD)
         return "Period";
+      if (code == FHIRAllTypes.POPULATION)
+        return "Population";
       if (code == FHIRAllTypes.PRODCHARACTERISTIC)
         return "ProdCharacteristic";
       if (code == FHIRAllTypes.PRODUCTSHELFLIFE)
@@ -5174,8 +6099,6 @@ into another (possibly the same) biological entity.
         return "SimpleQuantity";
       if (code == FHIRAllTypes.SUBSTANCEAMOUNT)
         return "SubstanceAmount";
-      if (code == FHIRAllTypes.SUBSTANCEMOIETY)
-        return "SubstanceMoiety";
       if (code == FHIRAllTypes.TIMING)
         return "Timing";
       if (code == FHIRAllTypes.TRIGGERDEFINITION)
@@ -5252,8 +6175,12 @@ into another (possibly the same) biological entity.
         return "CarePlan";
       if (code == FHIRAllTypes.CARETEAM)
         return "CareTeam";
+      if (code == FHIRAllTypes.CATALOGENTRY)
+        return "CatalogEntry";
       if (code == FHIRAllTypes.CHARGEITEM)
         return "ChargeItem";
+      if (code == FHIRAllTypes.CHARGEITEMDEFINITION)
+        return "ChargeItemDefinition";
       if (code == FHIRAllTypes.CLAIM)
         return "Claim";
       if (code == FHIRAllTypes.CLAIMRESPONSE)
@@ -5280,12 +6207,16 @@ into another (possibly the same) biological entity.
         return "Contract";
       if (code == FHIRAllTypes.COVERAGE)
         return "Coverage";
+      if (code == FHIRAllTypes.COVERAGEELIGIBILITYREQUEST)
+        return "CoverageEligibilityRequest";
+      if (code == FHIRAllTypes.COVERAGEELIGIBILITYRESPONSE)
+        return "CoverageEligibilityResponse";
       if (code == FHIRAllTypes.DETECTEDISSUE)
         return "DetectedIssue";
       if (code == FHIRAllTypes.DEVICE)
         return "Device";
-      if (code == FHIRAllTypes.DEVICECOMPONENT)
-        return "DeviceComponent";
+      if (code == FHIRAllTypes.DEVICEDEFINITION)
+        return "DeviceDefinition";
       if (code == FHIRAllTypes.DEVICEMETRIC)
         return "DeviceMetric";
       if (code == FHIRAllTypes.DEVICEREQUEST)
@@ -5300,10 +6231,8 @@ into another (possibly the same) biological entity.
         return "DocumentReference";
       if (code == FHIRAllTypes.DOMAINRESOURCE)
         return "DomainResource";
-      if (code == FHIRAllTypes.ELIGIBILITYREQUEST)
-        return "EligibilityRequest";
-      if (code == FHIRAllTypes.ELIGIBILITYRESPONSE)
-        return "EligibilityResponse";
+      if (code == FHIRAllTypes.EFFECTEVIDENCESYNTHESIS)
+        return "EffectEvidenceSynthesis";
       if (code == FHIRAllTypes.ENCOUNTER)
         return "Encounter";
       if (code == FHIRAllTypes.ENDPOINT)
@@ -5312,16 +6241,16 @@ into another (possibly the same) biological entity.
         return "EnrollmentRequest";
       if (code == FHIRAllTypes.ENROLLMENTRESPONSE)
         return "EnrollmentResponse";
-      if (code == FHIRAllTypes.ENTRYDEFINITION)
-        return "EntryDefinition";
       if (code == FHIRAllTypes.EPISODEOFCARE)
         return "EpisodeOfCare";
       if (code == FHIRAllTypes.EVENTDEFINITION)
         return "EventDefinition";
+      if (code == FHIRAllTypes.EVIDENCE)
+        return "Evidence";
+      if (code == FHIRAllTypes.EVIDENCEVARIABLE)
+        return "EvidenceVariable";
       if (code == FHIRAllTypes.EXAMPLESCENARIO)
         return "ExampleScenario";
-      if (code == FHIRAllTypes.EXPANSIONPROFILE)
-        return "ExpansionProfile";
       if (code == FHIRAllTypes.EXPLANATIONOFBENEFIT)
         return "ExplanationOfBenefit";
       if (code == FHIRAllTypes.FAMILYMEMBERHISTORY)
@@ -5348,10 +6277,10 @@ into another (possibly the same) biological entity.
         return "ImmunizationRecommendation";
       if (code == FHIRAllTypes.IMPLEMENTATIONGUIDE)
         return "ImplementationGuide";
+      if (code == FHIRAllTypes.INSURANCEPLAN)
+        return "InsurancePlan";
       if (code == FHIRAllTypes.INVOICE)
         return "Invoice";
-      if (code == FHIRAllTypes.ITEMINSTANCE)
-        return "ItemInstance";
       if (code == FHIRAllTypes.LIBRARY)
         return "Library";
       if (code == FHIRAllTypes.LINKAGE)
@@ -5382,20 +6311,28 @@ into another (possibly the same) biological entity.
         return "MedicinalProduct";
       if (code == FHIRAllTypes.MEDICINALPRODUCTAUTHORIZATION)
         return "MedicinalProductAuthorization";
-      if (code == FHIRAllTypes.MEDICINALPRODUCTCLINICALS)
-        return "MedicinalProductClinicals";
-      if (code == FHIRAllTypes.MEDICINALPRODUCTDEVICESPEC)
-        return "MedicinalProductDeviceSpec";
+      if (code == FHIRAllTypes.MEDICINALPRODUCTCONTRAINDICATION)
+        return "MedicinalProductContraindication";
+      if (code == FHIRAllTypes.MEDICINALPRODUCTINDICATION)
+        return "MedicinalProductIndication";
       if (code == FHIRAllTypes.MEDICINALPRODUCTINGREDIENT)
         return "MedicinalProductIngredient";
+      if (code == FHIRAllTypes.MEDICINALPRODUCTINTERACTION)
+        return "MedicinalProductInteraction";
+      if (code == FHIRAllTypes.MEDICINALPRODUCTMANUFACTURED)
+        return "MedicinalProductManufactured";
       if (code == FHIRAllTypes.MEDICINALPRODUCTPACKAGED)
         return "MedicinalProductPackaged";
       if (code == FHIRAllTypes.MEDICINALPRODUCTPHARMACEUTICAL)
         return "MedicinalProductPharmaceutical";
+      if (code == FHIRAllTypes.MEDICINALPRODUCTUNDESIRABLEEFFECT)
+        return "MedicinalProductUndesirableEffect";
       if (code == FHIRAllTypes.MESSAGEDEFINITION)
         return "MessageDefinition";
       if (code == FHIRAllTypes.MESSAGEHEADER)
         return "MessageHeader";
+      if (code == FHIRAllTypes.MOLECULARSEQUENCE)
+        return "MolecularSequence";
       if (code == FHIRAllTypes.NAMINGSYSTEM)
         return "NamingSystem";
       if (code == FHIRAllTypes.NUTRITIONORDER)
@@ -5404,16 +6341,14 @@ into another (possibly the same) biological entity.
         return "Observation";
       if (code == FHIRAllTypes.OBSERVATIONDEFINITION)
         return "ObservationDefinition";
-      if (code == FHIRAllTypes.OCCUPATIONALDATA)
-        return "OccupationalData";
       if (code == FHIRAllTypes.OPERATIONDEFINITION)
         return "OperationDefinition";
       if (code == FHIRAllTypes.OPERATIONOUTCOME)
         return "OperationOutcome";
       if (code == FHIRAllTypes.ORGANIZATION)
         return "Organization";
-      if (code == FHIRAllTypes.ORGANIZATIONROLE)
-        return "OrganizationRole";
+      if (code == FHIRAllTypes.ORGANIZATIONAFFILIATION)
+        return "OrganizationAffiliation";
       if (code == FHIRAllTypes.PARAMETERS)
         return "Parameters";
       if (code == FHIRAllTypes.PATIENT)
@@ -5432,12 +6367,6 @@ into another (possibly the same) biological entity.
         return "PractitionerRole";
       if (code == FHIRAllTypes.PROCEDURE)
         return "Procedure";
-      if (code == FHIRAllTypes.PROCESSREQUEST)
-        return "ProcessRequest";
-      if (code == FHIRAllTypes.PROCESSRESPONSE)
-        return "ProcessResponse";
-      if (code == FHIRAllTypes.PRODUCTPLAN)
-        return "ProductPlan";
       if (code == FHIRAllTypes.PROVENANCE)
         return "Provenance";
       if (code == FHIRAllTypes.QUESTIONNAIRE)
@@ -5448,6 +6377,10 @@ into another (possibly the same) biological entity.
         return "RelatedPerson";
       if (code == FHIRAllTypes.REQUESTGROUP)
         return "RequestGroup";
+      if (code == FHIRAllTypes.RESEARCHDEFINITION)
+        return "ResearchDefinition";
+      if (code == FHIRAllTypes.RESEARCHELEMENTDEFINITION)
+        return "ResearchElementDefinition";
       if (code == FHIRAllTypes.RESEARCHSTUDY)
         return "ResearchStudy";
       if (code == FHIRAllTypes.RESEARCHSUBJECT)
@@ -5456,12 +6389,12 @@ into another (possibly the same) biological entity.
         return "Resource";
       if (code == FHIRAllTypes.RISKASSESSMENT)
         return "RiskAssessment";
+      if (code == FHIRAllTypes.RISKEVIDENCESYNTHESIS)
+        return "RiskEvidenceSynthesis";
       if (code == FHIRAllTypes.SCHEDULE)
         return "Schedule";
       if (code == FHIRAllTypes.SEARCHPARAMETER)
         return "SearchParameter";
-      if (code == FHIRAllTypes.SEQUENCE)
-        return "Sequence";
       if (code == FHIRAllTypes.SERVICEREQUEST)
         return "ServiceRequest";
       if (code == FHIRAllTypes.SLOT)
@@ -5478,10 +6411,16 @@ into another (possibly the same) biological entity.
         return "Subscription";
       if (code == FHIRAllTypes.SUBSTANCE)
         return "Substance";
+      if (code == FHIRAllTypes.SUBSTANCENUCLEICACID)
+        return "SubstanceNucleicAcid";
       if (code == FHIRAllTypes.SUBSTANCEPOLYMER)
         return "SubstancePolymer";
+      if (code == FHIRAllTypes.SUBSTANCEPROTEIN)
+        return "SubstanceProtein";
       if (code == FHIRAllTypes.SUBSTANCEREFERENCEINFORMATION)
         return "SubstanceReferenceInformation";
+      if (code == FHIRAllTypes.SUBSTANCESOURCEMATERIAL)
+        return "SubstanceSourceMaterial";
       if (code == FHIRAllTypes.SUBSTANCESPECIFICATION)
         return "SubstanceSpecification";
       if (code == FHIRAllTypes.SUPPLYDELIVERY)
@@ -5496,8 +6435,6 @@ into another (possibly the same) biological entity.
         return "TestReport";
       if (code == FHIRAllTypes.TESTSCRIPT)
         return "TestScript";
-      if (code == FHIRAllTypes.USERSESSION)
-        return "UserSession";
       if (code == FHIRAllTypes.VALUESET)
         return "ValueSet";
       if (code == FHIRAllTypes.VERIFICATIONRESULT)
@@ -5585,6 +6522,10 @@ into another (possibly the same) biological entity.
          */
         ELEMENTDEFINITION, 
         /**
+         * A expression that is evaluated in a specified context and returns a value. The context of use of the expression must specify the context in which the expression is evaluated, and how the result of the expression is used.
+         */
+        EXPRESSION, 
+        /**
          * Optional Extension Element - found in all resources.
          */
         EXTENSION, 
@@ -5593,7 +6534,7 @@ into another (possibly the same) biological entity.
          */
         HUMANNAME, 
         /**
-         * A technical identifier - identifies some entity uniquely and unambiguously.
+         * An identifier - identifies some entity uniquely and unambiguously. Typically this is used for business identifiers.
          */
         IDENTIFIER, 
         /**
@@ -5609,7 +6550,11 @@ into another (possibly the same) biological entity.
          */
         MONEY, 
         /**
-         * A human-readable formatted text, including images.
+         * null
+         */
+        MONEYQUANTITY, 
+        /**
+         * A human-readable summary of the resource conveying the essential clinical and business information for the resource.
          */
         NARRATIVE, 
         /**
@@ -5620,6 +6565,10 @@ into another (possibly the same) biological entity.
          * A time period defined by a start and end date and optionally time.
          */
         PERIOD, 
+        /**
+         * A populatioof people with some set of grouping criteria.
+         */
+        POPULATION, 
         /**
          * The marketing status describes the date when a medicinal product is actually put on the market or the date as of which it is no longer available.
          */
@@ -5665,10 +6614,6 @@ into another (possibly the same) biological entity.
          */
         SUBSTANCEAMOUNT, 
         /**
-         * Chemical substances are a single substance type whose primary defining element is the molecular structure. Chemical substances shall be defined on the basis of their complete covalent molecular structure; the presence of a salt (counter-ion) and/or solvates (water, alcohols) is also captured. Purity, grade, physical form or particle size are not taken into account in the definition of a chemical substance or in the assignment of a Substance ID.
-         */
-        SUBSTANCEMOIETY, 
-        /**
          * Specifies an event that may occur multiple times. Timing schedules are used to record when things are planned, expected or requested to occur. The most common usage is in dosage instructions for medications. They are also used when planning care of various kinds, and may be used for reporting the schedule to which past regular activities were carried out.
          */
         TIMING, 
@@ -5689,7 +6634,7 @@ into another (possibly the same) biological entity.
          */
         BOOLEAN, 
         /**
-         * A URI that is a reference to a canonical URI on a FHIR resource
+         * A URI that is a reference to a canonical URL on a FHIR resource
          */
         CANONICAL, 
         /**
@@ -5793,7 +6738,7 @@ into another (possibly the same) biological entity.
          */
         BASIC, 
         /**
-         * A binary resource can contain any content, whether text, image, pdf, zip archive, etc.
+         * A resource that represents the data of a single raw artifact as digital content accessible in its native format.  A Binary resource can contain any content, whether text, image, pdf, zip archive, etc.
          */
         BINARY, 
         /**
@@ -5810,7 +6755,7 @@ into another (possibly the same) biological entity.
          */
         BUNDLE, 
         /**
-         * A Capability Statement documents a set of capabilities (behaviors) of a FHIR Server that may be used as a statement of actual server functionality or a statement of required or desired server implementation.
+         * A Capability Statement documents a set of capabilities (behaviors) of a FHIR Server for a particular version of FHIR that may be used as a statement of actual server functionality or a statement of required or desired server implementation.
          */
         CAPABILITYSTATEMENT, 
         /**
@@ -5822,11 +6767,19 @@ into another (possibly the same) biological entity.
          */
         CARETEAM, 
         /**
+         * Catalog entries are wrappers that contextualize items included in a catalog.
+         */
+        CATALOGENTRY, 
+        /**
          * The resource ChargeItem describes the provision of healthcare provider products for a certain patient, therefore referring not only to the product, but containing in addition details of the provision, like date, time, amounts and participating organizations and persons. Main Usage of the ChargeItem is to enable the billing process and internal cost allocation.
          */
         CHARGEITEM, 
         /**
-         * A provider issued list of services and products provided, or to be provided, to a patient which is provided to an insurer for payment recovery.
+         * The ChargeItemDefinition resource provides the properties that apply to the (billing) codes necessary to calculate costs and prices. The properties may differ largely depending on type and realm, therefore this resource gives only a rough structure and requires profiling for each type of billing code system.
+         */
+        CHARGEITEMDEFINITION, 
+        /**
+         * A provider issued list of professional services and products which have been provided, or are to be provided, to a patient which is sent to an insurer for reimbursement.
          */
         CLAIM, 
         /**
@@ -5842,7 +6795,7 @@ into another (possibly the same) biological entity.
          */
         CODESYSTEM, 
         /**
-         * An occurrence of information being transmitted; e.g. an alert that was sent to a responsible provider, a public health agency was notified about a reportable condition.
+         * An occurrence of information being transmitted; e.g. an alert that was sent to a responsible provider, a public health agency that was notified about a reportable condition.
          */
         COMMUNICATION, 
         /**
@@ -5858,7 +6811,7 @@ into another (possibly the same) biological entity.
          */
         COMPOSITION, 
         /**
-         * A statement of relationships from one set of concepts to one or more other concepts - either code systems or data elements, or classes in class models.
+         * A statement of relationships from one set of concepts to one or more other concepts - either concepts in code systems, or data element/data element concepts, or classes in class models.
          */
         CONCEPTMAP, 
         /**
@@ -5870,25 +6823,33 @@ into another (possibly the same) biological entity.
          */
         CONSENT, 
         /**
-         * A formal agreement between parties regarding the conduct of business, exchange of information or other matters.
+         * Legally enforceable, formally recorded unilateral or bilateral directive i.e., a policy or agreement.
          */
         CONTRACT, 
         /**
-         * Financial instrument which may be used to reimburse or pay for health care products and services.
+         * Financial instrument which may be used to reimburse or pay for health care products and services. Includes both insurance and self-payment.
          */
         COVERAGE, 
+        /**
+         * The CoverageEligibilityRequest provides patient and insurance coverage information to an insurer for them to respond, in the form of an CoverageEligibilityResponse, with information regarding whether the stated coverage is valid and in-force and optionally to provide the insurance details of the policy.
+         */
+        COVERAGEELIGIBILITYREQUEST, 
+        /**
+         * This resource provides eligibility and plan details from the processing of an CoverageEligibilityRequest resource.
+         */
+        COVERAGEELIGIBILITYRESPONSE, 
         /**
          * Indicates an actual or potential clinical issue with or between one or more active or proposed clinical actions for a patient; e.g. Drug-drug interaction, Ineffective treatment frequency, Procedure-condition conflict, etc.
          */
         DETECTEDISSUE, 
         /**
-         * This resource identifies an instance or a type of a manufactured item that is used in the provision of healthcare without being substantially changed through that activity. The device may be a medical or non-medical device.  Medical devices include durable (reusable) medical equipment, implantable devices, as well as disposable equipment used for diagnostic, treatment, and research for healthcare and public health.  Non-medical devices may include items such as a machine, cellphone, computer, application, etc.
+         * A type of a manufactured item that is used in the provision of healthcare without being substantially changed through that activity. The device may be a medical or non-medical device.
          */
         DEVICE, 
         /**
          * The characteristics, operational status and capabilities of a medical-related component of a medical device.
          */
-        DEVICECOMPONENT, 
+        DEVICEDEFINITION, 
         /**
          * Describes a measurement, calculation or setting capability of a medical device.
          */
@@ -5910,7 +6871,7 @@ into another (possibly the same) biological entity.
          */
         DOCUMENTMANIFEST, 
         /**
-         * A reference to a document.
+         * A reference to a document of any kind for any purpose. Provides metadata about the document so that the document can be discovered and managed. The scope of a document is any seralized object with a mime-type, so includes formal patient centric documents (CDA), cliical notes, scanned paper, and non-patient specific documents like policy text.
          */
         DOCUMENTREFERENCE, 
         /**
@@ -5918,13 +6879,9 @@ into another (possibly the same) biological entity.
          */
         DOMAINRESOURCE, 
         /**
-         * The EligibilityRequest provides patient and insurance coverage information to an insurer for them to respond, in the form of an EligibilityResponse, with information regarding whether the stated coverage is valid and in-force and optionally to provide the insurance details of the policy.
+         * The EffectEvidenceSynthesis resource describes the difference in an outcome between exposures states in a population where the effect estimate is derived from a combination of research studies.
          */
-        ELIGIBILITYREQUEST, 
-        /**
-         * This resource provides eligibility and plan details from the processing of an Eligibility resource.
-         */
-        ELIGIBILITYRESPONSE, 
+        EFFECTEVIDENCESYNTHESIS, 
         /**
          * An interaction between a patient and healthcare provider(s) for the purpose of providing healthcare service(s) or assessing the health status of a patient.
          */
@@ -5938,13 +6895,9 @@ into another (possibly the same) biological entity.
          */
         ENROLLMENTREQUEST, 
         /**
-         * This resource provides enrollment and plan details from the processing of an Enrollment resource.
+         * This resource provides enrollment and plan details from the processing of an EnrollmentRequest resource.
          */
         ENROLLMENTRESPONSE, 
-        /**
-         * Catalog entries are wrappers that contextualize items included in a catalog.
-         */
-        ENTRYDEFINITION, 
         /**
          * An association between a patient and an organization / healthcare provider(s) during which time encounters may occur. The managing organization assumes a level of responsibility for the patient during this time.
          */
@@ -5954,13 +6907,17 @@ into another (possibly the same) biological entity.
          */
         EVENTDEFINITION, 
         /**
+         * The Evidence resource describes the conditional state (population and any exposures being compared within the population) and outcome (if specified) that the knowledge (evidence, assertion, recommendation) is about.
+         */
+        EVIDENCE, 
+        /**
+         * The EvidenceVariable resource describes a "PICO" element that knowledge (evidence, assertion, recommendation) is about.
+         */
+        EVIDENCEVARIABLE, 
+        /**
          * Example of workflow instance.
          */
         EXAMPLESCENARIO, 
-        /**
-         * Resource to define constraints on the Expansion of a FHIR ValueSet.
-         */
-        EXPANSIONPROFILE, 
         /**
          * This resource provides: the claim details; adjudication details from the processing of a Claim; and optionally account balance information, for informing the subscriber of the benefits provided.
          */
@@ -5982,7 +6939,7 @@ into another (possibly the same) biological entity.
          */
         GRAPHDEFINITION, 
         /**
-         * Represents a defined collection of entities that may be discussed or acted upon collectively but which are not expected to act collectively and are not formally or legally recognized; i.e. a collection of entities that isn't an Organization.
+         * Represents a defined collection of entities that may be discussed or acted upon collectively but which are not expected to act collectively, and are not formally or legally recognized; i.e. a collection of entities that isn't an Organization.
          */
         GROUP, 
         /**
@@ -6010,27 +6967,27 @@ into another (possibly the same) biological entity.
          */
         IMMUNIZATIONRECOMMENDATION, 
         /**
-         * A set of rules of how FHIR is used to solve a particular problem. This resource is used to gather all the parts of an implementation guide into a logical whole and to publish a computable definition of all the parts.
+         * A set of rules of how a particular interoperability or standards problem is solved - typically through the use of FHIR resources. This resource is used to gather all the parts of an implementation guide into a logical whole and to publish a computable definition of all the parts.
          */
         IMPLEMENTATIONGUIDE, 
+        /**
+         * Details of a Health Insurance product/plan provided by an organization.
+         */
+        INSURANCEPLAN, 
         /**
          * Invoice containing collected ChargeItems from an Account with calculated individual and total price for Billing purpose.
          */
         INVOICE, 
         /**
-         * A physical, countable instance of an item, for example one box or one unit.
-         */
-        ITEMINSTANCE, 
-        /**
          * The Library resource is a general-purpose container for knowledge asset definitions. It can be used to describe and expose existing knowledge assets such as logic libraries and information model descriptions, as well as to describe a collection of knowledge assets.
          */
         LIBRARY, 
         /**
-         * Identifies two or more records (resource instances) that are referring to the same real-world "occurrence".
+         * Identifies two or more records (resource instances) that refer to the same real-world "occurrence".
          */
         LINKAGE, 
         /**
-         * A set of information summarized from a list of other resources.
+         * A list is a curated collection of resources.
          */
         LIST, 
         /**
@@ -6070,7 +7027,9 @@ into another (possibly the same) biological entity.
          */
         MEDICATIONREQUEST, 
         /**
-         * A record of a medication that is being consumed by a patient.   A MedicationStatement may indicate that the patient may be taking the medication now, or has taken the medication in the past or will be taking the medication in the future.  The source of this information can be the patient, significant other (such as a family member or spouse), or a clinician.  A common scenario where this information is captured is during the history taking process during a patient visit or stay.   The medication information may come from sources such as the patient's memory, from a prescription bottle,  or from a list of medications the patient, clinician or other party maintains. The primary difference between a medication statement and a medication administration is that the medication administration has complete administration information and is based on actual administration information from the person who administered the medication.  A medication statement is often, if not always, less specific.  There is no required date/time when the medication was administered, in fact we only know that a source has reported the patient is taking this medication, where details such as time, quantity, or rate or even medication product may be incomplete or missing or less precise.  As stated earlier, the medication statement information may come from the patient's memory, from a prescription bottle or from a list of medications the patient, clinician or other party maintains.  Medication administration is more formal and is not missing detailed information.
+         * A record of a medication that is being consumed by a patient.   A MedicationStatement may indicate that the patient may be taking the medication now or has taken the medication in the past or will be taking the medication in the future.  The source of this information can be the patient, significant other (such as a family member or spouse), or a clinician.  A common scenario where this information is captured is during the history taking process during a patient visit or stay.   The medication information may come from sources such as the patient's memory, from a prescription bottle,  or from a list of medications the patient, clinician or other party maintains. 
+
+The primary difference between a medication statement and a medication administration is that the medication administration has complete administration information and is based on actual administration information from the person who administered the medication.  A medication statement is often, if not always, less specific.  There is no required date/time when the medication was administered, in fact we only know that a source has reported the patient is taking this medication, where details such as time, quantity, or rate or even medication product may be incomplete or missing or less precise.  As stated earlier, the medication statement information may come from the patient's memory, from a prescription bottle or from a list of medications the patient, clinician or other party maintains.  Medication administration is more formal and is not missing detailed information.
          */
         MEDICATIONSTATEMENT, 
         /**
@@ -6084,15 +7043,23 @@ into another (possibly the same) biological entity.
         /**
          * The clinical particulars - indications, contraindications etc. of a medicinal product, including for regulatory purposes.
          */
-        MEDICINALPRODUCTCLINICALS, 
+        MEDICINALPRODUCTCONTRAINDICATION, 
         /**
-         * A detailed description of a device, typically as part of a regulated medicinal product. It is not intended to relace the Device resource, which covers use of device instances.
+         * Indication for the Medicinal Product.
          */
-        MEDICINALPRODUCTDEVICESPEC, 
+        MEDICINALPRODUCTINDICATION, 
         /**
          * An ingredient of a manufactured item or pharmaceutical product.
          */
         MEDICINALPRODUCTINGREDIENT, 
+        /**
+         * The interactions of the medicinal product with other medicinal products, or other forms of interactions.
+         */
+        MEDICINALPRODUCTINTERACTION, 
+        /**
+         * The manufactured item as contained in the packaged medicinal product.
+         */
+        MEDICINALPRODUCTMANUFACTURED, 
         /**
          * A medicinal product in a container or package.
          */
@@ -6102,6 +7069,10 @@ into another (possibly the same) biological entity.
          */
         MEDICINALPRODUCTPHARMACEUTICAL, 
         /**
+         * Describe the undesirable effects of the medicinal product.
+         */
+        MEDICINALPRODUCTUNDESIRABLEEFFECT, 
+        /**
          * Defines the characteristics of a message that can be shared between systems, including the type of event that initiates the message, the content to be transmitted and what response(s), if any, are permitted.
          */
         MESSAGEDEFINITION, 
@@ -6109,6 +7080,10 @@ into another (possibly the same) biological entity.
          * The header for a message exchange that is either requesting or responding to an action.  The reference(s) that are the subject of the action as well as other information related to the action are typically transmitted in a bundle in which the MessageHeader resource instance is the first resource in the bundle.
          */
         MESSAGEHEADER, 
+        /**
+         * Raw data describing a biological sequence.
+         */
+        MOLECULARSEQUENCE, 
         /**
          * A curated namespace that issues unique symbols within that namespace for the identification of concepts, people, devices, etc.  Represents a "System" used within the Identifier and Coding data types.
          */
@@ -6126,27 +7101,23 @@ into another (possibly the same) biological entity.
          */
         OBSERVATIONDEFINITION, 
         /**
-         * A person's work information, structured to facilitate individual, population, and public health use; not intended to support billing.
-         */
-        OCCUPATIONALDATA, 
-        /**
          * A formal computable definition of an operation (on the RESTful interface) or a named query (using the search interaction).
          */
         OPERATIONDEFINITION, 
         /**
-         * A collection of error, warning or information messages that result from a system action.
+         * A collection of error, warning, or information messages that result from a system action.
          */
         OPERATIONOUTCOME, 
         /**
-         * A formally or informally recognized grouping of people or organizations formed for the purpose of achieving some form of collective action.  Includes companies, institutions, corporations, departments, community groups, healthcare practice groups, etc.
+         * A formally or informally recognized grouping of people or organizations formed for the purpose of achieving some form of collective action.  Includes companies, institutions, corporations, departments, community groups, healthcare practice groups, payer/insurer, etc.
          */
         ORGANIZATION, 
         /**
-         * A specific set of Roles/Locations/specialties/services that a practitioner may perform at an organization for a period of time.
+         * Defines an affiliation/assotiation/relationship between 2 distinct oganizations, that is not a part-of relationship/sub-division relationship.
          */
-        ORGANIZATIONROLE, 
+        ORGANIZATIONAFFILIATION, 
         /**
-         * This special resource type is used to represent an operation request and response (operations.html). It has no other use, and there is no RESTful endpoint associated with it.
+         * This resource is a non-persisted resource used to pass information into and back from an [operation](operations.html). It has no other use, and there is no RESTful endpoint associated with it.
          */
         PARAMETERS, 
         /**
@@ -6158,7 +7129,7 @@ into another (possibly the same) biological entity.
          */
         PAYMENTNOTICE, 
         /**
-         * This resource provides payment details and claim references supporting a bulk payment.
+         * This resource provides the details including amount of a payment and allocates the payment items being paid.
          */
         PAYMENTRECONCILIATION, 
         /**
@@ -6178,21 +7149,9 @@ into another (possibly the same) biological entity.
          */
         PRACTITIONERROLE, 
         /**
-         * An action that is or was performed on a patient. This can be a physical intervention like an operation, or less invasive like counseling or hypnotherapy.
+         * An action that is or was performed on or for a patient. This can be a physical intervention like an operation, or less invasive like long term services, counseling, or hypnotherapy.
          */
         PROCEDURE, 
-        /**
-         * This resource provides the target, request and response, and action details for an action to be performed by the target on or about existing resources.
-         */
-        PROCESSREQUEST, 
-        /**
-         * This resource provides processing status, errors and notes from the processing of a resource.
-         */
-        PROCESSRESPONSE, 
-        /**
-         * Details of a Health Insurance product/plan provided by an organization.
-         */
-        PRODUCTPLAN, 
         /**
          * Provenance of a resource is a record that describes entities and processes involved in producing and delivering or otherwise influencing that resource. Provenance provides a critical foundation for assessing authenticity, enabling trust, and allowing reproducibility. Provenance assertions are a form of contextual metadata and can themselves become important records with their own provenance. Provenance statement indicates clinical significance in terms of confidence in authenticity, reliability, and trustworthiness, integrity, and stage in lifecycle (e.g. Document Completion - has the artifact been legally authenticated), all of which may impact security, privacy, and trust policies.
          */
@@ -6214,6 +7173,14 @@ into another (possibly the same) biological entity.
          */
         REQUESTGROUP, 
         /**
+         * The ResearchDefinition resource describes the conditional state (population and any exposures being compared within the population) and outcome (if specified) that the knowledge (evidence, assertion, recommendation) is about.
+         */
+        RESEARCHDEFINITION, 
+        /**
+         * The ResearchElementDefinition resource describes a "PICO" element that knowledge (evidence, assertion, recommendation) is about.
+         */
+        RESEARCHELEMENTDEFINITION, 
+        /**
          * A process where a researcher or organization plans and then executes a series of steps intended to increase the field of healthcare-related knowledge.  This includes studies of safety, efficacy, comparative effectiveness and other information about medications, devices, therapies and other interventional and investigative techniques.  A ResearchStudy involves the gathering of information about human or animal subjects.
          */
         RESEARCHSTUDY, 
@@ -6230,6 +7197,10 @@ into another (possibly the same) biological entity.
          */
         RISKASSESSMENT, 
         /**
+         * The RiskEvidenceSynthesis resource describes the likelihood of an outcome in a population plus exposure state where the risk estimate is derived from a combination of research studies.
+         */
+        RISKEVIDENCESYNTHESIS, 
+        /**
          * A container for slots of time that may be available for booking appointments.
          */
         SCHEDULE, 
@@ -6237,10 +7208,6 @@ into another (possibly the same) biological entity.
          * A search parameter that defines a named search item that can be used to search/filter on a resource.
          */
         SEARCHPARAMETER, 
-        /**
-         * Raw data describing a biological sequence.
-         */
-        SEQUENCE, 
         /**
          * A record of a request for service such as diagnostic investigations, treatments, or operations to be performed.
          */
@@ -6274,13 +7241,25 @@ into another (possibly the same) biological entity.
          */
         SUBSTANCE, 
         /**
+         * Nucleic acids are defined by three distinct elements: the base, sugar and linkage. Individual substance/moiety IDs will be created for each of these elements. The nucleotide sequence will be always entered in the 5’-3’ direction.
+         */
+        SUBSTANCENUCLEICACID, 
+        /**
          * Todo.
          */
         SUBSTANCEPOLYMER, 
         /**
+         * A SubstanceProtein is defined as a single unit of a linear amino acid sequence, or a combination of subunits that are either covalently linked or have a defined invariant stoichiometric relationship. This includes all synthetic, recombinant and purified SubstanceProteins of defined sequence, whether the use is therapeutic or prophylactic. This set of elements will be used to describe albumins, coagulation factors, cytokines, growth factors, peptide/SubstanceProtein hormones, enzymes, toxins, toxoids, recombinant vaccines, and immunomodulators.
+         */
+        SUBSTANCEPROTEIN, 
+        /**
          * Todo.
          */
         SUBSTANCEREFERENCEINFORMATION, 
+        /**
+         * Source material shall capture information on the taxonomic and anatomical origins as well as the fraction of a material that can result in or can be modified to form a substance. This set of data elements shall be used to define polymer substances isolated from biological matrices. Taxonomic and anatomical origins shall be described using a controlled vocabulary as required. This information is captured for naturally derived polymers ( . starch) and structurally diverse substances. For Organisms belonging to the Kingdom Plantae the Substance level defines the fresh material of a single species or infraspecies, the Herbal Drug and the Herbal preparation. For Herbal preparations, the fraction information will be captured at the Substance information level and additional information for herbal extracts will be captured at the Specified Substance Group 1 information level. See for further explanation the Substance Class: Structurally Diverse and the herbal annex.
+         */
+        SUBSTANCESOURCEMATERIAL, 
         /**
          * The detailed description of a substance, typically at a level beyond what is used for prescribing.
          */
@@ -6298,7 +7277,7 @@ into another (possibly the same) biological entity.
          */
         TASK, 
         /**
-         * A Terminology Capabilities documents a set of capabilities (behaviors) of a FHIR Server that may be used as a statement of actual server functionality or a statement of required or desired server implementation.
+         * A TerminologyCapabilities resource documents a set of capabilities (behaviors) of a FHIR Terminology Server that may be used as a statement of actual server functionality or a statement of required or desired server implementation.
          */
         TERMINOLOGYCAPABILITIES, 
         /**
@@ -6310,11 +7289,7 @@ into another (possibly the same) biological entity.
          */
         TESTSCRIPT, 
         /**
-         * Information about a user's current session.
-         */
-        USERSESSION, 
-        /**
-         * A ValueSet resource specifies a set of codes drawn from one or more code systems, intended for use in a particular context. Value sets link between [[[CodeSystem]]] definitions and their use in [coded elements](terminologies.html).
+         * A ValueSet resource instance specifies a set of codes drawn from one or more code systems, intended for use in a particular context. Value sets link between [[[CodeSystem]]] definitions and their use in [coded elements](terminologies.html).
          */
         VALUESET, 
         /**
@@ -6322,7 +7297,7 @@ into another (possibly the same) biological entity.
          */
         VERIFICATIONRESULT, 
         /**
-         * An authorization for the supply of glasses and/or contact lenses to a patient.
+         * An authorization for the provision of glasses and/or contact lenses to a patient.
          */
         VISIONPRESCRIPTION, 
         /**
@@ -6366,6 +7341,8 @@ into another (possibly the same) biological entity.
           return ELEMENT;
         if ("ElementDefinition".equals(codeString))
           return ELEMENTDEFINITION;
+        if ("Expression".equals(codeString))
+          return EXPRESSION;
         if ("Extension".equals(codeString))
           return EXTENSION;
         if ("HumanName".equals(codeString))
@@ -6378,12 +7355,16 @@ into another (possibly the same) biological entity.
           return META;
         if ("Money".equals(codeString))
           return MONEY;
+        if ("MoneyQuantity".equals(codeString))
+          return MONEYQUANTITY;
         if ("Narrative".equals(codeString))
           return NARRATIVE;
         if ("ParameterDefinition".equals(codeString))
           return PARAMETERDEFINITION;
         if ("Period".equals(codeString))
           return PERIOD;
+        if ("Population".equals(codeString))
+          return POPULATION;
         if ("ProdCharacteristic".equals(codeString))
           return PRODCHARACTERISTIC;
         if ("ProductShelfLife".equals(codeString))
@@ -6406,8 +7387,6 @@ into another (possibly the same) biological entity.
           return SIMPLEQUANTITY;
         if ("SubstanceAmount".equals(codeString))
           return SUBSTANCEAMOUNT;
-        if ("SubstanceMoiety".equals(codeString))
-          return SUBSTANCEMOIETY;
         if ("Timing".equals(codeString))
           return TIMING;
         if ("TriggerDefinition".equals(codeString))
@@ -6484,8 +7463,12 @@ into another (possibly the same) biological entity.
           return CAREPLAN;
         if ("CareTeam".equals(codeString))
           return CARETEAM;
+        if ("CatalogEntry".equals(codeString))
+          return CATALOGENTRY;
         if ("ChargeItem".equals(codeString))
           return CHARGEITEM;
+        if ("ChargeItemDefinition".equals(codeString))
+          return CHARGEITEMDEFINITION;
         if ("Claim".equals(codeString))
           return CLAIM;
         if ("ClaimResponse".equals(codeString))
@@ -6512,12 +7495,16 @@ into another (possibly the same) biological entity.
           return CONTRACT;
         if ("Coverage".equals(codeString))
           return COVERAGE;
+        if ("CoverageEligibilityRequest".equals(codeString))
+          return COVERAGEELIGIBILITYREQUEST;
+        if ("CoverageEligibilityResponse".equals(codeString))
+          return COVERAGEELIGIBILITYRESPONSE;
         if ("DetectedIssue".equals(codeString))
           return DETECTEDISSUE;
         if ("Device".equals(codeString))
           return DEVICE;
-        if ("DeviceComponent".equals(codeString))
-          return DEVICECOMPONENT;
+        if ("DeviceDefinition".equals(codeString))
+          return DEVICEDEFINITION;
         if ("DeviceMetric".equals(codeString))
           return DEVICEMETRIC;
         if ("DeviceRequest".equals(codeString))
@@ -6532,10 +7519,8 @@ into another (possibly the same) biological entity.
           return DOCUMENTREFERENCE;
         if ("DomainResource".equals(codeString))
           return DOMAINRESOURCE;
-        if ("EligibilityRequest".equals(codeString))
-          return ELIGIBILITYREQUEST;
-        if ("EligibilityResponse".equals(codeString))
-          return ELIGIBILITYRESPONSE;
+        if ("EffectEvidenceSynthesis".equals(codeString))
+          return EFFECTEVIDENCESYNTHESIS;
         if ("Encounter".equals(codeString))
           return ENCOUNTER;
         if ("Endpoint".equals(codeString))
@@ -6544,16 +7529,16 @@ into another (possibly the same) biological entity.
           return ENROLLMENTREQUEST;
         if ("EnrollmentResponse".equals(codeString))
           return ENROLLMENTRESPONSE;
-        if ("EntryDefinition".equals(codeString))
-          return ENTRYDEFINITION;
         if ("EpisodeOfCare".equals(codeString))
           return EPISODEOFCARE;
         if ("EventDefinition".equals(codeString))
           return EVENTDEFINITION;
+        if ("Evidence".equals(codeString))
+          return EVIDENCE;
+        if ("EvidenceVariable".equals(codeString))
+          return EVIDENCEVARIABLE;
         if ("ExampleScenario".equals(codeString))
           return EXAMPLESCENARIO;
-        if ("ExpansionProfile".equals(codeString))
-          return EXPANSIONPROFILE;
         if ("ExplanationOfBenefit".equals(codeString))
           return EXPLANATIONOFBENEFIT;
         if ("FamilyMemberHistory".equals(codeString))
@@ -6580,10 +7565,10 @@ into another (possibly the same) biological entity.
           return IMMUNIZATIONRECOMMENDATION;
         if ("ImplementationGuide".equals(codeString))
           return IMPLEMENTATIONGUIDE;
+        if ("InsurancePlan".equals(codeString))
+          return INSURANCEPLAN;
         if ("Invoice".equals(codeString))
           return INVOICE;
-        if ("ItemInstance".equals(codeString))
-          return ITEMINSTANCE;
         if ("Library".equals(codeString))
           return LIBRARY;
         if ("Linkage".equals(codeString))
@@ -6614,20 +7599,28 @@ into another (possibly the same) biological entity.
           return MEDICINALPRODUCT;
         if ("MedicinalProductAuthorization".equals(codeString))
           return MEDICINALPRODUCTAUTHORIZATION;
-        if ("MedicinalProductClinicals".equals(codeString))
-          return MEDICINALPRODUCTCLINICALS;
-        if ("MedicinalProductDeviceSpec".equals(codeString))
-          return MEDICINALPRODUCTDEVICESPEC;
+        if ("MedicinalProductContraindication".equals(codeString))
+          return MEDICINALPRODUCTCONTRAINDICATION;
+        if ("MedicinalProductIndication".equals(codeString))
+          return MEDICINALPRODUCTINDICATION;
         if ("MedicinalProductIngredient".equals(codeString))
           return MEDICINALPRODUCTINGREDIENT;
+        if ("MedicinalProductInteraction".equals(codeString))
+          return MEDICINALPRODUCTINTERACTION;
+        if ("MedicinalProductManufactured".equals(codeString))
+          return MEDICINALPRODUCTMANUFACTURED;
         if ("MedicinalProductPackaged".equals(codeString))
           return MEDICINALPRODUCTPACKAGED;
         if ("MedicinalProductPharmaceutical".equals(codeString))
           return MEDICINALPRODUCTPHARMACEUTICAL;
+        if ("MedicinalProductUndesirableEffect".equals(codeString))
+          return MEDICINALPRODUCTUNDESIRABLEEFFECT;
         if ("MessageDefinition".equals(codeString))
           return MESSAGEDEFINITION;
         if ("MessageHeader".equals(codeString))
           return MESSAGEHEADER;
+        if ("MolecularSequence".equals(codeString))
+          return MOLECULARSEQUENCE;
         if ("NamingSystem".equals(codeString))
           return NAMINGSYSTEM;
         if ("NutritionOrder".equals(codeString))
@@ -6636,16 +7629,14 @@ into another (possibly the same) biological entity.
           return OBSERVATION;
         if ("ObservationDefinition".equals(codeString))
           return OBSERVATIONDEFINITION;
-        if ("OccupationalData".equals(codeString))
-          return OCCUPATIONALDATA;
         if ("OperationDefinition".equals(codeString))
           return OPERATIONDEFINITION;
         if ("OperationOutcome".equals(codeString))
           return OPERATIONOUTCOME;
         if ("Organization".equals(codeString))
           return ORGANIZATION;
-        if ("OrganizationRole".equals(codeString))
-          return ORGANIZATIONROLE;
+        if ("OrganizationAffiliation".equals(codeString))
+          return ORGANIZATIONAFFILIATION;
         if ("Parameters".equals(codeString))
           return PARAMETERS;
         if ("Patient".equals(codeString))
@@ -6664,12 +7655,6 @@ into another (possibly the same) biological entity.
           return PRACTITIONERROLE;
         if ("Procedure".equals(codeString))
           return PROCEDURE;
-        if ("ProcessRequest".equals(codeString))
-          return PROCESSREQUEST;
-        if ("ProcessResponse".equals(codeString))
-          return PROCESSRESPONSE;
-        if ("ProductPlan".equals(codeString))
-          return PRODUCTPLAN;
         if ("Provenance".equals(codeString))
           return PROVENANCE;
         if ("Questionnaire".equals(codeString))
@@ -6680,6 +7665,10 @@ into another (possibly the same) biological entity.
           return RELATEDPERSON;
         if ("RequestGroup".equals(codeString))
           return REQUESTGROUP;
+        if ("ResearchDefinition".equals(codeString))
+          return RESEARCHDEFINITION;
+        if ("ResearchElementDefinition".equals(codeString))
+          return RESEARCHELEMENTDEFINITION;
         if ("ResearchStudy".equals(codeString))
           return RESEARCHSTUDY;
         if ("ResearchSubject".equals(codeString))
@@ -6688,12 +7677,12 @@ into another (possibly the same) biological entity.
           return RESOURCE;
         if ("RiskAssessment".equals(codeString))
           return RISKASSESSMENT;
+        if ("RiskEvidenceSynthesis".equals(codeString))
+          return RISKEVIDENCESYNTHESIS;
         if ("Schedule".equals(codeString))
           return SCHEDULE;
         if ("SearchParameter".equals(codeString))
           return SEARCHPARAMETER;
-        if ("Sequence".equals(codeString))
-          return SEQUENCE;
         if ("ServiceRequest".equals(codeString))
           return SERVICEREQUEST;
         if ("Slot".equals(codeString))
@@ -6710,10 +7699,16 @@ into another (possibly the same) biological entity.
           return SUBSCRIPTION;
         if ("Substance".equals(codeString))
           return SUBSTANCE;
+        if ("SubstanceNucleicAcid".equals(codeString))
+          return SUBSTANCENUCLEICACID;
         if ("SubstancePolymer".equals(codeString))
           return SUBSTANCEPOLYMER;
+        if ("SubstanceProtein".equals(codeString))
+          return SUBSTANCEPROTEIN;
         if ("SubstanceReferenceInformation".equals(codeString))
           return SUBSTANCEREFERENCEINFORMATION;
+        if ("SubstanceSourceMaterial".equals(codeString))
+          return SUBSTANCESOURCEMATERIAL;
         if ("SubstanceSpecification".equals(codeString))
           return SUBSTANCESPECIFICATION;
         if ("SupplyDelivery".equals(codeString))
@@ -6728,8 +7723,6 @@ into another (possibly the same) biological entity.
           return TESTREPORT;
         if ("TestScript".equals(codeString))
           return TESTSCRIPT;
-        if ("UserSession".equals(codeString))
-          return USERSESSION;
         if ("ValueSet".equals(codeString))
           return VALUESET;
         if ("VerificationResult".equals(codeString))
@@ -6757,15 +7750,18 @@ into another (possibly the same) biological entity.
             case DURATION: return "Duration";
             case ELEMENT: return "Element";
             case ELEMENTDEFINITION: return "ElementDefinition";
+            case EXPRESSION: return "Expression";
             case EXTENSION: return "Extension";
             case HUMANNAME: return "HumanName";
             case IDENTIFIER: return "Identifier";
             case MARKETINGSTATUS: return "MarketingStatus";
             case META: return "Meta";
             case MONEY: return "Money";
+            case MONEYQUANTITY: return "MoneyQuantity";
             case NARRATIVE: return "Narrative";
             case PARAMETERDEFINITION: return "ParameterDefinition";
             case PERIOD: return "Period";
+            case POPULATION: return "Population";
             case PRODCHARACTERISTIC: return "ProdCharacteristic";
             case PRODUCTSHELFLIFE: return "ProductShelfLife";
             case QUANTITY: return "Quantity";
@@ -6777,7 +7773,6 @@ into another (possibly the same) biological entity.
             case SIGNATURE: return "Signature";
             case SIMPLEQUANTITY: return "SimpleQuantity";
             case SUBSTANCEAMOUNT: return "SubstanceAmount";
-            case SUBSTANCEMOIETY: return "SubstanceMoiety";
             case TIMING: return "Timing";
             case TRIGGERDEFINITION: return "TriggerDefinition";
             case USAGECONTEXT: return "UsageContext";
@@ -6816,7 +7811,9 @@ into another (possibly the same) biological entity.
             case CAPABILITYSTATEMENT: return "CapabilityStatement";
             case CAREPLAN: return "CarePlan";
             case CARETEAM: return "CareTeam";
+            case CATALOGENTRY: return "CatalogEntry";
             case CHARGEITEM: return "ChargeItem";
+            case CHARGEITEMDEFINITION: return "ChargeItemDefinition";
             case CLAIM: return "Claim";
             case CLAIMRESPONSE: return "ClaimResponse";
             case CLINICALIMPRESSION: return "ClinicalImpression";
@@ -6830,9 +7827,11 @@ into another (possibly the same) biological entity.
             case CONSENT: return "Consent";
             case CONTRACT: return "Contract";
             case COVERAGE: return "Coverage";
+            case COVERAGEELIGIBILITYREQUEST: return "CoverageEligibilityRequest";
+            case COVERAGEELIGIBILITYRESPONSE: return "CoverageEligibilityResponse";
             case DETECTEDISSUE: return "DetectedIssue";
             case DEVICE: return "Device";
-            case DEVICECOMPONENT: return "DeviceComponent";
+            case DEVICEDEFINITION: return "DeviceDefinition";
             case DEVICEMETRIC: return "DeviceMetric";
             case DEVICEREQUEST: return "DeviceRequest";
             case DEVICEUSESTATEMENT: return "DeviceUseStatement";
@@ -6840,17 +7839,16 @@ into another (possibly the same) biological entity.
             case DOCUMENTMANIFEST: return "DocumentManifest";
             case DOCUMENTREFERENCE: return "DocumentReference";
             case DOMAINRESOURCE: return "DomainResource";
-            case ELIGIBILITYREQUEST: return "EligibilityRequest";
-            case ELIGIBILITYRESPONSE: return "EligibilityResponse";
+            case EFFECTEVIDENCESYNTHESIS: return "EffectEvidenceSynthesis";
             case ENCOUNTER: return "Encounter";
             case ENDPOINT: return "Endpoint";
             case ENROLLMENTREQUEST: return "EnrollmentRequest";
             case ENROLLMENTRESPONSE: return "EnrollmentResponse";
-            case ENTRYDEFINITION: return "EntryDefinition";
             case EPISODEOFCARE: return "EpisodeOfCare";
             case EVENTDEFINITION: return "EventDefinition";
+            case EVIDENCE: return "Evidence";
+            case EVIDENCEVARIABLE: return "EvidenceVariable";
             case EXAMPLESCENARIO: return "ExampleScenario";
-            case EXPANSIONPROFILE: return "ExpansionProfile";
             case EXPLANATIONOFBENEFIT: return "ExplanationOfBenefit";
             case FAMILYMEMBERHISTORY: return "FamilyMemberHistory";
             case FLAG: return "Flag";
@@ -6864,8 +7862,8 @@ into another (possibly the same) biological entity.
             case IMMUNIZATIONEVALUATION: return "ImmunizationEvaluation";
             case IMMUNIZATIONRECOMMENDATION: return "ImmunizationRecommendation";
             case IMPLEMENTATIONGUIDE: return "ImplementationGuide";
+            case INSURANCEPLAN: return "InsurancePlan";
             case INVOICE: return "Invoice";
-            case ITEMINSTANCE: return "ItemInstance";
             case LIBRARY: return "Library";
             case LINKAGE: return "Linkage";
             case LIST: return "List";
@@ -6881,22 +7879,25 @@ into another (possibly the same) biological entity.
             case MEDICATIONSTATEMENT: return "MedicationStatement";
             case MEDICINALPRODUCT: return "MedicinalProduct";
             case MEDICINALPRODUCTAUTHORIZATION: return "MedicinalProductAuthorization";
-            case MEDICINALPRODUCTCLINICALS: return "MedicinalProductClinicals";
-            case MEDICINALPRODUCTDEVICESPEC: return "MedicinalProductDeviceSpec";
+            case MEDICINALPRODUCTCONTRAINDICATION: return "MedicinalProductContraindication";
+            case MEDICINALPRODUCTINDICATION: return "MedicinalProductIndication";
             case MEDICINALPRODUCTINGREDIENT: return "MedicinalProductIngredient";
+            case MEDICINALPRODUCTINTERACTION: return "MedicinalProductInteraction";
+            case MEDICINALPRODUCTMANUFACTURED: return "MedicinalProductManufactured";
             case MEDICINALPRODUCTPACKAGED: return "MedicinalProductPackaged";
             case MEDICINALPRODUCTPHARMACEUTICAL: return "MedicinalProductPharmaceutical";
+            case MEDICINALPRODUCTUNDESIRABLEEFFECT: return "MedicinalProductUndesirableEffect";
             case MESSAGEDEFINITION: return "MessageDefinition";
             case MESSAGEHEADER: return "MessageHeader";
+            case MOLECULARSEQUENCE: return "MolecularSequence";
             case NAMINGSYSTEM: return "NamingSystem";
             case NUTRITIONORDER: return "NutritionOrder";
             case OBSERVATION: return "Observation";
             case OBSERVATIONDEFINITION: return "ObservationDefinition";
-            case OCCUPATIONALDATA: return "OccupationalData";
             case OPERATIONDEFINITION: return "OperationDefinition";
             case OPERATIONOUTCOME: return "OperationOutcome";
             case ORGANIZATION: return "Organization";
-            case ORGANIZATIONROLE: return "OrganizationRole";
+            case ORGANIZATIONAFFILIATION: return "OrganizationAffiliation";
             case PARAMETERS: return "Parameters";
             case PATIENT: return "Patient";
             case PAYMENTNOTICE: return "PaymentNotice";
@@ -6906,21 +7907,20 @@ into another (possibly the same) biological entity.
             case PRACTITIONER: return "Practitioner";
             case PRACTITIONERROLE: return "PractitionerRole";
             case PROCEDURE: return "Procedure";
-            case PROCESSREQUEST: return "ProcessRequest";
-            case PROCESSRESPONSE: return "ProcessResponse";
-            case PRODUCTPLAN: return "ProductPlan";
             case PROVENANCE: return "Provenance";
             case QUESTIONNAIRE: return "Questionnaire";
             case QUESTIONNAIRERESPONSE: return "QuestionnaireResponse";
             case RELATEDPERSON: return "RelatedPerson";
             case REQUESTGROUP: return "RequestGroup";
+            case RESEARCHDEFINITION: return "ResearchDefinition";
+            case RESEARCHELEMENTDEFINITION: return "ResearchElementDefinition";
             case RESEARCHSTUDY: return "ResearchStudy";
             case RESEARCHSUBJECT: return "ResearchSubject";
             case RESOURCE: return "Resource";
             case RISKASSESSMENT: return "RiskAssessment";
+            case RISKEVIDENCESYNTHESIS: return "RiskEvidenceSynthesis";
             case SCHEDULE: return "Schedule";
             case SEARCHPARAMETER: return "SearchParameter";
-            case SEQUENCE: return "Sequence";
             case SERVICEREQUEST: return "ServiceRequest";
             case SLOT: return "Slot";
             case SPECIMEN: return "Specimen";
@@ -6929,8 +7929,11 @@ into another (possibly the same) biological entity.
             case STRUCTUREMAP: return "StructureMap";
             case SUBSCRIPTION: return "Subscription";
             case SUBSTANCE: return "Substance";
+            case SUBSTANCENUCLEICACID: return "SubstanceNucleicAcid";
             case SUBSTANCEPOLYMER: return "SubstancePolymer";
+            case SUBSTANCEPROTEIN: return "SubstanceProtein";
             case SUBSTANCEREFERENCEINFORMATION: return "SubstanceReferenceInformation";
+            case SUBSTANCESOURCEMATERIAL: return "SubstanceSourceMaterial";
             case SUBSTANCESPECIFICATION: return "SubstanceSpecification";
             case SUPPLYDELIVERY: return "SupplyDelivery";
             case SUPPLYREQUEST: return "SupplyRequest";
@@ -6938,7 +7941,6 @@ into another (possibly the same) biological entity.
             case TERMINOLOGYCAPABILITIES: return "TerminologyCapabilities";
             case TESTREPORT: return "TestReport";
             case TESTSCRIPT: return "TestScript";
-            case USERSESSION: return "UserSession";
             case VALUESET: return "ValueSet";
             case VERIFICATIONRESULT: return "VerificationResult";
             case VISIONPRESCRIPTION: return "VisionPrescription";
@@ -6964,15 +7966,18 @@ into another (possibly the same) biological entity.
             case DURATION: return "http://hl7.org/fhir/data-types";
             case ELEMENT: return "http://hl7.org/fhir/data-types";
             case ELEMENTDEFINITION: return "http://hl7.org/fhir/data-types";
+            case EXPRESSION: return "http://hl7.org/fhir/data-types";
             case EXTENSION: return "http://hl7.org/fhir/data-types";
             case HUMANNAME: return "http://hl7.org/fhir/data-types";
             case IDENTIFIER: return "http://hl7.org/fhir/data-types";
             case MARKETINGSTATUS: return "http://hl7.org/fhir/data-types";
             case META: return "http://hl7.org/fhir/data-types";
             case MONEY: return "http://hl7.org/fhir/data-types";
+            case MONEYQUANTITY: return "http://hl7.org/fhir/data-types";
             case NARRATIVE: return "http://hl7.org/fhir/data-types";
             case PARAMETERDEFINITION: return "http://hl7.org/fhir/data-types";
             case PERIOD: return "http://hl7.org/fhir/data-types";
+            case POPULATION: return "http://hl7.org/fhir/data-types";
             case PRODCHARACTERISTIC: return "http://hl7.org/fhir/data-types";
             case PRODUCTSHELFLIFE: return "http://hl7.org/fhir/data-types";
             case QUANTITY: return "http://hl7.org/fhir/data-types";
@@ -6984,7 +7989,6 @@ into another (possibly the same) biological entity.
             case SIGNATURE: return "http://hl7.org/fhir/data-types";
             case SIMPLEQUANTITY: return "http://hl7.org/fhir/data-types";
             case SUBSTANCEAMOUNT: return "http://hl7.org/fhir/data-types";
-            case SUBSTANCEMOIETY: return "http://hl7.org/fhir/data-types";
             case TIMING: return "http://hl7.org/fhir/data-types";
             case TRIGGERDEFINITION: return "http://hl7.org/fhir/data-types";
             case USAGECONTEXT: return "http://hl7.org/fhir/data-types";
@@ -7023,7 +8027,9 @@ into another (possibly the same) biological entity.
             case CAPABILITYSTATEMENT: return "http://hl7.org/fhir/resource-types";
             case CAREPLAN: return "http://hl7.org/fhir/resource-types";
             case CARETEAM: return "http://hl7.org/fhir/resource-types";
+            case CATALOGENTRY: return "http://hl7.org/fhir/resource-types";
             case CHARGEITEM: return "http://hl7.org/fhir/resource-types";
+            case CHARGEITEMDEFINITION: return "http://hl7.org/fhir/resource-types";
             case CLAIM: return "http://hl7.org/fhir/resource-types";
             case CLAIMRESPONSE: return "http://hl7.org/fhir/resource-types";
             case CLINICALIMPRESSION: return "http://hl7.org/fhir/resource-types";
@@ -7037,9 +8043,11 @@ into another (possibly the same) biological entity.
             case CONSENT: return "http://hl7.org/fhir/resource-types";
             case CONTRACT: return "http://hl7.org/fhir/resource-types";
             case COVERAGE: return "http://hl7.org/fhir/resource-types";
+            case COVERAGEELIGIBILITYREQUEST: return "http://hl7.org/fhir/resource-types";
+            case COVERAGEELIGIBILITYRESPONSE: return "http://hl7.org/fhir/resource-types";
             case DETECTEDISSUE: return "http://hl7.org/fhir/resource-types";
             case DEVICE: return "http://hl7.org/fhir/resource-types";
-            case DEVICECOMPONENT: return "http://hl7.org/fhir/resource-types";
+            case DEVICEDEFINITION: return "http://hl7.org/fhir/resource-types";
             case DEVICEMETRIC: return "http://hl7.org/fhir/resource-types";
             case DEVICEREQUEST: return "http://hl7.org/fhir/resource-types";
             case DEVICEUSESTATEMENT: return "http://hl7.org/fhir/resource-types";
@@ -7047,17 +8055,16 @@ into another (possibly the same) biological entity.
             case DOCUMENTMANIFEST: return "http://hl7.org/fhir/resource-types";
             case DOCUMENTREFERENCE: return "http://hl7.org/fhir/resource-types";
             case DOMAINRESOURCE: return "http://hl7.org/fhir/resource-types";
-            case ELIGIBILITYREQUEST: return "http://hl7.org/fhir/resource-types";
-            case ELIGIBILITYRESPONSE: return "http://hl7.org/fhir/resource-types";
+            case EFFECTEVIDENCESYNTHESIS: return "http://hl7.org/fhir/resource-types";
             case ENCOUNTER: return "http://hl7.org/fhir/resource-types";
             case ENDPOINT: return "http://hl7.org/fhir/resource-types";
             case ENROLLMENTREQUEST: return "http://hl7.org/fhir/resource-types";
             case ENROLLMENTRESPONSE: return "http://hl7.org/fhir/resource-types";
-            case ENTRYDEFINITION: return "http://hl7.org/fhir/resource-types";
             case EPISODEOFCARE: return "http://hl7.org/fhir/resource-types";
             case EVENTDEFINITION: return "http://hl7.org/fhir/resource-types";
+            case EVIDENCE: return "http://hl7.org/fhir/resource-types";
+            case EVIDENCEVARIABLE: return "http://hl7.org/fhir/resource-types";
             case EXAMPLESCENARIO: return "http://hl7.org/fhir/resource-types";
-            case EXPANSIONPROFILE: return "http://hl7.org/fhir/resource-types";
             case EXPLANATIONOFBENEFIT: return "http://hl7.org/fhir/resource-types";
             case FAMILYMEMBERHISTORY: return "http://hl7.org/fhir/resource-types";
             case FLAG: return "http://hl7.org/fhir/resource-types";
@@ -7071,8 +8078,8 @@ into another (possibly the same) biological entity.
             case IMMUNIZATIONEVALUATION: return "http://hl7.org/fhir/resource-types";
             case IMMUNIZATIONRECOMMENDATION: return "http://hl7.org/fhir/resource-types";
             case IMPLEMENTATIONGUIDE: return "http://hl7.org/fhir/resource-types";
+            case INSURANCEPLAN: return "http://hl7.org/fhir/resource-types";
             case INVOICE: return "http://hl7.org/fhir/resource-types";
-            case ITEMINSTANCE: return "http://hl7.org/fhir/resource-types";
             case LIBRARY: return "http://hl7.org/fhir/resource-types";
             case LINKAGE: return "http://hl7.org/fhir/resource-types";
             case LIST: return "http://hl7.org/fhir/resource-types";
@@ -7088,22 +8095,25 @@ into another (possibly the same) biological entity.
             case MEDICATIONSTATEMENT: return "http://hl7.org/fhir/resource-types";
             case MEDICINALPRODUCT: return "http://hl7.org/fhir/resource-types";
             case MEDICINALPRODUCTAUTHORIZATION: return "http://hl7.org/fhir/resource-types";
-            case MEDICINALPRODUCTCLINICALS: return "http://hl7.org/fhir/resource-types";
-            case MEDICINALPRODUCTDEVICESPEC: return "http://hl7.org/fhir/resource-types";
+            case MEDICINALPRODUCTCONTRAINDICATION: return "http://hl7.org/fhir/resource-types";
+            case MEDICINALPRODUCTINDICATION: return "http://hl7.org/fhir/resource-types";
             case MEDICINALPRODUCTINGREDIENT: return "http://hl7.org/fhir/resource-types";
+            case MEDICINALPRODUCTINTERACTION: return "http://hl7.org/fhir/resource-types";
+            case MEDICINALPRODUCTMANUFACTURED: return "http://hl7.org/fhir/resource-types";
             case MEDICINALPRODUCTPACKAGED: return "http://hl7.org/fhir/resource-types";
             case MEDICINALPRODUCTPHARMACEUTICAL: return "http://hl7.org/fhir/resource-types";
+            case MEDICINALPRODUCTUNDESIRABLEEFFECT: return "http://hl7.org/fhir/resource-types";
             case MESSAGEDEFINITION: return "http://hl7.org/fhir/resource-types";
             case MESSAGEHEADER: return "http://hl7.org/fhir/resource-types";
+            case MOLECULARSEQUENCE: return "http://hl7.org/fhir/resource-types";
             case NAMINGSYSTEM: return "http://hl7.org/fhir/resource-types";
             case NUTRITIONORDER: return "http://hl7.org/fhir/resource-types";
             case OBSERVATION: return "http://hl7.org/fhir/resource-types";
             case OBSERVATIONDEFINITION: return "http://hl7.org/fhir/resource-types";
-            case OCCUPATIONALDATA: return "http://hl7.org/fhir/resource-types";
             case OPERATIONDEFINITION: return "http://hl7.org/fhir/resource-types";
             case OPERATIONOUTCOME: return "http://hl7.org/fhir/resource-types";
             case ORGANIZATION: return "http://hl7.org/fhir/resource-types";
-            case ORGANIZATIONROLE: return "http://hl7.org/fhir/resource-types";
+            case ORGANIZATIONAFFILIATION: return "http://hl7.org/fhir/resource-types";
             case PARAMETERS: return "http://hl7.org/fhir/resource-types";
             case PATIENT: return "http://hl7.org/fhir/resource-types";
             case PAYMENTNOTICE: return "http://hl7.org/fhir/resource-types";
@@ -7113,21 +8123,20 @@ into another (possibly the same) biological entity.
             case PRACTITIONER: return "http://hl7.org/fhir/resource-types";
             case PRACTITIONERROLE: return "http://hl7.org/fhir/resource-types";
             case PROCEDURE: return "http://hl7.org/fhir/resource-types";
-            case PROCESSREQUEST: return "http://hl7.org/fhir/resource-types";
-            case PROCESSRESPONSE: return "http://hl7.org/fhir/resource-types";
-            case PRODUCTPLAN: return "http://hl7.org/fhir/resource-types";
             case PROVENANCE: return "http://hl7.org/fhir/resource-types";
             case QUESTIONNAIRE: return "http://hl7.org/fhir/resource-types";
             case QUESTIONNAIRERESPONSE: return "http://hl7.org/fhir/resource-types";
             case RELATEDPERSON: return "http://hl7.org/fhir/resource-types";
             case REQUESTGROUP: return "http://hl7.org/fhir/resource-types";
+            case RESEARCHDEFINITION: return "http://hl7.org/fhir/resource-types";
+            case RESEARCHELEMENTDEFINITION: return "http://hl7.org/fhir/resource-types";
             case RESEARCHSTUDY: return "http://hl7.org/fhir/resource-types";
             case RESEARCHSUBJECT: return "http://hl7.org/fhir/resource-types";
             case RESOURCE: return "http://hl7.org/fhir/resource-types";
             case RISKASSESSMENT: return "http://hl7.org/fhir/resource-types";
+            case RISKEVIDENCESYNTHESIS: return "http://hl7.org/fhir/resource-types";
             case SCHEDULE: return "http://hl7.org/fhir/resource-types";
             case SEARCHPARAMETER: return "http://hl7.org/fhir/resource-types";
-            case SEQUENCE: return "http://hl7.org/fhir/resource-types";
             case SERVICEREQUEST: return "http://hl7.org/fhir/resource-types";
             case SLOT: return "http://hl7.org/fhir/resource-types";
             case SPECIMEN: return "http://hl7.org/fhir/resource-types";
@@ -7136,8 +8145,11 @@ into another (possibly the same) biological entity.
             case STRUCTUREMAP: return "http://hl7.org/fhir/resource-types";
             case SUBSCRIPTION: return "http://hl7.org/fhir/resource-types";
             case SUBSTANCE: return "http://hl7.org/fhir/resource-types";
+            case SUBSTANCENUCLEICACID: return "http://hl7.org/fhir/resource-types";
             case SUBSTANCEPOLYMER: return "http://hl7.org/fhir/resource-types";
+            case SUBSTANCEPROTEIN: return "http://hl7.org/fhir/resource-types";
             case SUBSTANCEREFERENCEINFORMATION: return "http://hl7.org/fhir/resource-types";
+            case SUBSTANCESOURCEMATERIAL: return "http://hl7.org/fhir/resource-types";
             case SUBSTANCESPECIFICATION: return "http://hl7.org/fhir/resource-types";
             case SUPPLYDELIVERY: return "http://hl7.org/fhir/resource-types";
             case SUPPLYREQUEST: return "http://hl7.org/fhir/resource-types";
@@ -7145,7 +8157,6 @@ into another (possibly the same) biological entity.
             case TERMINOLOGYCAPABILITIES: return "http://hl7.org/fhir/resource-types";
             case TESTREPORT: return "http://hl7.org/fhir/resource-types";
             case TESTSCRIPT: return "http://hl7.org/fhir/resource-types";
-            case USERSESSION: return "http://hl7.org/fhir/resource-types";
             case VALUESET: return "http://hl7.org/fhir/resource-types";
             case VERIFICATIONRESULT: return "http://hl7.org/fhir/resource-types";
             case VISIONPRESCRIPTION: return "http://hl7.org/fhir/resource-types";
@@ -7171,15 +8182,18 @@ into another (possibly the same) biological entity.
             case DURATION: return "A length of time.";
             case ELEMENT: return "Base definition for all elements in a resource.";
             case ELEMENTDEFINITION: return "Captures constraints on each element within the resource, profile, or extension.";
+            case EXPRESSION: return "A expression that is evaluated in a specified context and returns a value. The context of use of the expression must specify the context in which the expression is evaluated, and how the result of the expression is used.";
             case EXTENSION: return "Optional Extension Element - found in all resources.";
             case HUMANNAME: return "A human's name with the ability to identify parts and usage.";
-            case IDENTIFIER: return "A technical identifier - identifies some entity uniquely and unambiguously.";
+            case IDENTIFIER: return "An identifier - identifies some entity uniquely and unambiguously. Typically this is used for business identifiers.";
             case MARKETINGSTATUS: return "The marketing status describes the date when a medicinal product is actually put on the market or the date as of which it is no longer available.";
             case META: return "The metadata about a resource. This is content in the resource that is maintained by the infrastructure. Changes to the content might not always be associated with version changes to the resource.";
             case MONEY: return "An amount of economic utility in some recognized currency.";
-            case NARRATIVE: return "A human-readable formatted text, including images.";
+            case MONEYQUANTITY: return "";
+            case NARRATIVE: return "A human-readable summary of the resource conveying the essential clinical and business information for the resource.";
             case PARAMETERDEFINITION: return "The parameters to the module. This collection specifies both the input and output parameters. Input parameters are provided by the caller as part of the $evaluate operation. Output parameters are included in the GuidanceResponse.";
             case PERIOD: return "A time period defined by a start and end date and optionally time.";
+            case POPULATION: return "A populatioof people with some set of grouping criteria.";
             case PRODCHARACTERISTIC: return "The marketing status describes the date when a medicinal product is actually put on the market or the date as of which it is no longer available.";
             case PRODUCTSHELFLIFE: return "The shelf-life and storage information for a medicinal product item or container can be described using this class.";
             case QUANTITY: return "A measured amount (or an amount that can potentially be measured). Note that measured amounts include amounts that are not precisely quantified, including amounts involving arbitrary units and floating currencies.";
@@ -7191,13 +8205,12 @@ into another (possibly the same) biological entity.
             case SIGNATURE: return "A signature along with supporting context. The signature may be a digital signature that is cryptographic in nature, or some other signature acceptable to the domain. This other signature may be as simple as a graphical image representing a hand-written signature, or a signature ceremony Different signature approaches have different utilities.";
             case SIMPLEQUANTITY: return "";
             case SUBSTANCEAMOUNT: return "Chemical substances are a single substance type whose primary defining element is the molecular structure. Chemical substances shall be defined on the basis of their complete covalent molecular structure; the presence of a salt (counter-ion) and/or solvates (water, alcohols) is also captured. Purity, grade, physical form or particle size are not taken into account in the definition of a chemical substance or in the assignment of a Substance ID.";
-            case SUBSTANCEMOIETY: return "Chemical substances are a single substance type whose primary defining element is the molecular structure. Chemical substances shall be defined on the basis of their complete covalent molecular structure; the presence of a salt (counter-ion) and/or solvates (water, alcohols) is also captured. Purity, grade, physical form or particle size are not taken into account in the definition of a chemical substance or in the assignment of a Substance ID.";
             case TIMING: return "Specifies an event that may occur multiple times. Timing schedules are used to record when things are planned, expected or requested to occur. The most common usage is in dosage instructions for medications. They are also used when planning care of various kinds, and may be used for reporting the schedule to which past regular activities were carried out.";
             case TRIGGERDEFINITION: return "A description of a triggering event. Triggering events can be named events, data events, or periodic, as determined by the type element.";
             case USAGECONTEXT: return "Specifies clinical/business/etc. metadata that can be used to retrieve, index and/or categorize an artifact. This metadata can either be specific to the applicable population (e.g., age category, DRG) or the specific context of care (e.g., venue, care setting, provider of care).";
             case BASE64BINARY: return "A stream of bytes";
             case BOOLEAN: return "Value of \"true\" or \"false\"";
-            case CANONICAL: return "A URI that is a reference to a canonical URI on a FHIR resource";
+            case CANONICAL: return "A URI that is a reference to a canonical URL on a FHIR resource";
             case CODE: return "A string which has at least one character and no leading or trailing whitespace and where there is no whitespace other than single spaces in the contents";
             case DATE: return "A date or partial date (e.g. just year or year + month). There is no time zone. The format is a union of the schema types gYear, gYearMonth and date.  Dates SHALL be valid dates.";
             case DATETIME: return "A date, date-time or partial date (e.g. just year or year + month).  If hours and minutes are specified, a time zone SHALL be populated. The format is a union of the schema types gYear, gYearMonth, date and dateTime. Seconds must be provided due to schema type constraints but may be zero-filled and may be ignored.                 Dates SHALL be valid dates.";
@@ -7223,66 +8236,69 @@ into another (possibly the same) biological entity.
             case APPOINTMENTRESPONSE: return "A reply to an appointment request for a patient and/or practitioner(s), such as a confirmation or rejection.";
             case AUDITEVENT: return "A record of an event made for purposes of maintaining a security log. Typical uses include detection of intrusion attempts and monitoring for inappropriate usage.";
             case BASIC: return "Basic is used for handling concepts not yet defined in FHIR, narrative-only resources that don't map to an existing resource, and custom resources not appropriate for inclusion in the FHIR specification.";
-            case BINARY: return "A binary resource can contain any content, whether text, image, pdf, zip archive, etc.";
+            case BINARY: return "A resource that represents the data of a single raw artifact as digital content accessible in its native format.  A Binary resource can contain any content, whether text, image, pdf, zip archive, etc.";
             case BIOLOGICALLYDERIVEDPRODUCT: return "A material substance originating from a biological entity intended to be transplanted or infused\ninto another (possibly the same) biological entity.";
             case BODYSTRUCTURE: return "Record details about an anatomical structure.  This resource may be used when a coded concept does not provide the necessary detail needed for the use case.";
             case BUNDLE: return "A container for a collection of resources.";
-            case CAPABILITYSTATEMENT: return "A Capability Statement documents a set of capabilities (behaviors) of a FHIR Server that may be used as a statement of actual server functionality or a statement of required or desired server implementation.";
+            case CAPABILITYSTATEMENT: return "A Capability Statement documents a set of capabilities (behaviors) of a FHIR Server for a particular version of FHIR that may be used as a statement of actual server functionality or a statement of required or desired server implementation.";
             case CAREPLAN: return "Describes the intention of how one or more practitioners intend to deliver care for a particular patient, group or community for a period of time, possibly limited to care for a specific condition or set of conditions.";
             case CARETEAM: return "The Care Team includes all the people and organizations who plan to participate in the coordination and delivery of care for a patient.";
+            case CATALOGENTRY: return "Catalog entries are wrappers that contextualize items included in a catalog.";
             case CHARGEITEM: return "The resource ChargeItem describes the provision of healthcare provider products for a certain patient, therefore referring not only to the product, but containing in addition details of the provision, like date, time, amounts and participating organizations and persons. Main Usage of the ChargeItem is to enable the billing process and internal cost allocation.";
-            case CLAIM: return "A provider issued list of services and products provided, or to be provided, to a patient which is provided to an insurer for payment recovery.";
+            case CHARGEITEMDEFINITION: return "The ChargeItemDefinition resource provides the properties that apply to the (billing) codes necessary to calculate costs and prices. The properties may differ largely depending on type and realm, therefore this resource gives only a rough structure and requires profiling for each type of billing code system.";
+            case CLAIM: return "A provider issued list of professional services and products which have been provided, or are to be provided, to a patient which is sent to an insurer for reimbursement.";
             case CLAIMRESPONSE: return "This resource provides the adjudication details from the processing of a Claim resource.";
             case CLINICALIMPRESSION: return "A record of a clinical assessment performed to determine what problem(s) may affect the patient and before planning the treatments or management strategies that are best to manage a patient's condition. Assessments are often 1:1 with a clinical consultation / encounter,  but this varies greatly depending on the clinical workflow. This resource is called \"ClinicalImpression\" rather than \"ClinicalAssessment\" to avoid confusion with the recording of assessment tools such as Apgar score.";
             case CODESYSTEM: return "The CodeSystem resource is used to declare the existence of and describe a code system or code system supplement and its key properties, and optionally define a part or all of its content.";
-            case COMMUNICATION: return "An occurrence of information being transmitted; e.g. an alert that was sent to a responsible provider, a public health agency was notified about a reportable condition.";
+            case COMMUNICATION: return "An occurrence of information being transmitted; e.g. an alert that was sent to a responsible provider, a public health agency that was notified about a reportable condition.";
             case COMMUNICATIONREQUEST: return "A request to convey information; e.g. the CDS system proposes that an alert be sent to a responsible provider, the CDS system proposes that the public health agency be notified about a reportable condition.";
             case COMPARTMENTDEFINITION: return "A compartment definition that defines how resources are accessed on a server.";
             case COMPOSITION: return "A set of healthcare-related information that is assembled together into a single logical package that provides a single coherent statement of meaning, establishes its own context and that has clinical attestation with regard to who is making the statement. A Composition defines the structure and narrative content necessary for a document. However, a Composition alone does not constitute a document. Rather, the Composition must be the first entry in a Bundle where Bundle.type=document, and any other resources referenced from Composition must be included as subsequent entries in the Bundle (for example Patient, Practitioner, Encounter, etc.).";
-            case CONCEPTMAP: return "A statement of relationships from one set of concepts to one or more other concepts - either code systems or data elements, or classes in class models.";
+            case CONCEPTMAP: return "A statement of relationships from one set of concepts to one or more other concepts - either concepts in code systems, or data element/data element concepts, or classes in class models.";
             case CONDITION: return "A clinical condition, problem, diagnosis, or other event, situation, issue, or clinical concept that has risen to a level of concern.";
             case CONSENT: return "A record of a healthcare consumer’s  choices, which permits or denies identified recipient(s) or recipient role(s) to perform one or more actions within a given policy context, for specific purposes and periods of time.";
-            case CONTRACT: return "A formal agreement between parties regarding the conduct of business, exchange of information or other matters.";
-            case COVERAGE: return "Financial instrument which may be used to reimburse or pay for health care products and services.";
+            case CONTRACT: return "Legally enforceable, formally recorded unilateral or bilateral directive i.e., a policy or agreement.";
+            case COVERAGE: return "Financial instrument which may be used to reimburse or pay for health care products and services. Includes both insurance and self-payment.";
+            case COVERAGEELIGIBILITYREQUEST: return "The CoverageEligibilityRequest provides patient and insurance coverage information to an insurer for them to respond, in the form of an CoverageEligibilityResponse, with information regarding whether the stated coverage is valid and in-force and optionally to provide the insurance details of the policy.";
+            case COVERAGEELIGIBILITYRESPONSE: return "This resource provides eligibility and plan details from the processing of an CoverageEligibilityRequest resource.";
             case DETECTEDISSUE: return "Indicates an actual or potential clinical issue with or between one or more active or proposed clinical actions for a patient; e.g. Drug-drug interaction, Ineffective treatment frequency, Procedure-condition conflict, etc.";
-            case DEVICE: return "This resource identifies an instance or a type of a manufactured item that is used in the provision of healthcare without being substantially changed through that activity. The device may be a medical or non-medical device.  Medical devices include durable (reusable) medical equipment, implantable devices, as well as disposable equipment used for diagnostic, treatment, and research for healthcare and public health.  Non-medical devices may include items such as a machine, cellphone, computer, application, etc.";
-            case DEVICECOMPONENT: return "The characteristics, operational status and capabilities of a medical-related component of a medical device.";
+            case DEVICE: return "A type of a manufactured item that is used in the provision of healthcare without being substantially changed through that activity. The device may be a medical or non-medical device.";
+            case DEVICEDEFINITION: return "The characteristics, operational status and capabilities of a medical-related component of a medical device.";
             case DEVICEMETRIC: return "Describes a measurement, calculation or setting capability of a medical device.";
             case DEVICEREQUEST: return "Represents a request for a patient to employ a medical device. The device may be an implantable device, or an external assistive device, such as a walker.";
             case DEVICEUSESTATEMENT: return "A record of a device being used by a patient where the record is the result of a report from the patient or another clinician.";
             case DIAGNOSTICREPORT: return "The findings and interpretation of diagnostic  tests performed on patients, groups of patients, devices, and locations, and/or specimens derived from these. The report includes clinical context such as requesting and provider information, and some mix of atomic results, images, textual and coded interpretations, and formatted representation of diagnostic reports.";
             case DOCUMENTMANIFEST: return "A collection of documents compiled for a purpose together with metadata that applies to the collection.";
-            case DOCUMENTREFERENCE: return "A reference to a document.";
+            case DOCUMENTREFERENCE: return "A reference to a document of any kind for any purpose. Provides metadata about the document so that the document can be discovered and managed. The scope of a document is any seralized object with a mime-type, so includes formal patient centric documents (CDA), cliical notes, scanned paper, and non-patient specific documents like policy text.";
             case DOMAINRESOURCE: return "A resource that includes narrative, extensions, and contained resources.";
-            case ELIGIBILITYREQUEST: return "The EligibilityRequest provides patient and insurance coverage information to an insurer for them to respond, in the form of an EligibilityResponse, with information regarding whether the stated coverage is valid and in-force and optionally to provide the insurance details of the policy.";
-            case ELIGIBILITYRESPONSE: return "This resource provides eligibility and plan details from the processing of an Eligibility resource.";
+            case EFFECTEVIDENCESYNTHESIS: return "The EffectEvidenceSynthesis resource describes the difference in an outcome between exposures states in a population where the effect estimate is derived from a combination of research studies.";
             case ENCOUNTER: return "An interaction between a patient and healthcare provider(s) for the purpose of providing healthcare service(s) or assessing the health status of a patient.";
             case ENDPOINT: return "The technical details of an endpoint that can be used for electronic services, such as for web services providing XDS.b or a REST endpoint for another FHIR server. This may include any security context information.";
             case ENROLLMENTREQUEST: return "This resource provides the insurance enrollment details to the insurer regarding a specified coverage.";
-            case ENROLLMENTRESPONSE: return "This resource provides enrollment and plan details from the processing of an Enrollment resource.";
-            case ENTRYDEFINITION: return "Catalog entries are wrappers that contextualize items included in a catalog.";
+            case ENROLLMENTRESPONSE: return "This resource provides enrollment and plan details from the processing of an EnrollmentRequest resource.";
             case EPISODEOFCARE: return "An association between a patient and an organization / healthcare provider(s) during which time encounters may occur. The managing organization assumes a level of responsibility for the patient during this time.";
             case EVENTDEFINITION: return "The EventDefinition resource provides a reusable description of when a particular event can occur.";
+            case EVIDENCE: return "The Evidence resource describes the conditional state (population and any exposures being compared within the population) and outcome (if specified) that the knowledge (evidence, assertion, recommendation) is about.";
+            case EVIDENCEVARIABLE: return "The EvidenceVariable resource describes a \"PICO\" element that knowledge (evidence, assertion, recommendation) is about.";
             case EXAMPLESCENARIO: return "Example of workflow instance.";
-            case EXPANSIONPROFILE: return "Resource to define constraints on the Expansion of a FHIR ValueSet.";
             case EXPLANATIONOFBENEFIT: return "This resource provides: the claim details; adjudication details from the processing of a Claim; and optionally account balance information, for informing the subscriber of the benefits provided.";
             case FAMILYMEMBERHISTORY: return "Significant health conditions for a person related to the patient relevant in the context of care for the patient.";
             case FLAG: return "Prospective warnings of potential issues when providing care to the patient.";
             case GOAL: return "Describes the intended objective(s) for a patient, group or organization care, for example, weight loss, restoring an activity of daily living, obtaining herd immunity via immunization, meeting a process improvement objective, etc.";
             case GRAPHDEFINITION: return "A formal computable definition of a graph of resources - that is, a coherent set of resources that form a graph by following references. The Graph Definition resource defines a set and makes rules about the set.";
-            case GROUP: return "Represents a defined collection of entities that may be discussed or acted upon collectively but which are not expected to act collectively and are not formally or legally recognized; i.e. a collection of entities that isn't an Organization.";
+            case GROUP: return "Represents a defined collection of entities that may be discussed or acted upon collectively but which are not expected to act collectively, and are not formally or legally recognized; i.e. a collection of entities that isn't an Organization.";
             case GUIDANCERESPONSE: return "A guidance response is the formal response to a guidance request, including any output parameters returned by the evaluation, as well as the description of any proposed actions to be taken.";
             case HEALTHCARESERVICE: return "The details of a healthcare service available at a location.";
             case IMAGINGSTUDY: return "Representation of the content produced in a DICOM imaging study. A study comprises a set of series, each of which includes a set of Service-Object Pair Instances (SOP Instances - images or other data) acquired or produced in a common context.  A series is of only one modality (e.g. X-ray, CT, MR, ultrasound), but a study may have multiple series of different modalities.";
             case IMMUNIZATION: return "Describes the event of a patient being administered a vaccine or a record of an immunization as reported by a patient, a clinician or another party.";
             case IMMUNIZATIONEVALUATION: return "Describes a comparison of an immunization event against published recommendations to determine if the administration is \"valid\" in relation to those  recommendations.";
             case IMMUNIZATIONRECOMMENDATION: return "A patient's point-in-time set of recommendations (i.e. forecasting) according to a published schedule with optional supporting justification.";
-            case IMPLEMENTATIONGUIDE: return "A set of rules of how FHIR is used to solve a particular problem. This resource is used to gather all the parts of an implementation guide into a logical whole and to publish a computable definition of all the parts.";
+            case IMPLEMENTATIONGUIDE: return "A set of rules of how a particular interoperability or standards problem is solved - typically through the use of FHIR resources. This resource is used to gather all the parts of an implementation guide into a logical whole and to publish a computable definition of all the parts.";
+            case INSURANCEPLAN: return "Details of a Health Insurance product/plan provided by an organization.";
             case INVOICE: return "Invoice containing collected ChargeItems from an Account with calculated individual and total price for Billing purpose.";
-            case ITEMINSTANCE: return "A physical, countable instance of an item, for example one box or one unit.";
             case LIBRARY: return "The Library resource is a general-purpose container for knowledge asset definitions. It can be used to describe and expose existing knowledge assets such as logic libraries and information model descriptions, as well as to describe a collection of knowledge assets.";
-            case LINKAGE: return "Identifies two or more records (resource instances) that are referring to the same real-world \"occurrence\".";
-            case LIST: return "A set of information summarized from a list of other resources.";
+            case LINKAGE: return "Identifies two or more records (resource instances) that refer to the same real-world \"occurrence\".";
+            case LIST: return "A list is a curated collection of resources.";
             case LOCATION: return "Details and position information for a physical place where services are provided and resources and participants may be stored, found, contained, or accommodated.";
             case MEASURE: return "The Measure resource provides the definition of a quality measure.";
             case MEASUREREPORT: return "The MeasureReport resource contains the results of the calculation of a measure; and optionally a reference to the resources involved in that calculation.";
@@ -7292,49 +8308,51 @@ into another (possibly the same) biological entity.
             case MEDICATIONDISPENSE: return "Indicates that a medication product is to be or has been dispensed for a named person/patient.  This includes a description of the medication product (supply) provided and the instructions for administering the medication.  The medication dispense is the result of a pharmacy system responding to a medication order.";
             case MEDICATIONKNOWLEDGE: return "Information about a medication that is used to support knowledge.";
             case MEDICATIONREQUEST: return "An order or request for both supply of the medication and the instructions for administration of the medication to a patient. The resource is called \"MedicationRequest\" rather than \"MedicationPrescription\" or \"MedicationOrder\" to generalize the use across inpatient and outpatient settings, including care plans, etc., and to harmonize with workflow patterns.";
-            case MEDICATIONSTATEMENT: return "A record of a medication that is being consumed by a patient.   A MedicationStatement may indicate that the patient may be taking the medication now, or has taken the medication in the past or will be taking the medication in the future.  The source of this information can be the patient, significant other (such as a family member or spouse), or a clinician.  A common scenario where this information is captured is during the history taking process during a patient visit or stay.   The medication information may come from sources such as the patient's memory, from a prescription bottle,  or from a list of medications the patient, clinician or other party maintains. \r\rThe primary difference between a medication statement and a medication administration is that the medication administration has complete administration information and is based on actual administration information from the person who administered the medication.  A medication statement is often, if not always, less specific.  There is no required date/time when the medication was administered, in fact we only know that a source has reported the patient is taking this medication, where details such as time, quantity, or rate or even medication product may be incomplete or missing or less precise.  As stated earlier, the medication statement information may come from the patient's memory, from a prescription bottle or from a list of medications the patient, clinician or other party maintains.  Medication administration is more formal and is not missing detailed information.";
+            case MEDICATIONSTATEMENT: return "A record of a medication that is being consumed by a patient.   A MedicationStatement may indicate that the patient may be taking the medication now or has taken the medication in the past or will be taking the medication in the future.  The source of this information can be the patient, significant other (such as a family member or spouse), or a clinician.  A common scenario where this information is captured is during the history taking process during a patient visit or stay.   The medication information may come from sources such as the patient's memory, from a prescription bottle,  or from a list of medications the patient, clinician or other party maintains. \n\nThe primary difference between a medication statement and a medication administration is that the medication administration has complete administration information and is based on actual administration information from the person who administered the medication.  A medication statement is often, if not always, less specific.  There is no required date/time when the medication was administered, in fact we only know that a source has reported the patient is taking this medication, where details such as time, quantity, or rate or even medication product may be incomplete or missing or less precise.  As stated earlier, the medication statement information may come from the patient's memory, from a prescription bottle or from a list of medications the patient, clinician or other party maintains.  Medication administration is more formal and is not missing detailed information.";
             case MEDICINALPRODUCT: return "Detailed definition of a medicinal product, typically for uses other than direct patient care (e.g. regulatory use).";
             case MEDICINALPRODUCTAUTHORIZATION: return "The regulatory authorization of a medicinal product.";
-            case MEDICINALPRODUCTCLINICALS: return "The clinical particulars - indications, contraindications etc. of a medicinal product, including for regulatory purposes.";
-            case MEDICINALPRODUCTDEVICESPEC: return "A detailed description of a device, typically as part of a regulated medicinal product. It is not intended to relace the Device resource, which covers use of device instances.";
+            case MEDICINALPRODUCTCONTRAINDICATION: return "The clinical particulars - indications, contraindications etc. of a medicinal product, including for regulatory purposes.";
+            case MEDICINALPRODUCTINDICATION: return "Indication for the Medicinal Product.";
             case MEDICINALPRODUCTINGREDIENT: return "An ingredient of a manufactured item or pharmaceutical product.";
+            case MEDICINALPRODUCTINTERACTION: return "The interactions of the medicinal product with other medicinal products, or other forms of interactions.";
+            case MEDICINALPRODUCTMANUFACTURED: return "The manufactured item as contained in the packaged medicinal product.";
             case MEDICINALPRODUCTPACKAGED: return "A medicinal product in a container or package.";
             case MEDICINALPRODUCTPHARMACEUTICAL: return "A pharmaceutical product described in terms of its composition and dose form.";
+            case MEDICINALPRODUCTUNDESIRABLEEFFECT: return "Describe the undesirable effects of the medicinal product.";
             case MESSAGEDEFINITION: return "Defines the characteristics of a message that can be shared between systems, including the type of event that initiates the message, the content to be transmitted and what response(s), if any, are permitted.";
             case MESSAGEHEADER: return "The header for a message exchange that is either requesting or responding to an action.  The reference(s) that are the subject of the action as well as other information related to the action are typically transmitted in a bundle in which the MessageHeader resource instance is the first resource in the bundle.";
+            case MOLECULARSEQUENCE: return "Raw data describing a biological sequence.";
             case NAMINGSYSTEM: return "A curated namespace that issues unique symbols within that namespace for the identification of concepts, people, devices, etc.  Represents a \"System\" used within the Identifier and Coding data types.";
             case NUTRITIONORDER: return "A request to supply a diet, formula feeding (enteral) or oral nutritional supplement to a patient/resident.";
             case OBSERVATION: return "Measurements and simple assertions made about a patient, device or other subject.";
             case OBSERVATIONDEFINITION: return "Set of definitional characteristics for a kind of observation or measurement produced or consumed by an orderable health care service.";
-            case OCCUPATIONALDATA: return "A person's work information, structured to facilitate individual, population, and public health use; not intended to support billing.";
             case OPERATIONDEFINITION: return "A formal computable definition of an operation (on the RESTful interface) or a named query (using the search interaction).";
-            case OPERATIONOUTCOME: return "A collection of error, warning or information messages that result from a system action.";
-            case ORGANIZATION: return "A formally or informally recognized grouping of people or organizations formed for the purpose of achieving some form of collective action.  Includes companies, institutions, corporations, departments, community groups, healthcare practice groups, etc.";
-            case ORGANIZATIONROLE: return "A specific set of Roles/Locations/specialties/services that a practitioner may perform at an organization for a period of time.";
-            case PARAMETERS: return "This special resource type is used to represent an operation request and response (operations.html). It has no other use, and there is no RESTful endpoint associated with it.";
+            case OPERATIONOUTCOME: return "A collection of error, warning, or information messages that result from a system action.";
+            case ORGANIZATION: return "A formally or informally recognized grouping of people or organizations formed for the purpose of achieving some form of collective action.  Includes companies, institutions, corporations, departments, community groups, healthcare practice groups, payer/insurer, etc.";
+            case ORGANIZATIONAFFILIATION: return "Defines an affiliation/assotiation/relationship between 2 distinct oganizations, that is not a part-of relationship/sub-division relationship.";
+            case PARAMETERS: return "This resource is a non-persisted resource used to pass information into and back from an [operation](operations.html). It has no other use, and there is no RESTful endpoint associated with it.";
             case PATIENT: return "Demographics and other administrative information about an individual or animal receiving care or other health-related services.";
             case PAYMENTNOTICE: return "This resource provides the status of the payment for goods and services rendered, and the request and response resource references.";
-            case PAYMENTRECONCILIATION: return "This resource provides payment details and claim references supporting a bulk payment.";
+            case PAYMENTRECONCILIATION: return "This resource provides the details including amount of a payment and allocates the payment items being paid.";
             case PERSON: return "Demographics and administrative information about a person independent of a specific health-related context.";
             case PLANDEFINITION: return "This resource allows for the definition of various types of plans as a sharable, consumable, and executable artifact. The resource is general enough to support the description of a broad range of clinical artifacts such as clinical decision support rules, order sets and protocols.";
             case PRACTITIONER: return "A person who is directly or indirectly involved in the provisioning of healthcare.";
             case PRACTITIONERROLE: return "A specific set of Roles/Locations/specialties/services that a practitioner may perform at an organization for a period of time.";
-            case PROCEDURE: return "An action that is or was performed on a patient. This can be a physical intervention like an operation, or less invasive like counseling or hypnotherapy.";
-            case PROCESSREQUEST: return "This resource provides the target, request and response, and action details for an action to be performed by the target on or about existing resources.";
-            case PROCESSRESPONSE: return "This resource provides processing status, errors and notes from the processing of a resource.";
-            case PRODUCTPLAN: return "Details of a Health Insurance product/plan provided by an organization.";
+            case PROCEDURE: return "An action that is or was performed on or for a patient. This can be a physical intervention like an operation, or less invasive like long term services, counseling, or hypnotherapy.";
             case PROVENANCE: return "Provenance of a resource is a record that describes entities and processes involved in producing and delivering or otherwise influencing that resource. Provenance provides a critical foundation for assessing authenticity, enabling trust, and allowing reproducibility. Provenance assertions are a form of contextual metadata and can themselves become important records with their own provenance. Provenance statement indicates clinical significance in terms of confidence in authenticity, reliability, and trustworthiness, integrity, and stage in lifecycle (e.g. Document Completion - has the artifact been legally authenticated), all of which may impact security, privacy, and trust policies.";
             case QUESTIONNAIRE: return "A structured set of questions intended to guide the collection of answers from end-users. Questionnaires provide detailed control over order, presentation, phraseology and grouping to allow coherent, consistent data collection.";
             case QUESTIONNAIRERESPONSE: return "A structured set of questions and their answers. The questions are ordered and grouped into coherent subsets, corresponding to the structure of the grouping of the questionnaire being responded to.";
             case RELATEDPERSON: return "Information about a person that is involved in the care for a patient, but who is not the target of healthcare, nor has a formal responsibility in the care process.";
             case REQUESTGROUP: return "A group of related requests that can be used to capture intended activities that have inter-dependencies such as \"give this medication after that one\".";
+            case RESEARCHDEFINITION: return "The ResearchDefinition resource describes the conditional state (population and any exposures being compared within the population) and outcome (if specified) that the knowledge (evidence, assertion, recommendation) is about.";
+            case RESEARCHELEMENTDEFINITION: return "The ResearchElementDefinition resource describes a \"PICO\" element that knowledge (evidence, assertion, recommendation) is about.";
             case RESEARCHSTUDY: return "A process where a researcher or organization plans and then executes a series of steps intended to increase the field of healthcare-related knowledge.  This includes studies of safety, efficacy, comparative effectiveness and other information about medications, devices, therapies and other interventional and investigative techniques.  A ResearchStudy involves the gathering of information about human or animal subjects.";
             case RESEARCHSUBJECT: return "A physical entity which is the primary unit of operational and/or administrative interest in a study.";
             case RESOURCE: return "This is the base resource type for everything.";
             case RISKASSESSMENT: return "An assessment of the likely outcome(s) for a patient or other subject as well as the likelihood of each outcome.";
+            case RISKEVIDENCESYNTHESIS: return "The RiskEvidenceSynthesis resource describes the likelihood of an outcome in a population plus exposure state where the risk estimate is derived from a combination of research studies.";
             case SCHEDULE: return "A container for slots of time that may be available for booking appointments.";
             case SEARCHPARAMETER: return "A search parameter that defines a named search item that can be used to search/filter on a resource.";
-            case SEQUENCE: return "Raw data describing a biological sequence.";
             case SERVICEREQUEST: return "A record of a request for service such as diagnostic investigations, treatments, or operations to be performed.";
             case SLOT: return "A slot of time on a schedule that may be available for booking appointments.";
             case SPECIMEN: return "A sample to be used for analysis.";
@@ -7343,19 +8361,21 @@ into another (possibly the same) biological entity.
             case STRUCTUREMAP: return "A Map of relationships between 2 structures that can be used to transform data.";
             case SUBSCRIPTION: return "The subscription resource is used to define a push-based subscription from a server to another system. Once a subscription is registered with the server, the server checks every resource that is created or updated, and if the resource matches the given criteria, it sends a message on the defined \"channel\" so that another system can take an appropriate action.";
             case SUBSTANCE: return "A homogeneous material with a definite composition.";
+            case SUBSTANCENUCLEICACID: return "Nucleic acids are defined by three distinct elements: the base, sugar and linkage. Individual substance/moiety IDs will be created for each of these elements. The nucleotide sequence will be always entered in the 5’-3’ direction.";
             case SUBSTANCEPOLYMER: return "Todo.";
+            case SUBSTANCEPROTEIN: return "A SubstanceProtein is defined as a single unit of a linear amino acid sequence, or a combination of subunits that are either covalently linked or have a defined invariant stoichiometric relationship. This includes all synthetic, recombinant and purified SubstanceProteins of defined sequence, whether the use is therapeutic or prophylactic. This set of elements will be used to describe albumins, coagulation factors, cytokines, growth factors, peptide/SubstanceProtein hormones, enzymes, toxins, toxoids, recombinant vaccines, and immunomodulators.";
             case SUBSTANCEREFERENCEINFORMATION: return "Todo.";
+            case SUBSTANCESOURCEMATERIAL: return "Source material shall capture information on the taxonomic and anatomical origins as well as the fraction of a material that can result in or can be modified to form a substance. This set of data elements shall be used to define polymer substances isolated from biological matrices. Taxonomic and anatomical origins shall be described using a controlled vocabulary as required. This information is captured for naturally derived polymers ( . starch) and structurally diverse substances. For Organisms belonging to the Kingdom Plantae the Substance level defines the fresh material of a single species or infraspecies, the Herbal Drug and the Herbal preparation. For Herbal preparations, the fraction information will be captured at the Substance information level and additional information for herbal extracts will be captured at the Specified Substance Group 1 information level. See for further explanation the Substance Class: Structurally Diverse and the herbal annex.";
             case SUBSTANCESPECIFICATION: return "The detailed description of a substance, typically at a level beyond what is used for prescribing.";
             case SUPPLYDELIVERY: return "Record of delivery of what is supplied.";
             case SUPPLYREQUEST: return "A record of a request for a medication, substance or device used in the healthcare setting.";
             case TASK: return "A task to be performed.";
-            case TERMINOLOGYCAPABILITIES: return "A Terminology Capabilities documents a set of capabilities (behaviors) of a FHIR Server that may be used as a statement of actual server functionality or a statement of required or desired server implementation.";
+            case TERMINOLOGYCAPABILITIES: return "A TerminologyCapabilities resource documents a set of capabilities (behaviors) of a FHIR Terminology Server that may be used as a statement of actual server functionality or a statement of required or desired server implementation.";
             case TESTREPORT: return "A summary of information based on the results of executing a TestScript.";
             case TESTSCRIPT: return "A structured set of tests against a FHIR server or client implementation to determine compliance against the FHIR specification.";
-            case USERSESSION: return "Information about a user's current session.";
-            case VALUESET: return "A ValueSet resource specifies a set of codes drawn from one or more code systems, intended for use in a particular context. Value sets link between [[[CodeSystem]]] definitions and their use in [coded elements](terminologies.html).";
+            case VALUESET: return "A ValueSet resource instance specifies a set of codes drawn from one or more code systems, intended for use in a particular context. Value sets link between [[[CodeSystem]]] definitions and their use in [coded elements](terminologies.html).";
             case VERIFICATIONRESULT: return "Describes validation requirements, source(s), status and dates for one or more elements.";
-            case VISIONPRESCRIPTION: return "An authorization for the supply of glasses and/or contact lenses to a patient.";
+            case VISIONPRESCRIPTION: return "An authorization for the provision of glasses and/or contact lenses to a patient.";
             default: return "?";
           }
         }
@@ -7378,15 +8398,18 @@ into another (possibly the same) biological entity.
             case DURATION: return "Duration";
             case ELEMENT: return "Element";
             case ELEMENTDEFINITION: return "ElementDefinition";
+            case EXPRESSION: return "Expression";
             case EXTENSION: return "Extension";
             case HUMANNAME: return "HumanName";
             case IDENTIFIER: return "Identifier";
             case MARKETINGSTATUS: return "MarketingStatus";
             case META: return "Meta";
             case MONEY: return "Money";
+            case MONEYQUANTITY: return "MoneyQuantity";
             case NARRATIVE: return "Narrative";
             case PARAMETERDEFINITION: return "ParameterDefinition";
             case PERIOD: return "Period";
+            case POPULATION: return "Population";
             case PRODCHARACTERISTIC: return "ProdCharacteristic";
             case PRODUCTSHELFLIFE: return "ProductShelfLife";
             case QUANTITY: return "Quantity";
@@ -7398,7 +8421,6 @@ into another (possibly the same) biological entity.
             case SIGNATURE: return "Signature";
             case SIMPLEQUANTITY: return "SimpleQuantity";
             case SUBSTANCEAMOUNT: return "SubstanceAmount";
-            case SUBSTANCEMOIETY: return "SubstanceMoiety";
             case TIMING: return "Timing";
             case TRIGGERDEFINITION: return "TriggerDefinition";
             case USAGECONTEXT: return "UsageContext";
@@ -7437,7 +8459,9 @@ into another (possibly the same) biological entity.
             case CAPABILITYSTATEMENT: return "CapabilityStatement";
             case CAREPLAN: return "CarePlan";
             case CARETEAM: return "CareTeam";
+            case CATALOGENTRY: return "CatalogEntry";
             case CHARGEITEM: return "ChargeItem";
+            case CHARGEITEMDEFINITION: return "ChargeItemDefinition";
             case CLAIM: return "Claim";
             case CLAIMRESPONSE: return "ClaimResponse";
             case CLINICALIMPRESSION: return "ClinicalImpression";
@@ -7451,9 +8475,11 @@ into another (possibly the same) biological entity.
             case CONSENT: return "Consent";
             case CONTRACT: return "Contract";
             case COVERAGE: return "Coverage";
+            case COVERAGEELIGIBILITYREQUEST: return "CoverageEligibilityRequest";
+            case COVERAGEELIGIBILITYRESPONSE: return "CoverageEligibilityResponse";
             case DETECTEDISSUE: return "DetectedIssue";
             case DEVICE: return "Device";
-            case DEVICECOMPONENT: return "DeviceComponent";
+            case DEVICEDEFINITION: return "DeviceDefinition";
             case DEVICEMETRIC: return "DeviceMetric";
             case DEVICEREQUEST: return "DeviceRequest";
             case DEVICEUSESTATEMENT: return "DeviceUseStatement";
@@ -7461,17 +8487,16 @@ into another (possibly the same) biological entity.
             case DOCUMENTMANIFEST: return "DocumentManifest";
             case DOCUMENTREFERENCE: return "DocumentReference";
             case DOMAINRESOURCE: return "DomainResource";
-            case ELIGIBILITYREQUEST: return "EligibilityRequest";
-            case ELIGIBILITYRESPONSE: return "EligibilityResponse";
+            case EFFECTEVIDENCESYNTHESIS: return "EffectEvidenceSynthesis";
             case ENCOUNTER: return "Encounter";
             case ENDPOINT: return "Endpoint";
             case ENROLLMENTREQUEST: return "EnrollmentRequest";
             case ENROLLMENTRESPONSE: return "EnrollmentResponse";
-            case ENTRYDEFINITION: return "EntryDefinition";
             case EPISODEOFCARE: return "EpisodeOfCare";
             case EVENTDEFINITION: return "EventDefinition";
+            case EVIDENCE: return "Evidence";
+            case EVIDENCEVARIABLE: return "EvidenceVariable";
             case EXAMPLESCENARIO: return "ExampleScenario";
-            case EXPANSIONPROFILE: return "ExpansionProfile";
             case EXPLANATIONOFBENEFIT: return "ExplanationOfBenefit";
             case FAMILYMEMBERHISTORY: return "FamilyMemberHistory";
             case FLAG: return "Flag";
@@ -7485,8 +8510,8 @@ into another (possibly the same) biological entity.
             case IMMUNIZATIONEVALUATION: return "ImmunizationEvaluation";
             case IMMUNIZATIONRECOMMENDATION: return "ImmunizationRecommendation";
             case IMPLEMENTATIONGUIDE: return "ImplementationGuide";
+            case INSURANCEPLAN: return "InsurancePlan";
             case INVOICE: return "Invoice";
-            case ITEMINSTANCE: return "ItemInstance";
             case LIBRARY: return "Library";
             case LINKAGE: return "Linkage";
             case LIST: return "List";
@@ -7502,22 +8527,25 @@ into another (possibly the same) biological entity.
             case MEDICATIONSTATEMENT: return "MedicationStatement";
             case MEDICINALPRODUCT: return "MedicinalProduct";
             case MEDICINALPRODUCTAUTHORIZATION: return "MedicinalProductAuthorization";
-            case MEDICINALPRODUCTCLINICALS: return "MedicinalProductClinicals";
-            case MEDICINALPRODUCTDEVICESPEC: return "MedicinalProductDeviceSpec";
+            case MEDICINALPRODUCTCONTRAINDICATION: return "MedicinalProductContraindication";
+            case MEDICINALPRODUCTINDICATION: return "MedicinalProductIndication";
             case MEDICINALPRODUCTINGREDIENT: return "MedicinalProductIngredient";
+            case MEDICINALPRODUCTINTERACTION: return "MedicinalProductInteraction";
+            case MEDICINALPRODUCTMANUFACTURED: return "MedicinalProductManufactured";
             case MEDICINALPRODUCTPACKAGED: return "MedicinalProductPackaged";
             case MEDICINALPRODUCTPHARMACEUTICAL: return "MedicinalProductPharmaceutical";
+            case MEDICINALPRODUCTUNDESIRABLEEFFECT: return "MedicinalProductUndesirableEffect";
             case MESSAGEDEFINITION: return "MessageDefinition";
             case MESSAGEHEADER: return "MessageHeader";
+            case MOLECULARSEQUENCE: return "MolecularSequence";
             case NAMINGSYSTEM: return "NamingSystem";
             case NUTRITIONORDER: return "NutritionOrder";
             case OBSERVATION: return "Observation";
             case OBSERVATIONDEFINITION: return "ObservationDefinition";
-            case OCCUPATIONALDATA: return "OccupationalData";
             case OPERATIONDEFINITION: return "OperationDefinition";
             case OPERATIONOUTCOME: return "OperationOutcome";
             case ORGANIZATION: return "Organization";
-            case ORGANIZATIONROLE: return "OrganizationRole";
+            case ORGANIZATIONAFFILIATION: return "OrganizationAffiliation";
             case PARAMETERS: return "Parameters";
             case PATIENT: return "Patient";
             case PAYMENTNOTICE: return "PaymentNotice";
@@ -7527,21 +8555,20 @@ into another (possibly the same) biological entity.
             case PRACTITIONER: return "Practitioner";
             case PRACTITIONERROLE: return "PractitionerRole";
             case PROCEDURE: return "Procedure";
-            case PROCESSREQUEST: return "ProcessRequest";
-            case PROCESSRESPONSE: return "ProcessResponse";
-            case PRODUCTPLAN: return "ProductPlan";
             case PROVENANCE: return "Provenance";
             case QUESTIONNAIRE: return "Questionnaire";
             case QUESTIONNAIRERESPONSE: return "QuestionnaireResponse";
             case RELATEDPERSON: return "RelatedPerson";
             case REQUESTGROUP: return "RequestGroup";
+            case RESEARCHDEFINITION: return "ResearchDefinition";
+            case RESEARCHELEMENTDEFINITION: return "ResearchElementDefinition";
             case RESEARCHSTUDY: return "ResearchStudy";
             case RESEARCHSUBJECT: return "ResearchSubject";
             case RESOURCE: return "Resource";
             case RISKASSESSMENT: return "RiskAssessment";
+            case RISKEVIDENCESYNTHESIS: return "RiskEvidenceSynthesis";
             case SCHEDULE: return "Schedule";
             case SEARCHPARAMETER: return "SearchParameter";
-            case SEQUENCE: return "Sequence";
             case SERVICEREQUEST: return "ServiceRequest";
             case SLOT: return "Slot";
             case SPECIMEN: return "Specimen";
@@ -7550,8 +8577,11 @@ into another (possibly the same) biological entity.
             case STRUCTUREMAP: return "StructureMap";
             case SUBSCRIPTION: return "Subscription";
             case SUBSTANCE: return "Substance";
+            case SUBSTANCENUCLEICACID: return "SubstanceNucleicAcid";
             case SUBSTANCEPOLYMER: return "SubstancePolymer";
+            case SUBSTANCEPROTEIN: return "SubstanceProtein";
             case SUBSTANCEREFERENCEINFORMATION: return "SubstanceReferenceInformation";
+            case SUBSTANCESOURCEMATERIAL: return "SubstanceSourceMaterial";
             case SUBSTANCESPECIFICATION: return "SubstanceSpecification";
             case SUPPLYDELIVERY: return "SupplyDelivery";
             case SUPPLYREQUEST: return "SupplyRequest";
@@ -7559,7 +8589,6 @@ into another (possibly the same) biological entity.
             case TERMINOLOGYCAPABILITIES: return "TerminologyCapabilities";
             case TESTREPORT: return "TestReport";
             case TESTSCRIPT: return "TestScript";
-            case USERSESSION: return "UserSession";
             case VALUESET: return "ValueSet";
             case VERIFICATIONRESULT: return "VerificationResult";
             case VISIONPRESCRIPTION: return "VisionPrescription";
@@ -7607,6 +8636,8 @@ into another (possibly the same) biological entity.
           return FHIRDefinedType.ELEMENT;
         if ("ElementDefinition".equals(codeString))
           return FHIRDefinedType.ELEMENTDEFINITION;
+        if ("Expression".equals(codeString))
+          return FHIRDefinedType.EXPRESSION;
         if ("Extension".equals(codeString))
           return FHIRDefinedType.EXTENSION;
         if ("HumanName".equals(codeString))
@@ -7619,12 +8650,16 @@ into another (possibly the same) biological entity.
           return FHIRDefinedType.META;
         if ("Money".equals(codeString))
           return FHIRDefinedType.MONEY;
+        if ("MoneyQuantity".equals(codeString))
+          return FHIRDefinedType.MONEYQUANTITY;
         if ("Narrative".equals(codeString))
           return FHIRDefinedType.NARRATIVE;
         if ("ParameterDefinition".equals(codeString))
           return FHIRDefinedType.PARAMETERDEFINITION;
         if ("Period".equals(codeString))
           return FHIRDefinedType.PERIOD;
+        if ("Population".equals(codeString))
+          return FHIRDefinedType.POPULATION;
         if ("ProdCharacteristic".equals(codeString))
           return FHIRDefinedType.PRODCHARACTERISTIC;
         if ("ProductShelfLife".equals(codeString))
@@ -7647,8 +8682,6 @@ into another (possibly the same) biological entity.
           return FHIRDefinedType.SIMPLEQUANTITY;
         if ("SubstanceAmount".equals(codeString))
           return FHIRDefinedType.SUBSTANCEAMOUNT;
-        if ("SubstanceMoiety".equals(codeString))
-          return FHIRDefinedType.SUBSTANCEMOIETY;
         if ("Timing".equals(codeString))
           return FHIRDefinedType.TIMING;
         if ("TriggerDefinition".equals(codeString))
@@ -7725,8 +8758,12 @@ into another (possibly the same) biological entity.
           return FHIRDefinedType.CAREPLAN;
         if ("CareTeam".equals(codeString))
           return FHIRDefinedType.CARETEAM;
+        if ("CatalogEntry".equals(codeString))
+          return FHIRDefinedType.CATALOGENTRY;
         if ("ChargeItem".equals(codeString))
           return FHIRDefinedType.CHARGEITEM;
+        if ("ChargeItemDefinition".equals(codeString))
+          return FHIRDefinedType.CHARGEITEMDEFINITION;
         if ("Claim".equals(codeString))
           return FHIRDefinedType.CLAIM;
         if ("ClaimResponse".equals(codeString))
@@ -7753,12 +8790,16 @@ into another (possibly the same) biological entity.
           return FHIRDefinedType.CONTRACT;
         if ("Coverage".equals(codeString))
           return FHIRDefinedType.COVERAGE;
+        if ("CoverageEligibilityRequest".equals(codeString))
+          return FHIRDefinedType.COVERAGEELIGIBILITYREQUEST;
+        if ("CoverageEligibilityResponse".equals(codeString))
+          return FHIRDefinedType.COVERAGEELIGIBILITYRESPONSE;
         if ("DetectedIssue".equals(codeString))
           return FHIRDefinedType.DETECTEDISSUE;
         if ("Device".equals(codeString))
           return FHIRDefinedType.DEVICE;
-        if ("DeviceComponent".equals(codeString))
-          return FHIRDefinedType.DEVICECOMPONENT;
+        if ("DeviceDefinition".equals(codeString))
+          return FHIRDefinedType.DEVICEDEFINITION;
         if ("DeviceMetric".equals(codeString))
           return FHIRDefinedType.DEVICEMETRIC;
         if ("DeviceRequest".equals(codeString))
@@ -7773,10 +8814,8 @@ into another (possibly the same) biological entity.
           return FHIRDefinedType.DOCUMENTREFERENCE;
         if ("DomainResource".equals(codeString))
           return FHIRDefinedType.DOMAINRESOURCE;
-        if ("EligibilityRequest".equals(codeString))
-          return FHIRDefinedType.ELIGIBILITYREQUEST;
-        if ("EligibilityResponse".equals(codeString))
-          return FHIRDefinedType.ELIGIBILITYRESPONSE;
+        if ("EffectEvidenceSynthesis".equals(codeString))
+          return FHIRDefinedType.EFFECTEVIDENCESYNTHESIS;
         if ("Encounter".equals(codeString))
           return FHIRDefinedType.ENCOUNTER;
         if ("Endpoint".equals(codeString))
@@ -7785,16 +8824,16 @@ into another (possibly the same) biological entity.
           return FHIRDefinedType.ENROLLMENTREQUEST;
         if ("EnrollmentResponse".equals(codeString))
           return FHIRDefinedType.ENROLLMENTRESPONSE;
-        if ("EntryDefinition".equals(codeString))
-          return FHIRDefinedType.ENTRYDEFINITION;
         if ("EpisodeOfCare".equals(codeString))
           return FHIRDefinedType.EPISODEOFCARE;
         if ("EventDefinition".equals(codeString))
           return FHIRDefinedType.EVENTDEFINITION;
+        if ("Evidence".equals(codeString))
+          return FHIRDefinedType.EVIDENCE;
+        if ("EvidenceVariable".equals(codeString))
+          return FHIRDefinedType.EVIDENCEVARIABLE;
         if ("ExampleScenario".equals(codeString))
           return FHIRDefinedType.EXAMPLESCENARIO;
-        if ("ExpansionProfile".equals(codeString))
-          return FHIRDefinedType.EXPANSIONPROFILE;
         if ("ExplanationOfBenefit".equals(codeString))
           return FHIRDefinedType.EXPLANATIONOFBENEFIT;
         if ("FamilyMemberHistory".equals(codeString))
@@ -7821,10 +8860,10 @@ into another (possibly the same) biological entity.
           return FHIRDefinedType.IMMUNIZATIONRECOMMENDATION;
         if ("ImplementationGuide".equals(codeString))
           return FHIRDefinedType.IMPLEMENTATIONGUIDE;
+        if ("InsurancePlan".equals(codeString))
+          return FHIRDefinedType.INSURANCEPLAN;
         if ("Invoice".equals(codeString))
           return FHIRDefinedType.INVOICE;
-        if ("ItemInstance".equals(codeString))
-          return FHIRDefinedType.ITEMINSTANCE;
         if ("Library".equals(codeString))
           return FHIRDefinedType.LIBRARY;
         if ("Linkage".equals(codeString))
@@ -7855,20 +8894,28 @@ into another (possibly the same) biological entity.
           return FHIRDefinedType.MEDICINALPRODUCT;
         if ("MedicinalProductAuthorization".equals(codeString))
           return FHIRDefinedType.MEDICINALPRODUCTAUTHORIZATION;
-        if ("MedicinalProductClinicals".equals(codeString))
-          return FHIRDefinedType.MEDICINALPRODUCTCLINICALS;
-        if ("MedicinalProductDeviceSpec".equals(codeString))
-          return FHIRDefinedType.MEDICINALPRODUCTDEVICESPEC;
+        if ("MedicinalProductContraindication".equals(codeString))
+          return FHIRDefinedType.MEDICINALPRODUCTCONTRAINDICATION;
+        if ("MedicinalProductIndication".equals(codeString))
+          return FHIRDefinedType.MEDICINALPRODUCTINDICATION;
         if ("MedicinalProductIngredient".equals(codeString))
           return FHIRDefinedType.MEDICINALPRODUCTINGREDIENT;
+        if ("MedicinalProductInteraction".equals(codeString))
+          return FHIRDefinedType.MEDICINALPRODUCTINTERACTION;
+        if ("MedicinalProductManufactured".equals(codeString))
+          return FHIRDefinedType.MEDICINALPRODUCTMANUFACTURED;
         if ("MedicinalProductPackaged".equals(codeString))
           return FHIRDefinedType.MEDICINALPRODUCTPACKAGED;
         if ("MedicinalProductPharmaceutical".equals(codeString))
           return FHIRDefinedType.MEDICINALPRODUCTPHARMACEUTICAL;
+        if ("MedicinalProductUndesirableEffect".equals(codeString))
+          return FHIRDefinedType.MEDICINALPRODUCTUNDESIRABLEEFFECT;
         if ("MessageDefinition".equals(codeString))
           return FHIRDefinedType.MESSAGEDEFINITION;
         if ("MessageHeader".equals(codeString))
           return FHIRDefinedType.MESSAGEHEADER;
+        if ("MolecularSequence".equals(codeString))
+          return FHIRDefinedType.MOLECULARSEQUENCE;
         if ("NamingSystem".equals(codeString))
           return FHIRDefinedType.NAMINGSYSTEM;
         if ("NutritionOrder".equals(codeString))
@@ -7877,16 +8924,14 @@ into another (possibly the same) biological entity.
           return FHIRDefinedType.OBSERVATION;
         if ("ObservationDefinition".equals(codeString))
           return FHIRDefinedType.OBSERVATIONDEFINITION;
-        if ("OccupationalData".equals(codeString))
-          return FHIRDefinedType.OCCUPATIONALDATA;
         if ("OperationDefinition".equals(codeString))
           return FHIRDefinedType.OPERATIONDEFINITION;
         if ("OperationOutcome".equals(codeString))
           return FHIRDefinedType.OPERATIONOUTCOME;
         if ("Organization".equals(codeString))
           return FHIRDefinedType.ORGANIZATION;
-        if ("OrganizationRole".equals(codeString))
-          return FHIRDefinedType.ORGANIZATIONROLE;
+        if ("OrganizationAffiliation".equals(codeString))
+          return FHIRDefinedType.ORGANIZATIONAFFILIATION;
         if ("Parameters".equals(codeString))
           return FHIRDefinedType.PARAMETERS;
         if ("Patient".equals(codeString))
@@ -7905,12 +8950,6 @@ into another (possibly the same) biological entity.
           return FHIRDefinedType.PRACTITIONERROLE;
         if ("Procedure".equals(codeString))
           return FHIRDefinedType.PROCEDURE;
-        if ("ProcessRequest".equals(codeString))
-          return FHIRDefinedType.PROCESSREQUEST;
-        if ("ProcessResponse".equals(codeString))
-          return FHIRDefinedType.PROCESSRESPONSE;
-        if ("ProductPlan".equals(codeString))
-          return FHIRDefinedType.PRODUCTPLAN;
         if ("Provenance".equals(codeString))
           return FHIRDefinedType.PROVENANCE;
         if ("Questionnaire".equals(codeString))
@@ -7921,6 +8960,10 @@ into another (possibly the same) biological entity.
           return FHIRDefinedType.RELATEDPERSON;
         if ("RequestGroup".equals(codeString))
           return FHIRDefinedType.REQUESTGROUP;
+        if ("ResearchDefinition".equals(codeString))
+          return FHIRDefinedType.RESEARCHDEFINITION;
+        if ("ResearchElementDefinition".equals(codeString))
+          return FHIRDefinedType.RESEARCHELEMENTDEFINITION;
         if ("ResearchStudy".equals(codeString))
           return FHIRDefinedType.RESEARCHSTUDY;
         if ("ResearchSubject".equals(codeString))
@@ -7929,12 +8972,12 @@ into another (possibly the same) biological entity.
           return FHIRDefinedType.RESOURCE;
         if ("RiskAssessment".equals(codeString))
           return FHIRDefinedType.RISKASSESSMENT;
+        if ("RiskEvidenceSynthesis".equals(codeString))
+          return FHIRDefinedType.RISKEVIDENCESYNTHESIS;
         if ("Schedule".equals(codeString))
           return FHIRDefinedType.SCHEDULE;
         if ("SearchParameter".equals(codeString))
           return FHIRDefinedType.SEARCHPARAMETER;
-        if ("Sequence".equals(codeString))
-          return FHIRDefinedType.SEQUENCE;
         if ("ServiceRequest".equals(codeString))
           return FHIRDefinedType.SERVICEREQUEST;
         if ("Slot".equals(codeString))
@@ -7951,10 +8994,16 @@ into another (possibly the same) biological entity.
           return FHIRDefinedType.SUBSCRIPTION;
         if ("Substance".equals(codeString))
           return FHIRDefinedType.SUBSTANCE;
+        if ("SubstanceNucleicAcid".equals(codeString))
+          return FHIRDefinedType.SUBSTANCENUCLEICACID;
         if ("SubstancePolymer".equals(codeString))
           return FHIRDefinedType.SUBSTANCEPOLYMER;
+        if ("SubstanceProtein".equals(codeString))
+          return FHIRDefinedType.SUBSTANCEPROTEIN;
         if ("SubstanceReferenceInformation".equals(codeString))
           return FHIRDefinedType.SUBSTANCEREFERENCEINFORMATION;
+        if ("SubstanceSourceMaterial".equals(codeString))
+          return FHIRDefinedType.SUBSTANCESOURCEMATERIAL;
         if ("SubstanceSpecification".equals(codeString))
           return FHIRDefinedType.SUBSTANCESPECIFICATION;
         if ("SupplyDelivery".equals(codeString))
@@ -7969,8 +9018,6 @@ into another (possibly the same) biological entity.
           return FHIRDefinedType.TESTREPORT;
         if ("TestScript".equals(codeString))
           return FHIRDefinedType.TESTSCRIPT;
-        if ("UserSession".equals(codeString))
-          return FHIRDefinedType.USERSESSION;
         if ("ValueSet".equals(codeString))
           return FHIRDefinedType.VALUESET;
         if ("VerificationResult".equals(codeString))
@@ -8021,6 +9068,8 @@ into another (possibly the same) biological entity.
           return new Enumeration<FHIRDefinedType>(this, FHIRDefinedType.ELEMENT);
         if ("ElementDefinition".equals(codeString))
           return new Enumeration<FHIRDefinedType>(this, FHIRDefinedType.ELEMENTDEFINITION);
+        if ("Expression".equals(codeString))
+          return new Enumeration<FHIRDefinedType>(this, FHIRDefinedType.EXPRESSION);
         if ("Extension".equals(codeString))
           return new Enumeration<FHIRDefinedType>(this, FHIRDefinedType.EXTENSION);
         if ("HumanName".equals(codeString))
@@ -8033,12 +9082,16 @@ into another (possibly the same) biological entity.
           return new Enumeration<FHIRDefinedType>(this, FHIRDefinedType.META);
         if ("Money".equals(codeString))
           return new Enumeration<FHIRDefinedType>(this, FHIRDefinedType.MONEY);
+        if ("MoneyQuantity".equals(codeString))
+          return new Enumeration<FHIRDefinedType>(this, FHIRDefinedType.MONEYQUANTITY);
         if ("Narrative".equals(codeString))
           return new Enumeration<FHIRDefinedType>(this, FHIRDefinedType.NARRATIVE);
         if ("ParameterDefinition".equals(codeString))
           return new Enumeration<FHIRDefinedType>(this, FHIRDefinedType.PARAMETERDEFINITION);
         if ("Period".equals(codeString))
           return new Enumeration<FHIRDefinedType>(this, FHIRDefinedType.PERIOD);
+        if ("Population".equals(codeString))
+          return new Enumeration<FHIRDefinedType>(this, FHIRDefinedType.POPULATION);
         if ("ProdCharacteristic".equals(codeString))
           return new Enumeration<FHIRDefinedType>(this, FHIRDefinedType.PRODCHARACTERISTIC);
         if ("ProductShelfLife".equals(codeString))
@@ -8061,8 +9114,6 @@ into another (possibly the same) biological entity.
           return new Enumeration<FHIRDefinedType>(this, FHIRDefinedType.SIMPLEQUANTITY);
         if ("SubstanceAmount".equals(codeString))
           return new Enumeration<FHIRDefinedType>(this, FHIRDefinedType.SUBSTANCEAMOUNT);
-        if ("SubstanceMoiety".equals(codeString))
-          return new Enumeration<FHIRDefinedType>(this, FHIRDefinedType.SUBSTANCEMOIETY);
         if ("Timing".equals(codeString))
           return new Enumeration<FHIRDefinedType>(this, FHIRDefinedType.TIMING);
         if ("TriggerDefinition".equals(codeString))
@@ -8139,8 +9190,12 @@ into another (possibly the same) biological entity.
           return new Enumeration<FHIRDefinedType>(this, FHIRDefinedType.CAREPLAN);
         if ("CareTeam".equals(codeString))
           return new Enumeration<FHIRDefinedType>(this, FHIRDefinedType.CARETEAM);
+        if ("CatalogEntry".equals(codeString))
+          return new Enumeration<FHIRDefinedType>(this, FHIRDefinedType.CATALOGENTRY);
         if ("ChargeItem".equals(codeString))
           return new Enumeration<FHIRDefinedType>(this, FHIRDefinedType.CHARGEITEM);
+        if ("ChargeItemDefinition".equals(codeString))
+          return new Enumeration<FHIRDefinedType>(this, FHIRDefinedType.CHARGEITEMDEFINITION);
         if ("Claim".equals(codeString))
           return new Enumeration<FHIRDefinedType>(this, FHIRDefinedType.CLAIM);
         if ("ClaimResponse".equals(codeString))
@@ -8167,12 +9222,16 @@ into another (possibly the same) biological entity.
           return new Enumeration<FHIRDefinedType>(this, FHIRDefinedType.CONTRACT);
         if ("Coverage".equals(codeString))
           return new Enumeration<FHIRDefinedType>(this, FHIRDefinedType.COVERAGE);
+        if ("CoverageEligibilityRequest".equals(codeString))
+          return new Enumeration<FHIRDefinedType>(this, FHIRDefinedType.COVERAGEELIGIBILITYREQUEST);
+        if ("CoverageEligibilityResponse".equals(codeString))
+          return new Enumeration<FHIRDefinedType>(this, FHIRDefinedType.COVERAGEELIGIBILITYRESPONSE);
         if ("DetectedIssue".equals(codeString))
           return new Enumeration<FHIRDefinedType>(this, FHIRDefinedType.DETECTEDISSUE);
         if ("Device".equals(codeString))
           return new Enumeration<FHIRDefinedType>(this, FHIRDefinedType.DEVICE);
-        if ("DeviceComponent".equals(codeString))
-          return new Enumeration<FHIRDefinedType>(this, FHIRDefinedType.DEVICECOMPONENT);
+        if ("DeviceDefinition".equals(codeString))
+          return new Enumeration<FHIRDefinedType>(this, FHIRDefinedType.DEVICEDEFINITION);
         if ("DeviceMetric".equals(codeString))
           return new Enumeration<FHIRDefinedType>(this, FHIRDefinedType.DEVICEMETRIC);
         if ("DeviceRequest".equals(codeString))
@@ -8187,10 +9246,8 @@ into another (possibly the same) biological entity.
           return new Enumeration<FHIRDefinedType>(this, FHIRDefinedType.DOCUMENTREFERENCE);
         if ("DomainResource".equals(codeString))
           return new Enumeration<FHIRDefinedType>(this, FHIRDefinedType.DOMAINRESOURCE);
-        if ("EligibilityRequest".equals(codeString))
-          return new Enumeration<FHIRDefinedType>(this, FHIRDefinedType.ELIGIBILITYREQUEST);
-        if ("EligibilityResponse".equals(codeString))
-          return new Enumeration<FHIRDefinedType>(this, FHIRDefinedType.ELIGIBILITYRESPONSE);
+        if ("EffectEvidenceSynthesis".equals(codeString))
+          return new Enumeration<FHIRDefinedType>(this, FHIRDefinedType.EFFECTEVIDENCESYNTHESIS);
         if ("Encounter".equals(codeString))
           return new Enumeration<FHIRDefinedType>(this, FHIRDefinedType.ENCOUNTER);
         if ("Endpoint".equals(codeString))
@@ -8199,16 +9256,16 @@ into another (possibly the same) biological entity.
           return new Enumeration<FHIRDefinedType>(this, FHIRDefinedType.ENROLLMENTREQUEST);
         if ("EnrollmentResponse".equals(codeString))
           return new Enumeration<FHIRDefinedType>(this, FHIRDefinedType.ENROLLMENTRESPONSE);
-        if ("EntryDefinition".equals(codeString))
-          return new Enumeration<FHIRDefinedType>(this, FHIRDefinedType.ENTRYDEFINITION);
         if ("EpisodeOfCare".equals(codeString))
           return new Enumeration<FHIRDefinedType>(this, FHIRDefinedType.EPISODEOFCARE);
         if ("EventDefinition".equals(codeString))
           return new Enumeration<FHIRDefinedType>(this, FHIRDefinedType.EVENTDEFINITION);
+        if ("Evidence".equals(codeString))
+          return new Enumeration<FHIRDefinedType>(this, FHIRDefinedType.EVIDENCE);
+        if ("EvidenceVariable".equals(codeString))
+          return new Enumeration<FHIRDefinedType>(this, FHIRDefinedType.EVIDENCEVARIABLE);
         if ("ExampleScenario".equals(codeString))
           return new Enumeration<FHIRDefinedType>(this, FHIRDefinedType.EXAMPLESCENARIO);
-        if ("ExpansionProfile".equals(codeString))
-          return new Enumeration<FHIRDefinedType>(this, FHIRDefinedType.EXPANSIONPROFILE);
         if ("ExplanationOfBenefit".equals(codeString))
           return new Enumeration<FHIRDefinedType>(this, FHIRDefinedType.EXPLANATIONOFBENEFIT);
         if ("FamilyMemberHistory".equals(codeString))
@@ -8235,10 +9292,10 @@ into another (possibly the same) biological entity.
           return new Enumeration<FHIRDefinedType>(this, FHIRDefinedType.IMMUNIZATIONRECOMMENDATION);
         if ("ImplementationGuide".equals(codeString))
           return new Enumeration<FHIRDefinedType>(this, FHIRDefinedType.IMPLEMENTATIONGUIDE);
+        if ("InsurancePlan".equals(codeString))
+          return new Enumeration<FHIRDefinedType>(this, FHIRDefinedType.INSURANCEPLAN);
         if ("Invoice".equals(codeString))
           return new Enumeration<FHIRDefinedType>(this, FHIRDefinedType.INVOICE);
-        if ("ItemInstance".equals(codeString))
-          return new Enumeration<FHIRDefinedType>(this, FHIRDefinedType.ITEMINSTANCE);
         if ("Library".equals(codeString))
           return new Enumeration<FHIRDefinedType>(this, FHIRDefinedType.LIBRARY);
         if ("Linkage".equals(codeString))
@@ -8269,20 +9326,28 @@ into another (possibly the same) biological entity.
           return new Enumeration<FHIRDefinedType>(this, FHIRDefinedType.MEDICINALPRODUCT);
         if ("MedicinalProductAuthorization".equals(codeString))
           return new Enumeration<FHIRDefinedType>(this, FHIRDefinedType.MEDICINALPRODUCTAUTHORIZATION);
-        if ("MedicinalProductClinicals".equals(codeString))
-          return new Enumeration<FHIRDefinedType>(this, FHIRDefinedType.MEDICINALPRODUCTCLINICALS);
-        if ("MedicinalProductDeviceSpec".equals(codeString))
-          return new Enumeration<FHIRDefinedType>(this, FHIRDefinedType.MEDICINALPRODUCTDEVICESPEC);
+        if ("MedicinalProductContraindication".equals(codeString))
+          return new Enumeration<FHIRDefinedType>(this, FHIRDefinedType.MEDICINALPRODUCTCONTRAINDICATION);
+        if ("MedicinalProductIndication".equals(codeString))
+          return new Enumeration<FHIRDefinedType>(this, FHIRDefinedType.MEDICINALPRODUCTINDICATION);
         if ("MedicinalProductIngredient".equals(codeString))
           return new Enumeration<FHIRDefinedType>(this, FHIRDefinedType.MEDICINALPRODUCTINGREDIENT);
+        if ("MedicinalProductInteraction".equals(codeString))
+          return new Enumeration<FHIRDefinedType>(this, FHIRDefinedType.MEDICINALPRODUCTINTERACTION);
+        if ("MedicinalProductManufactured".equals(codeString))
+          return new Enumeration<FHIRDefinedType>(this, FHIRDefinedType.MEDICINALPRODUCTMANUFACTURED);
         if ("MedicinalProductPackaged".equals(codeString))
           return new Enumeration<FHIRDefinedType>(this, FHIRDefinedType.MEDICINALPRODUCTPACKAGED);
         if ("MedicinalProductPharmaceutical".equals(codeString))
           return new Enumeration<FHIRDefinedType>(this, FHIRDefinedType.MEDICINALPRODUCTPHARMACEUTICAL);
+        if ("MedicinalProductUndesirableEffect".equals(codeString))
+          return new Enumeration<FHIRDefinedType>(this, FHIRDefinedType.MEDICINALPRODUCTUNDESIRABLEEFFECT);
         if ("MessageDefinition".equals(codeString))
           return new Enumeration<FHIRDefinedType>(this, FHIRDefinedType.MESSAGEDEFINITION);
         if ("MessageHeader".equals(codeString))
           return new Enumeration<FHIRDefinedType>(this, FHIRDefinedType.MESSAGEHEADER);
+        if ("MolecularSequence".equals(codeString))
+          return new Enumeration<FHIRDefinedType>(this, FHIRDefinedType.MOLECULARSEQUENCE);
         if ("NamingSystem".equals(codeString))
           return new Enumeration<FHIRDefinedType>(this, FHIRDefinedType.NAMINGSYSTEM);
         if ("NutritionOrder".equals(codeString))
@@ -8291,16 +9356,14 @@ into another (possibly the same) biological entity.
           return new Enumeration<FHIRDefinedType>(this, FHIRDefinedType.OBSERVATION);
         if ("ObservationDefinition".equals(codeString))
           return new Enumeration<FHIRDefinedType>(this, FHIRDefinedType.OBSERVATIONDEFINITION);
-        if ("OccupationalData".equals(codeString))
-          return new Enumeration<FHIRDefinedType>(this, FHIRDefinedType.OCCUPATIONALDATA);
         if ("OperationDefinition".equals(codeString))
           return new Enumeration<FHIRDefinedType>(this, FHIRDefinedType.OPERATIONDEFINITION);
         if ("OperationOutcome".equals(codeString))
           return new Enumeration<FHIRDefinedType>(this, FHIRDefinedType.OPERATIONOUTCOME);
         if ("Organization".equals(codeString))
           return new Enumeration<FHIRDefinedType>(this, FHIRDefinedType.ORGANIZATION);
-        if ("OrganizationRole".equals(codeString))
-          return new Enumeration<FHIRDefinedType>(this, FHIRDefinedType.ORGANIZATIONROLE);
+        if ("OrganizationAffiliation".equals(codeString))
+          return new Enumeration<FHIRDefinedType>(this, FHIRDefinedType.ORGANIZATIONAFFILIATION);
         if ("Parameters".equals(codeString))
           return new Enumeration<FHIRDefinedType>(this, FHIRDefinedType.PARAMETERS);
         if ("Patient".equals(codeString))
@@ -8319,12 +9382,6 @@ into another (possibly the same) biological entity.
           return new Enumeration<FHIRDefinedType>(this, FHIRDefinedType.PRACTITIONERROLE);
         if ("Procedure".equals(codeString))
           return new Enumeration<FHIRDefinedType>(this, FHIRDefinedType.PROCEDURE);
-        if ("ProcessRequest".equals(codeString))
-          return new Enumeration<FHIRDefinedType>(this, FHIRDefinedType.PROCESSREQUEST);
-        if ("ProcessResponse".equals(codeString))
-          return new Enumeration<FHIRDefinedType>(this, FHIRDefinedType.PROCESSRESPONSE);
-        if ("ProductPlan".equals(codeString))
-          return new Enumeration<FHIRDefinedType>(this, FHIRDefinedType.PRODUCTPLAN);
         if ("Provenance".equals(codeString))
           return new Enumeration<FHIRDefinedType>(this, FHIRDefinedType.PROVENANCE);
         if ("Questionnaire".equals(codeString))
@@ -8335,6 +9392,10 @@ into another (possibly the same) biological entity.
           return new Enumeration<FHIRDefinedType>(this, FHIRDefinedType.RELATEDPERSON);
         if ("RequestGroup".equals(codeString))
           return new Enumeration<FHIRDefinedType>(this, FHIRDefinedType.REQUESTGROUP);
+        if ("ResearchDefinition".equals(codeString))
+          return new Enumeration<FHIRDefinedType>(this, FHIRDefinedType.RESEARCHDEFINITION);
+        if ("ResearchElementDefinition".equals(codeString))
+          return new Enumeration<FHIRDefinedType>(this, FHIRDefinedType.RESEARCHELEMENTDEFINITION);
         if ("ResearchStudy".equals(codeString))
           return new Enumeration<FHIRDefinedType>(this, FHIRDefinedType.RESEARCHSTUDY);
         if ("ResearchSubject".equals(codeString))
@@ -8343,12 +9404,12 @@ into another (possibly the same) biological entity.
           return new Enumeration<FHIRDefinedType>(this, FHIRDefinedType.RESOURCE);
         if ("RiskAssessment".equals(codeString))
           return new Enumeration<FHIRDefinedType>(this, FHIRDefinedType.RISKASSESSMENT);
+        if ("RiskEvidenceSynthesis".equals(codeString))
+          return new Enumeration<FHIRDefinedType>(this, FHIRDefinedType.RISKEVIDENCESYNTHESIS);
         if ("Schedule".equals(codeString))
           return new Enumeration<FHIRDefinedType>(this, FHIRDefinedType.SCHEDULE);
         if ("SearchParameter".equals(codeString))
           return new Enumeration<FHIRDefinedType>(this, FHIRDefinedType.SEARCHPARAMETER);
-        if ("Sequence".equals(codeString))
-          return new Enumeration<FHIRDefinedType>(this, FHIRDefinedType.SEQUENCE);
         if ("ServiceRequest".equals(codeString))
           return new Enumeration<FHIRDefinedType>(this, FHIRDefinedType.SERVICEREQUEST);
         if ("Slot".equals(codeString))
@@ -8365,10 +9426,16 @@ into another (possibly the same) biological entity.
           return new Enumeration<FHIRDefinedType>(this, FHIRDefinedType.SUBSCRIPTION);
         if ("Substance".equals(codeString))
           return new Enumeration<FHIRDefinedType>(this, FHIRDefinedType.SUBSTANCE);
+        if ("SubstanceNucleicAcid".equals(codeString))
+          return new Enumeration<FHIRDefinedType>(this, FHIRDefinedType.SUBSTANCENUCLEICACID);
         if ("SubstancePolymer".equals(codeString))
           return new Enumeration<FHIRDefinedType>(this, FHIRDefinedType.SUBSTANCEPOLYMER);
+        if ("SubstanceProtein".equals(codeString))
+          return new Enumeration<FHIRDefinedType>(this, FHIRDefinedType.SUBSTANCEPROTEIN);
         if ("SubstanceReferenceInformation".equals(codeString))
           return new Enumeration<FHIRDefinedType>(this, FHIRDefinedType.SUBSTANCEREFERENCEINFORMATION);
+        if ("SubstanceSourceMaterial".equals(codeString))
+          return new Enumeration<FHIRDefinedType>(this, FHIRDefinedType.SUBSTANCESOURCEMATERIAL);
         if ("SubstanceSpecification".equals(codeString))
           return new Enumeration<FHIRDefinedType>(this, FHIRDefinedType.SUBSTANCESPECIFICATION);
         if ("SupplyDelivery".equals(codeString))
@@ -8383,8 +9450,6 @@ into another (possibly the same) biological entity.
           return new Enumeration<FHIRDefinedType>(this, FHIRDefinedType.TESTREPORT);
         if ("TestScript".equals(codeString))
           return new Enumeration<FHIRDefinedType>(this, FHIRDefinedType.TESTSCRIPT);
-        if ("UserSession".equals(codeString))
-          return new Enumeration<FHIRDefinedType>(this, FHIRDefinedType.USERSESSION);
         if ("ValueSet".equals(codeString))
           return new Enumeration<FHIRDefinedType>(this, FHIRDefinedType.VALUESET);
         if ("VerificationResult".equals(codeString))
@@ -8428,6 +9493,8 @@ into another (possibly the same) biological entity.
         return "Element";
       if (code == FHIRDefinedType.ELEMENTDEFINITION)
         return "ElementDefinition";
+      if (code == FHIRDefinedType.EXPRESSION)
+        return "Expression";
       if (code == FHIRDefinedType.EXTENSION)
         return "Extension";
       if (code == FHIRDefinedType.HUMANNAME)
@@ -8440,12 +9507,16 @@ into another (possibly the same) biological entity.
         return "Meta";
       if (code == FHIRDefinedType.MONEY)
         return "Money";
+      if (code == FHIRDefinedType.MONEYQUANTITY)
+        return "MoneyQuantity";
       if (code == FHIRDefinedType.NARRATIVE)
         return "Narrative";
       if (code == FHIRDefinedType.PARAMETERDEFINITION)
         return "ParameterDefinition";
       if (code == FHIRDefinedType.PERIOD)
         return "Period";
+      if (code == FHIRDefinedType.POPULATION)
+        return "Population";
       if (code == FHIRDefinedType.PRODCHARACTERISTIC)
         return "ProdCharacteristic";
       if (code == FHIRDefinedType.PRODUCTSHELFLIFE)
@@ -8468,8 +9539,6 @@ into another (possibly the same) biological entity.
         return "SimpleQuantity";
       if (code == FHIRDefinedType.SUBSTANCEAMOUNT)
         return "SubstanceAmount";
-      if (code == FHIRDefinedType.SUBSTANCEMOIETY)
-        return "SubstanceMoiety";
       if (code == FHIRDefinedType.TIMING)
         return "Timing";
       if (code == FHIRDefinedType.TRIGGERDEFINITION)
@@ -8546,8 +9615,12 @@ into another (possibly the same) biological entity.
         return "CarePlan";
       if (code == FHIRDefinedType.CARETEAM)
         return "CareTeam";
+      if (code == FHIRDefinedType.CATALOGENTRY)
+        return "CatalogEntry";
       if (code == FHIRDefinedType.CHARGEITEM)
         return "ChargeItem";
+      if (code == FHIRDefinedType.CHARGEITEMDEFINITION)
+        return "ChargeItemDefinition";
       if (code == FHIRDefinedType.CLAIM)
         return "Claim";
       if (code == FHIRDefinedType.CLAIMRESPONSE)
@@ -8574,12 +9647,16 @@ into another (possibly the same) biological entity.
         return "Contract";
       if (code == FHIRDefinedType.COVERAGE)
         return "Coverage";
+      if (code == FHIRDefinedType.COVERAGEELIGIBILITYREQUEST)
+        return "CoverageEligibilityRequest";
+      if (code == FHIRDefinedType.COVERAGEELIGIBILITYRESPONSE)
+        return "CoverageEligibilityResponse";
       if (code == FHIRDefinedType.DETECTEDISSUE)
         return "DetectedIssue";
       if (code == FHIRDefinedType.DEVICE)
         return "Device";
-      if (code == FHIRDefinedType.DEVICECOMPONENT)
-        return "DeviceComponent";
+      if (code == FHIRDefinedType.DEVICEDEFINITION)
+        return "DeviceDefinition";
       if (code == FHIRDefinedType.DEVICEMETRIC)
         return "DeviceMetric";
       if (code == FHIRDefinedType.DEVICEREQUEST)
@@ -8594,10 +9671,8 @@ into another (possibly the same) biological entity.
         return "DocumentReference";
       if (code == FHIRDefinedType.DOMAINRESOURCE)
         return "DomainResource";
-      if (code == FHIRDefinedType.ELIGIBILITYREQUEST)
-        return "EligibilityRequest";
-      if (code == FHIRDefinedType.ELIGIBILITYRESPONSE)
-        return "EligibilityResponse";
+      if (code == FHIRDefinedType.EFFECTEVIDENCESYNTHESIS)
+        return "EffectEvidenceSynthesis";
       if (code == FHIRDefinedType.ENCOUNTER)
         return "Encounter";
       if (code == FHIRDefinedType.ENDPOINT)
@@ -8606,16 +9681,16 @@ into another (possibly the same) biological entity.
         return "EnrollmentRequest";
       if (code == FHIRDefinedType.ENROLLMENTRESPONSE)
         return "EnrollmentResponse";
-      if (code == FHIRDefinedType.ENTRYDEFINITION)
-        return "EntryDefinition";
       if (code == FHIRDefinedType.EPISODEOFCARE)
         return "EpisodeOfCare";
       if (code == FHIRDefinedType.EVENTDEFINITION)
         return "EventDefinition";
+      if (code == FHIRDefinedType.EVIDENCE)
+        return "Evidence";
+      if (code == FHIRDefinedType.EVIDENCEVARIABLE)
+        return "EvidenceVariable";
       if (code == FHIRDefinedType.EXAMPLESCENARIO)
         return "ExampleScenario";
-      if (code == FHIRDefinedType.EXPANSIONPROFILE)
-        return "ExpansionProfile";
       if (code == FHIRDefinedType.EXPLANATIONOFBENEFIT)
         return "ExplanationOfBenefit";
       if (code == FHIRDefinedType.FAMILYMEMBERHISTORY)
@@ -8642,10 +9717,10 @@ into another (possibly the same) biological entity.
         return "ImmunizationRecommendation";
       if (code == FHIRDefinedType.IMPLEMENTATIONGUIDE)
         return "ImplementationGuide";
+      if (code == FHIRDefinedType.INSURANCEPLAN)
+        return "InsurancePlan";
       if (code == FHIRDefinedType.INVOICE)
         return "Invoice";
-      if (code == FHIRDefinedType.ITEMINSTANCE)
-        return "ItemInstance";
       if (code == FHIRDefinedType.LIBRARY)
         return "Library";
       if (code == FHIRDefinedType.LINKAGE)
@@ -8676,20 +9751,28 @@ into another (possibly the same) biological entity.
         return "MedicinalProduct";
       if (code == FHIRDefinedType.MEDICINALPRODUCTAUTHORIZATION)
         return "MedicinalProductAuthorization";
-      if (code == FHIRDefinedType.MEDICINALPRODUCTCLINICALS)
-        return "MedicinalProductClinicals";
-      if (code == FHIRDefinedType.MEDICINALPRODUCTDEVICESPEC)
-        return "MedicinalProductDeviceSpec";
+      if (code == FHIRDefinedType.MEDICINALPRODUCTCONTRAINDICATION)
+        return "MedicinalProductContraindication";
+      if (code == FHIRDefinedType.MEDICINALPRODUCTINDICATION)
+        return "MedicinalProductIndication";
       if (code == FHIRDefinedType.MEDICINALPRODUCTINGREDIENT)
         return "MedicinalProductIngredient";
+      if (code == FHIRDefinedType.MEDICINALPRODUCTINTERACTION)
+        return "MedicinalProductInteraction";
+      if (code == FHIRDefinedType.MEDICINALPRODUCTMANUFACTURED)
+        return "MedicinalProductManufactured";
       if (code == FHIRDefinedType.MEDICINALPRODUCTPACKAGED)
         return "MedicinalProductPackaged";
       if (code == FHIRDefinedType.MEDICINALPRODUCTPHARMACEUTICAL)
         return "MedicinalProductPharmaceutical";
+      if (code == FHIRDefinedType.MEDICINALPRODUCTUNDESIRABLEEFFECT)
+        return "MedicinalProductUndesirableEffect";
       if (code == FHIRDefinedType.MESSAGEDEFINITION)
         return "MessageDefinition";
       if (code == FHIRDefinedType.MESSAGEHEADER)
         return "MessageHeader";
+      if (code == FHIRDefinedType.MOLECULARSEQUENCE)
+        return "MolecularSequence";
       if (code == FHIRDefinedType.NAMINGSYSTEM)
         return "NamingSystem";
       if (code == FHIRDefinedType.NUTRITIONORDER)
@@ -8698,16 +9781,14 @@ into another (possibly the same) biological entity.
         return "Observation";
       if (code == FHIRDefinedType.OBSERVATIONDEFINITION)
         return "ObservationDefinition";
-      if (code == FHIRDefinedType.OCCUPATIONALDATA)
-        return "OccupationalData";
       if (code == FHIRDefinedType.OPERATIONDEFINITION)
         return "OperationDefinition";
       if (code == FHIRDefinedType.OPERATIONOUTCOME)
         return "OperationOutcome";
       if (code == FHIRDefinedType.ORGANIZATION)
         return "Organization";
-      if (code == FHIRDefinedType.ORGANIZATIONROLE)
-        return "OrganizationRole";
+      if (code == FHIRDefinedType.ORGANIZATIONAFFILIATION)
+        return "OrganizationAffiliation";
       if (code == FHIRDefinedType.PARAMETERS)
         return "Parameters";
       if (code == FHIRDefinedType.PATIENT)
@@ -8726,12 +9807,6 @@ into another (possibly the same) biological entity.
         return "PractitionerRole";
       if (code == FHIRDefinedType.PROCEDURE)
         return "Procedure";
-      if (code == FHIRDefinedType.PROCESSREQUEST)
-        return "ProcessRequest";
-      if (code == FHIRDefinedType.PROCESSRESPONSE)
-        return "ProcessResponse";
-      if (code == FHIRDefinedType.PRODUCTPLAN)
-        return "ProductPlan";
       if (code == FHIRDefinedType.PROVENANCE)
         return "Provenance";
       if (code == FHIRDefinedType.QUESTIONNAIRE)
@@ -8742,6 +9817,10 @@ into another (possibly the same) biological entity.
         return "RelatedPerson";
       if (code == FHIRDefinedType.REQUESTGROUP)
         return "RequestGroup";
+      if (code == FHIRDefinedType.RESEARCHDEFINITION)
+        return "ResearchDefinition";
+      if (code == FHIRDefinedType.RESEARCHELEMENTDEFINITION)
+        return "ResearchElementDefinition";
       if (code == FHIRDefinedType.RESEARCHSTUDY)
         return "ResearchStudy";
       if (code == FHIRDefinedType.RESEARCHSUBJECT)
@@ -8750,12 +9829,12 @@ into another (possibly the same) biological entity.
         return "Resource";
       if (code == FHIRDefinedType.RISKASSESSMENT)
         return "RiskAssessment";
+      if (code == FHIRDefinedType.RISKEVIDENCESYNTHESIS)
+        return "RiskEvidenceSynthesis";
       if (code == FHIRDefinedType.SCHEDULE)
         return "Schedule";
       if (code == FHIRDefinedType.SEARCHPARAMETER)
         return "SearchParameter";
-      if (code == FHIRDefinedType.SEQUENCE)
-        return "Sequence";
       if (code == FHIRDefinedType.SERVICEREQUEST)
         return "ServiceRequest";
       if (code == FHIRDefinedType.SLOT)
@@ -8772,10 +9851,16 @@ into another (possibly the same) biological entity.
         return "Subscription";
       if (code == FHIRDefinedType.SUBSTANCE)
         return "Substance";
+      if (code == FHIRDefinedType.SUBSTANCENUCLEICACID)
+        return "SubstanceNucleicAcid";
       if (code == FHIRDefinedType.SUBSTANCEPOLYMER)
         return "SubstancePolymer";
+      if (code == FHIRDefinedType.SUBSTANCEPROTEIN)
+        return "SubstanceProtein";
       if (code == FHIRDefinedType.SUBSTANCEREFERENCEINFORMATION)
         return "SubstanceReferenceInformation";
+      if (code == FHIRDefinedType.SUBSTANCESOURCEMATERIAL)
+        return "SubstanceSourceMaterial";
       if (code == FHIRDefinedType.SUBSTANCESPECIFICATION)
         return "SubstanceSpecification";
       if (code == FHIRDefinedType.SUPPLYDELIVERY)
@@ -8790,8 +9875,6 @@ into another (possibly the same) biological entity.
         return "TestReport";
       if (code == FHIRDefinedType.TESTSCRIPT)
         return "TestScript";
-      if (code == FHIRDefinedType.USERSESSION)
-        return "UserSession";
       if (code == FHIRDefinedType.VALUESET)
         return "ValueSet";
       if (code == FHIRDefinedType.VERIFICATIONRESULT)
@@ -8801,6 +9884,600 @@ into another (possibly the same) biological entity.
       return "?";
       }
     public String toSystem(FHIRDefinedType code) {
+      return code.getSystem();
+      }
+    }
+
+    public enum FHIRVersion {
+        /**
+         * Oldest archived version of FHIR.
+         */
+        _0_01, 
+        /**
+         * 1st Draft for Comment (Sept 2012 Ballot).
+         */
+        _0_05, 
+        /**
+         * 2nd Draft for Comment (January 2013 Ballot).
+         */
+        _0_06, 
+        /**
+         * DSTU 1 Ballot version.
+         */
+        _0_11, 
+        /**
+         * DSTU 1 Official version.
+         */
+        _0_0_80, 
+        /**
+         * DSTU 1 Official version Technical Errata #1.
+         */
+        _0_0_81, 
+        /**
+         * DSTU 1 Official version Technical Errata #2.
+         */
+        _0_0_82, 
+        /**
+         * Draft For Comment (January 2015 Ballot).
+         */
+        _0_4_0, 
+        /**
+         * DSTU 2 Ballot version (May 2015 Ballot).
+         */
+        _0_5_0, 
+        /**
+         * DSTU 2 QA Preview + CQIF Ballot (Sep 2015).
+         */
+        _1_0_0, 
+        /**
+         * DSTU 2 (Official version).
+         */
+        _1_0_1, 
+        /**
+         * DSTU 2 (Official version) with 1 technical errata.
+         */
+        _1_0_2, 
+        /**
+         * GAO Ballot + draft changes to main FHIR standard.
+         */
+        _1_1_0, 
+        /**
+         * CQF on FHIR Ballot + Connectathon 12 (Montreal).
+         */
+        _1_4_0, 
+        /**
+         * FHIR STU3 Ballot + Connectathon 13 (Baltimore).
+         */
+        _1_6_0, 
+        /**
+         * FHIR STU3 Candidate + Connectathon 14 (San Antonio).
+         */
+        _1_8_0, 
+        /**
+         * FHIR Release 3 (STU).
+         */
+        _3_0_0, 
+        /**
+         * FHIR Release 3 (STU) with 1 technical errata.
+         */
+        _3_0_1, 
+        /**
+         * R4 Ballot #1.
+         */
+        _3_3_0, 
+        /**
+         * R4 Ballot #2.
+         */
+        _3_5_0, 
+        /**
+         * FHIR Release 4 (Normative + STU).
+         */
+        _4_0_0, 
+        /**
+         * added to help the parsers
+         */
+        NULL;
+        public static FHIRVersion fromCode(String codeString) throws FHIRException {
+            if (codeString == null || "".equals(codeString))
+                return null;
+        if ("0.01".equals(codeString))
+          return _0_01;
+        if ("0.05".equals(codeString))
+          return _0_05;
+        if ("0.06".equals(codeString))
+          return _0_06;
+        if ("0.11".equals(codeString))
+          return _0_11;
+        if ("0.0.80".equals(codeString))
+          return _0_0_80;
+        if ("0.0.81".equals(codeString))
+          return _0_0_81;
+        if ("0.0.82".equals(codeString))
+          return _0_0_82;
+        if ("0.4.0".equals(codeString))
+          return _0_4_0;
+        if ("0.5.0".equals(codeString))
+          return _0_5_0;
+        if ("1.0.0".equals(codeString))
+          return _1_0_0;
+        if ("1.0.1".equals(codeString))
+          return _1_0_1;
+        if ("1.0.2".equals(codeString))
+          return _1_0_2;
+        if ("1.1.0".equals(codeString))
+          return _1_1_0;
+        if ("1.4.0".equals(codeString))
+          return _1_4_0;
+        if ("1.6.0".equals(codeString))
+          return _1_6_0;
+        if ("1.8.0".equals(codeString))
+          return _1_8_0;
+        if ("3.0.0".equals(codeString))
+          return _3_0_0;
+        if ("3.0.1".equals(codeString))
+          return _3_0_1;
+        if ("3.3.0".equals(codeString))
+          return _3_3_0;
+        if ("3.5.0".equals(codeString))
+          return _3_5_0;
+        if ("4.0.0".equals(codeString))
+          return _4_0_0;
+        throw new FHIRException("Unknown FHIRVersion code '"+codeString+"'");
+        }
+        public String toCode() {
+          switch (this) {
+            case _0_01: return "0.01";
+            case _0_05: return "0.05";
+            case _0_06: return "0.06";
+            case _0_11: return "0.11";
+            case _0_0_80: return "0.0.80";
+            case _0_0_81: return "0.0.81";
+            case _0_0_82: return "0.0.82";
+            case _0_4_0: return "0.4.0";
+            case _0_5_0: return "0.5.0";
+            case _1_0_0: return "1.0.0";
+            case _1_0_1: return "1.0.1";
+            case _1_0_2: return "1.0.2";
+            case _1_1_0: return "1.1.0";
+            case _1_4_0: return "1.4.0";
+            case _1_6_0: return "1.6.0";
+            case _1_8_0: return "1.8.0";
+            case _3_0_0: return "3.0.0";
+            case _3_0_1: return "3.0.1";
+            case _3_3_0: return "3.3.0";
+            case _3_5_0: return "3.5.0";
+            case _4_0_0: return "4.0.0";
+            default: return "?";
+          }
+        }
+        public String getSystem() {
+          switch (this) {
+            case _0_01: return "http://hl7.org/fhir/FHIR-version";
+            case _0_05: return "http://hl7.org/fhir/FHIR-version";
+            case _0_06: return "http://hl7.org/fhir/FHIR-version";
+            case _0_11: return "http://hl7.org/fhir/FHIR-version";
+            case _0_0_80: return "http://hl7.org/fhir/FHIR-version";
+            case _0_0_81: return "http://hl7.org/fhir/FHIR-version";
+            case _0_0_82: return "http://hl7.org/fhir/FHIR-version";
+            case _0_4_0: return "http://hl7.org/fhir/FHIR-version";
+            case _0_5_0: return "http://hl7.org/fhir/FHIR-version";
+            case _1_0_0: return "http://hl7.org/fhir/FHIR-version";
+            case _1_0_1: return "http://hl7.org/fhir/FHIR-version";
+            case _1_0_2: return "http://hl7.org/fhir/FHIR-version";
+            case _1_1_0: return "http://hl7.org/fhir/FHIR-version";
+            case _1_4_0: return "http://hl7.org/fhir/FHIR-version";
+            case _1_6_0: return "http://hl7.org/fhir/FHIR-version";
+            case _1_8_0: return "http://hl7.org/fhir/FHIR-version";
+            case _3_0_0: return "http://hl7.org/fhir/FHIR-version";
+            case _3_0_1: return "http://hl7.org/fhir/FHIR-version";
+            case _3_3_0: return "http://hl7.org/fhir/FHIR-version";
+            case _3_5_0: return "http://hl7.org/fhir/FHIR-version";
+            case _4_0_0: return "http://hl7.org/fhir/FHIR-version";
+            default: return "?";
+          }
+        }
+        public String getDefinition() {
+          switch (this) {
+            case _0_01: return "Oldest archived version of FHIR.";
+            case _0_05: return "1st Draft for Comment (Sept 2012 Ballot).";
+            case _0_06: return "2nd Draft for Comment (January 2013 Ballot).";
+            case _0_11: return "DSTU 1 Ballot version.";
+            case _0_0_80: return "DSTU 1 Official version.";
+            case _0_0_81: return "DSTU 1 Official version Technical Errata #1.";
+            case _0_0_82: return "DSTU 1 Official version Technical Errata #2.";
+            case _0_4_0: return "Draft For Comment (January 2015 Ballot).";
+            case _0_5_0: return "DSTU 2 Ballot version (May 2015 Ballot).";
+            case _1_0_0: return "DSTU 2 QA Preview + CQIF Ballot (Sep 2015).";
+            case _1_0_1: return "DSTU 2 (Official version).";
+            case _1_0_2: return "DSTU 2 (Official version) with 1 technical errata.";
+            case _1_1_0: return "GAO Ballot + draft changes to main FHIR standard.";
+            case _1_4_0: return "CQF on FHIR Ballot + Connectathon 12 (Montreal).";
+            case _1_6_0: return "FHIR STU3 Ballot + Connectathon 13 (Baltimore).";
+            case _1_8_0: return "FHIR STU3 Candidate + Connectathon 14 (San Antonio).";
+            case _3_0_0: return "FHIR Release 3 (STU).";
+            case _3_0_1: return "FHIR Release 3 (STU) with 1 technical errata.";
+            case _3_3_0: return "R4 Ballot #1.";
+            case _3_5_0: return "R4 Ballot #2.";
+            case _4_0_0: return "FHIR Release 4 (Normative + STU).";
+            default: return "?";
+          }
+        }
+        public String getDisplay() {
+          switch (this) {
+            case _0_01: return "0.01";
+            case _0_05: return "0.05";
+            case _0_06: return "0.06";
+            case _0_11: return "0.11";
+            case _0_0_80: return "0.0.80";
+            case _0_0_81: return "0.0.81";
+            case _0_0_82: return "0.0.82";
+            case _0_4_0: return "0.4.0";
+            case _0_5_0: return "0.5.0";
+            case _1_0_0: return "1.0.0";
+            case _1_0_1: return "1.0.1";
+            case _1_0_2: return "1.0.2";
+            case _1_1_0: return "1.1.0";
+            case _1_4_0: return "1.4.0";
+            case _1_6_0: return "1.6.0";
+            case _1_8_0: return "1.8.0";
+            case _3_0_0: return "3.0.0";
+            case _3_0_1: return "3.0.1";
+            case _3_3_0: return "3.3.0";
+            case _3_5_0: return "3.5.0";
+            case _4_0_0: return "4.0.0";
+            default: return "?";
+          }
+        }
+    }
+
+  public static class FHIRVersionEnumFactory implements EnumFactory<FHIRVersion> {
+    public FHIRVersion fromCode(String codeString) throws IllegalArgumentException {
+      if (codeString == null || "".equals(codeString))
+            if (codeString == null || "".equals(codeString))
+                return null;
+        if ("0.01".equals(codeString))
+          return FHIRVersion._0_01;
+        if ("0.05".equals(codeString))
+          return FHIRVersion._0_05;
+        if ("0.06".equals(codeString))
+          return FHIRVersion._0_06;
+        if ("0.11".equals(codeString))
+          return FHIRVersion._0_11;
+        if ("0.0.80".equals(codeString))
+          return FHIRVersion._0_0_80;
+        if ("0.0.81".equals(codeString))
+          return FHIRVersion._0_0_81;
+        if ("0.0.82".equals(codeString))
+          return FHIRVersion._0_0_82;
+        if ("0.4.0".equals(codeString))
+          return FHIRVersion._0_4_0;
+        if ("0.5.0".equals(codeString))
+          return FHIRVersion._0_5_0;
+        if ("1.0.0".equals(codeString))
+          return FHIRVersion._1_0_0;
+        if ("1.0.1".equals(codeString))
+          return FHIRVersion._1_0_1;
+        if ("1.0.2".equals(codeString))
+          return FHIRVersion._1_0_2;
+        if ("1.1.0".equals(codeString))
+          return FHIRVersion._1_1_0;
+        if ("1.4.0".equals(codeString))
+          return FHIRVersion._1_4_0;
+        if ("1.6.0".equals(codeString))
+          return FHIRVersion._1_6_0;
+        if ("1.8.0".equals(codeString))
+          return FHIRVersion._1_8_0;
+        if ("3.0.0".equals(codeString))
+          return FHIRVersion._3_0_0;
+        if ("3.0.1".equals(codeString))
+          return FHIRVersion._3_0_1;
+        if ("3.3.0".equals(codeString))
+          return FHIRVersion._3_3_0;
+        if ("3.5.0".equals(codeString))
+          return FHIRVersion._3_5_0;
+        if ("4.0.0".equals(codeString))
+          return FHIRVersion._4_0_0;
+        throw new IllegalArgumentException("Unknown FHIRVersion code '"+codeString+"'");
+        }
+        public Enumeration<FHIRVersion> fromType(Base code) throws FHIRException {
+          if (code == null)
+            return null;
+          if (code.isEmpty())
+            return new Enumeration<FHIRVersion>(this);
+          String codeString = ((PrimitiveType) code).asStringValue();
+          if (codeString == null || "".equals(codeString))
+            return null;
+        if ("0.01".equals(codeString))
+          return new Enumeration<FHIRVersion>(this, FHIRVersion._0_01);
+        if ("0.05".equals(codeString))
+          return new Enumeration<FHIRVersion>(this, FHIRVersion._0_05);
+        if ("0.06".equals(codeString))
+          return new Enumeration<FHIRVersion>(this, FHIRVersion._0_06);
+        if ("0.11".equals(codeString))
+          return new Enumeration<FHIRVersion>(this, FHIRVersion._0_11);
+        if ("0.0.80".equals(codeString))
+          return new Enumeration<FHIRVersion>(this, FHIRVersion._0_0_80);
+        if ("0.0.81".equals(codeString))
+          return new Enumeration<FHIRVersion>(this, FHIRVersion._0_0_81);
+        if ("0.0.82".equals(codeString))
+          return new Enumeration<FHIRVersion>(this, FHIRVersion._0_0_82);
+        if ("0.4.0".equals(codeString))
+          return new Enumeration<FHIRVersion>(this, FHIRVersion._0_4_0);
+        if ("0.5.0".equals(codeString))
+          return new Enumeration<FHIRVersion>(this, FHIRVersion._0_5_0);
+        if ("1.0.0".equals(codeString))
+          return new Enumeration<FHIRVersion>(this, FHIRVersion._1_0_0);
+        if ("1.0.1".equals(codeString))
+          return new Enumeration<FHIRVersion>(this, FHIRVersion._1_0_1);
+        if ("1.0.2".equals(codeString))
+          return new Enumeration<FHIRVersion>(this, FHIRVersion._1_0_2);
+        if ("1.1.0".equals(codeString))
+          return new Enumeration<FHIRVersion>(this, FHIRVersion._1_1_0);
+        if ("1.4.0".equals(codeString))
+          return new Enumeration<FHIRVersion>(this, FHIRVersion._1_4_0);
+        if ("1.6.0".equals(codeString))
+          return new Enumeration<FHIRVersion>(this, FHIRVersion._1_6_0);
+        if ("1.8.0".equals(codeString))
+          return new Enumeration<FHIRVersion>(this, FHIRVersion._1_8_0);
+        if ("3.0.0".equals(codeString))
+          return new Enumeration<FHIRVersion>(this, FHIRVersion._3_0_0);
+        if ("3.0.1".equals(codeString))
+          return new Enumeration<FHIRVersion>(this, FHIRVersion._3_0_1);
+        if ("3.3.0".equals(codeString))
+          return new Enumeration<FHIRVersion>(this, FHIRVersion._3_3_0);
+        if ("3.5.0".equals(codeString))
+          return new Enumeration<FHIRVersion>(this, FHIRVersion._3_5_0);
+        if ("4.0.0".equals(codeString))
+          return new Enumeration<FHIRVersion>(this, FHIRVersion._4_0_0);
+        throw new FHIRException("Unknown FHIRVersion code '"+codeString+"'");
+        }
+    public String toCode(FHIRVersion code) {
+      if (code == FHIRVersion._0_01)
+        return "0.01";
+      if (code == FHIRVersion._0_05)
+        return "0.05";
+      if (code == FHIRVersion._0_06)
+        return "0.06";
+      if (code == FHIRVersion._0_11)
+        return "0.11";
+      if (code == FHIRVersion._0_0_80)
+        return "0.0.80";
+      if (code == FHIRVersion._0_0_81)
+        return "0.0.81";
+      if (code == FHIRVersion._0_0_82)
+        return "0.0.82";
+      if (code == FHIRVersion._0_4_0)
+        return "0.4.0";
+      if (code == FHIRVersion._0_5_0)
+        return "0.5.0";
+      if (code == FHIRVersion._1_0_0)
+        return "1.0.0";
+      if (code == FHIRVersion._1_0_1)
+        return "1.0.1";
+      if (code == FHIRVersion._1_0_2)
+        return "1.0.2";
+      if (code == FHIRVersion._1_1_0)
+        return "1.1.0";
+      if (code == FHIRVersion._1_4_0)
+        return "1.4.0";
+      if (code == FHIRVersion._1_6_0)
+        return "1.6.0";
+      if (code == FHIRVersion._1_8_0)
+        return "1.8.0";
+      if (code == FHIRVersion._3_0_0)
+        return "3.0.0";
+      if (code == FHIRVersion._3_0_1)
+        return "3.0.1";
+      if (code == FHIRVersion._3_3_0)
+        return "3.3.0";
+      if (code == FHIRVersion._3_5_0)
+        return "3.5.0";
+      if (code == FHIRVersion._4_0_0)
+        return "4.0.0";
+      return "?";
+      }
+    public String toSystem(FHIRVersion code) {
+      return code.getSystem();
+      }
+    }
+
+    public enum KnowledgeResourceType {
+        /**
+         * The definition of a specific activity to be taken, independent of any particular patient or context.
+         */
+        ACTIVITYDEFINITION, 
+        /**
+         * A set of codes drawn from one or more code systems.
+         */
+        CODESYSTEM, 
+        /**
+         * A map from one set of concepts to one or more other concepts.
+         */
+        CONCEPTMAP, 
+        /**
+         * Represents a library of quality improvement components.
+         */
+        LIBRARY, 
+        /**
+         * A quality measure definition.
+         */
+        MEASURE, 
+        /**
+         * The definition of a plan for a series of actions, independent of any specific patient or context.
+         */
+        PLANDEFINITION, 
+        /**
+         * Structural Definition.
+         */
+        STRUCTUREDEFINITION, 
+        /**
+         * A Map of relationships between 2 structures that can be used to transform data.
+         */
+        STRUCTUREMAP, 
+        /**
+         * A set of codes drawn from one or more code systems.
+         */
+        VALUESET, 
+        /**
+         * added to help the parsers
+         */
+        NULL;
+        public static KnowledgeResourceType fromCode(String codeString) throws FHIRException {
+            if (codeString == null || "".equals(codeString))
+                return null;
+        if ("ActivityDefinition".equals(codeString))
+          return ACTIVITYDEFINITION;
+        if ("CodeSystem".equals(codeString))
+          return CODESYSTEM;
+        if ("ConceptMap".equals(codeString))
+          return CONCEPTMAP;
+        if ("Library".equals(codeString))
+          return LIBRARY;
+        if ("Measure".equals(codeString))
+          return MEASURE;
+        if ("PlanDefinition".equals(codeString))
+          return PLANDEFINITION;
+        if ("StructureDefinition".equals(codeString))
+          return STRUCTUREDEFINITION;
+        if ("StructureMap".equals(codeString))
+          return STRUCTUREMAP;
+        if ("ValueSet".equals(codeString))
+          return VALUESET;
+        throw new FHIRException("Unknown KnowledgeResourceType code '"+codeString+"'");
+        }
+        public String toCode() {
+          switch (this) {
+            case ACTIVITYDEFINITION: return "ActivityDefinition";
+            case CODESYSTEM: return "CodeSystem";
+            case CONCEPTMAP: return "ConceptMap";
+            case LIBRARY: return "Library";
+            case MEASURE: return "Measure";
+            case PLANDEFINITION: return "PlanDefinition";
+            case STRUCTUREDEFINITION: return "StructureDefinition";
+            case STRUCTUREMAP: return "StructureMap";
+            case VALUESET: return "ValueSet";
+            default: return "?";
+          }
+        }
+        public String getSystem() {
+          switch (this) {
+            case ACTIVITYDEFINITION: return "http://hl7.org/fhir/knowledge-resource-types";
+            case CODESYSTEM: return "http://hl7.org/fhir/knowledge-resource-types";
+            case CONCEPTMAP: return "http://hl7.org/fhir/knowledge-resource-types";
+            case LIBRARY: return "http://hl7.org/fhir/knowledge-resource-types";
+            case MEASURE: return "http://hl7.org/fhir/knowledge-resource-types";
+            case PLANDEFINITION: return "http://hl7.org/fhir/knowledge-resource-types";
+            case STRUCTUREDEFINITION: return "http://hl7.org/fhir/knowledge-resource-types";
+            case STRUCTUREMAP: return "http://hl7.org/fhir/knowledge-resource-types";
+            case VALUESET: return "http://hl7.org/fhir/knowledge-resource-types";
+            default: return "?";
+          }
+        }
+        public String getDefinition() {
+          switch (this) {
+            case ACTIVITYDEFINITION: return "The definition of a specific activity to be taken, independent of any particular patient or context.";
+            case CODESYSTEM: return "A set of codes drawn from one or more code systems.";
+            case CONCEPTMAP: return "A map from one set of concepts to one or more other concepts.";
+            case LIBRARY: return "Represents a library of quality improvement components.";
+            case MEASURE: return "A quality measure definition.";
+            case PLANDEFINITION: return "The definition of a plan for a series of actions, independent of any specific patient or context.";
+            case STRUCTUREDEFINITION: return "Structural Definition.";
+            case STRUCTUREMAP: return "A Map of relationships between 2 structures that can be used to transform data.";
+            case VALUESET: return "A set of codes drawn from one or more code systems.";
+            default: return "?";
+          }
+        }
+        public String getDisplay() {
+          switch (this) {
+            case ACTIVITYDEFINITION: return "ActivityDefinition";
+            case CODESYSTEM: return "CodeSystem";
+            case CONCEPTMAP: return "ConceptMap";
+            case LIBRARY: return "Library";
+            case MEASURE: return "Measure";
+            case PLANDEFINITION: return "PlanDefinition";
+            case STRUCTUREDEFINITION: return "StructureDefinition";
+            case STRUCTUREMAP: return "StructureMap";
+            case VALUESET: return "ValueSet";
+            default: return "?";
+          }
+        }
+    }
+
+  public static class KnowledgeResourceTypeEnumFactory implements EnumFactory<KnowledgeResourceType> {
+    public KnowledgeResourceType fromCode(String codeString) throws IllegalArgumentException {
+      if (codeString == null || "".equals(codeString))
+            if (codeString == null || "".equals(codeString))
+                return null;
+        if ("ActivityDefinition".equals(codeString))
+          return KnowledgeResourceType.ACTIVITYDEFINITION;
+        if ("CodeSystem".equals(codeString))
+          return KnowledgeResourceType.CODESYSTEM;
+        if ("ConceptMap".equals(codeString))
+          return KnowledgeResourceType.CONCEPTMAP;
+        if ("Library".equals(codeString))
+          return KnowledgeResourceType.LIBRARY;
+        if ("Measure".equals(codeString))
+          return KnowledgeResourceType.MEASURE;
+        if ("PlanDefinition".equals(codeString))
+          return KnowledgeResourceType.PLANDEFINITION;
+        if ("StructureDefinition".equals(codeString))
+          return KnowledgeResourceType.STRUCTUREDEFINITION;
+        if ("StructureMap".equals(codeString))
+          return KnowledgeResourceType.STRUCTUREMAP;
+        if ("ValueSet".equals(codeString))
+          return KnowledgeResourceType.VALUESET;
+        throw new IllegalArgumentException("Unknown KnowledgeResourceType code '"+codeString+"'");
+        }
+        public Enumeration<KnowledgeResourceType> fromType(Base code) throws FHIRException {
+          if (code == null)
+            return null;
+          if (code.isEmpty())
+            return new Enumeration<KnowledgeResourceType>(this);
+          String codeString = ((PrimitiveType) code).asStringValue();
+          if (codeString == null || "".equals(codeString))
+            return null;
+        if ("ActivityDefinition".equals(codeString))
+          return new Enumeration<KnowledgeResourceType>(this, KnowledgeResourceType.ACTIVITYDEFINITION);
+        if ("CodeSystem".equals(codeString))
+          return new Enumeration<KnowledgeResourceType>(this, KnowledgeResourceType.CODESYSTEM);
+        if ("ConceptMap".equals(codeString))
+          return new Enumeration<KnowledgeResourceType>(this, KnowledgeResourceType.CONCEPTMAP);
+        if ("Library".equals(codeString))
+          return new Enumeration<KnowledgeResourceType>(this, KnowledgeResourceType.LIBRARY);
+        if ("Measure".equals(codeString))
+          return new Enumeration<KnowledgeResourceType>(this, KnowledgeResourceType.MEASURE);
+        if ("PlanDefinition".equals(codeString))
+          return new Enumeration<KnowledgeResourceType>(this, KnowledgeResourceType.PLANDEFINITION);
+        if ("StructureDefinition".equals(codeString))
+          return new Enumeration<KnowledgeResourceType>(this, KnowledgeResourceType.STRUCTUREDEFINITION);
+        if ("StructureMap".equals(codeString))
+          return new Enumeration<KnowledgeResourceType>(this, KnowledgeResourceType.STRUCTUREMAP);
+        if ("ValueSet".equals(codeString))
+          return new Enumeration<KnowledgeResourceType>(this, KnowledgeResourceType.VALUESET);
+        throw new FHIRException("Unknown KnowledgeResourceType code '"+codeString+"'");
+        }
+    public String toCode(KnowledgeResourceType code) {
+      if (code == KnowledgeResourceType.ACTIVITYDEFINITION)
+        return "ActivityDefinition";
+      if (code == KnowledgeResourceType.CODESYSTEM)
+        return "CodeSystem";
+      if (code == KnowledgeResourceType.CONCEPTMAP)
+        return "ConceptMap";
+      if (code == KnowledgeResourceType.LIBRARY)
+        return "Library";
+      if (code == KnowledgeResourceType.MEASURE)
+        return "Measure";
+      if (code == KnowledgeResourceType.PLANDEFINITION)
+        return "PlanDefinition";
+      if (code == KnowledgeResourceType.STRUCTUREDEFINITION)
+        return "StructureDefinition";
+      if (code == KnowledgeResourceType.STRUCTUREMAP)
+        return "StructureMap";
+      if (code == KnowledgeResourceType.VALUESET)
+        return "ValueSet";
+      return "?";
+      }
+    public String toSystem(KnowledgeResourceType code) {
       return code.getSystem();
       }
     }
@@ -9209,6 +10886,303 @@ into another (possibly the same) biological entity.
       }
     }
 
+    public enum RequestResourceType {
+        /**
+         * A booking of a healthcare event among patient(s), practitioner(s), related person(s) and/or device(s) for a specific date/time. This may result in one or more Encounter(s).
+         */
+        APPOINTMENT, 
+        /**
+         * A reply to an appointment request for a patient and/or practitioner(s), such as a confirmation or rejection.
+         */
+        APPOINTMENTRESPONSE, 
+        /**
+         * Healthcare plan for patient or group.
+         */
+        CAREPLAN, 
+        /**
+         * Claim, Pre-determination or Pre-authorization.
+         */
+        CLAIM, 
+        /**
+         * A request for information to be sent to a receiver.
+         */
+        COMMUNICATIONREQUEST, 
+        /**
+         * Legal Agreement.
+         */
+        CONTRACT, 
+        /**
+         * Medical device request.
+         */
+        DEVICEREQUEST, 
+        /**
+         * Enrollment request.
+         */
+        ENROLLMENTREQUEST, 
+        /**
+         * Guidance or advice relating to an immunization.
+         */
+        IMMUNIZATIONRECOMMENDATION, 
+        /**
+         * Ordering of medication for patient or group.
+         */
+        MEDICATIONREQUEST, 
+        /**
+         * Diet, formula or nutritional supplement request.
+         */
+        NUTRITIONORDER, 
+        /**
+         * A record of a request for service such as diagnostic investigations, treatments, or operations to be performed.
+         */
+        SERVICEREQUEST, 
+        /**
+         * Request for a medication, substance or device.
+         */
+        SUPPLYREQUEST, 
+        /**
+         * A task to be performed.
+         */
+        TASK, 
+        /**
+         * Prescription for vision correction products for a patient.
+         */
+        VISIONPRESCRIPTION, 
+        /**
+         * added to help the parsers
+         */
+        NULL;
+        public static RequestResourceType fromCode(String codeString) throws FHIRException {
+            if (codeString == null || "".equals(codeString))
+                return null;
+        if ("Appointment".equals(codeString))
+          return APPOINTMENT;
+        if ("AppointmentResponse".equals(codeString))
+          return APPOINTMENTRESPONSE;
+        if ("CarePlan".equals(codeString))
+          return CAREPLAN;
+        if ("Claim".equals(codeString))
+          return CLAIM;
+        if ("CommunicationRequest".equals(codeString))
+          return COMMUNICATIONREQUEST;
+        if ("Contract".equals(codeString))
+          return CONTRACT;
+        if ("DeviceRequest".equals(codeString))
+          return DEVICEREQUEST;
+        if ("EnrollmentRequest".equals(codeString))
+          return ENROLLMENTREQUEST;
+        if ("ImmunizationRecommendation".equals(codeString))
+          return IMMUNIZATIONRECOMMENDATION;
+        if ("MedicationRequest".equals(codeString))
+          return MEDICATIONREQUEST;
+        if ("NutritionOrder".equals(codeString))
+          return NUTRITIONORDER;
+        if ("ServiceRequest".equals(codeString))
+          return SERVICEREQUEST;
+        if ("SupplyRequest".equals(codeString))
+          return SUPPLYREQUEST;
+        if ("Task".equals(codeString))
+          return TASK;
+        if ("VisionPrescription".equals(codeString))
+          return VISIONPRESCRIPTION;
+        throw new FHIRException("Unknown RequestResourceType code '"+codeString+"'");
+        }
+        public String toCode() {
+          switch (this) {
+            case APPOINTMENT: return "Appointment";
+            case APPOINTMENTRESPONSE: return "AppointmentResponse";
+            case CAREPLAN: return "CarePlan";
+            case CLAIM: return "Claim";
+            case COMMUNICATIONREQUEST: return "CommunicationRequest";
+            case CONTRACT: return "Contract";
+            case DEVICEREQUEST: return "DeviceRequest";
+            case ENROLLMENTREQUEST: return "EnrollmentRequest";
+            case IMMUNIZATIONRECOMMENDATION: return "ImmunizationRecommendation";
+            case MEDICATIONREQUEST: return "MedicationRequest";
+            case NUTRITIONORDER: return "NutritionOrder";
+            case SERVICEREQUEST: return "ServiceRequest";
+            case SUPPLYREQUEST: return "SupplyRequest";
+            case TASK: return "Task";
+            case VISIONPRESCRIPTION: return "VisionPrescription";
+            default: return "?";
+          }
+        }
+        public String getSystem() {
+          switch (this) {
+            case APPOINTMENT: return "http://hl7.org/fhir/request-resource-types";
+            case APPOINTMENTRESPONSE: return "http://hl7.org/fhir/request-resource-types";
+            case CAREPLAN: return "http://hl7.org/fhir/request-resource-types";
+            case CLAIM: return "http://hl7.org/fhir/request-resource-types";
+            case COMMUNICATIONREQUEST: return "http://hl7.org/fhir/request-resource-types";
+            case CONTRACT: return "http://hl7.org/fhir/request-resource-types";
+            case DEVICEREQUEST: return "http://hl7.org/fhir/request-resource-types";
+            case ENROLLMENTREQUEST: return "http://hl7.org/fhir/request-resource-types";
+            case IMMUNIZATIONRECOMMENDATION: return "http://hl7.org/fhir/request-resource-types";
+            case MEDICATIONREQUEST: return "http://hl7.org/fhir/request-resource-types";
+            case NUTRITIONORDER: return "http://hl7.org/fhir/request-resource-types";
+            case SERVICEREQUEST: return "http://hl7.org/fhir/request-resource-types";
+            case SUPPLYREQUEST: return "http://hl7.org/fhir/request-resource-types";
+            case TASK: return "http://hl7.org/fhir/request-resource-types";
+            case VISIONPRESCRIPTION: return "http://hl7.org/fhir/request-resource-types";
+            default: return "?";
+          }
+        }
+        public String getDefinition() {
+          switch (this) {
+            case APPOINTMENT: return "A booking of a healthcare event among patient(s), practitioner(s), related person(s) and/or device(s) for a specific date/time. This may result in one or more Encounter(s).";
+            case APPOINTMENTRESPONSE: return "A reply to an appointment request for a patient and/or practitioner(s), such as a confirmation or rejection.";
+            case CAREPLAN: return "Healthcare plan for patient or group.";
+            case CLAIM: return "Claim, Pre-determination or Pre-authorization.";
+            case COMMUNICATIONREQUEST: return "A request for information to be sent to a receiver.";
+            case CONTRACT: return "Legal Agreement.";
+            case DEVICEREQUEST: return "Medical device request.";
+            case ENROLLMENTREQUEST: return "Enrollment request.";
+            case IMMUNIZATIONRECOMMENDATION: return "Guidance or advice relating to an immunization.";
+            case MEDICATIONREQUEST: return "Ordering of medication for patient or group.";
+            case NUTRITIONORDER: return "Diet, formula or nutritional supplement request.";
+            case SERVICEREQUEST: return "A record of a request for service such as diagnostic investigations, treatments, or operations to be performed.";
+            case SUPPLYREQUEST: return "Request for a medication, substance or device.";
+            case TASK: return "A task to be performed.";
+            case VISIONPRESCRIPTION: return "Prescription for vision correction products for a patient.";
+            default: return "?";
+          }
+        }
+        public String getDisplay() {
+          switch (this) {
+            case APPOINTMENT: return "Appointment";
+            case APPOINTMENTRESPONSE: return "AppointmentResponse";
+            case CAREPLAN: return "CarePlan";
+            case CLAIM: return "Claim";
+            case COMMUNICATIONREQUEST: return "CommunicationRequest";
+            case CONTRACT: return "Contract";
+            case DEVICEREQUEST: return "DeviceRequest";
+            case ENROLLMENTREQUEST: return "EnrollmentRequest";
+            case IMMUNIZATIONRECOMMENDATION: return "ImmunizationRecommendation";
+            case MEDICATIONREQUEST: return "MedicationRequest";
+            case NUTRITIONORDER: return "NutritionOrder";
+            case SERVICEREQUEST: return "ServiceRequest";
+            case SUPPLYREQUEST: return "SupplyRequest";
+            case TASK: return "Task";
+            case VISIONPRESCRIPTION: return "VisionPrescription";
+            default: return "?";
+          }
+        }
+    }
+
+  public static class RequestResourceTypeEnumFactory implements EnumFactory<RequestResourceType> {
+    public RequestResourceType fromCode(String codeString) throws IllegalArgumentException {
+      if (codeString == null || "".equals(codeString))
+            if (codeString == null || "".equals(codeString))
+                return null;
+        if ("Appointment".equals(codeString))
+          return RequestResourceType.APPOINTMENT;
+        if ("AppointmentResponse".equals(codeString))
+          return RequestResourceType.APPOINTMENTRESPONSE;
+        if ("CarePlan".equals(codeString))
+          return RequestResourceType.CAREPLAN;
+        if ("Claim".equals(codeString))
+          return RequestResourceType.CLAIM;
+        if ("CommunicationRequest".equals(codeString))
+          return RequestResourceType.COMMUNICATIONREQUEST;
+        if ("Contract".equals(codeString))
+          return RequestResourceType.CONTRACT;
+        if ("DeviceRequest".equals(codeString))
+          return RequestResourceType.DEVICEREQUEST;
+        if ("EnrollmentRequest".equals(codeString))
+          return RequestResourceType.ENROLLMENTREQUEST;
+        if ("ImmunizationRecommendation".equals(codeString))
+          return RequestResourceType.IMMUNIZATIONRECOMMENDATION;
+        if ("MedicationRequest".equals(codeString))
+          return RequestResourceType.MEDICATIONREQUEST;
+        if ("NutritionOrder".equals(codeString))
+          return RequestResourceType.NUTRITIONORDER;
+        if ("ServiceRequest".equals(codeString))
+          return RequestResourceType.SERVICEREQUEST;
+        if ("SupplyRequest".equals(codeString))
+          return RequestResourceType.SUPPLYREQUEST;
+        if ("Task".equals(codeString))
+          return RequestResourceType.TASK;
+        if ("VisionPrescription".equals(codeString))
+          return RequestResourceType.VISIONPRESCRIPTION;
+        throw new IllegalArgumentException("Unknown RequestResourceType code '"+codeString+"'");
+        }
+        public Enumeration<RequestResourceType> fromType(Base code) throws FHIRException {
+          if (code == null)
+            return null;
+          if (code.isEmpty())
+            return new Enumeration<RequestResourceType>(this);
+          String codeString = ((PrimitiveType) code).asStringValue();
+          if (codeString == null || "".equals(codeString))
+            return null;
+        if ("Appointment".equals(codeString))
+          return new Enumeration<RequestResourceType>(this, RequestResourceType.APPOINTMENT);
+        if ("AppointmentResponse".equals(codeString))
+          return new Enumeration<RequestResourceType>(this, RequestResourceType.APPOINTMENTRESPONSE);
+        if ("CarePlan".equals(codeString))
+          return new Enumeration<RequestResourceType>(this, RequestResourceType.CAREPLAN);
+        if ("Claim".equals(codeString))
+          return new Enumeration<RequestResourceType>(this, RequestResourceType.CLAIM);
+        if ("CommunicationRequest".equals(codeString))
+          return new Enumeration<RequestResourceType>(this, RequestResourceType.COMMUNICATIONREQUEST);
+        if ("Contract".equals(codeString))
+          return new Enumeration<RequestResourceType>(this, RequestResourceType.CONTRACT);
+        if ("DeviceRequest".equals(codeString))
+          return new Enumeration<RequestResourceType>(this, RequestResourceType.DEVICEREQUEST);
+        if ("EnrollmentRequest".equals(codeString))
+          return new Enumeration<RequestResourceType>(this, RequestResourceType.ENROLLMENTREQUEST);
+        if ("ImmunizationRecommendation".equals(codeString))
+          return new Enumeration<RequestResourceType>(this, RequestResourceType.IMMUNIZATIONRECOMMENDATION);
+        if ("MedicationRequest".equals(codeString))
+          return new Enumeration<RequestResourceType>(this, RequestResourceType.MEDICATIONREQUEST);
+        if ("NutritionOrder".equals(codeString))
+          return new Enumeration<RequestResourceType>(this, RequestResourceType.NUTRITIONORDER);
+        if ("ServiceRequest".equals(codeString))
+          return new Enumeration<RequestResourceType>(this, RequestResourceType.SERVICEREQUEST);
+        if ("SupplyRequest".equals(codeString))
+          return new Enumeration<RequestResourceType>(this, RequestResourceType.SUPPLYREQUEST);
+        if ("Task".equals(codeString))
+          return new Enumeration<RequestResourceType>(this, RequestResourceType.TASK);
+        if ("VisionPrescription".equals(codeString))
+          return new Enumeration<RequestResourceType>(this, RequestResourceType.VISIONPRESCRIPTION);
+        throw new FHIRException("Unknown RequestResourceType code '"+codeString+"'");
+        }
+    public String toCode(RequestResourceType code) {
+      if (code == RequestResourceType.APPOINTMENT)
+        return "Appointment";
+      if (code == RequestResourceType.APPOINTMENTRESPONSE)
+        return "AppointmentResponse";
+      if (code == RequestResourceType.CAREPLAN)
+        return "CarePlan";
+      if (code == RequestResourceType.CLAIM)
+        return "Claim";
+      if (code == RequestResourceType.COMMUNICATIONREQUEST)
+        return "CommunicationRequest";
+      if (code == RequestResourceType.CONTRACT)
+        return "Contract";
+      if (code == RequestResourceType.DEVICEREQUEST)
+        return "DeviceRequest";
+      if (code == RequestResourceType.ENROLLMENTREQUEST)
+        return "EnrollmentRequest";
+      if (code == RequestResourceType.IMMUNIZATIONRECOMMENDATION)
+        return "ImmunizationRecommendation";
+      if (code == RequestResourceType.MEDICATIONREQUEST)
+        return "MedicationRequest";
+      if (code == RequestResourceType.NUTRITIONORDER)
+        return "NutritionOrder";
+      if (code == RequestResourceType.SERVICEREQUEST)
+        return "ServiceRequest";
+      if (code == RequestResourceType.SUPPLYREQUEST)
+        return "SupplyRequest";
+      if (code == RequestResourceType.TASK)
+        return "Task";
+      if (code == RequestResourceType.VISIONPRESCRIPTION)
+        return "VisionPrescription";
+      return "?";
+      }
+    public String toSystem(RequestResourceType code) {
+      return code.getSystem();
+      }
+    }
+
     public enum ResourceType {
         /**
          * A financial tool for tracking value accrued for a particular purpose.  In the healthcare field, used to track charges for a patient, cost centers, etc.
@@ -9243,7 +11217,7 @@ into another (possibly the same) biological entity.
          */
         BASIC, 
         /**
-         * A binary resource can contain any content, whether text, image, pdf, zip archive, etc.
+         * A resource that represents the data of a single raw artifact as digital content accessible in its native format.  A Binary resource can contain any content, whether text, image, pdf, zip archive, etc.
          */
         BINARY, 
         /**
@@ -9260,7 +11234,7 @@ into another (possibly the same) biological entity.
          */
         BUNDLE, 
         /**
-         * A Capability Statement documents a set of capabilities (behaviors) of a FHIR Server that may be used as a statement of actual server functionality or a statement of required or desired server implementation.
+         * A Capability Statement documents a set of capabilities (behaviors) of a FHIR Server for a particular version of FHIR that may be used as a statement of actual server functionality or a statement of required or desired server implementation.
          */
         CAPABILITYSTATEMENT, 
         /**
@@ -9272,11 +11246,19 @@ into another (possibly the same) biological entity.
          */
         CARETEAM, 
         /**
+         * Catalog entries are wrappers that contextualize items included in a catalog.
+         */
+        CATALOGENTRY, 
+        /**
          * The resource ChargeItem describes the provision of healthcare provider products for a certain patient, therefore referring not only to the product, but containing in addition details of the provision, like date, time, amounts and participating organizations and persons. Main Usage of the ChargeItem is to enable the billing process and internal cost allocation.
          */
         CHARGEITEM, 
         /**
-         * A provider issued list of services and products provided, or to be provided, to a patient which is provided to an insurer for payment recovery.
+         * The ChargeItemDefinition resource provides the properties that apply to the (billing) codes necessary to calculate costs and prices. The properties may differ largely depending on type and realm, therefore this resource gives only a rough structure and requires profiling for each type of billing code system.
+         */
+        CHARGEITEMDEFINITION, 
+        /**
+         * A provider issued list of professional services and products which have been provided, or are to be provided, to a patient which is sent to an insurer for reimbursement.
          */
         CLAIM, 
         /**
@@ -9292,7 +11274,7 @@ into another (possibly the same) biological entity.
          */
         CODESYSTEM, 
         /**
-         * An occurrence of information being transmitted; e.g. an alert that was sent to a responsible provider, a public health agency was notified about a reportable condition.
+         * An occurrence of information being transmitted; e.g. an alert that was sent to a responsible provider, a public health agency that was notified about a reportable condition.
          */
         COMMUNICATION, 
         /**
@@ -9308,7 +11290,7 @@ into another (possibly the same) biological entity.
          */
         COMPOSITION, 
         /**
-         * A statement of relationships from one set of concepts to one or more other concepts - either code systems or data elements, or classes in class models.
+         * A statement of relationships from one set of concepts to one or more other concepts - either concepts in code systems, or data element/data element concepts, or classes in class models.
          */
         CONCEPTMAP, 
         /**
@@ -9320,25 +11302,33 @@ into another (possibly the same) biological entity.
          */
         CONSENT, 
         /**
-         * A formal agreement between parties regarding the conduct of business, exchange of information or other matters.
+         * Legally enforceable, formally recorded unilateral or bilateral directive i.e., a policy or agreement.
          */
         CONTRACT, 
         /**
-         * Financial instrument which may be used to reimburse or pay for health care products and services.
+         * Financial instrument which may be used to reimburse or pay for health care products and services. Includes both insurance and self-payment.
          */
         COVERAGE, 
+        /**
+         * The CoverageEligibilityRequest provides patient and insurance coverage information to an insurer for them to respond, in the form of an CoverageEligibilityResponse, with information regarding whether the stated coverage is valid and in-force and optionally to provide the insurance details of the policy.
+         */
+        COVERAGEELIGIBILITYREQUEST, 
+        /**
+         * This resource provides eligibility and plan details from the processing of an CoverageEligibilityRequest resource.
+         */
+        COVERAGEELIGIBILITYRESPONSE, 
         /**
          * Indicates an actual or potential clinical issue with or between one or more active or proposed clinical actions for a patient; e.g. Drug-drug interaction, Ineffective treatment frequency, Procedure-condition conflict, etc.
          */
         DETECTEDISSUE, 
         /**
-         * This resource identifies an instance or a type of a manufactured item that is used in the provision of healthcare without being substantially changed through that activity. The device may be a medical or non-medical device.  Medical devices include durable (reusable) medical equipment, implantable devices, as well as disposable equipment used for diagnostic, treatment, and research for healthcare and public health.  Non-medical devices may include items such as a machine, cellphone, computer, application, etc.
+         * A type of a manufactured item that is used in the provision of healthcare without being substantially changed through that activity. The device may be a medical or non-medical device.
          */
         DEVICE, 
         /**
          * The characteristics, operational status and capabilities of a medical-related component of a medical device.
          */
-        DEVICECOMPONENT, 
+        DEVICEDEFINITION, 
         /**
          * Describes a measurement, calculation or setting capability of a medical device.
          */
@@ -9360,7 +11350,7 @@ into another (possibly the same) biological entity.
          */
         DOCUMENTMANIFEST, 
         /**
-         * A reference to a document.
+         * A reference to a document of any kind for any purpose. Provides metadata about the document so that the document can be discovered and managed. The scope of a document is any seralized object with a mime-type, so includes formal patient centric documents (CDA), cliical notes, scanned paper, and non-patient specific documents like policy text.
          */
         DOCUMENTREFERENCE, 
         /**
@@ -9368,13 +11358,9 @@ into another (possibly the same) biological entity.
          */
         DOMAINRESOURCE, 
         /**
-         * The EligibilityRequest provides patient and insurance coverage information to an insurer for them to respond, in the form of an EligibilityResponse, with information regarding whether the stated coverage is valid and in-force and optionally to provide the insurance details of the policy.
+         * The EffectEvidenceSynthesis resource describes the difference in an outcome between exposures states in a population where the effect estimate is derived from a combination of research studies.
          */
-        ELIGIBILITYREQUEST, 
-        /**
-         * This resource provides eligibility and plan details from the processing of an Eligibility resource.
-         */
-        ELIGIBILITYRESPONSE, 
+        EFFECTEVIDENCESYNTHESIS, 
         /**
          * An interaction between a patient and healthcare provider(s) for the purpose of providing healthcare service(s) or assessing the health status of a patient.
          */
@@ -9388,13 +11374,9 @@ into another (possibly the same) biological entity.
          */
         ENROLLMENTREQUEST, 
         /**
-         * This resource provides enrollment and plan details from the processing of an Enrollment resource.
+         * This resource provides enrollment and plan details from the processing of an EnrollmentRequest resource.
          */
         ENROLLMENTRESPONSE, 
-        /**
-         * Catalog entries are wrappers that contextualize items included in a catalog.
-         */
-        ENTRYDEFINITION, 
         /**
          * An association between a patient and an organization / healthcare provider(s) during which time encounters may occur. The managing organization assumes a level of responsibility for the patient during this time.
          */
@@ -9404,13 +11386,17 @@ into another (possibly the same) biological entity.
          */
         EVENTDEFINITION, 
         /**
+         * The Evidence resource describes the conditional state (population and any exposures being compared within the population) and outcome (if specified) that the knowledge (evidence, assertion, recommendation) is about.
+         */
+        EVIDENCE, 
+        /**
+         * The EvidenceVariable resource describes a "PICO" element that knowledge (evidence, assertion, recommendation) is about.
+         */
+        EVIDENCEVARIABLE, 
+        /**
          * Example of workflow instance.
          */
         EXAMPLESCENARIO, 
-        /**
-         * Resource to define constraints on the Expansion of a FHIR ValueSet.
-         */
-        EXPANSIONPROFILE, 
         /**
          * This resource provides: the claim details; adjudication details from the processing of a Claim; and optionally account balance information, for informing the subscriber of the benefits provided.
          */
@@ -9432,7 +11418,7 @@ into another (possibly the same) biological entity.
          */
         GRAPHDEFINITION, 
         /**
-         * Represents a defined collection of entities that may be discussed or acted upon collectively but which are not expected to act collectively and are not formally or legally recognized; i.e. a collection of entities that isn't an Organization.
+         * Represents a defined collection of entities that may be discussed or acted upon collectively but which are not expected to act collectively, and are not formally or legally recognized; i.e. a collection of entities that isn't an Organization.
          */
         GROUP, 
         /**
@@ -9460,27 +11446,27 @@ into another (possibly the same) biological entity.
          */
         IMMUNIZATIONRECOMMENDATION, 
         /**
-         * A set of rules of how FHIR is used to solve a particular problem. This resource is used to gather all the parts of an implementation guide into a logical whole and to publish a computable definition of all the parts.
+         * A set of rules of how a particular interoperability or standards problem is solved - typically through the use of FHIR resources. This resource is used to gather all the parts of an implementation guide into a logical whole and to publish a computable definition of all the parts.
          */
         IMPLEMENTATIONGUIDE, 
+        /**
+         * Details of a Health Insurance product/plan provided by an organization.
+         */
+        INSURANCEPLAN, 
         /**
          * Invoice containing collected ChargeItems from an Account with calculated individual and total price for Billing purpose.
          */
         INVOICE, 
         /**
-         * A physical, countable instance of an item, for example one box or one unit.
-         */
-        ITEMINSTANCE, 
-        /**
          * The Library resource is a general-purpose container for knowledge asset definitions. It can be used to describe and expose existing knowledge assets such as logic libraries and information model descriptions, as well as to describe a collection of knowledge assets.
          */
         LIBRARY, 
         /**
-         * Identifies two or more records (resource instances) that are referring to the same real-world "occurrence".
+         * Identifies two or more records (resource instances) that refer to the same real-world "occurrence".
          */
         LINKAGE, 
         /**
-         * A set of information summarized from a list of other resources.
+         * A list is a curated collection of resources.
          */
         LIST, 
         /**
@@ -9520,7 +11506,9 @@ into another (possibly the same) biological entity.
          */
         MEDICATIONREQUEST, 
         /**
-         * A record of a medication that is being consumed by a patient.   A MedicationStatement may indicate that the patient may be taking the medication now, or has taken the medication in the past or will be taking the medication in the future.  The source of this information can be the patient, significant other (such as a family member or spouse), or a clinician.  A common scenario where this information is captured is during the history taking process during a patient visit or stay.   The medication information may come from sources such as the patient's memory, from a prescription bottle,  or from a list of medications the patient, clinician or other party maintains. The primary difference between a medication statement and a medication administration is that the medication administration has complete administration information and is based on actual administration information from the person who administered the medication.  A medication statement is often, if not always, less specific.  There is no required date/time when the medication was administered, in fact we only know that a source has reported the patient is taking this medication, where details such as time, quantity, or rate or even medication product may be incomplete or missing or less precise.  As stated earlier, the medication statement information may come from the patient's memory, from a prescription bottle or from a list of medications the patient, clinician or other party maintains.  Medication administration is more formal and is not missing detailed information.
+         * A record of a medication that is being consumed by a patient.   A MedicationStatement may indicate that the patient may be taking the medication now or has taken the medication in the past or will be taking the medication in the future.  The source of this information can be the patient, significant other (such as a family member or spouse), or a clinician.  A common scenario where this information is captured is during the history taking process during a patient visit or stay.   The medication information may come from sources such as the patient's memory, from a prescription bottle,  or from a list of medications the patient, clinician or other party maintains. 
+
+The primary difference between a medication statement and a medication administration is that the medication administration has complete administration information and is based on actual administration information from the person who administered the medication.  A medication statement is often, if not always, less specific.  There is no required date/time when the medication was administered, in fact we only know that a source has reported the patient is taking this medication, where details such as time, quantity, or rate or even medication product may be incomplete or missing or less precise.  As stated earlier, the medication statement information may come from the patient's memory, from a prescription bottle or from a list of medications the patient, clinician or other party maintains.  Medication administration is more formal and is not missing detailed information.
          */
         MEDICATIONSTATEMENT, 
         /**
@@ -9534,15 +11522,23 @@ into another (possibly the same) biological entity.
         /**
          * The clinical particulars - indications, contraindications etc. of a medicinal product, including for regulatory purposes.
          */
-        MEDICINALPRODUCTCLINICALS, 
+        MEDICINALPRODUCTCONTRAINDICATION, 
         /**
-         * A detailed description of a device, typically as part of a regulated medicinal product. It is not intended to relace the Device resource, which covers use of device instances.
+         * Indication for the Medicinal Product.
          */
-        MEDICINALPRODUCTDEVICESPEC, 
+        MEDICINALPRODUCTINDICATION, 
         /**
          * An ingredient of a manufactured item or pharmaceutical product.
          */
         MEDICINALPRODUCTINGREDIENT, 
+        /**
+         * The interactions of the medicinal product with other medicinal products, or other forms of interactions.
+         */
+        MEDICINALPRODUCTINTERACTION, 
+        /**
+         * The manufactured item as contained in the packaged medicinal product.
+         */
+        MEDICINALPRODUCTMANUFACTURED, 
         /**
          * A medicinal product in a container or package.
          */
@@ -9552,6 +11548,10 @@ into another (possibly the same) biological entity.
          */
         MEDICINALPRODUCTPHARMACEUTICAL, 
         /**
+         * Describe the undesirable effects of the medicinal product.
+         */
+        MEDICINALPRODUCTUNDESIRABLEEFFECT, 
+        /**
          * Defines the characteristics of a message that can be shared between systems, including the type of event that initiates the message, the content to be transmitted and what response(s), if any, are permitted.
          */
         MESSAGEDEFINITION, 
@@ -9559,6 +11559,10 @@ into another (possibly the same) biological entity.
          * The header for a message exchange that is either requesting or responding to an action.  The reference(s) that are the subject of the action as well as other information related to the action are typically transmitted in a bundle in which the MessageHeader resource instance is the first resource in the bundle.
          */
         MESSAGEHEADER, 
+        /**
+         * Raw data describing a biological sequence.
+         */
+        MOLECULARSEQUENCE, 
         /**
          * A curated namespace that issues unique symbols within that namespace for the identification of concepts, people, devices, etc.  Represents a "System" used within the Identifier and Coding data types.
          */
@@ -9576,27 +11580,23 @@ into another (possibly the same) biological entity.
          */
         OBSERVATIONDEFINITION, 
         /**
-         * A person's work information, structured to facilitate individual, population, and public health use; not intended to support billing.
-         */
-        OCCUPATIONALDATA, 
-        /**
          * A formal computable definition of an operation (on the RESTful interface) or a named query (using the search interaction).
          */
         OPERATIONDEFINITION, 
         /**
-         * A collection of error, warning or information messages that result from a system action.
+         * A collection of error, warning, or information messages that result from a system action.
          */
         OPERATIONOUTCOME, 
         /**
-         * A formally or informally recognized grouping of people or organizations formed for the purpose of achieving some form of collective action.  Includes companies, institutions, corporations, departments, community groups, healthcare practice groups, etc.
+         * A formally or informally recognized grouping of people or organizations formed for the purpose of achieving some form of collective action.  Includes companies, institutions, corporations, departments, community groups, healthcare practice groups, payer/insurer, etc.
          */
         ORGANIZATION, 
         /**
-         * A specific set of Roles/Locations/specialties/services that a practitioner may perform at an organization for a period of time.
+         * Defines an affiliation/assotiation/relationship between 2 distinct oganizations, that is not a part-of relationship/sub-division relationship.
          */
-        ORGANIZATIONROLE, 
+        ORGANIZATIONAFFILIATION, 
         /**
-         * This special resource type is used to represent an operation request and response (operations.html). It has no other use, and there is no RESTful endpoint associated with it.
+         * This resource is a non-persisted resource used to pass information into and back from an [operation](operations.html). It has no other use, and there is no RESTful endpoint associated with it.
          */
         PARAMETERS, 
         /**
@@ -9608,7 +11608,7 @@ into another (possibly the same) biological entity.
          */
         PAYMENTNOTICE, 
         /**
-         * This resource provides payment details and claim references supporting a bulk payment.
+         * This resource provides the details including amount of a payment and allocates the payment items being paid.
          */
         PAYMENTRECONCILIATION, 
         /**
@@ -9628,21 +11628,9 @@ into another (possibly the same) biological entity.
          */
         PRACTITIONERROLE, 
         /**
-         * An action that is or was performed on a patient. This can be a physical intervention like an operation, or less invasive like counseling or hypnotherapy.
+         * An action that is or was performed on or for a patient. This can be a physical intervention like an operation, or less invasive like long term services, counseling, or hypnotherapy.
          */
         PROCEDURE, 
-        /**
-         * This resource provides the target, request and response, and action details for an action to be performed by the target on or about existing resources.
-         */
-        PROCESSREQUEST, 
-        /**
-         * This resource provides processing status, errors and notes from the processing of a resource.
-         */
-        PROCESSRESPONSE, 
-        /**
-         * Details of a Health Insurance product/plan provided by an organization.
-         */
-        PRODUCTPLAN, 
         /**
          * Provenance of a resource is a record that describes entities and processes involved in producing and delivering or otherwise influencing that resource. Provenance provides a critical foundation for assessing authenticity, enabling trust, and allowing reproducibility. Provenance assertions are a form of contextual metadata and can themselves become important records with their own provenance. Provenance statement indicates clinical significance in terms of confidence in authenticity, reliability, and trustworthiness, integrity, and stage in lifecycle (e.g. Document Completion - has the artifact been legally authenticated), all of which may impact security, privacy, and trust policies.
          */
@@ -9664,6 +11652,14 @@ into another (possibly the same) biological entity.
          */
         REQUESTGROUP, 
         /**
+         * The ResearchDefinition resource describes the conditional state (population and any exposures being compared within the population) and outcome (if specified) that the knowledge (evidence, assertion, recommendation) is about.
+         */
+        RESEARCHDEFINITION, 
+        /**
+         * The ResearchElementDefinition resource describes a "PICO" element that knowledge (evidence, assertion, recommendation) is about.
+         */
+        RESEARCHELEMENTDEFINITION, 
+        /**
          * A process where a researcher or organization plans and then executes a series of steps intended to increase the field of healthcare-related knowledge.  This includes studies of safety, efficacy, comparative effectiveness and other information about medications, devices, therapies and other interventional and investigative techniques.  A ResearchStudy involves the gathering of information about human or animal subjects.
          */
         RESEARCHSTUDY, 
@@ -9680,6 +11676,10 @@ into another (possibly the same) biological entity.
          */
         RISKASSESSMENT, 
         /**
+         * The RiskEvidenceSynthesis resource describes the likelihood of an outcome in a population plus exposure state where the risk estimate is derived from a combination of research studies.
+         */
+        RISKEVIDENCESYNTHESIS, 
+        /**
          * A container for slots of time that may be available for booking appointments.
          */
         SCHEDULE, 
@@ -9687,10 +11687,6 @@ into another (possibly the same) biological entity.
          * A search parameter that defines a named search item that can be used to search/filter on a resource.
          */
         SEARCHPARAMETER, 
-        /**
-         * Raw data describing a biological sequence.
-         */
-        SEQUENCE, 
         /**
          * A record of a request for service such as diagnostic investigations, treatments, or operations to be performed.
          */
@@ -9724,13 +11720,25 @@ into another (possibly the same) biological entity.
          */
         SUBSTANCE, 
         /**
+         * Nucleic acids are defined by three distinct elements: the base, sugar and linkage. Individual substance/moiety IDs will be created for each of these elements. The nucleotide sequence will be always entered in the 5’-3’ direction.
+         */
+        SUBSTANCENUCLEICACID, 
+        /**
          * Todo.
          */
         SUBSTANCEPOLYMER, 
         /**
+         * A SubstanceProtein is defined as a single unit of a linear amino acid sequence, or a combination of subunits that are either covalently linked or have a defined invariant stoichiometric relationship. This includes all synthetic, recombinant and purified SubstanceProteins of defined sequence, whether the use is therapeutic or prophylactic. This set of elements will be used to describe albumins, coagulation factors, cytokines, growth factors, peptide/SubstanceProtein hormones, enzymes, toxins, toxoids, recombinant vaccines, and immunomodulators.
+         */
+        SUBSTANCEPROTEIN, 
+        /**
          * Todo.
          */
         SUBSTANCEREFERENCEINFORMATION, 
+        /**
+         * Source material shall capture information on the taxonomic and anatomical origins as well as the fraction of a material that can result in or can be modified to form a substance. This set of data elements shall be used to define polymer substances isolated from biological matrices. Taxonomic and anatomical origins shall be described using a controlled vocabulary as required. This information is captured for naturally derived polymers ( . starch) and structurally diverse substances. For Organisms belonging to the Kingdom Plantae the Substance level defines the fresh material of a single species or infraspecies, the Herbal Drug and the Herbal preparation. For Herbal preparations, the fraction information will be captured at the Substance information level and additional information for herbal extracts will be captured at the Specified Substance Group 1 information level. See for further explanation the Substance Class: Structurally Diverse and the herbal annex.
+         */
+        SUBSTANCESOURCEMATERIAL, 
         /**
          * The detailed description of a substance, typically at a level beyond what is used for prescribing.
          */
@@ -9748,7 +11756,7 @@ into another (possibly the same) biological entity.
          */
         TASK, 
         /**
-         * A Terminology Capabilities documents a set of capabilities (behaviors) of a FHIR Server that may be used as a statement of actual server functionality or a statement of required or desired server implementation.
+         * A TerminologyCapabilities resource documents a set of capabilities (behaviors) of a FHIR Terminology Server that may be used as a statement of actual server functionality or a statement of required or desired server implementation.
          */
         TERMINOLOGYCAPABILITIES, 
         /**
@@ -9760,11 +11768,7 @@ into another (possibly the same) biological entity.
          */
         TESTSCRIPT, 
         /**
-         * Information about a user's current session.
-         */
-        USERSESSION, 
-        /**
-         * A ValueSet resource specifies a set of codes drawn from one or more code systems, intended for use in a particular context. Value sets link between [[[CodeSystem]]] definitions and their use in [coded elements](terminologies.html).
+         * A ValueSet resource instance specifies a set of codes drawn from one or more code systems, intended for use in a particular context. Value sets link between [[[CodeSystem]]] definitions and their use in [coded elements](terminologies.html).
          */
         VALUESET, 
         /**
@@ -9772,7 +11776,7 @@ into another (possibly the same) biological entity.
          */
         VERIFICATIONRESULT, 
         /**
-         * An authorization for the supply of glasses and/or contact lenses to a patient.
+         * An authorization for the provision of glasses and/or contact lenses to a patient.
          */
         VISIONPRESCRIPTION, 
         /**
@@ -9812,8 +11816,12 @@ into another (possibly the same) biological entity.
           return CAREPLAN;
         if ("CareTeam".equals(codeString))
           return CARETEAM;
+        if ("CatalogEntry".equals(codeString))
+          return CATALOGENTRY;
         if ("ChargeItem".equals(codeString))
           return CHARGEITEM;
+        if ("ChargeItemDefinition".equals(codeString))
+          return CHARGEITEMDEFINITION;
         if ("Claim".equals(codeString))
           return CLAIM;
         if ("ClaimResponse".equals(codeString))
@@ -9840,12 +11848,16 @@ into another (possibly the same) biological entity.
           return CONTRACT;
         if ("Coverage".equals(codeString))
           return COVERAGE;
+        if ("CoverageEligibilityRequest".equals(codeString))
+          return COVERAGEELIGIBILITYREQUEST;
+        if ("CoverageEligibilityResponse".equals(codeString))
+          return COVERAGEELIGIBILITYRESPONSE;
         if ("DetectedIssue".equals(codeString))
           return DETECTEDISSUE;
         if ("Device".equals(codeString))
           return DEVICE;
-        if ("DeviceComponent".equals(codeString))
-          return DEVICECOMPONENT;
+        if ("DeviceDefinition".equals(codeString))
+          return DEVICEDEFINITION;
         if ("DeviceMetric".equals(codeString))
           return DEVICEMETRIC;
         if ("DeviceRequest".equals(codeString))
@@ -9860,10 +11872,8 @@ into another (possibly the same) biological entity.
           return DOCUMENTREFERENCE;
         if ("DomainResource".equals(codeString))
           return DOMAINRESOURCE;
-        if ("EligibilityRequest".equals(codeString))
-          return ELIGIBILITYREQUEST;
-        if ("EligibilityResponse".equals(codeString))
-          return ELIGIBILITYRESPONSE;
+        if ("EffectEvidenceSynthesis".equals(codeString))
+          return EFFECTEVIDENCESYNTHESIS;
         if ("Encounter".equals(codeString))
           return ENCOUNTER;
         if ("Endpoint".equals(codeString))
@@ -9872,16 +11882,16 @@ into another (possibly the same) biological entity.
           return ENROLLMENTREQUEST;
         if ("EnrollmentResponse".equals(codeString))
           return ENROLLMENTRESPONSE;
-        if ("EntryDefinition".equals(codeString))
-          return ENTRYDEFINITION;
         if ("EpisodeOfCare".equals(codeString))
           return EPISODEOFCARE;
         if ("EventDefinition".equals(codeString))
           return EVENTDEFINITION;
+        if ("Evidence".equals(codeString))
+          return EVIDENCE;
+        if ("EvidenceVariable".equals(codeString))
+          return EVIDENCEVARIABLE;
         if ("ExampleScenario".equals(codeString))
           return EXAMPLESCENARIO;
-        if ("ExpansionProfile".equals(codeString))
-          return EXPANSIONPROFILE;
         if ("ExplanationOfBenefit".equals(codeString))
           return EXPLANATIONOFBENEFIT;
         if ("FamilyMemberHistory".equals(codeString))
@@ -9908,10 +11918,10 @@ into another (possibly the same) biological entity.
           return IMMUNIZATIONRECOMMENDATION;
         if ("ImplementationGuide".equals(codeString))
           return IMPLEMENTATIONGUIDE;
+        if ("InsurancePlan".equals(codeString))
+          return INSURANCEPLAN;
         if ("Invoice".equals(codeString))
           return INVOICE;
-        if ("ItemInstance".equals(codeString))
-          return ITEMINSTANCE;
         if ("Library".equals(codeString))
           return LIBRARY;
         if ("Linkage".equals(codeString))
@@ -9942,20 +11952,28 @@ into another (possibly the same) biological entity.
           return MEDICINALPRODUCT;
         if ("MedicinalProductAuthorization".equals(codeString))
           return MEDICINALPRODUCTAUTHORIZATION;
-        if ("MedicinalProductClinicals".equals(codeString))
-          return MEDICINALPRODUCTCLINICALS;
-        if ("MedicinalProductDeviceSpec".equals(codeString))
-          return MEDICINALPRODUCTDEVICESPEC;
+        if ("MedicinalProductContraindication".equals(codeString))
+          return MEDICINALPRODUCTCONTRAINDICATION;
+        if ("MedicinalProductIndication".equals(codeString))
+          return MEDICINALPRODUCTINDICATION;
         if ("MedicinalProductIngredient".equals(codeString))
           return MEDICINALPRODUCTINGREDIENT;
+        if ("MedicinalProductInteraction".equals(codeString))
+          return MEDICINALPRODUCTINTERACTION;
+        if ("MedicinalProductManufactured".equals(codeString))
+          return MEDICINALPRODUCTMANUFACTURED;
         if ("MedicinalProductPackaged".equals(codeString))
           return MEDICINALPRODUCTPACKAGED;
         if ("MedicinalProductPharmaceutical".equals(codeString))
           return MEDICINALPRODUCTPHARMACEUTICAL;
+        if ("MedicinalProductUndesirableEffect".equals(codeString))
+          return MEDICINALPRODUCTUNDESIRABLEEFFECT;
         if ("MessageDefinition".equals(codeString))
           return MESSAGEDEFINITION;
         if ("MessageHeader".equals(codeString))
           return MESSAGEHEADER;
+        if ("MolecularSequence".equals(codeString))
+          return MOLECULARSEQUENCE;
         if ("NamingSystem".equals(codeString))
           return NAMINGSYSTEM;
         if ("NutritionOrder".equals(codeString))
@@ -9964,16 +11982,14 @@ into another (possibly the same) biological entity.
           return OBSERVATION;
         if ("ObservationDefinition".equals(codeString))
           return OBSERVATIONDEFINITION;
-        if ("OccupationalData".equals(codeString))
-          return OCCUPATIONALDATA;
         if ("OperationDefinition".equals(codeString))
           return OPERATIONDEFINITION;
         if ("OperationOutcome".equals(codeString))
           return OPERATIONOUTCOME;
         if ("Organization".equals(codeString))
           return ORGANIZATION;
-        if ("OrganizationRole".equals(codeString))
-          return ORGANIZATIONROLE;
+        if ("OrganizationAffiliation".equals(codeString))
+          return ORGANIZATIONAFFILIATION;
         if ("Parameters".equals(codeString))
           return PARAMETERS;
         if ("Patient".equals(codeString))
@@ -9992,12 +12008,6 @@ into another (possibly the same) biological entity.
           return PRACTITIONERROLE;
         if ("Procedure".equals(codeString))
           return PROCEDURE;
-        if ("ProcessRequest".equals(codeString))
-          return PROCESSREQUEST;
-        if ("ProcessResponse".equals(codeString))
-          return PROCESSRESPONSE;
-        if ("ProductPlan".equals(codeString))
-          return PRODUCTPLAN;
         if ("Provenance".equals(codeString))
           return PROVENANCE;
         if ("Questionnaire".equals(codeString))
@@ -10008,6 +12018,10 @@ into another (possibly the same) biological entity.
           return RELATEDPERSON;
         if ("RequestGroup".equals(codeString))
           return REQUESTGROUP;
+        if ("ResearchDefinition".equals(codeString))
+          return RESEARCHDEFINITION;
+        if ("ResearchElementDefinition".equals(codeString))
+          return RESEARCHELEMENTDEFINITION;
         if ("ResearchStudy".equals(codeString))
           return RESEARCHSTUDY;
         if ("ResearchSubject".equals(codeString))
@@ -10016,12 +12030,12 @@ into another (possibly the same) biological entity.
           return RESOURCE;
         if ("RiskAssessment".equals(codeString))
           return RISKASSESSMENT;
+        if ("RiskEvidenceSynthesis".equals(codeString))
+          return RISKEVIDENCESYNTHESIS;
         if ("Schedule".equals(codeString))
           return SCHEDULE;
         if ("SearchParameter".equals(codeString))
           return SEARCHPARAMETER;
-        if ("Sequence".equals(codeString))
-          return SEQUENCE;
         if ("ServiceRequest".equals(codeString))
           return SERVICEREQUEST;
         if ("Slot".equals(codeString))
@@ -10038,10 +12052,16 @@ into another (possibly the same) biological entity.
           return SUBSCRIPTION;
         if ("Substance".equals(codeString))
           return SUBSTANCE;
+        if ("SubstanceNucleicAcid".equals(codeString))
+          return SUBSTANCENUCLEICACID;
         if ("SubstancePolymer".equals(codeString))
           return SUBSTANCEPOLYMER;
+        if ("SubstanceProtein".equals(codeString))
+          return SUBSTANCEPROTEIN;
         if ("SubstanceReferenceInformation".equals(codeString))
           return SUBSTANCEREFERENCEINFORMATION;
+        if ("SubstanceSourceMaterial".equals(codeString))
+          return SUBSTANCESOURCEMATERIAL;
         if ("SubstanceSpecification".equals(codeString))
           return SUBSTANCESPECIFICATION;
         if ("SupplyDelivery".equals(codeString))
@@ -10056,8 +12076,6 @@ into another (possibly the same) biological entity.
           return TESTREPORT;
         if ("TestScript".equals(codeString))
           return TESTSCRIPT;
-        if ("UserSession".equals(codeString))
-          return USERSESSION;
         if ("ValueSet".equals(codeString))
           return VALUESET;
         if ("VerificationResult".equals(codeString))
@@ -10083,7 +12101,9 @@ into another (possibly the same) biological entity.
             case CAPABILITYSTATEMENT: return "CapabilityStatement";
             case CAREPLAN: return "CarePlan";
             case CARETEAM: return "CareTeam";
+            case CATALOGENTRY: return "CatalogEntry";
             case CHARGEITEM: return "ChargeItem";
+            case CHARGEITEMDEFINITION: return "ChargeItemDefinition";
             case CLAIM: return "Claim";
             case CLAIMRESPONSE: return "ClaimResponse";
             case CLINICALIMPRESSION: return "ClinicalImpression";
@@ -10097,9 +12117,11 @@ into another (possibly the same) biological entity.
             case CONSENT: return "Consent";
             case CONTRACT: return "Contract";
             case COVERAGE: return "Coverage";
+            case COVERAGEELIGIBILITYREQUEST: return "CoverageEligibilityRequest";
+            case COVERAGEELIGIBILITYRESPONSE: return "CoverageEligibilityResponse";
             case DETECTEDISSUE: return "DetectedIssue";
             case DEVICE: return "Device";
-            case DEVICECOMPONENT: return "DeviceComponent";
+            case DEVICEDEFINITION: return "DeviceDefinition";
             case DEVICEMETRIC: return "DeviceMetric";
             case DEVICEREQUEST: return "DeviceRequest";
             case DEVICEUSESTATEMENT: return "DeviceUseStatement";
@@ -10107,17 +12129,16 @@ into another (possibly the same) biological entity.
             case DOCUMENTMANIFEST: return "DocumentManifest";
             case DOCUMENTREFERENCE: return "DocumentReference";
             case DOMAINRESOURCE: return "DomainResource";
-            case ELIGIBILITYREQUEST: return "EligibilityRequest";
-            case ELIGIBILITYRESPONSE: return "EligibilityResponse";
+            case EFFECTEVIDENCESYNTHESIS: return "EffectEvidenceSynthesis";
             case ENCOUNTER: return "Encounter";
             case ENDPOINT: return "Endpoint";
             case ENROLLMENTREQUEST: return "EnrollmentRequest";
             case ENROLLMENTRESPONSE: return "EnrollmentResponse";
-            case ENTRYDEFINITION: return "EntryDefinition";
             case EPISODEOFCARE: return "EpisodeOfCare";
             case EVENTDEFINITION: return "EventDefinition";
+            case EVIDENCE: return "Evidence";
+            case EVIDENCEVARIABLE: return "EvidenceVariable";
             case EXAMPLESCENARIO: return "ExampleScenario";
-            case EXPANSIONPROFILE: return "ExpansionProfile";
             case EXPLANATIONOFBENEFIT: return "ExplanationOfBenefit";
             case FAMILYMEMBERHISTORY: return "FamilyMemberHistory";
             case FLAG: return "Flag";
@@ -10131,8 +12152,8 @@ into another (possibly the same) biological entity.
             case IMMUNIZATIONEVALUATION: return "ImmunizationEvaluation";
             case IMMUNIZATIONRECOMMENDATION: return "ImmunizationRecommendation";
             case IMPLEMENTATIONGUIDE: return "ImplementationGuide";
+            case INSURANCEPLAN: return "InsurancePlan";
             case INVOICE: return "Invoice";
-            case ITEMINSTANCE: return "ItemInstance";
             case LIBRARY: return "Library";
             case LINKAGE: return "Linkage";
             case LIST: return "List";
@@ -10148,22 +12169,25 @@ into another (possibly the same) biological entity.
             case MEDICATIONSTATEMENT: return "MedicationStatement";
             case MEDICINALPRODUCT: return "MedicinalProduct";
             case MEDICINALPRODUCTAUTHORIZATION: return "MedicinalProductAuthorization";
-            case MEDICINALPRODUCTCLINICALS: return "MedicinalProductClinicals";
-            case MEDICINALPRODUCTDEVICESPEC: return "MedicinalProductDeviceSpec";
+            case MEDICINALPRODUCTCONTRAINDICATION: return "MedicinalProductContraindication";
+            case MEDICINALPRODUCTINDICATION: return "MedicinalProductIndication";
             case MEDICINALPRODUCTINGREDIENT: return "MedicinalProductIngredient";
+            case MEDICINALPRODUCTINTERACTION: return "MedicinalProductInteraction";
+            case MEDICINALPRODUCTMANUFACTURED: return "MedicinalProductManufactured";
             case MEDICINALPRODUCTPACKAGED: return "MedicinalProductPackaged";
             case MEDICINALPRODUCTPHARMACEUTICAL: return "MedicinalProductPharmaceutical";
+            case MEDICINALPRODUCTUNDESIRABLEEFFECT: return "MedicinalProductUndesirableEffect";
             case MESSAGEDEFINITION: return "MessageDefinition";
             case MESSAGEHEADER: return "MessageHeader";
+            case MOLECULARSEQUENCE: return "MolecularSequence";
             case NAMINGSYSTEM: return "NamingSystem";
             case NUTRITIONORDER: return "NutritionOrder";
             case OBSERVATION: return "Observation";
             case OBSERVATIONDEFINITION: return "ObservationDefinition";
-            case OCCUPATIONALDATA: return "OccupationalData";
             case OPERATIONDEFINITION: return "OperationDefinition";
             case OPERATIONOUTCOME: return "OperationOutcome";
             case ORGANIZATION: return "Organization";
-            case ORGANIZATIONROLE: return "OrganizationRole";
+            case ORGANIZATIONAFFILIATION: return "OrganizationAffiliation";
             case PARAMETERS: return "Parameters";
             case PATIENT: return "Patient";
             case PAYMENTNOTICE: return "PaymentNotice";
@@ -10173,21 +12197,20 @@ into another (possibly the same) biological entity.
             case PRACTITIONER: return "Practitioner";
             case PRACTITIONERROLE: return "PractitionerRole";
             case PROCEDURE: return "Procedure";
-            case PROCESSREQUEST: return "ProcessRequest";
-            case PROCESSRESPONSE: return "ProcessResponse";
-            case PRODUCTPLAN: return "ProductPlan";
             case PROVENANCE: return "Provenance";
             case QUESTIONNAIRE: return "Questionnaire";
             case QUESTIONNAIRERESPONSE: return "QuestionnaireResponse";
             case RELATEDPERSON: return "RelatedPerson";
             case REQUESTGROUP: return "RequestGroup";
+            case RESEARCHDEFINITION: return "ResearchDefinition";
+            case RESEARCHELEMENTDEFINITION: return "ResearchElementDefinition";
             case RESEARCHSTUDY: return "ResearchStudy";
             case RESEARCHSUBJECT: return "ResearchSubject";
             case RESOURCE: return "Resource";
             case RISKASSESSMENT: return "RiskAssessment";
+            case RISKEVIDENCESYNTHESIS: return "RiskEvidenceSynthesis";
             case SCHEDULE: return "Schedule";
             case SEARCHPARAMETER: return "SearchParameter";
-            case SEQUENCE: return "Sequence";
             case SERVICEREQUEST: return "ServiceRequest";
             case SLOT: return "Slot";
             case SPECIMEN: return "Specimen";
@@ -10196,8 +12219,11 @@ into another (possibly the same) biological entity.
             case STRUCTUREMAP: return "StructureMap";
             case SUBSCRIPTION: return "Subscription";
             case SUBSTANCE: return "Substance";
+            case SUBSTANCENUCLEICACID: return "SubstanceNucleicAcid";
             case SUBSTANCEPOLYMER: return "SubstancePolymer";
+            case SUBSTANCEPROTEIN: return "SubstanceProtein";
             case SUBSTANCEREFERENCEINFORMATION: return "SubstanceReferenceInformation";
+            case SUBSTANCESOURCEMATERIAL: return "SubstanceSourceMaterial";
             case SUBSTANCESPECIFICATION: return "SubstanceSpecification";
             case SUPPLYDELIVERY: return "SupplyDelivery";
             case SUPPLYREQUEST: return "SupplyRequest";
@@ -10205,7 +12231,6 @@ into another (possibly the same) biological entity.
             case TERMINOLOGYCAPABILITIES: return "TerminologyCapabilities";
             case TESTREPORT: return "TestReport";
             case TESTSCRIPT: return "TestScript";
-            case USERSESSION: return "UserSession";
             case VALUESET: return "ValueSet";
             case VERIFICATIONRESULT: return "VerificationResult";
             case VISIONPRESCRIPTION: return "VisionPrescription";
@@ -10229,7 +12254,9 @@ into another (possibly the same) biological entity.
             case CAPABILITYSTATEMENT: return "http://hl7.org/fhir/resource-types";
             case CAREPLAN: return "http://hl7.org/fhir/resource-types";
             case CARETEAM: return "http://hl7.org/fhir/resource-types";
+            case CATALOGENTRY: return "http://hl7.org/fhir/resource-types";
             case CHARGEITEM: return "http://hl7.org/fhir/resource-types";
+            case CHARGEITEMDEFINITION: return "http://hl7.org/fhir/resource-types";
             case CLAIM: return "http://hl7.org/fhir/resource-types";
             case CLAIMRESPONSE: return "http://hl7.org/fhir/resource-types";
             case CLINICALIMPRESSION: return "http://hl7.org/fhir/resource-types";
@@ -10243,9 +12270,11 @@ into another (possibly the same) biological entity.
             case CONSENT: return "http://hl7.org/fhir/resource-types";
             case CONTRACT: return "http://hl7.org/fhir/resource-types";
             case COVERAGE: return "http://hl7.org/fhir/resource-types";
+            case COVERAGEELIGIBILITYREQUEST: return "http://hl7.org/fhir/resource-types";
+            case COVERAGEELIGIBILITYRESPONSE: return "http://hl7.org/fhir/resource-types";
             case DETECTEDISSUE: return "http://hl7.org/fhir/resource-types";
             case DEVICE: return "http://hl7.org/fhir/resource-types";
-            case DEVICECOMPONENT: return "http://hl7.org/fhir/resource-types";
+            case DEVICEDEFINITION: return "http://hl7.org/fhir/resource-types";
             case DEVICEMETRIC: return "http://hl7.org/fhir/resource-types";
             case DEVICEREQUEST: return "http://hl7.org/fhir/resource-types";
             case DEVICEUSESTATEMENT: return "http://hl7.org/fhir/resource-types";
@@ -10253,17 +12282,16 @@ into another (possibly the same) biological entity.
             case DOCUMENTMANIFEST: return "http://hl7.org/fhir/resource-types";
             case DOCUMENTREFERENCE: return "http://hl7.org/fhir/resource-types";
             case DOMAINRESOURCE: return "http://hl7.org/fhir/resource-types";
-            case ELIGIBILITYREQUEST: return "http://hl7.org/fhir/resource-types";
-            case ELIGIBILITYRESPONSE: return "http://hl7.org/fhir/resource-types";
+            case EFFECTEVIDENCESYNTHESIS: return "http://hl7.org/fhir/resource-types";
             case ENCOUNTER: return "http://hl7.org/fhir/resource-types";
             case ENDPOINT: return "http://hl7.org/fhir/resource-types";
             case ENROLLMENTREQUEST: return "http://hl7.org/fhir/resource-types";
             case ENROLLMENTRESPONSE: return "http://hl7.org/fhir/resource-types";
-            case ENTRYDEFINITION: return "http://hl7.org/fhir/resource-types";
             case EPISODEOFCARE: return "http://hl7.org/fhir/resource-types";
             case EVENTDEFINITION: return "http://hl7.org/fhir/resource-types";
+            case EVIDENCE: return "http://hl7.org/fhir/resource-types";
+            case EVIDENCEVARIABLE: return "http://hl7.org/fhir/resource-types";
             case EXAMPLESCENARIO: return "http://hl7.org/fhir/resource-types";
-            case EXPANSIONPROFILE: return "http://hl7.org/fhir/resource-types";
             case EXPLANATIONOFBENEFIT: return "http://hl7.org/fhir/resource-types";
             case FAMILYMEMBERHISTORY: return "http://hl7.org/fhir/resource-types";
             case FLAG: return "http://hl7.org/fhir/resource-types";
@@ -10277,8 +12305,8 @@ into another (possibly the same) biological entity.
             case IMMUNIZATIONEVALUATION: return "http://hl7.org/fhir/resource-types";
             case IMMUNIZATIONRECOMMENDATION: return "http://hl7.org/fhir/resource-types";
             case IMPLEMENTATIONGUIDE: return "http://hl7.org/fhir/resource-types";
+            case INSURANCEPLAN: return "http://hl7.org/fhir/resource-types";
             case INVOICE: return "http://hl7.org/fhir/resource-types";
-            case ITEMINSTANCE: return "http://hl7.org/fhir/resource-types";
             case LIBRARY: return "http://hl7.org/fhir/resource-types";
             case LINKAGE: return "http://hl7.org/fhir/resource-types";
             case LIST: return "http://hl7.org/fhir/resource-types";
@@ -10294,22 +12322,25 @@ into another (possibly the same) biological entity.
             case MEDICATIONSTATEMENT: return "http://hl7.org/fhir/resource-types";
             case MEDICINALPRODUCT: return "http://hl7.org/fhir/resource-types";
             case MEDICINALPRODUCTAUTHORIZATION: return "http://hl7.org/fhir/resource-types";
-            case MEDICINALPRODUCTCLINICALS: return "http://hl7.org/fhir/resource-types";
-            case MEDICINALPRODUCTDEVICESPEC: return "http://hl7.org/fhir/resource-types";
+            case MEDICINALPRODUCTCONTRAINDICATION: return "http://hl7.org/fhir/resource-types";
+            case MEDICINALPRODUCTINDICATION: return "http://hl7.org/fhir/resource-types";
             case MEDICINALPRODUCTINGREDIENT: return "http://hl7.org/fhir/resource-types";
+            case MEDICINALPRODUCTINTERACTION: return "http://hl7.org/fhir/resource-types";
+            case MEDICINALPRODUCTMANUFACTURED: return "http://hl7.org/fhir/resource-types";
             case MEDICINALPRODUCTPACKAGED: return "http://hl7.org/fhir/resource-types";
             case MEDICINALPRODUCTPHARMACEUTICAL: return "http://hl7.org/fhir/resource-types";
+            case MEDICINALPRODUCTUNDESIRABLEEFFECT: return "http://hl7.org/fhir/resource-types";
             case MESSAGEDEFINITION: return "http://hl7.org/fhir/resource-types";
             case MESSAGEHEADER: return "http://hl7.org/fhir/resource-types";
+            case MOLECULARSEQUENCE: return "http://hl7.org/fhir/resource-types";
             case NAMINGSYSTEM: return "http://hl7.org/fhir/resource-types";
             case NUTRITIONORDER: return "http://hl7.org/fhir/resource-types";
             case OBSERVATION: return "http://hl7.org/fhir/resource-types";
             case OBSERVATIONDEFINITION: return "http://hl7.org/fhir/resource-types";
-            case OCCUPATIONALDATA: return "http://hl7.org/fhir/resource-types";
             case OPERATIONDEFINITION: return "http://hl7.org/fhir/resource-types";
             case OPERATIONOUTCOME: return "http://hl7.org/fhir/resource-types";
             case ORGANIZATION: return "http://hl7.org/fhir/resource-types";
-            case ORGANIZATIONROLE: return "http://hl7.org/fhir/resource-types";
+            case ORGANIZATIONAFFILIATION: return "http://hl7.org/fhir/resource-types";
             case PARAMETERS: return "http://hl7.org/fhir/resource-types";
             case PATIENT: return "http://hl7.org/fhir/resource-types";
             case PAYMENTNOTICE: return "http://hl7.org/fhir/resource-types";
@@ -10319,21 +12350,20 @@ into another (possibly the same) biological entity.
             case PRACTITIONER: return "http://hl7.org/fhir/resource-types";
             case PRACTITIONERROLE: return "http://hl7.org/fhir/resource-types";
             case PROCEDURE: return "http://hl7.org/fhir/resource-types";
-            case PROCESSREQUEST: return "http://hl7.org/fhir/resource-types";
-            case PROCESSRESPONSE: return "http://hl7.org/fhir/resource-types";
-            case PRODUCTPLAN: return "http://hl7.org/fhir/resource-types";
             case PROVENANCE: return "http://hl7.org/fhir/resource-types";
             case QUESTIONNAIRE: return "http://hl7.org/fhir/resource-types";
             case QUESTIONNAIRERESPONSE: return "http://hl7.org/fhir/resource-types";
             case RELATEDPERSON: return "http://hl7.org/fhir/resource-types";
             case REQUESTGROUP: return "http://hl7.org/fhir/resource-types";
+            case RESEARCHDEFINITION: return "http://hl7.org/fhir/resource-types";
+            case RESEARCHELEMENTDEFINITION: return "http://hl7.org/fhir/resource-types";
             case RESEARCHSTUDY: return "http://hl7.org/fhir/resource-types";
             case RESEARCHSUBJECT: return "http://hl7.org/fhir/resource-types";
             case RESOURCE: return "http://hl7.org/fhir/resource-types";
             case RISKASSESSMENT: return "http://hl7.org/fhir/resource-types";
+            case RISKEVIDENCESYNTHESIS: return "http://hl7.org/fhir/resource-types";
             case SCHEDULE: return "http://hl7.org/fhir/resource-types";
             case SEARCHPARAMETER: return "http://hl7.org/fhir/resource-types";
-            case SEQUENCE: return "http://hl7.org/fhir/resource-types";
             case SERVICEREQUEST: return "http://hl7.org/fhir/resource-types";
             case SLOT: return "http://hl7.org/fhir/resource-types";
             case SPECIMEN: return "http://hl7.org/fhir/resource-types";
@@ -10342,8 +12372,11 @@ into another (possibly the same) biological entity.
             case STRUCTUREMAP: return "http://hl7.org/fhir/resource-types";
             case SUBSCRIPTION: return "http://hl7.org/fhir/resource-types";
             case SUBSTANCE: return "http://hl7.org/fhir/resource-types";
+            case SUBSTANCENUCLEICACID: return "http://hl7.org/fhir/resource-types";
             case SUBSTANCEPOLYMER: return "http://hl7.org/fhir/resource-types";
+            case SUBSTANCEPROTEIN: return "http://hl7.org/fhir/resource-types";
             case SUBSTANCEREFERENCEINFORMATION: return "http://hl7.org/fhir/resource-types";
+            case SUBSTANCESOURCEMATERIAL: return "http://hl7.org/fhir/resource-types";
             case SUBSTANCESPECIFICATION: return "http://hl7.org/fhir/resource-types";
             case SUPPLYDELIVERY: return "http://hl7.org/fhir/resource-types";
             case SUPPLYREQUEST: return "http://hl7.org/fhir/resource-types";
@@ -10351,7 +12384,6 @@ into another (possibly the same) biological entity.
             case TERMINOLOGYCAPABILITIES: return "http://hl7.org/fhir/resource-types";
             case TESTREPORT: return "http://hl7.org/fhir/resource-types";
             case TESTSCRIPT: return "http://hl7.org/fhir/resource-types";
-            case USERSESSION: return "http://hl7.org/fhir/resource-types";
             case VALUESET: return "http://hl7.org/fhir/resource-types";
             case VERIFICATIONRESULT: return "http://hl7.org/fhir/resource-types";
             case VISIONPRESCRIPTION: return "http://hl7.org/fhir/resource-types";
@@ -10368,66 +12400,69 @@ into another (possibly the same) biological entity.
             case APPOINTMENTRESPONSE: return "A reply to an appointment request for a patient and/or practitioner(s), such as a confirmation or rejection.";
             case AUDITEVENT: return "A record of an event made for purposes of maintaining a security log. Typical uses include detection of intrusion attempts and monitoring for inappropriate usage.";
             case BASIC: return "Basic is used for handling concepts not yet defined in FHIR, narrative-only resources that don't map to an existing resource, and custom resources not appropriate for inclusion in the FHIR specification.";
-            case BINARY: return "A binary resource can contain any content, whether text, image, pdf, zip archive, etc.";
+            case BINARY: return "A resource that represents the data of a single raw artifact as digital content accessible in its native format.  A Binary resource can contain any content, whether text, image, pdf, zip archive, etc.";
             case BIOLOGICALLYDERIVEDPRODUCT: return "A material substance originating from a biological entity intended to be transplanted or infused\ninto another (possibly the same) biological entity.";
             case BODYSTRUCTURE: return "Record details about an anatomical structure.  This resource may be used when a coded concept does not provide the necessary detail needed for the use case.";
             case BUNDLE: return "A container for a collection of resources.";
-            case CAPABILITYSTATEMENT: return "A Capability Statement documents a set of capabilities (behaviors) of a FHIR Server that may be used as a statement of actual server functionality or a statement of required or desired server implementation.";
+            case CAPABILITYSTATEMENT: return "A Capability Statement documents a set of capabilities (behaviors) of a FHIR Server for a particular version of FHIR that may be used as a statement of actual server functionality or a statement of required or desired server implementation.";
             case CAREPLAN: return "Describes the intention of how one or more practitioners intend to deliver care for a particular patient, group or community for a period of time, possibly limited to care for a specific condition or set of conditions.";
             case CARETEAM: return "The Care Team includes all the people and organizations who plan to participate in the coordination and delivery of care for a patient.";
+            case CATALOGENTRY: return "Catalog entries are wrappers that contextualize items included in a catalog.";
             case CHARGEITEM: return "The resource ChargeItem describes the provision of healthcare provider products for a certain patient, therefore referring not only to the product, but containing in addition details of the provision, like date, time, amounts and participating organizations and persons. Main Usage of the ChargeItem is to enable the billing process and internal cost allocation.";
-            case CLAIM: return "A provider issued list of services and products provided, or to be provided, to a patient which is provided to an insurer for payment recovery.";
+            case CHARGEITEMDEFINITION: return "The ChargeItemDefinition resource provides the properties that apply to the (billing) codes necessary to calculate costs and prices. The properties may differ largely depending on type and realm, therefore this resource gives only a rough structure and requires profiling for each type of billing code system.";
+            case CLAIM: return "A provider issued list of professional services and products which have been provided, or are to be provided, to a patient which is sent to an insurer for reimbursement.";
             case CLAIMRESPONSE: return "This resource provides the adjudication details from the processing of a Claim resource.";
             case CLINICALIMPRESSION: return "A record of a clinical assessment performed to determine what problem(s) may affect the patient and before planning the treatments or management strategies that are best to manage a patient's condition. Assessments are often 1:1 with a clinical consultation / encounter,  but this varies greatly depending on the clinical workflow. This resource is called \"ClinicalImpression\" rather than \"ClinicalAssessment\" to avoid confusion with the recording of assessment tools such as Apgar score.";
             case CODESYSTEM: return "The CodeSystem resource is used to declare the existence of and describe a code system or code system supplement and its key properties, and optionally define a part or all of its content.";
-            case COMMUNICATION: return "An occurrence of information being transmitted; e.g. an alert that was sent to a responsible provider, a public health agency was notified about a reportable condition.";
+            case COMMUNICATION: return "An occurrence of information being transmitted; e.g. an alert that was sent to a responsible provider, a public health agency that was notified about a reportable condition.";
             case COMMUNICATIONREQUEST: return "A request to convey information; e.g. the CDS system proposes that an alert be sent to a responsible provider, the CDS system proposes that the public health agency be notified about a reportable condition.";
             case COMPARTMENTDEFINITION: return "A compartment definition that defines how resources are accessed on a server.";
             case COMPOSITION: return "A set of healthcare-related information that is assembled together into a single logical package that provides a single coherent statement of meaning, establishes its own context and that has clinical attestation with regard to who is making the statement. A Composition defines the structure and narrative content necessary for a document. However, a Composition alone does not constitute a document. Rather, the Composition must be the first entry in a Bundle where Bundle.type=document, and any other resources referenced from Composition must be included as subsequent entries in the Bundle (for example Patient, Practitioner, Encounter, etc.).";
-            case CONCEPTMAP: return "A statement of relationships from one set of concepts to one or more other concepts - either code systems or data elements, or classes in class models.";
+            case CONCEPTMAP: return "A statement of relationships from one set of concepts to one or more other concepts - either concepts in code systems, or data element/data element concepts, or classes in class models.";
             case CONDITION: return "A clinical condition, problem, diagnosis, or other event, situation, issue, or clinical concept that has risen to a level of concern.";
             case CONSENT: return "A record of a healthcare consumer’s  choices, which permits or denies identified recipient(s) or recipient role(s) to perform one or more actions within a given policy context, for specific purposes and periods of time.";
-            case CONTRACT: return "A formal agreement between parties regarding the conduct of business, exchange of information or other matters.";
-            case COVERAGE: return "Financial instrument which may be used to reimburse or pay for health care products and services.";
+            case CONTRACT: return "Legally enforceable, formally recorded unilateral or bilateral directive i.e., a policy or agreement.";
+            case COVERAGE: return "Financial instrument which may be used to reimburse or pay for health care products and services. Includes both insurance and self-payment.";
+            case COVERAGEELIGIBILITYREQUEST: return "The CoverageEligibilityRequest provides patient and insurance coverage information to an insurer for them to respond, in the form of an CoverageEligibilityResponse, with information regarding whether the stated coverage is valid and in-force and optionally to provide the insurance details of the policy.";
+            case COVERAGEELIGIBILITYRESPONSE: return "This resource provides eligibility and plan details from the processing of an CoverageEligibilityRequest resource.";
             case DETECTEDISSUE: return "Indicates an actual or potential clinical issue with or between one or more active or proposed clinical actions for a patient; e.g. Drug-drug interaction, Ineffective treatment frequency, Procedure-condition conflict, etc.";
-            case DEVICE: return "This resource identifies an instance or a type of a manufactured item that is used in the provision of healthcare without being substantially changed through that activity. The device may be a medical or non-medical device.  Medical devices include durable (reusable) medical equipment, implantable devices, as well as disposable equipment used for diagnostic, treatment, and research for healthcare and public health.  Non-medical devices may include items such as a machine, cellphone, computer, application, etc.";
-            case DEVICECOMPONENT: return "The characteristics, operational status and capabilities of a medical-related component of a medical device.";
+            case DEVICE: return "A type of a manufactured item that is used in the provision of healthcare without being substantially changed through that activity. The device may be a medical or non-medical device.";
+            case DEVICEDEFINITION: return "The characteristics, operational status and capabilities of a medical-related component of a medical device.";
             case DEVICEMETRIC: return "Describes a measurement, calculation or setting capability of a medical device.";
             case DEVICEREQUEST: return "Represents a request for a patient to employ a medical device. The device may be an implantable device, or an external assistive device, such as a walker.";
             case DEVICEUSESTATEMENT: return "A record of a device being used by a patient where the record is the result of a report from the patient or another clinician.";
             case DIAGNOSTICREPORT: return "The findings and interpretation of diagnostic  tests performed on patients, groups of patients, devices, and locations, and/or specimens derived from these. The report includes clinical context such as requesting and provider information, and some mix of atomic results, images, textual and coded interpretations, and formatted representation of diagnostic reports.";
             case DOCUMENTMANIFEST: return "A collection of documents compiled for a purpose together with metadata that applies to the collection.";
-            case DOCUMENTREFERENCE: return "A reference to a document.";
+            case DOCUMENTREFERENCE: return "A reference to a document of any kind for any purpose. Provides metadata about the document so that the document can be discovered and managed. The scope of a document is any seralized object with a mime-type, so includes formal patient centric documents (CDA), cliical notes, scanned paper, and non-patient specific documents like policy text.";
             case DOMAINRESOURCE: return "A resource that includes narrative, extensions, and contained resources.";
-            case ELIGIBILITYREQUEST: return "The EligibilityRequest provides patient and insurance coverage information to an insurer for them to respond, in the form of an EligibilityResponse, with information regarding whether the stated coverage is valid and in-force and optionally to provide the insurance details of the policy.";
-            case ELIGIBILITYRESPONSE: return "This resource provides eligibility and plan details from the processing of an Eligibility resource.";
+            case EFFECTEVIDENCESYNTHESIS: return "The EffectEvidenceSynthesis resource describes the difference in an outcome between exposures states in a population where the effect estimate is derived from a combination of research studies.";
             case ENCOUNTER: return "An interaction between a patient and healthcare provider(s) for the purpose of providing healthcare service(s) or assessing the health status of a patient.";
             case ENDPOINT: return "The technical details of an endpoint that can be used for electronic services, such as for web services providing XDS.b or a REST endpoint for another FHIR server. This may include any security context information.";
             case ENROLLMENTREQUEST: return "This resource provides the insurance enrollment details to the insurer regarding a specified coverage.";
-            case ENROLLMENTRESPONSE: return "This resource provides enrollment and plan details from the processing of an Enrollment resource.";
-            case ENTRYDEFINITION: return "Catalog entries are wrappers that contextualize items included in a catalog.";
+            case ENROLLMENTRESPONSE: return "This resource provides enrollment and plan details from the processing of an EnrollmentRequest resource.";
             case EPISODEOFCARE: return "An association between a patient and an organization / healthcare provider(s) during which time encounters may occur. The managing organization assumes a level of responsibility for the patient during this time.";
             case EVENTDEFINITION: return "The EventDefinition resource provides a reusable description of when a particular event can occur.";
+            case EVIDENCE: return "The Evidence resource describes the conditional state (population and any exposures being compared within the population) and outcome (if specified) that the knowledge (evidence, assertion, recommendation) is about.";
+            case EVIDENCEVARIABLE: return "The EvidenceVariable resource describes a \"PICO\" element that knowledge (evidence, assertion, recommendation) is about.";
             case EXAMPLESCENARIO: return "Example of workflow instance.";
-            case EXPANSIONPROFILE: return "Resource to define constraints on the Expansion of a FHIR ValueSet.";
             case EXPLANATIONOFBENEFIT: return "This resource provides: the claim details; adjudication details from the processing of a Claim; and optionally account balance information, for informing the subscriber of the benefits provided.";
             case FAMILYMEMBERHISTORY: return "Significant health conditions for a person related to the patient relevant in the context of care for the patient.";
             case FLAG: return "Prospective warnings of potential issues when providing care to the patient.";
             case GOAL: return "Describes the intended objective(s) for a patient, group or organization care, for example, weight loss, restoring an activity of daily living, obtaining herd immunity via immunization, meeting a process improvement objective, etc.";
             case GRAPHDEFINITION: return "A formal computable definition of a graph of resources - that is, a coherent set of resources that form a graph by following references. The Graph Definition resource defines a set and makes rules about the set.";
-            case GROUP: return "Represents a defined collection of entities that may be discussed or acted upon collectively but which are not expected to act collectively and are not formally or legally recognized; i.e. a collection of entities that isn't an Organization.";
+            case GROUP: return "Represents a defined collection of entities that may be discussed or acted upon collectively but which are not expected to act collectively, and are not formally or legally recognized; i.e. a collection of entities that isn't an Organization.";
             case GUIDANCERESPONSE: return "A guidance response is the formal response to a guidance request, including any output parameters returned by the evaluation, as well as the description of any proposed actions to be taken.";
             case HEALTHCARESERVICE: return "The details of a healthcare service available at a location.";
             case IMAGINGSTUDY: return "Representation of the content produced in a DICOM imaging study. A study comprises a set of series, each of which includes a set of Service-Object Pair Instances (SOP Instances - images or other data) acquired or produced in a common context.  A series is of only one modality (e.g. X-ray, CT, MR, ultrasound), but a study may have multiple series of different modalities.";
             case IMMUNIZATION: return "Describes the event of a patient being administered a vaccine or a record of an immunization as reported by a patient, a clinician or another party.";
             case IMMUNIZATIONEVALUATION: return "Describes a comparison of an immunization event against published recommendations to determine if the administration is \"valid\" in relation to those  recommendations.";
             case IMMUNIZATIONRECOMMENDATION: return "A patient's point-in-time set of recommendations (i.e. forecasting) according to a published schedule with optional supporting justification.";
-            case IMPLEMENTATIONGUIDE: return "A set of rules of how FHIR is used to solve a particular problem. This resource is used to gather all the parts of an implementation guide into a logical whole and to publish a computable definition of all the parts.";
+            case IMPLEMENTATIONGUIDE: return "A set of rules of how a particular interoperability or standards problem is solved - typically through the use of FHIR resources. This resource is used to gather all the parts of an implementation guide into a logical whole and to publish a computable definition of all the parts.";
+            case INSURANCEPLAN: return "Details of a Health Insurance product/plan provided by an organization.";
             case INVOICE: return "Invoice containing collected ChargeItems from an Account with calculated individual and total price for Billing purpose.";
-            case ITEMINSTANCE: return "A physical, countable instance of an item, for example one box or one unit.";
             case LIBRARY: return "The Library resource is a general-purpose container for knowledge asset definitions. It can be used to describe and expose existing knowledge assets such as logic libraries and information model descriptions, as well as to describe a collection of knowledge assets.";
-            case LINKAGE: return "Identifies two or more records (resource instances) that are referring to the same real-world \"occurrence\".";
-            case LIST: return "A set of information summarized from a list of other resources.";
+            case LINKAGE: return "Identifies two or more records (resource instances) that refer to the same real-world \"occurrence\".";
+            case LIST: return "A list is a curated collection of resources.";
             case LOCATION: return "Details and position information for a physical place where services are provided and resources and participants may be stored, found, contained, or accommodated.";
             case MEASURE: return "The Measure resource provides the definition of a quality measure.";
             case MEASUREREPORT: return "The MeasureReport resource contains the results of the calculation of a measure; and optionally a reference to the resources involved in that calculation.";
@@ -10437,49 +12472,51 @@ into another (possibly the same) biological entity.
             case MEDICATIONDISPENSE: return "Indicates that a medication product is to be or has been dispensed for a named person/patient.  This includes a description of the medication product (supply) provided and the instructions for administering the medication.  The medication dispense is the result of a pharmacy system responding to a medication order.";
             case MEDICATIONKNOWLEDGE: return "Information about a medication that is used to support knowledge.";
             case MEDICATIONREQUEST: return "An order or request for both supply of the medication and the instructions for administration of the medication to a patient. The resource is called \"MedicationRequest\" rather than \"MedicationPrescription\" or \"MedicationOrder\" to generalize the use across inpatient and outpatient settings, including care plans, etc., and to harmonize with workflow patterns.";
-            case MEDICATIONSTATEMENT: return "A record of a medication that is being consumed by a patient.   A MedicationStatement may indicate that the patient may be taking the medication now, or has taken the medication in the past or will be taking the medication in the future.  The source of this information can be the patient, significant other (such as a family member or spouse), or a clinician.  A common scenario where this information is captured is during the history taking process during a patient visit or stay.   The medication information may come from sources such as the patient's memory, from a prescription bottle,  or from a list of medications the patient, clinician or other party maintains. \r\rThe primary difference between a medication statement and a medication administration is that the medication administration has complete administration information and is based on actual administration information from the person who administered the medication.  A medication statement is often, if not always, less specific.  There is no required date/time when the medication was administered, in fact we only know that a source has reported the patient is taking this medication, where details such as time, quantity, or rate or even medication product may be incomplete or missing or less precise.  As stated earlier, the medication statement information may come from the patient's memory, from a prescription bottle or from a list of medications the patient, clinician or other party maintains.  Medication administration is more formal and is not missing detailed information.";
+            case MEDICATIONSTATEMENT: return "A record of a medication that is being consumed by a patient.   A MedicationStatement may indicate that the patient may be taking the medication now or has taken the medication in the past or will be taking the medication in the future.  The source of this information can be the patient, significant other (such as a family member or spouse), or a clinician.  A common scenario where this information is captured is during the history taking process during a patient visit or stay.   The medication information may come from sources such as the patient's memory, from a prescription bottle,  or from a list of medications the patient, clinician or other party maintains. \n\nThe primary difference between a medication statement and a medication administration is that the medication administration has complete administration information and is based on actual administration information from the person who administered the medication.  A medication statement is often, if not always, less specific.  There is no required date/time when the medication was administered, in fact we only know that a source has reported the patient is taking this medication, where details such as time, quantity, or rate or even medication product may be incomplete or missing or less precise.  As stated earlier, the medication statement information may come from the patient's memory, from a prescription bottle or from a list of medications the patient, clinician or other party maintains.  Medication administration is more formal and is not missing detailed information.";
             case MEDICINALPRODUCT: return "Detailed definition of a medicinal product, typically for uses other than direct patient care (e.g. regulatory use).";
             case MEDICINALPRODUCTAUTHORIZATION: return "The regulatory authorization of a medicinal product.";
-            case MEDICINALPRODUCTCLINICALS: return "The clinical particulars - indications, contraindications etc. of a medicinal product, including for regulatory purposes.";
-            case MEDICINALPRODUCTDEVICESPEC: return "A detailed description of a device, typically as part of a regulated medicinal product. It is not intended to relace the Device resource, which covers use of device instances.";
+            case MEDICINALPRODUCTCONTRAINDICATION: return "The clinical particulars - indications, contraindications etc. of a medicinal product, including for regulatory purposes.";
+            case MEDICINALPRODUCTINDICATION: return "Indication for the Medicinal Product.";
             case MEDICINALPRODUCTINGREDIENT: return "An ingredient of a manufactured item or pharmaceutical product.";
+            case MEDICINALPRODUCTINTERACTION: return "The interactions of the medicinal product with other medicinal products, or other forms of interactions.";
+            case MEDICINALPRODUCTMANUFACTURED: return "The manufactured item as contained in the packaged medicinal product.";
             case MEDICINALPRODUCTPACKAGED: return "A medicinal product in a container or package.";
             case MEDICINALPRODUCTPHARMACEUTICAL: return "A pharmaceutical product described in terms of its composition and dose form.";
+            case MEDICINALPRODUCTUNDESIRABLEEFFECT: return "Describe the undesirable effects of the medicinal product.";
             case MESSAGEDEFINITION: return "Defines the characteristics of a message that can be shared between systems, including the type of event that initiates the message, the content to be transmitted and what response(s), if any, are permitted.";
             case MESSAGEHEADER: return "The header for a message exchange that is either requesting or responding to an action.  The reference(s) that are the subject of the action as well as other information related to the action are typically transmitted in a bundle in which the MessageHeader resource instance is the first resource in the bundle.";
+            case MOLECULARSEQUENCE: return "Raw data describing a biological sequence.";
             case NAMINGSYSTEM: return "A curated namespace that issues unique symbols within that namespace for the identification of concepts, people, devices, etc.  Represents a \"System\" used within the Identifier and Coding data types.";
             case NUTRITIONORDER: return "A request to supply a diet, formula feeding (enteral) or oral nutritional supplement to a patient/resident.";
             case OBSERVATION: return "Measurements and simple assertions made about a patient, device or other subject.";
             case OBSERVATIONDEFINITION: return "Set of definitional characteristics for a kind of observation or measurement produced or consumed by an orderable health care service.";
-            case OCCUPATIONALDATA: return "A person's work information, structured to facilitate individual, population, and public health use; not intended to support billing.";
             case OPERATIONDEFINITION: return "A formal computable definition of an operation (on the RESTful interface) or a named query (using the search interaction).";
-            case OPERATIONOUTCOME: return "A collection of error, warning or information messages that result from a system action.";
-            case ORGANIZATION: return "A formally or informally recognized grouping of people or organizations formed for the purpose of achieving some form of collective action.  Includes companies, institutions, corporations, departments, community groups, healthcare practice groups, etc.";
-            case ORGANIZATIONROLE: return "A specific set of Roles/Locations/specialties/services that a practitioner may perform at an organization for a period of time.";
-            case PARAMETERS: return "This special resource type is used to represent an operation request and response (operations.html). It has no other use, and there is no RESTful endpoint associated with it.";
+            case OPERATIONOUTCOME: return "A collection of error, warning, or information messages that result from a system action.";
+            case ORGANIZATION: return "A formally or informally recognized grouping of people or organizations formed for the purpose of achieving some form of collective action.  Includes companies, institutions, corporations, departments, community groups, healthcare practice groups, payer/insurer, etc.";
+            case ORGANIZATIONAFFILIATION: return "Defines an affiliation/assotiation/relationship between 2 distinct oganizations, that is not a part-of relationship/sub-division relationship.";
+            case PARAMETERS: return "This resource is a non-persisted resource used to pass information into and back from an [operation](operations.html). It has no other use, and there is no RESTful endpoint associated with it.";
             case PATIENT: return "Demographics and other administrative information about an individual or animal receiving care or other health-related services.";
             case PAYMENTNOTICE: return "This resource provides the status of the payment for goods and services rendered, and the request and response resource references.";
-            case PAYMENTRECONCILIATION: return "This resource provides payment details and claim references supporting a bulk payment.";
+            case PAYMENTRECONCILIATION: return "This resource provides the details including amount of a payment and allocates the payment items being paid.";
             case PERSON: return "Demographics and administrative information about a person independent of a specific health-related context.";
             case PLANDEFINITION: return "This resource allows for the definition of various types of plans as a sharable, consumable, and executable artifact. The resource is general enough to support the description of a broad range of clinical artifacts such as clinical decision support rules, order sets and protocols.";
             case PRACTITIONER: return "A person who is directly or indirectly involved in the provisioning of healthcare.";
             case PRACTITIONERROLE: return "A specific set of Roles/Locations/specialties/services that a practitioner may perform at an organization for a period of time.";
-            case PROCEDURE: return "An action that is or was performed on a patient. This can be a physical intervention like an operation, or less invasive like counseling or hypnotherapy.";
-            case PROCESSREQUEST: return "This resource provides the target, request and response, and action details for an action to be performed by the target on or about existing resources.";
-            case PROCESSRESPONSE: return "This resource provides processing status, errors and notes from the processing of a resource.";
-            case PRODUCTPLAN: return "Details of a Health Insurance product/plan provided by an organization.";
+            case PROCEDURE: return "An action that is or was performed on or for a patient. This can be a physical intervention like an operation, or less invasive like long term services, counseling, or hypnotherapy.";
             case PROVENANCE: return "Provenance of a resource is a record that describes entities and processes involved in producing and delivering or otherwise influencing that resource. Provenance provides a critical foundation for assessing authenticity, enabling trust, and allowing reproducibility. Provenance assertions are a form of contextual metadata and can themselves become important records with their own provenance. Provenance statement indicates clinical significance in terms of confidence in authenticity, reliability, and trustworthiness, integrity, and stage in lifecycle (e.g. Document Completion - has the artifact been legally authenticated), all of which may impact security, privacy, and trust policies.";
             case QUESTIONNAIRE: return "A structured set of questions intended to guide the collection of answers from end-users. Questionnaires provide detailed control over order, presentation, phraseology and grouping to allow coherent, consistent data collection.";
             case QUESTIONNAIRERESPONSE: return "A structured set of questions and their answers. The questions are ordered and grouped into coherent subsets, corresponding to the structure of the grouping of the questionnaire being responded to.";
             case RELATEDPERSON: return "Information about a person that is involved in the care for a patient, but who is not the target of healthcare, nor has a formal responsibility in the care process.";
             case REQUESTGROUP: return "A group of related requests that can be used to capture intended activities that have inter-dependencies such as \"give this medication after that one\".";
+            case RESEARCHDEFINITION: return "The ResearchDefinition resource describes the conditional state (population and any exposures being compared within the population) and outcome (if specified) that the knowledge (evidence, assertion, recommendation) is about.";
+            case RESEARCHELEMENTDEFINITION: return "The ResearchElementDefinition resource describes a \"PICO\" element that knowledge (evidence, assertion, recommendation) is about.";
             case RESEARCHSTUDY: return "A process where a researcher or organization plans and then executes a series of steps intended to increase the field of healthcare-related knowledge.  This includes studies of safety, efficacy, comparative effectiveness and other information about medications, devices, therapies and other interventional and investigative techniques.  A ResearchStudy involves the gathering of information about human or animal subjects.";
             case RESEARCHSUBJECT: return "A physical entity which is the primary unit of operational and/or administrative interest in a study.";
             case RESOURCE: return "This is the base resource type for everything.";
             case RISKASSESSMENT: return "An assessment of the likely outcome(s) for a patient or other subject as well as the likelihood of each outcome.";
+            case RISKEVIDENCESYNTHESIS: return "The RiskEvidenceSynthesis resource describes the likelihood of an outcome in a population plus exposure state where the risk estimate is derived from a combination of research studies.";
             case SCHEDULE: return "A container for slots of time that may be available for booking appointments.";
             case SEARCHPARAMETER: return "A search parameter that defines a named search item that can be used to search/filter on a resource.";
-            case SEQUENCE: return "Raw data describing a biological sequence.";
             case SERVICEREQUEST: return "A record of a request for service such as diagnostic investigations, treatments, or operations to be performed.";
             case SLOT: return "A slot of time on a schedule that may be available for booking appointments.";
             case SPECIMEN: return "A sample to be used for analysis.";
@@ -10488,19 +12525,21 @@ into another (possibly the same) biological entity.
             case STRUCTUREMAP: return "A Map of relationships between 2 structures that can be used to transform data.";
             case SUBSCRIPTION: return "The subscription resource is used to define a push-based subscription from a server to another system. Once a subscription is registered with the server, the server checks every resource that is created or updated, and if the resource matches the given criteria, it sends a message on the defined \"channel\" so that another system can take an appropriate action.";
             case SUBSTANCE: return "A homogeneous material with a definite composition.";
+            case SUBSTANCENUCLEICACID: return "Nucleic acids are defined by three distinct elements: the base, sugar and linkage. Individual substance/moiety IDs will be created for each of these elements. The nucleotide sequence will be always entered in the 5’-3’ direction.";
             case SUBSTANCEPOLYMER: return "Todo.";
+            case SUBSTANCEPROTEIN: return "A SubstanceProtein is defined as a single unit of a linear amino acid sequence, or a combination of subunits that are either covalently linked or have a defined invariant stoichiometric relationship. This includes all synthetic, recombinant and purified SubstanceProteins of defined sequence, whether the use is therapeutic or prophylactic. This set of elements will be used to describe albumins, coagulation factors, cytokines, growth factors, peptide/SubstanceProtein hormones, enzymes, toxins, toxoids, recombinant vaccines, and immunomodulators.";
             case SUBSTANCEREFERENCEINFORMATION: return "Todo.";
+            case SUBSTANCESOURCEMATERIAL: return "Source material shall capture information on the taxonomic and anatomical origins as well as the fraction of a material that can result in or can be modified to form a substance. This set of data elements shall be used to define polymer substances isolated from biological matrices. Taxonomic and anatomical origins shall be described using a controlled vocabulary as required. This information is captured for naturally derived polymers ( . starch) and structurally diverse substances. For Organisms belonging to the Kingdom Plantae the Substance level defines the fresh material of a single species or infraspecies, the Herbal Drug and the Herbal preparation. For Herbal preparations, the fraction information will be captured at the Substance information level and additional information for herbal extracts will be captured at the Specified Substance Group 1 information level. See for further explanation the Substance Class: Structurally Diverse and the herbal annex.";
             case SUBSTANCESPECIFICATION: return "The detailed description of a substance, typically at a level beyond what is used for prescribing.";
             case SUPPLYDELIVERY: return "Record of delivery of what is supplied.";
             case SUPPLYREQUEST: return "A record of a request for a medication, substance or device used in the healthcare setting.";
             case TASK: return "A task to be performed.";
-            case TERMINOLOGYCAPABILITIES: return "A Terminology Capabilities documents a set of capabilities (behaviors) of a FHIR Server that may be used as a statement of actual server functionality or a statement of required or desired server implementation.";
+            case TERMINOLOGYCAPABILITIES: return "A TerminologyCapabilities resource documents a set of capabilities (behaviors) of a FHIR Terminology Server that may be used as a statement of actual server functionality or a statement of required or desired server implementation.";
             case TESTREPORT: return "A summary of information based on the results of executing a TestScript.";
             case TESTSCRIPT: return "A structured set of tests against a FHIR server or client implementation to determine compliance against the FHIR specification.";
-            case USERSESSION: return "Information about a user's current session.";
-            case VALUESET: return "A ValueSet resource specifies a set of codes drawn from one or more code systems, intended for use in a particular context. Value sets link between [[[CodeSystem]]] definitions and their use in [coded elements](terminologies.html).";
+            case VALUESET: return "A ValueSet resource instance specifies a set of codes drawn from one or more code systems, intended for use in a particular context. Value sets link between [[[CodeSystem]]] definitions and their use in [coded elements](terminologies.html).";
             case VERIFICATIONRESULT: return "Describes validation requirements, source(s), status and dates for one or more elements.";
-            case VISIONPRESCRIPTION: return "An authorization for the supply of glasses and/or contact lenses to a patient.";
+            case VISIONPRESCRIPTION: return "An authorization for the provision of glasses and/or contact lenses to a patient.";
             default: return "?";
           }
         }
@@ -10521,7 +12560,9 @@ into another (possibly the same) biological entity.
             case CAPABILITYSTATEMENT: return "CapabilityStatement";
             case CAREPLAN: return "CarePlan";
             case CARETEAM: return "CareTeam";
+            case CATALOGENTRY: return "CatalogEntry";
             case CHARGEITEM: return "ChargeItem";
+            case CHARGEITEMDEFINITION: return "ChargeItemDefinition";
             case CLAIM: return "Claim";
             case CLAIMRESPONSE: return "ClaimResponse";
             case CLINICALIMPRESSION: return "ClinicalImpression";
@@ -10535,9 +12576,11 @@ into another (possibly the same) biological entity.
             case CONSENT: return "Consent";
             case CONTRACT: return "Contract";
             case COVERAGE: return "Coverage";
+            case COVERAGEELIGIBILITYREQUEST: return "CoverageEligibilityRequest";
+            case COVERAGEELIGIBILITYRESPONSE: return "CoverageEligibilityResponse";
             case DETECTEDISSUE: return "DetectedIssue";
             case DEVICE: return "Device";
-            case DEVICECOMPONENT: return "DeviceComponent";
+            case DEVICEDEFINITION: return "DeviceDefinition";
             case DEVICEMETRIC: return "DeviceMetric";
             case DEVICEREQUEST: return "DeviceRequest";
             case DEVICEUSESTATEMENT: return "DeviceUseStatement";
@@ -10545,17 +12588,16 @@ into another (possibly the same) biological entity.
             case DOCUMENTMANIFEST: return "DocumentManifest";
             case DOCUMENTREFERENCE: return "DocumentReference";
             case DOMAINRESOURCE: return "DomainResource";
-            case ELIGIBILITYREQUEST: return "EligibilityRequest";
-            case ELIGIBILITYRESPONSE: return "EligibilityResponse";
+            case EFFECTEVIDENCESYNTHESIS: return "EffectEvidenceSynthesis";
             case ENCOUNTER: return "Encounter";
             case ENDPOINT: return "Endpoint";
             case ENROLLMENTREQUEST: return "EnrollmentRequest";
             case ENROLLMENTRESPONSE: return "EnrollmentResponse";
-            case ENTRYDEFINITION: return "EntryDefinition";
             case EPISODEOFCARE: return "EpisodeOfCare";
             case EVENTDEFINITION: return "EventDefinition";
+            case EVIDENCE: return "Evidence";
+            case EVIDENCEVARIABLE: return "EvidenceVariable";
             case EXAMPLESCENARIO: return "ExampleScenario";
-            case EXPANSIONPROFILE: return "ExpansionProfile";
             case EXPLANATIONOFBENEFIT: return "ExplanationOfBenefit";
             case FAMILYMEMBERHISTORY: return "FamilyMemberHistory";
             case FLAG: return "Flag";
@@ -10569,8 +12611,8 @@ into another (possibly the same) biological entity.
             case IMMUNIZATIONEVALUATION: return "ImmunizationEvaluation";
             case IMMUNIZATIONRECOMMENDATION: return "ImmunizationRecommendation";
             case IMPLEMENTATIONGUIDE: return "ImplementationGuide";
+            case INSURANCEPLAN: return "InsurancePlan";
             case INVOICE: return "Invoice";
-            case ITEMINSTANCE: return "ItemInstance";
             case LIBRARY: return "Library";
             case LINKAGE: return "Linkage";
             case LIST: return "List";
@@ -10586,22 +12628,25 @@ into another (possibly the same) biological entity.
             case MEDICATIONSTATEMENT: return "MedicationStatement";
             case MEDICINALPRODUCT: return "MedicinalProduct";
             case MEDICINALPRODUCTAUTHORIZATION: return "MedicinalProductAuthorization";
-            case MEDICINALPRODUCTCLINICALS: return "MedicinalProductClinicals";
-            case MEDICINALPRODUCTDEVICESPEC: return "MedicinalProductDeviceSpec";
+            case MEDICINALPRODUCTCONTRAINDICATION: return "MedicinalProductContraindication";
+            case MEDICINALPRODUCTINDICATION: return "MedicinalProductIndication";
             case MEDICINALPRODUCTINGREDIENT: return "MedicinalProductIngredient";
+            case MEDICINALPRODUCTINTERACTION: return "MedicinalProductInteraction";
+            case MEDICINALPRODUCTMANUFACTURED: return "MedicinalProductManufactured";
             case MEDICINALPRODUCTPACKAGED: return "MedicinalProductPackaged";
             case MEDICINALPRODUCTPHARMACEUTICAL: return "MedicinalProductPharmaceutical";
+            case MEDICINALPRODUCTUNDESIRABLEEFFECT: return "MedicinalProductUndesirableEffect";
             case MESSAGEDEFINITION: return "MessageDefinition";
             case MESSAGEHEADER: return "MessageHeader";
+            case MOLECULARSEQUENCE: return "MolecularSequence";
             case NAMINGSYSTEM: return "NamingSystem";
             case NUTRITIONORDER: return "NutritionOrder";
             case OBSERVATION: return "Observation";
             case OBSERVATIONDEFINITION: return "ObservationDefinition";
-            case OCCUPATIONALDATA: return "OccupationalData";
             case OPERATIONDEFINITION: return "OperationDefinition";
             case OPERATIONOUTCOME: return "OperationOutcome";
             case ORGANIZATION: return "Organization";
-            case ORGANIZATIONROLE: return "OrganizationRole";
+            case ORGANIZATIONAFFILIATION: return "OrganizationAffiliation";
             case PARAMETERS: return "Parameters";
             case PATIENT: return "Patient";
             case PAYMENTNOTICE: return "PaymentNotice";
@@ -10611,21 +12656,20 @@ into another (possibly the same) biological entity.
             case PRACTITIONER: return "Practitioner";
             case PRACTITIONERROLE: return "PractitionerRole";
             case PROCEDURE: return "Procedure";
-            case PROCESSREQUEST: return "ProcessRequest";
-            case PROCESSRESPONSE: return "ProcessResponse";
-            case PRODUCTPLAN: return "ProductPlan";
             case PROVENANCE: return "Provenance";
             case QUESTIONNAIRE: return "Questionnaire";
             case QUESTIONNAIRERESPONSE: return "QuestionnaireResponse";
             case RELATEDPERSON: return "RelatedPerson";
             case REQUESTGROUP: return "RequestGroup";
+            case RESEARCHDEFINITION: return "ResearchDefinition";
+            case RESEARCHELEMENTDEFINITION: return "ResearchElementDefinition";
             case RESEARCHSTUDY: return "ResearchStudy";
             case RESEARCHSUBJECT: return "ResearchSubject";
             case RESOURCE: return "Resource";
             case RISKASSESSMENT: return "RiskAssessment";
+            case RISKEVIDENCESYNTHESIS: return "RiskEvidenceSynthesis";
             case SCHEDULE: return "Schedule";
             case SEARCHPARAMETER: return "SearchParameter";
-            case SEQUENCE: return "Sequence";
             case SERVICEREQUEST: return "ServiceRequest";
             case SLOT: return "Slot";
             case SPECIMEN: return "Specimen";
@@ -10634,8 +12678,11 @@ into another (possibly the same) biological entity.
             case STRUCTUREMAP: return "StructureMap";
             case SUBSCRIPTION: return "Subscription";
             case SUBSTANCE: return "Substance";
+            case SUBSTANCENUCLEICACID: return "SubstanceNucleicAcid";
             case SUBSTANCEPOLYMER: return "SubstancePolymer";
+            case SUBSTANCEPROTEIN: return "SubstanceProtein";
             case SUBSTANCEREFERENCEINFORMATION: return "SubstanceReferenceInformation";
+            case SUBSTANCESOURCEMATERIAL: return "SubstanceSourceMaterial";
             case SUBSTANCESPECIFICATION: return "SubstanceSpecification";
             case SUPPLYDELIVERY: return "SupplyDelivery";
             case SUPPLYREQUEST: return "SupplyRequest";
@@ -10643,7 +12690,6 @@ into another (possibly the same) biological entity.
             case TERMINOLOGYCAPABILITIES: return "TerminologyCapabilities";
             case TESTREPORT: return "TestReport";
             case TESTSCRIPT: return "TestScript";
-            case USERSESSION: return "UserSession";
             case VALUESET: return "ValueSet";
             case VERIFICATIONRESULT: return "VerificationResult";
             case VISIONPRESCRIPTION: return "VisionPrescription";
@@ -10687,8 +12733,12 @@ into another (possibly the same) biological entity.
           return ResourceType.CAREPLAN;
         if ("CareTeam".equals(codeString))
           return ResourceType.CARETEAM;
+        if ("CatalogEntry".equals(codeString))
+          return ResourceType.CATALOGENTRY;
         if ("ChargeItem".equals(codeString))
           return ResourceType.CHARGEITEM;
+        if ("ChargeItemDefinition".equals(codeString))
+          return ResourceType.CHARGEITEMDEFINITION;
         if ("Claim".equals(codeString))
           return ResourceType.CLAIM;
         if ("ClaimResponse".equals(codeString))
@@ -10715,12 +12765,16 @@ into another (possibly the same) biological entity.
           return ResourceType.CONTRACT;
         if ("Coverage".equals(codeString))
           return ResourceType.COVERAGE;
+        if ("CoverageEligibilityRequest".equals(codeString))
+          return ResourceType.COVERAGEELIGIBILITYREQUEST;
+        if ("CoverageEligibilityResponse".equals(codeString))
+          return ResourceType.COVERAGEELIGIBILITYRESPONSE;
         if ("DetectedIssue".equals(codeString))
           return ResourceType.DETECTEDISSUE;
         if ("Device".equals(codeString))
           return ResourceType.DEVICE;
-        if ("DeviceComponent".equals(codeString))
-          return ResourceType.DEVICECOMPONENT;
+        if ("DeviceDefinition".equals(codeString))
+          return ResourceType.DEVICEDEFINITION;
         if ("DeviceMetric".equals(codeString))
           return ResourceType.DEVICEMETRIC;
         if ("DeviceRequest".equals(codeString))
@@ -10735,10 +12789,8 @@ into another (possibly the same) biological entity.
           return ResourceType.DOCUMENTREFERENCE;
         if ("DomainResource".equals(codeString))
           return ResourceType.DOMAINRESOURCE;
-        if ("EligibilityRequest".equals(codeString))
-          return ResourceType.ELIGIBILITYREQUEST;
-        if ("EligibilityResponse".equals(codeString))
-          return ResourceType.ELIGIBILITYRESPONSE;
+        if ("EffectEvidenceSynthesis".equals(codeString))
+          return ResourceType.EFFECTEVIDENCESYNTHESIS;
         if ("Encounter".equals(codeString))
           return ResourceType.ENCOUNTER;
         if ("Endpoint".equals(codeString))
@@ -10747,16 +12799,16 @@ into another (possibly the same) biological entity.
           return ResourceType.ENROLLMENTREQUEST;
         if ("EnrollmentResponse".equals(codeString))
           return ResourceType.ENROLLMENTRESPONSE;
-        if ("EntryDefinition".equals(codeString))
-          return ResourceType.ENTRYDEFINITION;
         if ("EpisodeOfCare".equals(codeString))
           return ResourceType.EPISODEOFCARE;
         if ("EventDefinition".equals(codeString))
           return ResourceType.EVENTDEFINITION;
+        if ("Evidence".equals(codeString))
+          return ResourceType.EVIDENCE;
+        if ("EvidenceVariable".equals(codeString))
+          return ResourceType.EVIDENCEVARIABLE;
         if ("ExampleScenario".equals(codeString))
           return ResourceType.EXAMPLESCENARIO;
-        if ("ExpansionProfile".equals(codeString))
-          return ResourceType.EXPANSIONPROFILE;
         if ("ExplanationOfBenefit".equals(codeString))
           return ResourceType.EXPLANATIONOFBENEFIT;
         if ("FamilyMemberHistory".equals(codeString))
@@ -10783,10 +12835,10 @@ into another (possibly the same) biological entity.
           return ResourceType.IMMUNIZATIONRECOMMENDATION;
         if ("ImplementationGuide".equals(codeString))
           return ResourceType.IMPLEMENTATIONGUIDE;
+        if ("InsurancePlan".equals(codeString))
+          return ResourceType.INSURANCEPLAN;
         if ("Invoice".equals(codeString))
           return ResourceType.INVOICE;
-        if ("ItemInstance".equals(codeString))
-          return ResourceType.ITEMINSTANCE;
         if ("Library".equals(codeString))
           return ResourceType.LIBRARY;
         if ("Linkage".equals(codeString))
@@ -10817,20 +12869,28 @@ into another (possibly the same) biological entity.
           return ResourceType.MEDICINALPRODUCT;
         if ("MedicinalProductAuthorization".equals(codeString))
           return ResourceType.MEDICINALPRODUCTAUTHORIZATION;
-        if ("MedicinalProductClinicals".equals(codeString))
-          return ResourceType.MEDICINALPRODUCTCLINICALS;
-        if ("MedicinalProductDeviceSpec".equals(codeString))
-          return ResourceType.MEDICINALPRODUCTDEVICESPEC;
+        if ("MedicinalProductContraindication".equals(codeString))
+          return ResourceType.MEDICINALPRODUCTCONTRAINDICATION;
+        if ("MedicinalProductIndication".equals(codeString))
+          return ResourceType.MEDICINALPRODUCTINDICATION;
         if ("MedicinalProductIngredient".equals(codeString))
           return ResourceType.MEDICINALPRODUCTINGREDIENT;
+        if ("MedicinalProductInteraction".equals(codeString))
+          return ResourceType.MEDICINALPRODUCTINTERACTION;
+        if ("MedicinalProductManufactured".equals(codeString))
+          return ResourceType.MEDICINALPRODUCTMANUFACTURED;
         if ("MedicinalProductPackaged".equals(codeString))
           return ResourceType.MEDICINALPRODUCTPACKAGED;
         if ("MedicinalProductPharmaceutical".equals(codeString))
           return ResourceType.MEDICINALPRODUCTPHARMACEUTICAL;
+        if ("MedicinalProductUndesirableEffect".equals(codeString))
+          return ResourceType.MEDICINALPRODUCTUNDESIRABLEEFFECT;
         if ("MessageDefinition".equals(codeString))
           return ResourceType.MESSAGEDEFINITION;
         if ("MessageHeader".equals(codeString))
           return ResourceType.MESSAGEHEADER;
+        if ("MolecularSequence".equals(codeString))
+          return ResourceType.MOLECULARSEQUENCE;
         if ("NamingSystem".equals(codeString))
           return ResourceType.NAMINGSYSTEM;
         if ("NutritionOrder".equals(codeString))
@@ -10839,16 +12899,14 @@ into another (possibly the same) biological entity.
           return ResourceType.OBSERVATION;
         if ("ObservationDefinition".equals(codeString))
           return ResourceType.OBSERVATIONDEFINITION;
-        if ("OccupationalData".equals(codeString))
-          return ResourceType.OCCUPATIONALDATA;
         if ("OperationDefinition".equals(codeString))
           return ResourceType.OPERATIONDEFINITION;
         if ("OperationOutcome".equals(codeString))
           return ResourceType.OPERATIONOUTCOME;
         if ("Organization".equals(codeString))
           return ResourceType.ORGANIZATION;
-        if ("OrganizationRole".equals(codeString))
-          return ResourceType.ORGANIZATIONROLE;
+        if ("OrganizationAffiliation".equals(codeString))
+          return ResourceType.ORGANIZATIONAFFILIATION;
         if ("Parameters".equals(codeString))
           return ResourceType.PARAMETERS;
         if ("Patient".equals(codeString))
@@ -10867,12 +12925,6 @@ into another (possibly the same) biological entity.
           return ResourceType.PRACTITIONERROLE;
         if ("Procedure".equals(codeString))
           return ResourceType.PROCEDURE;
-        if ("ProcessRequest".equals(codeString))
-          return ResourceType.PROCESSREQUEST;
-        if ("ProcessResponse".equals(codeString))
-          return ResourceType.PROCESSRESPONSE;
-        if ("ProductPlan".equals(codeString))
-          return ResourceType.PRODUCTPLAN;
         if ("Provenance".equals(codeString))
           return ResourceType.PROVENANCE;
         if ("Questionnaire".equals(codeString))
@@ -10883,6 +12935,10 @@ into another (possibly the same) biological entity.
           return ResourceType.RELATEDPERSON;
         if ("RequestGroup".equals(codeString))
           return ResourceType.REQUESTGROUP;
+        if ("ResearchDefinition".equals(codeString))
+          return ResourceType.RESEARCHDEFINITION;
+        if ("ResearchElementDefinition".equals(codeString))
+          return ResourceType.RESEARCHELEMENTDEFINITION;
         if ("ResearchStudy".equals(codeString))
           return ResourceType.RESEARCHSTUDY;
         if ("ResearchSubject".equals(codeString))
@@ -10891,12 +12947,12 @@ into another (possibly the same) biological entity.
           return ResourceType.RESOURCE;
         if ("RiskAssessment".equals(codeString))
           return ResourceType.RISKASSESSMENT;
+        if ("RiskEvidenceSynthesis".equals(codeString))
+          return ResourceType.RISKEVIDENCESYNTHESIS;
         if ("Schedule".equals(codeString))
           return ResourceType.SCHEDULE;
         if ("SearchParameter".equals(codeString))
           return ResourceType.SEARCHPARAMETER;
-        if ("Sequence".equals(codeString))
-          return ResourceType.SEQUENCE;
         if ("ServiceRequest".equals(codeString))
           return ResourceType.SERVICEREQUEST;
         if ("Slot".equals(codeString))
@@ -10913,10 +12969,16 @@ into another (possibly the same) biological entity.
           return ResourceType.SUBSCRIPTION;
         if ("Substance".equals(codeString))
           return ResourceType.SUBSTANCE;
+        if ("SubstanceNucleicAcid".equals(codeString))
+          return ResourceType.SUBSTANCENUCLEICACID;
         if ("SubstancePolymer".equals(codeString))
           return ResourceType.SUBSTANCEPOLYMER;
+        if ("SubstanceProtein".equals(codeString))
+          return ResourceType.SUBSTANCEPROTEIN;
         if ("SubstanceReferenceInformation".equals(codeString))
           return ResourceType.SUBSTANCEREFERENCEINFORMATION;
+        if ("SubstanceSourceMaterial".equals(codeString))
+          return ResourceType.SUBSTANCESOURCEMATERIAL;
         if ("SubstanceSpecification".equals(codeString))
           return ResourceType.SUBSTANCESPECIFICATION;
         if ("SupplyDelivery".equals(codeString))
@@ -10931,8 +12993,6 @@ into another (possibly the same) biological entity.
           return ResourceType.TESTREPORT;
         if ("TestScript".equals(codeString))
           return ResourceType.TESTSCRIPT;
-        if ("UserSession".equals(codeString))
-          return ResourceType.USERSESSION;
         if ("ValueSet".equals(codeString))
           return ResourceType.VALUESET;
         if ("VerificationResult".equals(codeString))
@@ -10979,8 +13039,12 @@ into another (possibly the same) biological entity.
           return new Enumeration<ResourceType>(this, ResourceType.CAREPLAN);
         if ("CareTeam".equals(codeString))
           return new Enumeration<ResourceType>(this, ResourceType.CARETEAM);
+        if ("CatalogEntry".equals(codeString))
+          return new Enumeration<ResourceType>(this, ResourceType.CATALOGENTRY);
         if ("ChargeItem".equals(codeString))
           return new Enumeration<ResourceType>(this, ResourceType.CHARGEITEM);
+        if ("ChargeItemDefinition".equals(codeString))
+          return new Enumeration<ResourceType>(this, ResourceType.CHARGEITEMDEFINITION);
         if ("Claim".equals(codeString))
           return new Enumeration<ResourceType>(this, ResourceType.CLAIM);
         if ("ClaimResponse".equals(codeString))
@@ -11007,12 +13071,16 @@ into another (possibly the same) biological entity.
           return new Enumeration<ResourceType>(this, ResourceType.CONTRACT);
         if ("Coverage".equals(codeString))
           return new Enumeration<ResourceType>(this, ResourceType.COVERAGE);
+        if ("CoverageEligibilityRequest".equals(codeString))
+          return new Enumeration<ResourceType>(this, ResourceType.COVERAGEELIGIBILITYREQUEST);
+        if ("CoverageEligibilityResponse".equals(codeString))
+          return new Enumeration<ResourceType>(this, ResourceType.COVERAGEELIGIBILITYRESPONSE);
         if ("DetectedIssue".equals(codeString))
           return new Enumeration<ResourceType>(this, ResourceType.DETECTEDISSUE);
         if ("Device".equals(codeString))
           return new Enumeration<ResourceType>(this, ResourceType.DEVICE);
-        if ("DeviceComponent".equals(codeString))
-          return new Enumeration<ResourceType>(this, ResourceType.DEVICECOMPONENT);
+        if ("DeviceDefinition".equals(codeString))
+          return new Enumeration<ResourceType>(this, ResourceType.DEVICEDEFINITION);
         if ("DeviceMetric".equals(codeString))
           return new Enumeration<ResourceType>(this, ResourceType.DEVICEMETRIC);
         if ("DeviceRequest".equals(codeString))
@@ -11027,10 +13095,8 @@ into another (possibly the same) biological entity.
           return new Enumeration<ResourceType>(this, ResourceType.DOCUMENTREFERENCE);
         if ("DomainResource".equals(codeString))
           return new Enumeration<ResourceType>(this, ResourceType.DOMAINRESOURCE);
-        if ("EligibilityRequest".equals(codeString))
-          return new Enumeration<ResourceType>(this, ResourceType.ELIGIBILITYREQUEST);
-        if ("EligibilityResponse".equals(codeString))
-          return new Enumeration<ResourceType>(this, ResourceType.ELIGIBILITYRESPONSE);
+        if ("EffectEvidenceSynthesis".equals(codeString))
+          return new Enumeration<ResourceType>(this, ResourceType.EFFECTEVIDENCESYNTHESIS);
         if ("Encounter".equals(codeString))
           return new Enumeration<ResourceType>(this, ResourceType.ENCOUNTER);
         if ("Endpoint".equals(codeString))
@@ -11039,16 +13105,16 @@ into another (possibly the same) biological entity.
           return new Enumeration<ResourceType>(this, ResourceType.ENROLLMENTREQUEST);
         if ("EnrollmentResponse".equals(codeString))
           return new Enumeration<ResourceType>(this, ResourceType.ENROLLMENTRESPONSE);
-        if ("EntryDefinition".equals(codeString))
-          return new Enumeration<ResourceType>(this, ResourceType.ENTRYDEFINITION);
         if ("EpisodeOfCare".equals(codeString))
           return new Enumeration<ResourceType>(this, ResourceType.EPISODEOFCARE);
         if ("EventDefinition".equals(codeString))
           return new Enumeration<ResourceType>(this, ResourceType.EVENTDEFINITION);
+        if ("Evidence".equals(codeString))
+          return new Enumeration<ResourceType>(this, ResourceType.EVIDENCE);
+        if ("EvidenceVariable".equals(codeString))
+          return new Enumeration<ResourceType>(this, ResourceType.EVIDENCEVARIABLE);
         if ("ExampleScenario".equals(codeString))
           return new Enumeration<ResourceType>(this, ResourceType.EXAMPLESCENARIO);
-        if ("ExpansionProfile".equals(codeString))
-          return new Enumeration<ResourceType>(this, ResourceType.EXPANSIONPROFILE);
         if ("ExplanationOfBenefit".equals(codeString))
           return new Enumeration<ResourceType>(this, ResourceType.EXPLANATIONOFBENEFIT);
         if ("FamilyMemberHistory".equals(codeString))
@@ -11075,10 +13141,10 @@ into another (possibly the same) biological entity.
           return new Enumeration<ResourceType>(this, ResourceType.IMMUNIZATIONRECOMMENDATION);
         if ("ImplementationGuide".equals(codeString))
           return new Enumeration<ResourceType>(this, ResourceType.IMPLEMENTATIONGUIDE);
+        if ("InsurancePlan".equals(codeString))
+          return new Enumeration<ResourceType>(this, ResourceType.INSURANCEPLAN);
         if ("Invoice".equals(codeString))
           return new Enumeration<ResourceType>(this, ResourceType.INVOICE);
-        if ("ItemInstance".equals(codeString))
-          return new Enumeration<ResourceType>(this, ResourceType.ITEMINSTANCE);
         if ("Library".equals(codeString))
           return new Enumeration<ResourceType>(this, ResourceType.LIBRARY);
         if ("Linkage".equals(codeString))
@@ -11109,20 +13175,28 @@ into another (possibly the same) biological entity.
           return new Enumeration<ResourceType>(this, ResourceType.MEDICINALPRODUCT);
         if ("MedicinalProductAuthorization".equals(codeString))
           return new Enumeration<ResourceType>(this, ResourceType.MEDICINALPRODUCTAUTHORIZATION);
-        if ("MedicinalProductClinicals".equals(codeString))
-          return new Enumeration<ResourceType>(this, ResourceType.MEDICINALPRODUCTCLINICALS);
-        if ("MedicinalProductDeviceSpec".equals(codeString))
-          return new Enumeration<ResourceType>(this, ResourceType.MEDICINALPRODUCTDEVICESPEC);
+        if ("MedicinalProductContraindication".equals(codeString))
+          return new Enumeration<ResourceType>(this, ResourceType.MEDICINALPRODUCTCONTRAINDICATION);
+        if ("MedicinalProductIndication".equals(codeString))
+          return new Enumeration<ResourceType>(this, ResourceType.MEDICINALPRODUCTINDICATION);
         if ("MedicinalProductIngredient".equals(codeString))
           return new Enumeration<ResourceType>(this, ResourceType.MEDICINALPRODUCTINGREDIENT);
+        if ("MedicinalProductInteraction".equals(codeString))
+          return new Enumeration<ResourceType>(this, ResourceType.MEDICINALPRODUCTINTERACTION);
+        if ("MedicinalProductManufactured".equals(codeString))
+          return new Enumeration<ResourceType>(this, ResourceType.MEDICINALPRODUCTMANUFACTURED);
         if ("MedicinalProductPackaged".equals(codeString))
           return new Enumeration<ResourceType>(this, ResourceType.MEDICINALPRODUCTPACKAGED);
         if ("MedicinalProductPharmaceutical".equals(codeString))
           return new Enumeration<ResourceType>(this, ResourceType.MEDICINALPRODUCTPHARMACEUTICAL);
+        if ("MedicinalProductUndesirableEffect".equals(codeString))
+          return new Enumeration<ResourceType>(this, ResourceType.MEDICINALPRODUCTUNDESIRABLEEFFECT);
         if ("MessageDefinition".equals(codeString))
           return new Enumeration<ResourceType>(this, ResourceType.MESSAGEDEFINITION);
         if ("MessageHeader".equals(codeString))
           return new Enumeration<ResourceType>(this, ResourceType.MESSAGEHEADER);
+        if ("MolecularSequence".equals(codeString))
+          return new Enumeration<ResourceType>(this, ResourceType.MOLECULARSEQUENCE);
         if ("NamingSystem".equals(codeString))
           return new Enumeration<ResourceType>(this, ResourceType.NAMINGSYSTEM);
         if ("NutritionOrder".equals(codeString))
@@ -11131,16 +13205,14 @@ into another (possibly the same) biological entity.
           return new Enumeration<ResourceType>(this, ResourceType.OBSERVATION);
         if ("ObservationDefinition".equals(codeString))
           return new Enumeration<ResourceType>(this, ResourceType.OBSERVATIONDEFINITION);
-        if ("OccupationalData".equals(codeString))
-          return new Enumeration<ResourceType>(this, ResourceType.OCCUPATIONALDATA);
         if ("OperationDefinition".equals(codeString))
           return new Enumeration<ResourceType>(this, ResourceType.OPERATIONDEFINITION);
         if ("OperationOutcome".equals(codeString))
           return new Enumeration<ResourceType>(this, ResourceType.OPERATIONOUTCOME);
         if ("Organization".equals(codeString))
           return new Enumeration<ResourceType>(this, ResourceType.ORGANIZATION);
-        if ("OrganizationRole".equals(codeString))
-          return new Enumeration<ResourceType>(this, ResourceType.ORGANIZATIONROLE);
+        if ("OrganizationAffiliation".equals(codeString))
+          return new Enumeration<ResourceType>(this, ResourceType.ORGANIZATIONAFFILIATION);
         if ("Parameters".equals(codeString))
           return new Enumeration<ResourceType>(this, ResourceType.PARAMETERS);
         if ("Patient".equals(codeString))
@@ -11159,12 +13231,6 @@ into another (possibly the same) biological entity.
           return new Enumeration<ResourceType>(this, ResourceType.PRACTITIONERROLE);
         if ("Procedure".equals(codeString))
           return new Enumeration<ResourceType>(this, ResourceType.PROCEDURE);
-        if ("ProcessRequest".equals(codeString))
-          return new Enumeration<ResourceType>(this, ResourceType.PROCESSREQUEST);
-        if ("ProcessResponse".equals(codeString))
-          return new Enumeration<ResourceType>(this, ResourceType.PROCESSRESPONSE);
-        if ("ProductPlan".equals(codeString))
-          return new Enumeration<ResourceType>(this, ResourceType.PRODUCTPLAN);
         if ("Provenance".equals(codeString))
           return new Enumeration<ResourceType>(this, ResourceType.PROVENANCE);
         if ("Questionnaire".equals(codeString))
@@ -11175,6 +13241,10 @@ into another (possibly the same) biological entity.
           return new Enumeration<ResourceType>(this, ResourceType.RELATEDPERSON);
         if ("RequestGroup".equals(codeString))
           return new Enumeration<ResourceType>(this, ResourceType.REQUESTGROUP);
+        if ("ResearchDefinition".equals(codeString))
+          return new Enumeration<ResourceType>(this, ResourceType.RESEARCHDEFINITION);
+        if ("ResearchElementDefinition".equals(codeString))
+          return new Enumeration<ResourceType>(this, ResourceType.RESEARCHELEMENTDEFINITION);
         if ("ResearchStudy".equals(codeString))
           return new Enumeration<ResourceType>(this, ResourceType.RESEARCHSTUDY);
         if ("ResearchSubject".equals(codeString))
@@ -11183,12 +13253,12 @@ into another (possibly the same) biological entity.
           return new Enumeration<ResourceType>(this, ResourceType.RESOURCE);
         if ("RiskAssessment".equals(codeString))
           return new Enumeration<ResourceType>(this, ResourceType.RISKASSESSMENT);
+        if ("RiskEvidenceSynthesis".equals(codeString))
+          return new Enumeration<ResourceType>(this, ResourceType.RISKEVIDENCESYNTHESIS);
         if ("Schedule".equals(codeString))
           return new Enumeration<ResourceType>(this, ResourceType.SCHEDULE);
         if ("SearchParameter".equals(codeString))
           return new Enumeration<ResourceType>(this, ResourceType.SEARCHPARAMETER);
-        if ("Sequence".equals(codeString))
-          return new Enumeration<ResourceType>(this, ResourceType.SEQUENCE);
         if ("ServiceRequest".equals(codeString))
           return new Enumeration<ResourceType>(this, ResourceType.SERVICEREQUEST);
         if ("Slot".equals(codeString))
@@ -11205,10 +13275,16 @@ into another (possibly the same) biological entity.
           return new Enumeration<ResourceType>(this, ResourceType.SUBSCRIPTION);
         if ("Substance".equals(codeString))
           return new Enumeration<ResourceType>(this, ResourceType.SUBSTANCE);
+        if ("SubstanceNucleicAcid".equals(codeString))
+          return new Enumeration<ResourceType>(this, ResourceType.SUBSTANCENUCLEICACID);
         if ("SubstancePolymer".equals(codeString))
           return new Enumeration<ResourceType>(this, ResourceType.SUBSTANCEPOLYMER);
+        if ("SubstanceProtein".equals(codeString))
+          return new Enumeration<ResourceType>(this, ResourceType.SUBSTANCEPROTEIN);
         if ("SubstanceReferenceInformation".equals(codeString))
           return new Enumeration<ResourceType>(this, ResourceType.SUBSTANCEREFERENCEINFORMATION);
+        if ("SubstanceSourceMaterial".equals(codeString))
+          return new Enumeration<ResourceType>(this, ResourceType.SUBSTANCESOURCEMATERIAL);
         if ("SubstanceSpecification".equals(codeString))
           return new Enumeration<ResourceType>(this, ResourceType.SUBSTANCESPECIFICATION);
         if ("SupplyDelivery".equals(codeString))
@@ -11223,8 +13299,6 @@ into another (possibly the same) biological entity.
           return new Enumeration<ResourceType>(this, ResourceType.TESTREPORT);
         if ("TestScript".equals(codeString))
           return new Enumeration<ResourceType>(this, ResourceType.TESTSCRIPT);
-        if ("UserSession".equals(codeString))
-          return new Enumeration<ResourceType>(this, ResourceType.USERSESSION);
         if ("ValueSet".equals(codeString))
           return new Enumeration<ResourceType>(this, ResourceType.VALUESET);
         if ("VerificationResult".equals(codeString))
@@ -11264,8 +13338,12 @@ into another (possibly the same) biological entity.
         return "CarePlan";
       if (code == ResourceType.CARETEAM)
         return "CareTeam";
+      if (code == ResourceType.CATALOGENTRY)
+        return "CatalogEntry";
       if (code == ResourceType.CHARGEITEM)
         return "ChargeItem";
+      if (code == ResourceType.CHARGEITEMDEFINITION)
+        return "ChargeItemDefinition";
       if (code == ResourceType.CLAIM)
         return "Claim";
       if (code == ResourceType.CLAIMRESPONSE)
@@ -11292,12 +13370,16 @@ into another (possibly the same) biological entity.
         return "Contract";
       if (code == ResourceType.COVERAGE)
         return "Coverage";
+      if (code == ResourceType.COVERAGEELIGIBILITYREQUEST)
+        return "CoverageEligibilityRequest";
+      if (code == ResourceType.COVERAGEELIGIBILITYRESPONSE)
+        return "CoverageEligibilityResponse";
       if (code == ResourceType.DETECTEDISSUE)
         return "DetectedIssue";
       if (code == ResourceType.DEVICE)
         return "Device";
-      if (code == ResourceType.DEVICECOMPONENT)
-        return "DeviceComponent";
+      if (code == ResourceType.DEVICEDEFINITION)
+        return "DeviceDefinition";
       if (code == ResourceType.DEVICEMETRIC)
         return "DeviceMetric";
       if (code == ResourceType.DEVICEREQUEST)
@@ -11312,10 +13394,8 @@ into another (possibly the same) biological entity.
         return "DocumentReference";
       if (code == ResourceType.DOMAINRESOURCE)
         return "DomainResource";
-      if (code == ResourceType.ELIGIBILITYREQUEST)
-        return "EligibilityRequest";
-      if (code == ResourceType.ELIGIBILITYRESPONSE)
-        return "EligibilityResponse";
+      if (code == ResourceType.EFFECTEVIDENCESYNTHESIS)
+        return "EffectEvidenceSynthesis";
       if (code == ResourceType.ENCOUNTER)
         return "Encounter";
       if (code == ResourceType.ENDPOINT)
@@ -11324,16 +13404,16 @@ into another (possibly the same) biological entity.
         return "EnrollmentRequest";
       if (code == ResourceType.ENROLLMENTRESPONSE)
         return "EnrollmentResponse";
-      if (code == ResourceType.ENTRYDEFINITION)
-        return "EntryDefinition";
       if (code == ResourceType.EPISODEOFCARE)
         return "EpisodeOfCare";
       if (code == ResourceType.EVENTDEFINITION)
         return "EventDefinition";
+      if (code == ResourceType.EVIDENCE)
+        return "Evidence";
+      if (code == ResourceType.EVIDENCEVARIABLE)
+        return "EvidenceVariable";
       if (code == ResourceType.EXAMPLESCENARIO)
         return "ExampleScenario";
-      if (code == ResourceType.EXPANSIONPROFILE)
-        return "ExpansionProfile";
       if (code == ResourceType.EXPLANATIONOFBENEFIT)
         return "ExplanationOfBenefit";
       if (code == ResourceType.FAMILYMEMBERHISTORY)
@@ -11360,10 +13440,10 @@ into another (possibly the same) biological entity.
         return "ImmunizationRecommendation";
       if (code == ResourceType.IMPLEMENTATIONGUIDE)
         return "ImplementationGuide";
+      if (code == ResourceType.INSURANCEPLAN)
+        return "InsurancePlan";
       if (code == ResourceType.INVOICE)
         return "Invoice";
-      if (code == ResourceType.ITEMINSTANCE)
-        return "ItemInstance";
       if (code == ResourceType.LIBRARY)
         return "Library";
       if (code == ResourceType.LINKAGE)
@@ -11394,20 +13474,28 @@ into another (possibly the same) biological entity.
         return "MedicinalProduct";
       if (code == ResourceType.MEDICINALPRODUCTAUTHORIZATION)
         return "MedicinalProductAuthorization";
-      if (code == ResourceType.MEDICINALPRODUCTCLINICALS)
-        return "MedicinalProductClinicals";
-      if (code == ResourceType.MEDICINALPRODUCTDEVICESPEC)
-        return "MedicinalProductDeviceSpec";
+      if (code == ResourceType.MEDICINALPRODUCTCONTRAINDICATION)
+        return "MedicinalProductContraindication";
+      if (code == ResourceType.MEDICINALPRODUCTINDICATION)
+        return "MedicinalProductIndication";
       if (code == ResourceType.MEDICINALPRODUCTINGREDIENT)
         return "MedicinalProductIngredient";
+      if (code == ResourceType.MEDICINALPRODUCTINTERACTION)
+        return "MedicinalProductInteraction";
+      if (code == ResourceType.MEDICINALPRODUCTMANUFACTURED)
+        return "MedicinalProductManufactured";
       if (code == ResourceType.MEDICINALPRODUCTPACKAGED)
         return "MedicinalProductPackaged";
       if (code == ResourceType.MEDICINALPRODUCTPHARMACEUTICAL)
         return "MedicinalProductPharmaceutical";
+      if (code == ResourceType.MEDICINALPRODUCTUNDESIRABLEEFFECT)
+        return "MedicinalProductUndesirableEffect";
       if (code == ResourceType.MESSAGEDEFINITION)
         return "MessageDefinition";
       if (code == ResourceType.MESSAGEHEADER)
         return "MessageHeader";
+      if (code == ResourceType.MOLECULARSEQUENCE)
+        return "MolecularSequence";
       if (code == ResourceType.NAMINGSYSTEM)
         return "NamingSystem";
       if (code == ResourceType.NUTRITIONORDER)
@@ -11416,16 +13504,14 @@ into another (possibly the same) biological entity.
         return "Observation";
       if (code == ResourceType.OBSERVATIONDEFINITION)
         return "ObservationDefinition";
-      if (code == ResourceType.OCCUPATIONALDATA)
-        return "OccupationalData";
       if (code == ResourceType.OPERATIONDEFINITION)
         return "OperationDefinition";
       if (code == ResourceType.OPERATIONOUTCOME)
         return "OperationOutcome";
       if (code == ResourceType.ORGANIZATION)
         return "Organization";
-      if (code == ResourceType.ORGANIZATIONROLE)
-        return "OrganizationRole";
+      if (code == ResourceType.ORGANIZATIONAFFILIATION)
+        return "OrganizationAffiliation";
       if (code == ResourceType.PARAMETERS)
         return "Parameters";
       if (code == ResourceType.PATIENT)
@@ -11444,12 +13530,6 @@ into another (possibly the same) biological entity.
         return "PractitionerRole";
       if (code == ResourceType.PROCEDURE)
         return "Procedure";
-      if (code == ResourceType.PROCESSREQUEST)
-        return "ProcessRequest";
-      if (code == ResourceType.PROCESSRESPONSE)
-        return "ProcessResponse";
-      if (code == ResourceType.PRODUCTPLAN)
-        return "ProductPlan";
       if (code == ResourceType.PROVENANCE)
         return "Provenance";
       if (code == ResourceType.QUESTIONNAIRE)
@@ -11460,6 +13540,10 @@ into another (possibly the same) biological entity.
         return "RelatedPerson";
       if (code == ResourceType.REQUESTGROUP)
         return "RequestGroup";
+      if (code == ResourceType.RESEARCHDEFINITION)
+        return "ResearchDefinition";
+      if (code == ResourceType.RESEARCHELEMENTDEFINITION)
+        return "ResearchElementDefinition";
       if (code == ResourceType.RESEARCHSTUDY)
         return "ResearchStudy";
       if (code == ResourceType.RESEARCHSUBJECT)
@@ -11468,12 +13552,12 @@ into another (possibly the same) biological entity.
         return "Resource";
       if (code == ResourceType.RISKASSESSMENT)
         return "RiskAssessment";
+      if (code == ResourceType.RISKEVIDENCESYNTHESIS)
+        return "RiskEvidenceSynthesis";
       if (code == ResourceType.SCHEDULE)
         return "Schedule";
       if (code == ResourceType.SEARCHPARAMETER)
         return "SearchParameter";
-      if (code == ResourceType.SEQUENCE)
-        return "Sequence";
       if (code == ResourceType.SERVICEREQUEST)
         return "ServiceRequest";
       if (code == ResourceType.SLOT)
@@ -11490,10 +13574,16 @@ into another (possibly the same) biological entity.
         return "Subscription";
       if (code == ResourceType.SUBSTANCE)
         return "Substance";
+      if (code == ResourceType.SUBSTANCENUCLEICACID)
+        return "SubstanceNucleicAcid";
       if (code == ResourceType.SUBSTANCEPOLYMER)
         return "SubstancePolymer";
+      if (code == ResourceType.SUBSTANCEPROTEIN)
+        return "SubstanceProtein";
       if (code == ResourceType.SUBSTANCEREFERENCEINFORMATION)
         return "SubstanceReferenceInformation";
+      if (code == ResourceType.SUBSTANCESOURCEMATERIAL)
+        return "SubstanceSourceMaterial";
       if (code == ResourceType.SUBSTANCESPECIFICATION)
         return "SubstanceSpecification";
       if (code == ResourceType.SUPPLYDELIVERY)
@@ -11508,8 +13598,6 @@ into another (possibly the same) biological entity.
         return "TestReport";
       if (code == ResourceType.TESTSCRIPT)
         return "TestScript";
-      if (code == ResourceType.USERSESSION)
-        return "UserSession";
       if (code == ResourceType.VALUESET)
         return "ValueSet";
       if (code == ResourceType.VERIFICATIONRESULT)
@@ -11557,6 +13645,10 @@ into another (possibly the same) biological entity.
          */
         URI, 
         /**
+         * Special logic applies to this parameter per the description of the search parameter.
+         */
+        SPECIAL, 
+        /**
          * added to help the parsers
          */
         NULL;
@@ -11579,6 +13671,8 @@ into another (possibly the same) biological entity.
           return QUANTITY;
         if ("uri".equals(codeString))
           return URI;
+        if ("special".equals(codeString))
+          return SPECIAL;
         throw new FHIRException("Unknown SearchParamType code '"+codeString+"'");
         }
         public String toCode() {
@@ -11591,6 +13685,7 @@ into another (possibly the same) biological entity.
             case COMPOSITE: return "composite";
             case QUANTITY: return "quantity";
             case URI: return "uri";
+            case SPECIAL: return "special";
             default: return "?";
           }
         }
@@ -11604,6 +13699,7 @@ into another (possibly the same) biological entity.
             case COMPOSITE: return "http://hl7.org/fhir/search-param-type";
             case QUANTITY: return "http://hl7.org/fhir/search-param-type";
             case URI: return "http://hl7.org/fhir/search-param-type";
+            case SPECIAL: return "http://hl7.org/fhir/search-param-type";
             default: return "?";
           }
         }
@@ -11617,6 +13713,7 @@ into another (possibly the same) biological entity.
             case COMPOSITE: return "A composite search parameter that combines a search on two values together.";
             case QUANTITY: return "A search parameter that searches on a quantity.";
             case URI: return "A search parameter that searches on a URI (RFC 3986).";
+            case SPECIAL: return "Special logic applies to this parameter per the description of the search parameter.";
             default: return "?";
           }
         }
@@ -11630,6 +13727,7 @@ into another (possibly the same) biological entity.
             case COMPOSITE: return "Composite";
             case QUANTITY: return "Quantity";
             case URI: return "URI";
+            case SPECIAL: return "Special";
             default: return "?";
           }
         }
@@ -11656,6 +13754,8 @@ into another (possibly the same) biological entity.
           return SearchParamType.QUANTITY;
         if ("uri".equals(codeString))
           return SearchParamType.URI;
+        if ("special".equals(codeString))
+          return SearchParamType.SPECIAL;
         throw new IllegalArgumentException("Unknown SearchParamType code '"+codeString+"'");
         }
         public Enumeration<SearchParamType> fromType(Base code) throws FHIRException {
@@ -11682,6 +13782,8 @@ into another (possibly the same) biological entity.
           return new Enumeration<SearchParamType>(this, SearchParamType.QUANTITY);
         if ("uri".equals(codeString))
           return new Enumeration<SearchParamType>(this, SearchParamType.URI);
+        if ("special".equals(codeString))
+          return new Enumeration<SearchParamType>(this, SearchParamType.SPECIAL);
         throw new FHIRException("Unknown SearchParamType code '"+codeString+"'");
         }
     public String toCode(SearchParamType code) {
@@ -11701,6 +13803,8 @@ into another (possibly the same) biological entity.
         return "quantity";
       if (code == SearchParamType.URI)
         return "uri";
+      if (code == SearchParamType.SPECIAL)
+        return "special";
       return "?";
       }
     public String toSystem(SearchParamType code) {
@@ -11767,12 +13871,12 @@ into another (possibly the same) biological entity.
         }
         public String getSystem() {
           switch (this) {
-            case TRUE: return "http://hl7.org/fhir/special-values";
-            case FALSE: return "http://hl7.org/fhir/special-values";
-            case TRACE: return "http://hl7.org/fhir/special-values";
-            case SUFFICIENT: return "http://hl7.org/fhir/special-values";
-            case WITHDRAWN: return "http://hl7.org/fhir/special-values";
-            case NILKNOWN: return "http://hl7.org/fhir/special-values";
+            case TRUE: return "http://terminology.hl7.org/CodeSystem/special-values";
+            case FALSE: return "http://terminology.hl7.org/CodeSystem/special-values";
+            case TRACE: return "http://terminology.hl7.org/CodeSystem/special-values";
+            case SUFFICIENT: return "http://terminology.hl7.org/CodeSystem/special-values";
+            case WITHDRAWN: return "http://terminology.hl7.org/CodeSystem/special-values";
+            case NILKNOWN: return "http://terminology.hl7.org/CodeSystem/special-values";
             default: return "?";
           }
         }

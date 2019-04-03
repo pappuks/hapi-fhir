@@ -4,7 +4,7 @@ package ca.uhn.fhir.jpa.dao.dstu3;
  * #%L
  * HAPI FHIR JPA Server
  * %%
- * Copyright (C) 2014 - 2018 University Health Network
+ * Copyright (C) 2014 - 2019 University Health Network
  * %%
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -24,7 +24,7 @@ import ca.uhn.fhir.jpa.dao.IFhirResourceDaoConceptMap;
 import ca.uhn.fhir.jpa.term.TranslationMatch;
 import ca.uhn.fhir.jpa.term.TranslationRequest;
 import ca.uhn.fhir.jpa.term.TranslationResult;
-import ca.uhn.fhir.jpa.entity.ResourceTable;
+import ca.uhn.fhir.jpa.model.entity.ResourceTable;
 import ca.uhn.fhir.jpa.entity.TermConceptMapGroupElement;
 import ca.uhn.fhir.jpa.entity.TermConceptMapGroupElementTarget;
 import ca.uhn.fhir.jpa.term.IHapiTerminologySvc;
@@ -87,7 +87,9 @@ public class FhirResourceDaoConceptMapDstu3 extends FhirResourceDaoDstu3<Concept
 				if (targetsToReturn.add(target)) {
 					translationMatch = new TranslationMatch();
 
-					translationMatch.setEquivalence(new CodeType(target.getEquivalence().toCode()));
+					if (target.getEquivalence() != null) {
+						translationMatch.setEquivalence(new CodeType(target.getEquivalence().toCode()));
+					}
 
 					translationMatch.setConcept(
 						new Coding()
@@ -160,13 +162,16 @@ public class FhirResourceDaoConceptMapDstu3 extends FhirResourceDaoDstu3<Concept
 													 boolean theUpdateVersion, Date theUpdateTime, boolean theForceUpdate, boolean theCreateNewHistoryEntry) {
 		ResourceTable retVal = super.updateEntity(theRequestDetails, theResource, theEntity, theDeletedTimestampOrNull, thePerformIndexing, theUpdateVersion, theUpdateTime, theForceUpdate, theCreateNewHistoryEntry);
 
-		ConceptMap conceptMap = (ConceptMap) theResource;
-
-		// Convert from DSTU3 to R4
-		try {
-			myHapiTerminologySvc.storeTermConceptMapAndChildren(retVal, VersionConvertor_30_40.convertConceptMap(conceptMap));
-		} catch (FHIRException fe) {
-			throw new InternalErrorException(fe);
+		if (retVal.getDeleted() == null) {
+			try {
+				ConceptMap conceptMap = (ConceptMap) theResource;
+				org.hl7.fhir.r4.model.ConceptMap converted = VersionConvertor_30_40.convertConceptMap(conceptMap);
+				myHapiTerminologySvc.storeTermConceptMapAndChildren(retVal, converted);
+			} catch (FHIRException fe) {
+				throw new InternalErrorException(fe);
+			}
+		} else {
+			myHapiTerminologySvc.deleteConceptMapAndChildren(retVal);
 		}
 
 		return retVal;

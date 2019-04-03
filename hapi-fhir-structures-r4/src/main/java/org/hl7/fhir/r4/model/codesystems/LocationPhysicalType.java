@@ -29,7 +29,7 @@ package org.hl7.fhir.r4.model.codesystems;
   
 */
 
-// Generated on Sun, May 6, 2018 17:51-0400 for FHIR v3.4.0
+// Generated on Thu, Dec 27, 2018 10:06-0500 for FHIR v4.0.0
 
 
 import org.hl7.fhir.exceptions.FHIRException;
@@ -89,7 +89,7 @@ public enum LocationPhysicalType {
          */
         AREA, 
         /**
-         * A wide scope that covers a conceptual domain, such as a Nation (Country wide community or Federal Government - e.g. Ministry of Health),  Province or State (community or Government), Business (throughout the enterprise), Nation with a business scope of an agency (e.g. CDC, FDA etc.) or a Business segment (UK Pharmacy), not just an physical boundry
+         * A wide scope that covers a conceptual domain, such as a Nation (Country wide community or Federal Government - e.g. Ministry of Health),  Province or State (community or Government), Business (throughout the enterprise), Nation with a business scope of an agency (e.g. CDC, FDA etc.) or a Business segment (UK Pharmacy), not just an physical boundary
          */
         JDN, 
         /**
@@ -149,7 +149,7 @@ public enum LocationPhysicalType {
           }
         }
         public String getSystem() {
-          return "http://hl7.org/fhir/location-physical-type";
+          return "http://terminology.hl7.org/CodeSystem/location-physical-type";
         }
         public String getDefinition() {
           switch (this) {
@@ -166,7 +166,7 @@ public enum LocationPhysicalType {
             case CA: return "A container that can store goods, equipment, medications or other items.";
             case RD: return "A defined path to travel between 2 points that has a known name.";
             case AREA: return "A defined physical boundary of something, such as a flood risk zone, region, postcode";
-            case JDN: return "A wide scope that covers a conceptual domain, such as a Nation (Country wide community or Federal Government - e.g. Ministry of Health),  Province or State (community or Government), Business (throughout the enterprise), Nation with a business scope of an agency (e.g. CDC, FDA etc.) or a Business segment (UK Pharmacy), not just an physical boundry";
+            case JDN: return "A wide scope that covers a conceptual domain, such as a Nation (Country wide community or Federal Government - e.g. Ministry of Health),  Province or State (community or Government), Business (throughout the enterprise), Nation with a business scope of an agency (e.g. CDC, FDA etc.) or a Business segment (UK Pharmacy), not just an physical boundary";
             default: return "?";
           }
         }

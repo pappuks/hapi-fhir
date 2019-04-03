@@ -29,7 +29,7 @@ package org.hl7.fhir.r4.model.codesystems;
   
 */
 
-// Generated on Sun, May 6, 2018 17:51-0400 for FHIR v3.4.0
+// Generated on Thu, Dec 27, 2018 10:06-0500 for FHIR v4.0.0
 
 
 import org.hl7.fhir.exceptions.FHIRException;
@@ -37,27 +37,27 @@ import org.hl7.fhir.exceptions.FHIRException;
 public enum CommunicationTopic {
 
         /**
-         * The purpose of the communication is a prescription refill request.
+         * The purpose or content of the communication is a prescription refill request.
          */
         PRESCRIPTIONREFILLREQUEST, 
         /**
-         * The purpose of the communication is a progress update.
+         * The purpose or content of the communication is a progress update.
          */
         PROGRESSUPDATE, 
         /**
-         * The purpose of the communication is to report labs.
+         * The purpose or content of the communication is to report labs.
          */
         REPORTLABS, 
         /**
-         * The purpose of the communication is an appointment reminder.
+         * The purpose or content of the communication is an appointment reminder.
          */
         APPOINTMENTREMINDER, 
         /**
-         * The purpose of the communication is a phone consult.
+         * The purpose or content of the communication is a phone consult.
          */
         PHONECONSULT, 
         /**
-         * The purpose of the communication is a summary report.
+         * The purpose or content of the communication is a summary report.
          */
         SUMMARYREPORT, 
         /**
@@ -93,16 +93,16 @@ public enum CommunicationTopic {
           }
         }
         public String getSystem() {
-          return "http://hl7.org/fhir/communication-topic";
+          return "http://terminology.hl7.org/CodeSystem/communication-topic";
         }
         public String getDefinition() {
           switch (this) {
-            case PRESCRIPTIONREFILLREQUEST: return "The purpose of the communication is a prescription refill request.";
-            case PROGRESSUPDATE: return "The purpose of the communication is a progress update.";
-            case REPORTLABS: return "The purpose of the communication is to report labs.";
-            case APPOINTMENTREMINDER: return "The purpose of the communication is an appointment reminder.";
-            case PHONECONSULT: return "The purpose of the communication is a phone consult.";
-            case SUMMARYREPORT: return "The purpose of the communication is a summary report.";
+            case PRESCRIPTIONREFILLREQUEST: return "The purpose or content of the communication is a prescription refill request.";
+            case PROGRESSUPDATE: return "The purpose or content of the communication is a progress update.";
+            case REPORTLABS: return "The purpose or content of the communication is to report labs.";
+            case APPOINTMENTREMINDER: return "The purpose or content of the communication is an appointment reminder.";
+            case PHONECONSULT: return "The purpose or content of the communication is a phone consult.";
+            case SUMMARYREPORT: return "The purpose or content of the communication is a summary report.";
             default: return "?";
           }
         }

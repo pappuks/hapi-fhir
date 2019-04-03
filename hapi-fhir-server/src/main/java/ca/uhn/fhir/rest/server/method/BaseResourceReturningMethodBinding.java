@@ -19,7 +19,6 @@ import ca.uhn.fhir.rest.server.exceptions.InternalErrorException;
 import ca.uhn.fhir.rest.server.exceptions.InvalidRequestException;
 import ca.uhn.fhir.rest.server.exceptions.ResourceNotFoundException;
 import ca.uhn.fhir.rest.server.interceptor.IServerInterceptor;
-import ca.uhn.fhir.rest.server.interceptor.ResponseHighlighterInterceptor;
 import ca.uhn.fhir.rest.server.servlet.ServletRequestDetails;
 import ca.uhn.fhir.util.ReflectionUtil;
 import ca.uhn.fhir.util.UrlUtil;
@@ -40,7 +39,7 @@ import static org.apache.commons.lang3.StringUtils.isNotBlank;
  * #%L
  * HAPI FHIR - Server Framework
  * %%
- * Copyright (C) 2014 - 2018 University Health Network
+ * Copyright (C) 2014 - 2019 University Health Network
  * %%
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -57,27 +56,10 @@ import static org.apache.commons.lang3.StringUtils.isNotBlank;
  */
 
 public abstract class BaseResourceReturningMethodBinding extends BaseMethodBinding<Object> {
-	protected static final Set<String> ALLOWED_PARAMS;
 	private static final org.slf4j.Logger ourLog = org.slf4j.LoggerFactory.getLogger(BaseResourceReturningMethodBinding.class);
-
-	static {
-		HashSet<String> set = new HashSet<String>();
-		set.add(Constants.PARAM_FORMAT);
-		set.add(Constants.PARAM_NARRATIVE);
-		set.add(Constants.PARAM_PRETTY);
-		set.add(Constants.PARAM_SORT);
-		set.add(Constants.PARAM_SORT_ASC);
-		set.add(Constants.PARAM_SORT_DESC);
-		set.add(Constants.PARAM_COUNT);
-		set.add(Constants.PARAM_SUMMARY);
-		set.add(Constants.PARAM_ELEMENTS);
-		set.add(ResponseHighlighterInterceptor.PARAM_RAW);
-		ALLOWED_PARAMS = Collections.unmodifiableSet(set);
-	}
 
 	private MethodReturnTypeEnum myMethodReturnType;
 	private String myResourceName;
-	private Class<? extends IBaseResource> myResourceType;
 
 	@SuppressWarnings("unchecked")
 	public BaseResourceReturningMethodBinding(Class<?> theReturnResourceType, Method theMethod, FhirContext theContext, Object theProvider) {
@@ -112,19 +94,20 @@ public abstract class BaseResourceReturningMethodBinding extends BaseMethodBindi
 
 		if (theReturnResourceType != null) {
 			if (IBaseResource.class.isAssignableFrom(theReturnResourceType)) {
-				if (Modifier.isAbstract(theReturnResourceType.getModifiers()) || Modifier.isInterface(theReturnResourceType.getModifiers())) {
-					// If we're returning an abstract type, that's ok
-				} else {
-					myResourceType = (Class<? extends IResource>) theReturnResourceType;
-					myResourceName = theContext.getResourceDefinition(myResourceType).getName();
+
+				// If we're returning an abstract type, that's ok, but if we know the resource
+				// type let's grab it
+				if (!Modifier.isAbstract(theReturnResourceType.getModifiers()) && !Modifier.isInterface(theReturnResourceType.getModifiers())) {
+					Class<? extends IBaseResource> resourceType = (Class<? extends IResource>) theReturnResourceType;
+					myResourceName = theContext.getResourceDefinition(resourceType).getName();
 				}
 			}
 		}
 
 	}
 
-	protected IBaseResource createBundleFromBundleProvider(IRestfulServer<?> theServer, RequestDetails theRequest, Integer theLimit, String theLinkSelf, Set<Include> theIncludes,
-																			 IBundleProvider theResult, int theOffset, BundleTypeEnum theBundleType, EncodingEnum theLinkEncoding, String theSearchId) {
+	IBaseResource createBundleFromBundleProvider(IRestfulServer<?> theServer, RequestDetails theRequest, Integer theLimit, String theLinkSelf, Set<Include> theIncludes,
+																IBundleProvider theResult, int theOffset, BundleTypeEnum theBundleType, EncodingEnum theLinkEncoding, String theSearchId) {
 		IVersionSpecificBundleFactory bundleFactory = theServer.getFhirContext().newBundleFactory();
 
 		int numToReturn;
@@ -152,12 +135,16 @@ public abstract class BaseResourceReturningMethodBinding extends BaseMethodBindi
 				numToReturn = Math.min(numToReturn, numTotalResults - theOffset);
 			}
 
-			if (numToReturn > 0) {
+			if (numToReturn > 0 || theResult.getCurrentPageId() != null) {
 				resourceList = theResult.getResources(theOffset, numToReturn + theOffset);
 			} else {
 				resourceList = Collections.emptyList();
 			}
 			RestfulServerUtils.validateResourceListNotNull(resourceList);
+
+			if (numTotalResults == null) {
+				numTotalResults = theResult.size();
+			}
 
 			if (theSearchId != null) {
 				searchId = theSearchId;
@@ -166,6 +153,7 @@ public abstract class BaseResourceReturningMethodBinding extends BaseMethodBindi
 					searchId = pagingProvider.storeResultList(theResult);
 					if (isBlank(searchId)) {
 						ourLog.info("Found {} results but paging provider did not provide an ID to use for paging", numTotalResults);
+						searchId = null;
 					}
 				}
 			}
@@ -183,11 +171,7 @@ public abstract class BaseResourceReturningMethodBinding extends BaseMethodBindi
 			}
 		}
 		if (hasNull) {
-			for (Iterator<IBaseResource> iter = resourceList.iterator(); iter.hasNext(); ) {
-				if (iter.next() == null) {
-					iter.remove();
-				}
-			}
+			resourceList.removeIf(Objects::isNull);
 		}
 
 		/*
@@ -207,13 +191,31 @@ public abstract class BaseResourceReturningMethodBinding extends BaseMethodBindi
 
 		String linkPrev = null;
 		String linkNext = null;
-		if (searchId != null) {
-			if (numTotalResults == null || theOffset + numToReturn < numTotalResults) {
-				linkNext = (RestfulServerUtils.createPagingLink(theIncludes, serverBase, searchId, theOffset + numToReturn, numToReturn, theRequest.getParameters(), prettyPrint, theBundleType));
+
+		if (isNotBlank(theResult.getCurrentPageId())) {
+			// We're doing named pages
+			searchId = theResult.getUuid();
+			if (isNotBlank(theResult.getNextPageId())) {
+				linkNext = RestfulServerUtils.createPagingLink(theIncludes, theRequest, searchId, theResult.getNextPageId(), theRequest.getParameters(), prettyPrint, theBundleType);
 			}
-			if (theOffset > 0) {
-				int start = Math.max(0, theOffset - theLimit);
-				linkPrev = RestfulServerUtils.createPagingLink(theIncludes, serverBase, searchId, start, theLimit, theRequest.getParameters(), prettyPrint, theBundleType);
+			if (isNotBlank(theResult.getPreviousPageId())) {
+				linkPrev = RestfulServerUtils.createPagingLink(theIncludes, theRequest, searchId, theResult.getPreviousPageId(), theRequest.getParameters(), prettyPrint, theBundleType);
+			}
+		} else if (searchId != null) {
+			/*
+			 * We're doing offset pages - Note that we only return paging links if we actually
+			 * included some results in the response. We do this to avoid situations where
+			 * people have faked the offset number to some huge number to avoid them getting
+			 * back paging links that don't make sense.
+			 */
+			if (resourceList.size() > 0) {
+				if (numTotalResults == null || theOffset + numToReturn < numTotalResults) {
+					linkNext = (RestfulServerUtils.createPagingLink(theIncludes, theRequest, searchId, theOffset + numToReturn, numToReturn, theRequest.getParameters(), prettyPrint, theBundleType));
+				}
+				if (theOffset > 0) {
+					int start = Math.max(0, theOffset - theLimit);
+					linkPrev = RestfulServerUtils.createPagingLink(theIncludes, theRequest, searchId, start, theLimit, theRequest.getParameters(), prettyPrint, theBundleType);
+				}
 			}
 		}
 

@@ -29,7 +29,7 @@ package org.hl7.fhir.r4.model.codesystems;
   
 */
 
-// Generated on Sun, May 6, 2018 17:51-0400 for FHIR v3.4.0
+// Generated on Thu, Dec 27, 2018 10:06-0500 for FHIR v4.0.0
 
 
 import org.hl7.fhir.r4.model.EnumFactory;
@@ -45,6 +45,8 @@ public class ResourceValidationModeEnumFactory implements EnumFactory<ResourceVa
       return ResourceValidationMode.UPDATE;
     if ("delete".equals(codeString))
       return ResourceValidationMode.DELETE;
+    if ("profile".equals(codeString))
+      return ResourceValidationMode.PROFILE;
     throw new IllegalArgumentException("Unknown ResourceValidationMode code '"+codeString+"'");
   }
 
@@ -55,6 +57,8 @@ public class ResourceValidationModeEnumFactory implements EnumFactory<ResourceVa
       return "update";
     if (code == ResourceValidationMode.DELETE)
       return "delete";
+    if (code == ResourceValidationMode.PROFILE)
+      return "profile";
     return "?";
   }
 

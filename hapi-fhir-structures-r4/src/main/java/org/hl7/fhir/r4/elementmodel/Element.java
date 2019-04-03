@@ -21,6 +21,8 @@ import org.hl7.fhir.r4.model.Type;
 import org.hl7.fhir.r4.model.ValueSet.ValueSetExpansionContainsComponent;
 import org.hl7.fhir.r4.terminologies.ValueSetExpander.ValueSetExpansionOutcome;
 import org.hl7.fhir.exceptions.FHIRException;
+import org.hl7.fhir.utilities.ElementDecoration;
+import org.hl7.fhir.utilities.ElementDecoration.DecorationType;
 import org.hl7.fhir.utilities.Utilities;
 import org.hl7.fhir.utilities.xhtml.XhtmlComposer;
 import org.hl7.fhir.utilities.xhtml.XhtmlNode;
@@ -294,13 +296,13 @@ public class Element extends Base {
 	
   @Override
   public Base setProperty(int hash, String name, Base value) throws FHIRException {
-    if (isPrimitive() && (hash == "value".hashCode())) {
-      this.value = castToString(value).asStringValue();
-      return this;
-    }
     if ("xhtml".equals(getType()) && (hash == "value".hashCode())) {
       this.xhtml = castToXhtml(value);
       this.value =  castToXhtmlString(value);
+      return this;
+    }
+    if (isPrimitive() && (hash == "value".hashCode())) {
+      this.value = castToString(value).asStringValue();
       return this;
     }
     
@@ -331,11 +333,20 @@ public class Element extends Base {
       }
     }
 
+    int i = 0;
     if (childForValue == null)
       for (Property p : property.getChildProperties(this.name, type)) {
+        int t = -1;
+        for (int c =0; c < children.size(); c++) {
+          Element e = children.get(c);
+          if (p.getName().equals(e.getName()))
+            t = c;
+        }
+        if (t > i)
+          i = t;
         if (p.getName().equals(name) || p.getName().equals(name+"[x]")) {
           Element ne = new Element(name, p);
-          children.add(ne);
+          children.add(i, ne);
           childForValue = ne;
           break;
         }
@@ -470,9 +481,30 @@ public class Element extends Base {
 		return this;
 	}
 
-	public void markValidation(StructureDefinition profile, ElementDefinition definition) {
+	public void clearDecorations() {
+	  clearUserData("fhir.decorations");
+	  for (Element e : children)
+	    e.clearDecorations();	  
 	}
 	
+	public void markValidation(StructureDefinition profile, ElementDefinition definition) {
+	  @SuppressWarnings("unchecked")
+    List<ElementDecoration> decorations = (List<ElementDecoration>) getUserData("fhir.decorations");
+	  if (decorations == null) {
+	    decorations = new ArrayList<ElementDecoration>();
+	    setUserData("fhir.decorations", decorations);
+	  }
+	  decorations.add(new ElementDecoration(DecorationType.TYPE, profile.getUserString("path"), definition.getPath()));
+	  if (definition.getId() != null && tail(definition.getId()).contains(":")) {
+	    String[] details = tail(definition.getId()).split("\\:");
+	    decorations.add(new ElementDecoration(DecorationType.SLICE, null, details[1]));
+	  }
+	}
+	
+  private String tail(String id) {
+    return id.contains(".") ? id.substring(id.lastIndexOf(".")+1) : id;
+  }
+
   public Element getNamedChild(String name) {
 	  if (children == null)
   		return null;
@@ -525,7 +557,7 @@ public class Element extends Base {
 
 	@Override
 	public boolean isEmpty() {
-		if (isNotBlank(value)) {
+		if (value != null && !"".equals(value)) {
 			return false;
 		}
 		for (Element next : getChildren()) {
@@ -660,7 +692,7 @@ public class Element extends Base {
     private List<ElementDefinition> children;
     public ElementSortComparator(Element e, Property property) {
       String tn = e.getType();
-      StructureDefinition sd = property.getContext().fetchResource(StructureDefinition.class, ProfileUtilities.sdNs(tn));
+      StructureDefinition sd = property.getContext().fetchResource(StructureDefinition.class, ProfileUtilities.sdNs(tn, property.getContext().getOverrideVersionNs()));
       if (sd != null && !sd.getAbstract())
         children = sd.getSnapshot().getElement();
       else

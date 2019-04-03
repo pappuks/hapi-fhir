@@ -4,7 +4,7 @@ package ca.uhn.fhir.rest.server.method;
  * #%L
  * HAPI FHIR - Server Framework
  * %%
- * Copyright (C) 2014 - 2018 University Health Network
+ * Copyright (C) 2014 - 2019 University Health Network
  * %%
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,6 +19,7 @@ package ca.uhn.fhir.rest.server.method;
  * limitations under the License.
  * #L%
  */
+
 
 import ca.uhn.fhir.context.ConfigurationException;
 import ca.uhn.fhir.context.FhirContext;
@@ -48,7 +49,7 @@ import java.util.Set;
 abstract class BaseOutcomeReturningMethodBinding extends BaseMethodBinding<MethodOutcome> {
 	static final org.slf4j.Logger ourLog = org.slf4j.LoggerFactory.getLogger(BaseOutcomeReturningMethodBinding.class);
 
-	private static EnumSet<RestOperationTypeEnum> ourOperationsWhichAllowPreferHeader = EnumSet.of(RestOperationTypeEnum.CREATE, RestOperationTypeEnum.UPDATE);
+	private static EnumSet<RestOperationTypeEnum> ourOperationsWhichAllowPreferHeader = EnumSet.of(RestOperationTypeEnum.CREATE, RestOperationTypeEnum.UPDATE, RestOperationTypeEnum.PATCH);
 
 	private boolean myReturnVoid;
 
@@ -91,11 +92,11 @@ abstract class BaseOutcomeReturningMethodBinding extends BaseMethodBinding<Metho
 				return Constants.STATUS_HTTP_200_OK;
 
 			case UPDATE:
+			case PATCH:
 				if (response == null || response.getCreated() == null || Boolean.FALSE.equals(response.getCreated())) {
 					return Constants.STATUS_HTTP_200_OK;
 				}
 				return Constants.STATUS_HTTP_201_CREATED;
-
 			case VALIDATE:
 			case DELETE:
 			default:
@@ -189,14 +190,25 @@ abstract class BaseOutcomeReturningMethodBinding extends BaseMethodBinding<Metho
 			allowPrefer = true;
 		}
 
-		if (resource != null && allowPrefer) {
+		if (allowPrefer) {
 			String prefer = theRequest.getHeader(Constants.HEADER_PREFER);
 			PreferReturnEnum preferReturn = RestfulServerUtils.parsePreferHeader(prefer);
-			if (preferReturn != null) {
-				if (preferReturn == PreferReturnEnum.REPRESENTATION) {
-					outcome = resource;
-				}
+			if (preferReturn == null) {
+				preferReturn = theServer.getDefaultPreferReturn();
 			}
+
+			switch (preferReturn) {
+				case REPRESENTATION:
+					outcome = resource;
+					break;
+				case MINIMAL:
+					outcome = null;
+					break;
+				case OPERATION_OUTCOME:
+					outcome = originalOutcome;
+					break;
+			}
+
 		}
 
 		ResponseDetails responseDetails = new ResponseDetails();

@@ -1,6 +1,9 @@
 package ca.uhn.fhir.util;
 
+import ca.uhn.fhir.context.FhirContext;
+import ca.uhn.fhir.context.RuntimeResourceDefinition;
 import ca.uhn.fhir.model.primitive.IdDt;
+import ca.uhn.fhir.parser.DataFormatException;
 import ca.uhn.fhir.rest.api.Constants;
 import ca.uhn.fhir.rest.server.exceptions.InvalidRequestException;
 import com.google.common.escape.Escaper;
@@ -14,13 +17,14 @@ import java.util.*;
 import java.util.Map.Entry;
 
 import static org.apache.commons.lang3.StringUtils.defaultIfBlank;
+import static org.apache.commons.lang3.StringUtils.defaultString;
 import static org.apache.commons.lang3.StringUtils.isBlank;
 
 /*
  * #%L
  * HAPI FHIR - Core Library
  * %%
- * Copyright (C) 2014 - 2018 University Health Network
+ * Copyright (C) 2014 - 2019 University Health Network
  * %%
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -70,7 +74,7 @@ public class UrlUtil {
 			return theExtensionUrl;
 		}
 		if (theExtensionUrl == null) {
-			return theExtensionUrl;
+			return null;
 		}
 
 		int parentLastSlashIdx = theParentExtensionUrl.lastIndexOf('/');
@@ -119,6 +123,18 @@ public class UrlUtil {
 		return value.startsWith("http://") || value.startsWith("https://");
 	}
 
+	public static boolean isNeedsSanitization(String theString) {
+		if (theString != null) {
+			for (int i = 0; i < theString.length(); i++) {
+				char nextChar = theString.charAt(i);
+				if (nextChar == '<' || nextChar == '"') {
+					return true;
+				}
+			}
+		}
+		return false;
+	}
+
 	public static boolean isValid(String theUrl) {
 		if (theUrl == null || theUrl.length() < 8) {
 			return false;
@@ -159,18 +175,23 @@ public class UrlUtil {
 		return true;
 	}
 
-	public static void main(String[] args) {
-		System.out.println(escapeUrlParam("http://snomed.info/sct?fhir_vs=isa/126851005"));
+	public static RuntimeResourceDefinition parseUrlResourceType(FhirContext theCtx, String theUrl) throws DataFormatException {
+		int paramIndex = theUrl.indexOf('?');
+		String resourceName = theUrl.substring(0, paramIndex);
+		if (resourceName.contains("/")) {
+			resourceName = resourceName.substring(resourceName.lastIndexOf('/') + 1);
+		}
+		return theCtx.getResourceDefinition(resourceName);
 	}
 
 	public static Map<String, String[]> parseQueryString(String theQueryString) {
-		HashMap<String, List<String>> map = new HashMap<String, List<String>>();
+		HashMap<String, List<String>> map = new HashMap<>();
 		parseQueryString(theQueryString, map);
 		return toQueryStringMap(map);
 	}
 
 	private static void parseQueryString(String theQueryString, HashMap<String, List<String>> map) {
-		String query = theQueryString;
+		String query = defaultString(theQueryString);
 		if (query.startsWith("?")) {
 			query = query.substring(1);
 		}
@@ -197,17 +218,13 @@ public class UrlUtil {
 			nextKey = unescape(nextKey);
 			nextValue = unescape(nextValue);
 
-			List<String> list = map.get(nextKey);
-			if (list == null) {
-				list = new ArrayList<>();
-				map.put(nextKey, list);
-			}
+			List<String> list = map.computeIfAbsent(nextKey, k -> new ArrayList<>());
 			list.add(nextValue);
 		}
 	}
 
 	public static Map<String, String[]> parseQueryStrings(String... theQueryString) {
-		HashMap<String, List<String>> map = new HashMap<String, List<String>>();
+		HashMap<String, List<String>> map = new HashMap<>();
 		for (String next : theQueryString) {
 			parseQueryString(next, map);
 		}
@@ -222,7 +239,6 @@ public class UrlUtil {
 	 * <li>[Resource Type]/[Resource ID]/_history/[Version ID]
 	 * </ul>
 	 */
-	//@formatter:on
 	public static UrlParts parseUrl(String theUrl) {
 		String url = theUrl;
 		UrlParts retVal = new UrlParts();
@@ -243,7 +259,7 @@ public class UrlUtil {
 			retVal.setVersionId(id.getVersionIdPart());
 			return retVal;
 		}
-		if (url.matches("\\/[a-zA-Z]+\\?.*")) {
+		if (url.matches("/[a-zA-Z]+\\?.*")) {
 			url = url.substring(1);
 		}
 		int nextStart = 0;
@@ -282,12 +298,47 @@ public class UrlUtil {
 
 	}
 
-	//@formatter:off
+	/**
+	 * This method specifically HTML-encodes the &quot; and
+	 * &lt; characters in order to prevent injection attacks
+	 */
+	public static String sanitizeUrlPart(String theString) {
+		if (theString == null) {
+			return null;
+		}
+
+		boolean needsSanitization = isNeedsSanitization(theString);
+
+		if (needsSanitization) {
+			// Ok, we're sanitizing
+			StringBuilder buffer = new StringBuilder(theString.length() + 10);
+			for (int j = 0; j < theString.length(); j++) {
+
+				char nextChar = theString.charAt(j);
+				switch (nextChar) {
+					case '"':
+						buffer.append("&quot;");
+						break;
+					case '<':
+						buffer.append("&lt;");
+						break;
+					default:
+						buffer.append(nextChar);
+						break;
+				}
+
+			} // for build escaped string
+
+			return buffer.toString();
+		}
+
+		return theString;
+	}
 
 	private static Map<String, String[]> toQueryStringMap(HashMap<String, List<String>> map) {
-		HashMap<String, String[]> retVal = new HashMap<String, String[]>();
+		HashMap<String, String[]> retVal = new HashMap<>();
 		for (Entry<String, List<String>> nextEntry : map.entrySet()) {
-			retVal.put(nextEntry.getKey(), nextEntry.getValue().toArray(new String[nextEntry.getValue().size()]));
+			retVal.put(nextEntry.getKey(), nextEntry.getValue().toArray(new String[0]));
 		}
 		return retVal;
 	}

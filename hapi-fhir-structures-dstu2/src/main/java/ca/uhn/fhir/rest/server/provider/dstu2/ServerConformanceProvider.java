@@ -30,6 +30,7 @@ import ca.uhn.fhir.rest.server.method.*;
 import ca.uhn.fhir.rest.server.method.OperationMethodBinding.ReturnType;
 import org.apache.commons.lang3.StringUtils;
 import org.hl7.fhir.instance.model.api.IBaseResource;
+import org.hl7.fhir.instance.model.api.IPrimitiveType;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
@@ -44,7 +45,7 @@ import static org.apache.commons.lang3.StringUtils.isNotBlank;
  * #%L
  * HAPI FHIR Structures - DSTU2 (FHIR v1.0.0)
  * %%
- * Copyright (C) 2014 - 2018 University Health Network
+ * Copyright (C) 2014 - 2019 University Health Network
  * %%
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -136,10 +137,10 @@ public class ServerConformanceProvider implements IServerConformanceProvider<Con
 	}
 
 	private DateTimeDt conformanceDate() {
-		String buildDate = getServerConfiguration().getConformanceDate();
-		if (buildDate != null) {
+		IPrimitiveType<Date> buildDate = getServerConfiguration().getConformanceDate();
+		if (buildDate != null && buildDate.getValue() != null) {
 			try {
-				return new DateTimeDt(buildDate);
+				return new DateTimeDt(buildDate.getValueAsString());
 			} catch (DataFormatException e) {
 				// fall through
 			}
@@ -287,8 +288,6 @@ public class ServerConformanceProvider implements IServerConformanceProvider<Con
 
 					if (nextMethodBinding instanceof SearchMethodBinding) {
 						handleSearchMethodBinding(rest, resource, resourceName, def, includes, (SearchMethodBinding) nextMethodBinding);
-					} else if (nextMethodBinding instanceof DynamicSearchMethodBinding) {
-						handleDynamicSearchMethodBinding(resource, def, includes, (DynamicSearchMethodBinding) nextMethodBinding);
 					} else if (nextMethodBinding instanceof OperationMethodBinding) {
 						OperationMethodBinding methodBinding = (OperationMethodBinding) nextMethodBinding;
 						String opName = myOperationBindingToName.get(methodBinding);
@@ -337,51 +336,6 @@ public class ServerConformanceProvider implements IServerConformanceProvider<Con
 
 		myConformance = retVal;
 		return retVal;
-	}
-
-	private void handleDynamicSearchMethodBinding(RestResource resource, RuntimeResourceDefinition def, TreeSet<String> includes, DynamicSearchMethodBinding searchMethodBinding) {
-		includes.addAll(searchMethodBinding.getIncludes());
-
-		List<RuntimeSearchParam> searchParameters = new ArrayList<RuntimeSearchParam>();
-		searchParameters.addAll(searchMethodBinding.getSearchParams());
-		sortRuntimeSearchParameters(searchParameters);
-
-		if (!searchParameters.isEmpty()) {
-
-			for (RuntimeSearchParam nextParameter : searchParameters) {
-
-				String nextParamName = nextParameter.getName();
-
-				// String chain = null;
-				String nextParamUnchainedName = nextParamName;
-				if (nextParamName.contains(".")) {
-					// chain = nextParamName.substring(nextParamName.indexOf('.') + 1);
-					nextParamUnchainedName = nextParamName.substring(0, nextParamName.indexOf('.'));
-				}
-
-				String nextParamDescription = nextParameter.getDescription();
-
-				/*
-				 * If the parameter has no description, default to the one from the resource
-				 */
-				if (StringUtils.isBlank(nextParamDescription)) {
-					RuntimeSearchParam paramDef = def.getSearchParam(nextParamUnchainedName);
-					if (paramDef != null) {
-						nextParamDescription = paramDef.getDescription();
-					}
-				}
-
-				RestResourceSearchParam param;
-				param = resource.addSearchParam();
-
-				param.setName(nextParamName);
-				// if (StringUtils.isNotBlank(chain)) {
-				// param.addChain(chain);
-				// }
-				param.setDocumentation(nextParamDescription);
-				// param.setType(nextParameter.getParamType());
-			}
-		}
 	}
 
 	private void handleSearchMethodBinding(Rest rest, RestResource resource, String resourceName, RuntimeResourceDefinition def, TreeSet<String> includes, SearchMethodBinding searchMethodBinding) {
@@ -433,16 +387,24 @@ public class ServerConformanceProvider implements IServerConformanceProvider<Con
 					}
 				}
 
-				RestResourceSearchParam param = resource.addSearchParam();
+				String finalNextParamUnchainedName = nextParamUnchainedName;
+				RestResourceSearchParam param =
+					resource
+						.getSearchParam()
+						.stream()
+						.filter(t -> t.getName().equals(finalNextParamUnchainedName))
+						.findFirst()
+						.orElseGet(() -> resource.addSearchParam());
+
 				param.setName(nextParamUnchainedName);
 				if (StringUtils.isNotBlank(chain)) {
 					param.addChain(chain);
-				}
-
-				if (nextParameter.getParamType() == RestSearchParameterTypeEnum.REFERENCE) {
-					for (String nextWhitelist : new TreeSet<String>(nextParameter.getQualifierWhitelist())) {
-						if (nextWhitelist.startsWith(".")) {
-							param.addChain(nextWhitelist.substring(1));
+				} else {
+					if (nextParameter.getParamType() == RestSearchParameterTypeEnum.REFERENCE) {
+						for (String nextWhitelist : new TreeSet<String>(nextParameter.getQualifierWhitelist())) {
+							if (nextWhitelist.startsWith(".")) {
+								param.addChain(nextWhitelist.substring(1));
+							}
 						}
 					}
 				}

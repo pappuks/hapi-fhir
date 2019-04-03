@@ -29,7 +29,7 @@ package org.hl7.fhir.r4.model;
   
 */
 
-// Generated on Sun, May 6, 2018 17:51-0400 for FHIR v3.4.0
+// Generated on Thu, Dec 27, 2018 10:06-0500 for FHIR v4.0.0
 
 import java.util.*;
 
@@ -52,7 +52,7 @@ public class Dosage extends BackboneType implements ICompositeType {
         /**
          * The kind of dose or rate specified, for example, ordered or calculated.
          */
-        @Child(name = "type", type = {CodeableConcept.class}, order=1, min=1, max=1, modifier=false, summary=true)
+        @Child(name = "type", type = {CodeableConcept.class}, order=1, min=0, max=1, modifier=false, summary=true)
         @Description(shortDefinition="The kind of dose or rate specified", formalDefinition="The kind of dose or rate specified, for example, ordered or calculated." )
         @ca.uhn.fhir.model.api.annotation.Binding(valueSet="http://hl7.org/fhir/ValueSet/dose-rate-type")
         protected CodeableConcept type;
@@ -60,14 +60,14 @@ public class Dosage extends BackboneType implements ICompositeType {
         /**
          * Amount of medication per dose.
          */
-        @Child(name = "dose", type = {Range.class, SimpleQuantity.class}, order=2, min=0, max=1, modifier=false, summary=true)
+        @Child(name = "dose", type = {Range.class, Quantity.class}, order=2, min=0, max=1, modifier=false, summary=true)
         @Description(shortDefinition="Amount of medication per dose", formalDefinition="Amount of medication per dose." )
         protected Type dose;
 
         /**
          * Amount of medication per unit of time.
          */
-        @Child(name = "rate", type = {Ratio.class, Range.class, SimpleQuantity.class}, order=3, min=0, max=1, modifier=false, summary=true)
+        @Child(name = "rate", type = {Ratio.class, Range.class, Quantity.class}, order=3, min=0, max=1, modifier=false, summary=true)
         @Description(shortDefinition="Amount of medication per unit of time", formalDefinition="Amount of medication per unit of time." )
         protected Type rate;
 
@@ -78,14 +78,6 @@ public class Dosage extends BackboneType implements ICompositeType {
      */
       public DosageDoseAndRateComponent() {
         super();
-      }
-
-    /**
-     * Constructor
-     */
-      public DosageDoseAndRateComponent(CodeableConcept type) {
-        super();
-        this.type = type;
       }
 
         /**
@@ -124,7 +116,7 @@ public class Dosage extends BackboneType implements ICompositeType {
          */
         public Range getDoseRange() throws FHIRException { 
           if (this.dose == null)
-            return null;
+            this.dose = new Range();
           if (!(this.dose instanceof Range))
             throw new FHIRException("Type mismatch: the type Range was expected, but "+this.dose.getClass().getName()+" was encountered");
           return (Range) this.dose;
@@ -137,16 +129,16 @@ public class Dosage extends BackboneType implements ICompositeType {
         /**
          * @return {@link #dose} (Amount of medication per dose.)
          */
-        public SimpleQuantity getDoseSimpleQuantity() throws FHIRException { 
+        public Quantity getDoseQuantity() throws FHIRException { 
           if (this.dose == null)
-            return null;
-          if (!(this.dose instanceof SimpleQuantity))
-            throw new FHIRException("Type mismatch: the type SimpleQuantity was expected, but "+this.dose.getClass().getName()+" was encountered");
-          return (SimpleQuantity) this.dose;
+            this.dose = new Quantity();
+          if (!(this.dose instanceof Quantity))
+            throw new FHIRException("Type mismatch: the type Quantity was expected, but "+this.dose.getClass().getName()+" was encountered");
+          return (Quantity) this.dose;
         }
 
-        public boolean hasDoseSimpleQuantity() { 
-          return this != null && this.dose instanceof SimpleQuantity;
+        public boolean hasDoseQuantity() { 
+          return this != null && this.dose instanceof Quantity;
         }
 
         public boolean hasDose() { 
@@ -157,7 +149,7 @@ public class Dosage extends BackboneType implements ICompositeType {
          * @param value {@link #dose} (Amount of medication per dose.)
          */
         public DosageDoseAndRateComponent setDose(Type value) { 
-          if (value != null && !(value instanceof Range || value instanceof SimpleQuantity))
+          if (value != null && !(value instanceof Range || value instanceof Quantity))
             throw new Error("Not the right type for Dosage.doseAndRate.dose[x]: "+value.fhirType());
           this.dose = value;
           return this;
@@ -175,7 +167,7 @@ public class Dosage extends BackboneType implements ICompositeType {
          */
         public Ratio getRateRatio() throws FHIRException { 
           if (this.rate == null)
-            return null;
+            this.rate = new Ratio();
           if (!(this.rate instanceof Ratio))
             throw new FHIRException("Type mismatch: the type Ratio was expected, but "+this.rate.getClass().getName()+" was encountered");
           return (Ratio) this.rate;
@@ -190,7 +182,7 @@ public class Dosage extends BackboneType implements ICompositeType {
          */
         public Range getRateRange() throws FHIRException { 
           if (this.rate == null)
-            return null;
+            this.rate = new Range();
           if (!(this.rate instanceof Range))
             throw new FHIRException("Type mismatch: the type Range was expected, but "+this.rate.getClass().getName()+" was encountered");
           return (Range) this.rate;
@@ -203,16 +195,16 @@ public class Dosage extends BackboneType implements ICompositeType {
         /**
          * @return {@link #rate} (Amount of medication per unit of time.)
          */
-        public SimpleQuantity getRateSimpleQuantity() throws FHIRException { 
+        public Quantity getRateQuantity() throws FHIRException { 
           if (this.rate == null)
-            return null;
-          if (!(this.rate instanceof SimpleQuantity))
-            throw new FHIRException("Type mismatch: the type SimpleQuantity was expected, but "+this.rate.getClass().getName()+" was encountered");
-          return (SimpleQuantity) this.rate;
+            this.rate = new Quantity();
+          if (!(this.rate instanceof Quantity))
+            throw new FHIRException("Type mismatch: the type Quantity was expected, but "+this.rate.getClass().getName()+" was encountered");
+          return (Quantity) this.rate;
         }
 
-        public boolean hasRateSimpleQuantity() { 
-          return this != null && this.rate instanceof SimpleQuantity;
+        public boolean hasRateQuantity() { 
+          return this != null && this.rate instanceof Quantity;
         }
 
         public boolean hasRate() { 
@@ -223,7 +215,7 @@ public class Dosage extends BackboneType implements ICompositeType {
          * @param value {@link #rate} (Amount of medication per unit of time.)
          */
         public DosageDoseAndRateComponent setRate(Type value) { 
-          if (value != null && !(value instanceof Ratio || value instanceof Range || value instanceof SimpleQuantity))
+          if (value != null && !(value instanceof Ratio || value instanceof Range || value instanceof Quantity))
             throw new Error("Not the right type for Dosage.doseAndRate.rate[x]: "+value.fhirType());
           this.rate = value;
           return this;
@@ -243,12 +235,12 @@ public class Dosage extends BackboneType implements ICompositeType {
           case 1843195715: /*dose[x]*/  return new Property("dose[x]", "Range|SimpleQuantity", "Amount of medication per dose.", 0, 1, dose);
           case 3089437: /*dose*/  return new Property("dose[x]", "Range|SimpleQuantity", "Amount of medication per dose.", 0, 1, dose);
           case 1775578912: /*doseRange*/  return new Property("dose[x]", "Range|SimpleQuantity", "Amount of medication per dose.", 0, 1, dose);
-          case 1230053850: /*doseSimpleQuantity*/  return new Property("dose[x]", "Range|SimpleQuantity", "Amount of medication per dose.", 0, 1, dose);
+          case -2083618872: /*doseQuantity*/  return new Property("dose[x]", "Range|SimpleQuantity", "Amount of medication per dose.", 0, 1, dose);
           case 983460768: /*rate[x]*/  return new Property("rate[x]", "Ratio|Range|SimpleQuantity", "Amount of medication per unit of time.", 0, 1, rate);
           case 3493088: /*rate*/  return new Property("rate[x]", "Ratio|Range|SimpleQuantity", "Amount of medication per unit of time.", 0, 1, rate);
           case 204021515: /*rateRatio*/  return new Property("rate[x]", "Ratio|Range|SimpleQuantity", "Amount of medication per unit of time.", 0, 1, rate);
           case 204015677: /*rateRange*/  return new Property("rate[x]", "Ratio|Range|SimpleQuantity", "Amount of medication per unit of time.", 0, 1, rate);
-          case -2121057955: /*rateSimpleQuantity*/  return new Property("rate[x]", "Ratio|Range|SimpleQuantity", "Amount of medication per unit of time.", 0, 1, rate);
+          case -1085459061: /*rateQuantity*/  return new Property("rate[x]", "Ratio|Range|SimpleQuantity", "Amount of medication per unit of time.", 0, 1, rate);
           default: return super.getNamedProperty(_hash, _name, _checkValid);
           }
 
@@ -329,8 +321,8 @@ public class Dosage extends BackboneType implements ICompositeType {
           this.dose = new Range();
           return this.dose;
         }
-        else if (name.equals("doseSimpleQuantity")) {
-          this.dose = new SimpleQuantity();
+        else if (name.equals("doseQuantity")) {
+          this.dose = new Quantity();
           return this.dose;
         }
         else if (name.equals("rateRatio")) {
@@ -341,8 +333,8 @@ public class Dosage extends BackboneType implements ICompositeType {
           this.rate = new Range();
           return this.rate;
         }
-        else if (name.equals("rateSimpleQuantity")) {
-          this.rate = new SimpleQuantity();
+        else if (name.equals("rateQuantity")) {
+          this.rate = new Quantity();
           return this.rate;
         }
         else
@@ -475,18 +467,18 @@ public class Dosage extends BackboneType implements ICompositeType {
     /**
      * Upper limit on medication per administration.
      */
-    @Child(name = "maxDosePerAdministration", type = {SimpleQuantity.class}, order=11, min=0, max=1, modifier=false, summary=true)
+    @Child(name = "maxDosePerAdministration", type = {Quantity.class}, order=11, min=0, max=1, modifier=false, summary=true)
     @Description(shortDefinition="Upper limit on medication per administration", formalDefinition="Upper limit on medication per administration." )
-    protected SimpleQuantity maxDosePerAdministration;
+    protected Quantity maxDosePerAdministration;
 
     /**
      * Upper limit on medication per lifetime of the patient.
      */
-    @Child(name = "maxDosePerLifetime", type = {SimpleQuantity.class}, order=12, min=0, max=1, modifier=false, summary=true)
+    @Child(name = "maxDosePerLifetime", type = {Quantity.class}, order=12, min=0, max=1, modifier=false, summary=true)
     @Description(shortDefinition="Upper limit on medication per lifetime of the patient", formalDefinition="Upper limit on medication per lifetime of the patient." )
-    protected SimpleQuantity maxDosePerLifetime;
+    protected Quantity maxDosePerLifetime;
 
-    private static final long serialVersionUID = -1765173693L;
+    private static final long serialVersionUID = -1095063329L;
 
   /**
    * Constructor
@@ -727,7 +719,7 @@ public class Dosage extends BackboneType implements ICompositeType {
      */
     public BooleanType getAsNeededBooleanType() throws FHIRException { 
       if (this.asNeeded == null)
-        return null;
+        this.asNeeded = new BooleanType();
       if (!(this.asNeeded instanceof BooleanType))
         throw new FHIRException("Type mismatch: the type BooleanType was expected, but "+this.asNeeded.getClass().getName()+" was encountered");
       return (BooleanType) this.asNeeded;
@@ -742,7 +734,7 @@ public class Dosage extends BackboneType implements ICompositeType {
      */
     public CodeableConcept getAsNeededCodeableConcept() throws FHIRException { 
       if (this.asNeeded == null)
-        return null;
+        this.asNeeded = new CodeableConcept();
       if (!(this.asNeeded instanceof CodeableConcept))
         throw new FHIRException("Type mismatch: the type CodeableConcept was expected, but "+this.asNeeded.getClass().getName()+" was encountered");
       return (CodeableConcept) this.asNeeded;
@@ -918,12 +910,12 @@ public class Dosage extends BackboneType implements ICompositeType {
     /**
      * @return {@link #maxDosePerAdministration} (Upper limit on medication per administration.)
      */
-    public SimpleQuantity getMaxDosePerAdministration() { 
+    public Quantity getMaxDosePerAdministration() { 
       if (this.maxDosePerAdministration == null)
         if (Configuration.errorOnAutoCreate())
           throw new Error("Attempt to auto-create Dosage.maxDosePerAdministration");
         else if (Configuration.doAutoCreate())
-          this.maxDosePerAdministration = new SimpleQuantity(); // cc
+          this.maxDosePerAdministration = new Quantity(); // cc
       return this.maxDosePerAdministration;
     }
 
@@ -934,7 +926,7 @@ public class Dosage extends BackboneType implements ICompositeType {
     /**
      * @param value {@link #maxDosePerAdministration} (Upper limit on medication per administration.)
      */
-    public Dosage setMaxDosePerAdministration(SimpleQuantity value) { 
+    public Dosage setMaxDosePerAdministration(Quantity value) { 
       this.maxDosePerAdministration = value;
       return this;
     }
@@ -942,12 +934,12 @@ public class Dosage extends BackboneType implements ICompositeType {
     /**
      * @return {@link #maxDosePerLifetime} (Upper limit on medication per lifetime of the patient.)
      */
-    public SimpleQuantity getMaxDosePerLifetime() { 
+    public Quantity getMaxDosePerLifetime() { 
       if (this.maxDosePerLifetime == null)
         if (Configuration.errorOnAutoCreate())
           throw new Error("Attempt to auto-create Dosage.maxDosePerLifetime");
         else if (Configuration.doAutoCreate())
-          this.maxDosePerLifetime = new SimpleQuantity(); // cc
+          this.maxDosePerLifetime = new Quantity(); // cc
       return this.maxDosePerLifetime;
     }
 
@@ -958,7 +950,7 @@ public class Dosage extends BackboneType implements ICompositeType {
     /**
      * @param value {@link #maxDosePerLifetime} (Upper limit on medication per lifetime of the patient.)
      */
-    public Dosage setMaxDosePerLifetime(SimpleQuantity value) { 
+    public Dosage setMaxDosePerLifetime(Quantity value) { 
       this.maxDosePerLifetime = value;
       return this;
     }
@@ -1018,8 +1010,8 @@ public class Dosage extends BackboneType implements ICompositeType {
         case -1077554975: /*method*/ return this.method == null ? new Base[0] : new Base[] {this.method}; // CodeableConcept
         case -611024774: /*doseAndRate*/ return this.doseAndRate == null ? new Base[0] : this.doseAndRate.toArray(new Base[this.doseAndRate.size()]); // DosageDoseAndRateComponent
         case 1506263709: /*maxDosePerPeriod*/ return this.maxDosePerPeriod == null ? new Base[0] : new Base[] {this.maxDosePerPeriod}; // Ratio
-        case 2004889914: /*maxDosePerAdministration*/ return this.maxDosePerAdministration == null ? new Base[0] : new Base[] {this.maxDosePerAdministration}; // SimpleQuantity
-        case 642099621: /*maxDosePerLifetime*/ return this.maxDosePerLifetime == null ? new Base[0] : new Base[] {this.maxDosePerLifetime}; // SimpleQuantity
+        case 2004889914: /*maxDosePerAdministration*/ return this.maxDosePerAdministration == null ? new Base[0] : new Base[] {this.maxDosePerAdministration}; // Quantity
+        case 642099621: /*maxDosePerLifetime*/ return this.maxDosePerLifetime == null ? new Base[0] : new Base[] {this.maxDosePerLifetime}; // Quantity
         default: return super.getProperty(hash, name, checkValid);
         }
 
@@ -1062,10 +1054,10 @@ public class Dosage extends BackboneType implements ICompositeType {
           this.maxDosePerPeriod = castToRatio(value); // Ratio
           return value;
         case 2004889914: // maxDosePerAdministration
-          this.maxDosePerAdministration = castToSimpleQuantity(value); // SimpleQuantity
+          this.maxDosePerAdministration = castToQuantity(value); // Quantity
           return value;
         case 642099621: // maxDosePerLifetime
-          this.maxDosePerLifetime = castToSimpleQuantity(value); // SimpleQuantity
+          this.maxDosePerLifetime = castToQuantity(value); // Quantity
           return value;
         default: return super.setProperty(hash, name, value);
         }
@@ -1097,9 +1089,9 @@ public class Dosage extends BackboneType implements ICompositeType {
         } else if (name.equals("maxDosePerPeriod")) {
           this.maxDosePerPeriod = castToRatio(value); // Ratio
         } else if (name.equals("maxDosePerAdministration")) {
-          this.maxDosePerAdministration = castToSimpleQuantity(value); // SimpleQuantity
+          this.maxDosePerAdministration = castToQuantity(value); // Quantity
         } else if (name.equals("maxDosePerLifetime")) {
-          this.maxDosePerLifetime = castToSimpleQuantity(value); // SimpleQuantity
+          this.maxDosePerLifetime = castToQuantity(value); // Quantity
         } else
           return super.setProperty(name, value);
         return value;
@@ -1194,11 +1186,11 @@ public class Dosage extends BackboneType implements ICompositeType {
           return this.maxDosePerPeriod;
         }
         else if (name.equals("maxDosePerAdministration")) {
-          this.maxDosePerAdministration = new SimpleQuantity();
+          this.maxDosePerAdministration = new Quantity();
           return this.maxDosePerAdministration;
         }
         else if (name.equals("maxDosePerLifetime")) {
-          this.maxDosePerLifetime = new SimpleQuantity();
+          this.maxDosePerLifetime = new Quantity();
           return this.maxDosePerLifetime;
         }
         else

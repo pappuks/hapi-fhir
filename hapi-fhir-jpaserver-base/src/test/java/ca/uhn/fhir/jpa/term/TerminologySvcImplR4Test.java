@@ -1,5 +1,6 @@
 package ca.uhn.fhir.jpa.term;
 
+import ca.uhn.fhir.jpa.dao.DaoConfig;
 import ca.uhn.fhir.jpa.dao.r4.BaseJpaR4Test;
 import ca.uhn.fhir.jpa.entity.TermConceptMap;
 import ca.uhn.fhir.jpa.entity.TermConceptMapGroup;
@@ -8,12 +9,11 @@ import ca.uhn.fhir.jpa.entity.TermConceptMapGroupElementTarget;
 import ca.uhn.fhir.rest.server.exceptions.UnprocessableEntityException;
 import ca.uhn.fhir.util.TestUtil;
 import org.hl7.fhir.instance.model.api.IIdType;
+import org.hl7.fhir.r4.model.CanonicalType;
 import org.hl7.fhir.r4.model.ConceptMap;
 import org.hl7.fhir.r4.model.Enumerations.ConceptMapEquivalence;
 import org.hl7.fhir.r4.model.UriType;
-import org.junit.AfterClass;
-import org.junit.Rule;
-import org.junit.Test;
+import org.junit.*;
 import org.junit.rules.ExpectedException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -32,11 +32,26 @@ public class TerminologySvcImplR4Test extends BaseJpaR4Test {
 	public final ExpectedException expectedException = ExpectedException.none();
 	private IIdType myConceptMapId;
 
-	private void persistConceptMap() {
+	@Before
+	public void before() {
+		myDaoConfig.setAllowExternalReferences(true);
+	}
+
+	@After
+	public void after() {
+		myDaoConfig.setAllowExternalReferences(new DaoConfig().isAllowExternalReferences());
+	}
+	
+	private void createAndPersistConceptMap() {
+		ConceptMap conceptMap = createConceptMap();
+		persistConceptMap(conceptMap);
+	}
+
+	private void persistConceptMap(ConceptMap theConceptMap) {
 		new TransactionTemplate(myTxManager).execute(new TransactionCallbackWithoutResult() {
 			@Override
 			protected void doInTransactionWithoutResult(TransactionStatus theStatus) {
-				myConceptMapId = myConceptMapDao.create(createConceptMap(), mySrd).getId().toUnqualifiedVersionless();
+				myConceptMapId = myConceptMapDao.create(theConceptMap, mySrd).getId().toUnqualifiedVersionless();
 			}
 		});
 	}
@@ -60,6 +75,17 @@ public class TerminologySvcImplR4Test extends BaseJpaR4Test {
 		} catch (UnprocessableEntityException e) {
 			assertEquals("ConceptMap[url='http://example.com/my_concept_map'] contains at least one group without a value in ConceptMap.group.source", e.getMessage());
 		}
+
+	}
+
+
+	@Test
+	public void testCreateConceptMapWithVirtualSourceSystem() {
+		ConceptMap conceptMap = createConceptMap();
+		conceptMap.getGroup().forEach(t->t.setSource(null));
+		conceptMap.setSource(new CanonicalType("http://hl7.org/fhir/uv/livd/StructureDefinition/loinc-livd"));
+
+		persistConceptMap(conceptMap);
 
 	}
 
@@ -113,17 +139,17 @@ public class TerminologySvcImplR4Test extends BaseJpaR4Test {
 
 	@Test
 	public void testDuplicateConceptMapUrls() {
-		persistConceptMap();
+		createAndPersistConceptMap();
 
 		expectedException.expect(UnprocessableEntityException.class);
 		expectedException.expectMessage("Can not create multiple ConceptMap resources with ConceptMap.url \"http://example.com/my_concept_map\", already have one with resource ID: ConceptMap/" + myConceptMapId.getIdPart());
 
-		persistConceptMap();
+		createAndPersistConceptMap();
 	}
 
 	@Test
 	public void testStoreTermConceptMapAndChildren() {
-		persistConceptMap();
+		createAndPersistConceptMap();
 		ConceptMap conceptMap = myConceptMapDao.read(myConceptMapId);
 
 		ourLog.info("ConceptMap:\n" + myFhirCtx.newJsonParser().setPrettyPrint(true).encodeResourceToString(conceptMap));
@@ -190,12 +216,22 @@ public class TerminologySvcImplR4Test extends BaseJpaR4Test {
 				assertEquals("Version 1", element.getSystemVersion());
 				assertEquals(VS_URL, element.getValueSet());
 				assertEquals(CM_URL, element.getConceptMapUrl());
-				assertEquals(1, element.getConceptMapGroupElementTargets().size());
+
+				assertEquals(2, element.getConceptMapGroupElementTargets().size());
 
 				target = element.getConceptMapGroupElementTargets().get(0);
-
 				ourLog.info("ConceptMap.group(0).element(1).target(0):\n" + target.toString());
+				assertEquals("45678", target.getCode());
+				assertEquals("Target Code 45678", target.getDisplay());
+				assertEquals(CS_URL_2, target.getSystem());
+				assertEquals("Version 2", target.getSystemVersion());
+				assertEquals(ConceptMapEquivalence.WIDER, target.getEquivalence());
+				assertEquals(VS_URL_2, target.getValueSet());
+				assertEquals(CM_URL, target.getConceptMapUrl());
 
+				// We had deliberately added a duplicate, and here it is...
+				target = element.getConceptMapGroupElementTargets().get(1);
+				ourLog.info("ConceptMap.group(0).element(1).target(1):\n" + target.toString());
 				assertEquals("45678", target.getCode());
 				assertEquals("Target Code 45678", target.getDisplay());
 				assertEquals(CS_URL_2, target.getSystem());
@@ -291,7 +327,7 @@ public class TerminologySvcImplR4Test extends BaseJpaR4Test {
 
 	@Test
 	public void testTranslateByCodeSystemsAndSourceCodeOneToMany() {
-		persistConceptMap();
+		createAndPersistConceptMap();
 		ConceptMap conceptMap = myConceptMapDao.read(myConceptMapId);
 
 		ourLog.info("ConceptMap:\n" + myFhirCtx.newJsonParser().setPrettyPrint(true).encodeResourceToString(conceptMap));
@@ -345,7 +381,7 @@ public class TerminologySvcImplR4Test extends BaseJpaR4Test {
 
 	@Test
 	public void testTranslateByCodeSystemsAndSourceCodeOneToOne() {
-		persistConceptMap();
+		createAndPersistConceptMap();
 		ConceptMap conceptMap = myConceptMapDao.read(myConceptMapId);
 
 		ourLog.info("ConceptMap:\n" + myFhirCtx.newJsonParser().setPrettyPrint(true).encodeResourceToString(conceptMap));
@@ -419,7 +455,7 @@ public class TerminologySvcImplR4Test extends BaseJpaR4Test {
 
 	@Test
 	public void testTranslateByCodeSystemsAndSourceCodeUnmapped() {
-		persistConceptMap();
+		createAndPersistConceptMap();
 		ConceptMap conceptMap = myConceptMapDao.read(myConceptMapId);
 
 		ourLog.info("ConceptMap:\n" + myFhirCtx.newJsonParser().setPrettyPrint(true).encodeResourceToString(conceptMap));
@@ -472,7 +508,7 @@ public class TerminologySvcImplR4Test extends BaseJpaR4Test {
 
 	@Test
 	public void testTranslateUsingPredicatesWithCodeOnly() {
-		persistConceptMap();
+		createAndPersistConceptMap();
 		ConceptMap conceptMap = myConceptMapDao.read(myConceptMapId);
 
 		ourLog.info("ConceptMap:\n" + myFhirCtx.newJsonParser().setPrettyPrint(true).encodeResourceToString(conceptMap));
@@ -540,7 +576,7 @@ public class TerminologySvcImplR4Test extends BaseJpaR4Test {
 
 	@Test
 	public void testTranslateUsingPredicatesWithSourceAndTargetSystem2() {
-		persistConceptMap();
+		createAndPersistConceptMap();
 		ConceptMap conceptMap = myConceptMapDao.read(myConceptMapId);
 
 		ourLog.info("ConceptMap:\n" + myFhirCtx.newJsonParser().setPrettyPrint(true).encodeResourceToString(conceptMap));
@@ -588,7 +624,7 @@ public class TerminologySvcImplR4Test extends BaseJpaR4Test {
 
 	@Test
 	public void testTranslateUsingPredicatesWithSourceAndTargetSystem3() {
-		persistConceptMap();
+		createAndPersistConceptMap();
 		ConceptMap conceptMap = myConceptMapDao.read(myConceptMapId);
 
 		ourLog.info("ConceptMap:\n" + myFhirCtx.newJsonParser().setPrettyPrint(true).encodeResourceToString(conceptMap));
@@ -648,7 +684,7 @@ public class TerminologySvcImplR4Test extends BaseJpaR4Test {
 
 	@Test
 	public void testTranslateUsingPredicatesWithSourceSystem() {
-		persistConceptMap();
+		createAndPersistConceptMap();
 		ConceptMap conceptMap = myConceptMapDao.read(myConceptMapId);
 
 		ourLog.info("ConceptMap:\n" + myFhirCtx.newJsonParser().setPrettyPrint(true).encodeResourceToString(conceptMap));
@@ -718,7 +754,7 @@ public class TerminologySvcImplR4Test extends BaseJpaR4Test {
 
 	@Test
 	public void testTranslateUsingPredicatesWithSourceSystemAndVersion1() {
-		persistConceptMap();
+		createAndPersistConceptMap();
 		ConceptMap conceptMap = myConceptMapDao.read(myConceptMapId);
 
 		ourLog.info("ConceptMap:\n" + myFhirCtx.newJsonParser().setPrettyPrint(true).encodeResourceToString(conceptMap));
@@ -766,7 +802,7 @@ public class TerminologySvcImplR4Test extends BaseJpaR4Test {
 
 	@Test
 	public void testTranslateUsingPredicatesWithSourceSystemAndVersion3() {
-		persistConceptMap();
+		createAndPersistConceptMap();
 		ConceptMap conceptMap = myConceptMapDao.read(myConceptMapId);
 
 		ourLog.info("ConceptMap:\n" + myFhirCtx.newJsonParser().setPrettyPrint(true).encodeResourceToString(conceptMap));
@@ -826,7 +862,7 @@ public class TerminologySvcImplR4Test extends BaseJpaR4Test {
 
 	@Test
 	public void testTranslateUsingPredicatesWithSourceValueSet() {
-		persistConceptMap();
+		createAndPersistConceptMap();
 		ConceptMap conceptMap = myConceptMapDao.read(myConceptMapId);
 
 		ourLog.info("ConceptMap:\n" + myFhirCtx.newJsonParser().setPrettyPrint(true).encodeResourceToString(conceptMap));
@@ -896,7 +932,7 @@ public class TerminologySvcImplR4Test extends BaseJpaR4Test {
 
 	@Test
 	public void testTranslateUsingPredicatesWithTargetValueSet() {
-		persistConceptMap();
+		createAndPersistConceptMap();
 		ConceptMap conceptMap = myConceptMapDao.read(myConceptMapId);
 
 		ourLog.info("ConceptMap:\n" + myFhirCtx.newJsonParser().setPrettyPrint(true).encodeResourceToString(conceptMap));
@@ -966,7 +1002,7 @@ public class TerminologySvcImplR4Test extends BaseJpaR4Test {
 
 	@Test
 	public void testTranslateWithReverse() {
-		persistConceptMap();
+		createAndPersistConceptMap();
 		ConceptMap conceptMap = myConceptMapDao.read(myConceptMapId);
 
 		ourLog.info("ConceptMap:\n" + myFhirCtx.newJsonParser().setPrettyPrint(true).encodeResourceToString(conceptMap));
@@ -1015,7 +1051,7 @@ public class TerminologySvcImplR4Test extends BaseJpaR4Test {
 
 	@Test
 	public void testTranslateWithReverseByCodeSystemsAndSourceCodeUnmapped() {
-		persistConceptMap();
+		createAndPersistConceptMap();
 		ConceptMap conceptMap = myConceptMapDao.read(myConceptMapId);
 
 		ourLog.info("ConceptMap:\n" + myFhirCtx.newJsonParser().setPrettyPrint(true).encodeResourceToString(conceptMap));
@@ -1038,7 +1074,7 @@ public class TerminologySvcImplR4Test extends BaseJpaR4Test {
 
 	@Test
 	public void testTranslateWithReverseUsingPredicatesWithCodeOnly() {
-		persistConceptMap();
+		createAndPersistConceptMap();
 		ConceptMap conceptMap = myConceptMapDao.read(myConceptMapId);
 
 		ourLog.info("ConceptMap:\n" + myFhirCtx.newJsonParser().setPrettyPrint(true).encodeResourceToString(conceptMap));
@@ -1094,7 +1130,7 @@ public class TerminologySvcImplR4Test extends BaseJpaR4Test {
 
 	@Test
 	public void testTranslateWithReverseUsingPredicatesWithSourceAndTargetSystem1() {
-		persistConceptMap();
+		createAndPersistConceptMap();
 		ConceptMap conceptMap = myConceptMapDao.read(myConceptMapId);
 
 		ourLog.info("ConceptMap:\n" + myFhirCtx.newJsonParser().setPrettyPrint(true).encodeResourceToString(conceptMap));
@@ -1143,7 +1179,7 @@ public class TerminologySvcImplR4Test extends BaseJpaR4Test {
 
 	@Test
 	public void testTranslateWithReverseUsingPredicatesWithSourceAndTargetSystem4() {
-		persistConceptMap();
+		createAndPersistConceptMap();
 		ConceptMap conceptMap = myConceptMapDao.read(myConceptMapId);
 
 		ourLog.info("ConceptMap:\n" + myFhirCtx.newJsonParser().setPrettyPrint(true).encodeResourceToString(conceptMap));
@@ -1192,7 +1228,7 @@ public class TerminologySvcImplR4Test extends BaseJpaR4Test {
 
 	@Test
 	public void testTranslateWithReverseUsingPredicatesWithSourceSystem() {
-		persistConceptMap();
+		createAndPersistConceptMap();
 		ConceptMap conceptMap = myConceptMapDao.read(myConceptMapId);
 
 		ourLog.info("ConceptMap:\n" + myFhirCtx.newJsonParser().setPrettyPrint(true).encodeResourceToString(conceptMap));
@@ -1250,7 +1286,7 @@ public class TerminologySvcImplR4Test extends BaseJpaR4Test {
 
 	@Test
 	public void testTranslateWithReverseUsingPredicatesWithSourceSystemAndVersion() {
-		persistConceptMap();
+		createAndPersistConceptMap();
 		ConceptMap conceptMap = myConceptMapDao.read(myConceptMapId);
 
 		ourLog.info("ConceptMap:\n" + myFhirCtx.newJsonParser().setPrettyPrint(true).encodeResourceToString(conceptMap));
@@ -1310,7 +1346,7 @@ public class TerminologySvcImplR4Test extends BaseJpaR4Test {
 
 	@Test
 	public void testTranslateWithReverseUsingPredicatesWithSourceValueSet() {
-		persistConceptMap();
+		createAndPersistConceptMap();
 		ConceptMap conceptMap = myConceptMapDao.read(myConceptMapId);
 
 		ourLog.info("ConceptMap:\n" + myFhirCtx.newJsonParser().setPrettyPrint(true).encodeResourceToString(conceptMap));
@@ -1368,7 +1404,7 @@ public class TerminologySvcImplR4Test extends BaseJpaR4Test {
 
 	@Test
 	public void testTranslateWithReverseUsingPredicatesWithTargetValueSet() {
-		persistConceptMap();
+		createAndPersistConceptMap();
 		ConceptMap conceptMap = myConceptMapDao.read(myConceptMapId);
 
 		ourLog.info("ConceptMap:\n" + myFhirCtx.newJsonParser().setPrettyPrint(true).encodeResourceToString(conceptMap));

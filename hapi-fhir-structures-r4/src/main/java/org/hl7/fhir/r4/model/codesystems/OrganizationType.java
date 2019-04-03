@@ -29,7 +29,7 @@ package org.hl7.fhir.r4.model.codesystems;
   
 */
 
-// Generated on Sun, May 6, 2018 17:51-0400 for FHIR v3.4.0
+// Generated on Thu, Dec 27, 2018 10:06-0500 for FHIR v4.0.0
 
 
 import org.hl7.fhir.exceptions.FHIRException;
@@ -57,7 +57,7 @@ public enum OrganizationType {
          */
         INS, 
         /**
-         * A company, charity, or governmental organization which processes claims and/or issues payments to providers on behalf of patients or groups of patients.
+         * A company, charity, or governmental organization, which processes claims and/or issues payments to providers on behalf of patients or groups of patients.
          */
         PAY, 
         /**
@@ -135,7 +135,7 @@ public enum OrganizationType {
           }
         }
         public String getSystem() {
-          return "http://hl7.org/fhir/organization-type";
+          return "http://terminology.hl7.org/CodeSystem/organization-type";
         }
         public String getDefinition() {
           switch (this) {
@@ -144,7 +144,7 @@ public enum OrganizationType {
             case TEAM: return "An organizational team is usually a grouping of practitioners that perform a specific function within an organization (which could be a top level organization, or a department).";
             case GOVT: return "A political body, often used when including organization records for government bodies such as a Federal Government, State or Local Government.";
             case INS: return "A company that provides insurance to its subscribers that may include healthcare related policies.";
-            case PAY: return "A company, charity, or governmental organization which processes claims and/or issues payments to providers on behalf of patients or groups of patients.";
+            case PAY: return "A company, charity, or governmental organization, which processes claims and/or issues payments to providers on behalf of patients or groups of patients.";
             case EDU: return "An educational institution that provides education or research facilities.";
             case RELI: return "An organization that is identified as a part of a religious institution.";
             case CRS: return "An organization that is identified as a Pharmaceutical/Clinical Research Sponsor.";

@@ -4,7 +4,7 @@ package ca.uhn.fhir.jpa.term.loinc;
  * #%L
  * HAPI FHIR JPA Server
  * %%
- * Copyright (C) 2014 - 2018 University Health Network
+ * Copyright (C) 2014 - 2019 University Health Network
  * %%
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -63,25 +63,12 @@ public class LoincAnswerListHandler extends BaseLoincHandler {
 		String extCodeSystem = trim(theRecord.get("ExtCodeSystem"));
 		String extCodeSystemVersion = trim(theRecord.get("ExtCodeSystemVersion"));
 
-		if (isBlank(answerString)) {
-			return;
-		}
 
 		// Answer list code
 		if (!myCode2Concept.containsKey(answerListId)) {
 			TermConcept concept = new TermConcept(myCodeSystemVersion, answerListId);
 			concept.setDisplay(answerListName);
 			myCode2Concept.put(answerListId, concept);
-		}
-
-		// Answer code
-		if (!myCode2Concept.containsKey(answerString)) {
-			TermConcept concept = new TermConcept(myCodeSystemVersion, answerString);
-			concept.setDisplay(displayText);
-			if (isNotBlank(sequenceNumber) && sequenceNumber.matches("^[0-9]$")) {
-				concept.setSequence(Integer.parseInt(sequenceNumber));
-			}
-			myCode2Concept.put(answerString, concept);
 		}
 
 		// Answer list ValueSet
@@ -92,13 +79,28 @@ public class LoincAnswerListHandler extends BaseLoincHandler {
 				.setValue("urn:oid:" + answerListOid);
 		}
 
-		vs
-			.getCompose()
-			.getIncludeFirstRep()
-			.setSystem(IHapiTerminologyLoaderSvc.LOINC_URI)
-			.addConcept()
-			.setCode(answerString)
-			.setDisplay(displayText);
+		if (isNotBlank(answerString)) {
+
+			// Answer code
+			if (!myCode2Concept.containsKey(answerString)) {
+				TermConcept concept = new TermConcept(myCodeSystemVersion, answerString);
+				concept.setDisplay(displayText);
+				if (isNotBlank(sequenceNumber) && sequenceNumber.matches("^[0-9]$")) {
+					concept.setSequence(Integer.parseInt(sequenceNumber));
+				}
+				myCode2Concept.put(answerString, concept);
+			}
+
+			vs
+				.getCompose()
+				.getIncludeFirstRep()
+				.setSystem(IHapiTerminologyLoaderSvc.LOINC_URI)
+				.addConcept()
+				.setCode(answerString)
+				.setDisplay(displayText);
+
+		}
+
 	}
 
 }

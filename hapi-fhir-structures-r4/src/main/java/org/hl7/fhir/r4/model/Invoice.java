@@ -29,7 +29,7 @@ package org.hl7.fhir.r4.model;
   
 */
 
-// Generated on Sun, May 6, 2018 17:51-0400 for FHIR v3.4.0
+// Generated on Thu, Dec 27, 2018 10:06-0500 for FHIR v4.0.0
 
 import java.util.*;
 
@@ -46,28 +46,28 @@ import org.hl7.fhir.exceptions.FHIRException;
 /**
  * Invoice containing collected ChargeItems from an Account with calculated individual and total price for Billing purpose.
  */
-@ResourceDef(name="Invoice", profile="http://hl7.org/fhir/Profile/Invoice")
+@ResourceDef(name="Invoice", profile="http://hl7.org/fhir/StructureDefinition/Invoice")
 public class Invoice extends DomainResource {
 
     public enum InvoiceStatus {
         /**
-         * the invoice has been prepared but not yet finalized
+         * the invoice has been prepared but not yet finalized.
          */
         DRAFT, 
         /**
-         * the invoice has been finalized and sent to the recipient
+         * the invoice has been finalized and sent to the recipient.
          */
         ISSUED, 
         /**
-         * the invoice has been balaced / completely paid
+         * the invoice has been balaced / completely paid.
          */
         BALANCED, 
         /**
-         * the invoice was cancelled
+         * the invoice was cancelled.
          */
         CANCELLED, 
         /**
-         * the invoice was determined as entered in error before it was issued
+         * the invoice was determined as entered in error before it was issued.
          */
         ENTEREDINERROR, 
         /**
@@ -114,11 +114,11 @@ public class Invoice extends DomainResource {
         }
         public String getDefinition() {
           switch (this) {
-            case DRAFT: return "the invoice has been prepared but not yet finalized";
-            case ISSUED: return "the invoice has been finalized and sent to the recipient";
-            case BALANCED: return "the invoice has been balaced / completely paid";
-            case CANCELLED: return "the invoice was cancelled";
-            case ENTEREDINERROR: return "the invoice was determined as entered in error before it was issued";
+            case DRAFT: return "the invoice has been prepared but not yet finalized.";
+            case ISSUED: return "the invoice has been finalized and sent to the recipient.";
+            case BALANCED: return "the invoice has been balaced / completely paid.";
+            case CANCELLED: return "the invoice was cancelled.";
+            case ENTEREDINERROR: return "the invoice was determined as entered in error before it was issued.";
             default: return "?";
           }
         }
@@ -191,27 +191,27 @@ public class Invoice extends DomainResource {
 
     public enum InvoicePriceComponentType {
         /**
-         * the amount is the base price used for calculating the total price before applying surcharges, discount or taxes
+         * the amount is the base price used for calculating the total price before applying surcharges, discount or taxes.
          */
         BASE, 
         /**
-         * the amount is a surcharge applied on the base price
+         * the amount is a surcharge applied on the base price.
          */
         SURCHARGE, 
         /**
-         * the amount is a deduction applied on the base price
+         * the amount is a deduction applied on the base price.
          */
         DEDUCTION, 
         /**
-         * the amount is a discount applied on the base price
+         * the amount is a discount applied on the base price.
          */
         DISCOUNT, 
         /**
-         * the amount is the tax component of the total price
+         * the amount is the tax component of the total price.
          */
         TAX, 
         /**
-         * the amount is of informational character, it has not been applied in the calculation of the total price
+         * the amount is of informational character, it has not been applied in the calculation of the total price.
          */
         INFORMATIONAL, 
         /**
@@ -262,12 +262,12 @@ public class Invoice extends DomainResource {
         }
         public String getDefinition() {
           switch (this) {
-            case BASE: return "the amount is the base price used for calculating the total price before applying surcharges, discount or taxes";
-            case SURCHARGE: return "the amount is a surcharge applied on the base price";
-            case DEDUCTION: return "the amount is a deduction applied on the base price";
-            case DISCOUNT: return "the amount is a discount applied on the base price";
-            case TAX: return "the amount is the tax component of the total price";
-            case INFORMATIONAL: return "the amount is of informational character, it has not been applied in the calculation of the total price";
+            case BASE: return "the amount is the base price used for calculating the total price before applying surcharges, discount or taxes.";
+            case SURCHARGE: return "the amount is a surcharge applied on the base price.";
+            case DEDUCTION: return "the amount is a deduction applied on the base price.";
+            case DISCOUNT: return "the amount is a discount applied on the base price.";
+            case TAX: return "the amount is the tax component of the total price.";
+            case INFORMATIONAL: return "the amount is of informational character, it has not been applied in the calculation of the total price.";
             default: return "?";
           }
         }
@@ -351,13 +351,13 @@ public class Invoice extends DomainResource {
          * Describes the type of involvement (e.g. transcriptionist, creator etc.). If the invoice has been created automatically, the Participant may be a billing engine or another kind of device.
          */
         @Child(name = "role", type = {CodeableConcept.class}, order=1, min=0, max=1, modifier=false, summary=false)
-        @Description(shortDefinition="Type of involevent in creation of this Invoice", formalDefinition="Describes the type of involvement (e.g. transcriptionist, creator etc.). If the invoice has been created automatically, the Participant may be a billing engine or another kind of device." )
+        @Description(shortDefinition="Type of involvement in creation of this Invoice", formalDefinition="Describes the type of involvement (e.g. transcriptionist, creator etc.). If the invoice has been created automatically, the Participant may be a billing engine or another kind of device." )
         protected CodeableConcept role;
 
         /**
          * The device, practitioner, etc. who performed or participated in the service.
          */
-        @Child(name = "actor", type = {Practitioner.class, Organization.class, Patient.class, Device.class, RelatedPerson.class}, order=2, min=1, max=1, modifier=false, summary=false)
+        @Child(name = "actor", type = {Practitioner.class, Organization.class, Patient.class, PractitionerRole.class, Device.class, RelatedPerson.class}, order=2, min=1, max=1, modifier=false, summary=false)
         @Description(shortDefinition="Individual who was involved", formalDefinition="The device, practitioner, etc. who performed or participated in the service." )
         protected Reference actor;
 
@@ -449,14 +449,14 @@ public class Invoice extends DomainResource {
         protected void listChildren(List<Property> children) {
           super.listChildren(children);
           children.add(new Property("role", "CodeableConcept", "Describes the type of involvement (e.g. transcriptionist, creator etc.). If the invoice has been created automatically, the Participant may be a billing engine or another kind of device.", 0, 1, role));
-          children.add(new Property("actor", "Reference(Practitioner|Organization|Patient|Device|RelatedPerson)", "The device, practitioner, etc. who performed or participated in the service.", 0, 1, actor));
+          children.add(new Property("actor", "Reference(Practitioner|Organization|Patient|PractitionerRole|Device|RelatedPerson)", "The device, practitioner, etc. who performed or participated in the service.", 0, 1, actor));
         }
 
         @Override
         public Property getNamedProperty(int _hash, String _name, boolean _checkValid) throws FHIRException {
           switch (_hash) {
           case 3506294: /*role*/  return new Property("role", "CodeableConcept", "Describes the type of involvement (e.g. transcriptionist, creator etc.). If the invoice has been created automatically, the Participant may be a billing engine or another kind of device.", 0, 1, role);
-          case 92645877: /*actor*/  return new Property("actor", "Reference(Practitioner|Organization|Patient|Device|RelatedPerson)", "The device, practitioner, etc. who performed or participated in the service.", 0, 1, actor);
+          case 92645877: /*actor*/  return new Property("actor", "Reference(Practitioner|Organization|Patient|PractitionerRole|Device|RelatedPerson)", "The device, practitioner, etc. who performed or participated in the service.", 0, 1, actor);
           default: return super.getNamedProperty(_hash, _name, _checkValid);
           }
 
@@ -580,25 +580,20 @@ public class Invoice extends DomainResource {
         protected PositiveIntType sequence;
 
         /**
-         * The ChargeItem contains information such as the billing code, date, amount etc.
+         * The ChargeItem contains information such as the billing code, date, amount etc. If no further details are required for the lineItem, inline billing codes can be added using the CodeableConcept data type instead of the Reference.
          */
-        @Child(name = "chargeItem", type = {ChargeItem.class}, order=2, min=1, max=1, modifier=false, summary=false)
-        @Description(shortDefinition="Reference to ChargeItem containing details of this line item", formalDefinition="The ChargeItem contains information such as the billing code, date, amount etc." )
-        protected Reference chargeItem;
+        @Child(name = "chargeItem", type = {ChargeItem.class, CodeableConcept.class}, order=2, min=1, max=1, modifier=false, summary=false)
+        @Description(shortDefinition="Reference to ChargeItem containing details of this line item or an inline billing code", formalDefinition="The ChargeItem contains information such as the billing code, date, amount etc. If no further details are required for the lineItem, inline billing codes can be added using the CodeableConcept data type instead of the Reference." )
+        protected Type chargeItem;
 
         /**
-         * The actual object that is the target of the reference (The ChargeItem contains information such as the billing code, date, amount etc.)
-         */
-        protected ChargeItem chargeItemTarget;
-
-        /**
-         * The price for a ChargeItem may be calculated as a base price with surcharges/deductions that apply in certain conditions. A ChargeItemDefinition resource that defines the prices, factors and conditions that apply to a billing code is currently under developement. The priceComponent element can be used to offer transparency to the recipient of the Invoice of how the prices have been calculated.
+         * The price for a ChargeItem may be calculated as a base price with surcharges/deductions that apply in certain conditions. A ChargeItemDefinition resource that defines the prices, factors and conditions that apply to a billing code is currently under development. The priceComponent element can be used to offer transparency to the recipient of the Invoice as to how the prices have been calculated.
          */
         @Child(name = "priceComponent", type = {}, order=3, min=0, max=Child.MAX_UNLIMITED, modifier=false, summary=false)
-        @Description(shortDefinition="Components of total line item price", formalDefinition="The price for a ChargeItem may be calculated as a base price with surcharges/deductions that apply in certain conditions. A ChargeItemDefinition resource that defines the prices, factors and conditions that apply to a billing code is currently under developement. The priceComponent element can be used to offer transparency to the recipient of the Invoice of how the prices have been calculated." )
+        @Description(shortDefinition="Components of total line item price", formalDefinition="The price for a ChargeItem may be calculated as a base price with surcharges/deductions that apply in certain conditions. A ChargeItemDefinition resource that defines the prices, factors and conditions that apply to a billing code is currently under development. The priceComponent element can be used to offer transparency to the recipient of the Invoice as to how the prices have been calculated." )
         protected List<InvoiceLineItemPriceComponentComponent> priceComponent;
 
-        private static final long serialVersionUID = -1719217937L;
+        private static final long serialVersionUID = -1013610189L;
 
     /**
      * Constructor
@@ -610,7 +605,7 @@ public class Invoice extends DomainResource {
     /**
      * Constructor
      */
-      public InvoiceLineItemComponent(Reference chargeItem) {
+      public InvoiceLineItemComponent(Type chargeItem) {
         super();
         this.chargeItem = chargeItem;
       }
@@ -661,15 +656,40 @@ public class Invoice extends DomainResource {
         }
 
         /**
-         * @return {@link #chargeItem} (The ChargeItem contains information such as the billing code, date, amount etc.)
+         * @return {@link #chargeItem} (The ChargeItem contains information such as the billing code, date, amount etc. If no further details are required for the lineItem, inline billing codes can be added using the CodeableConcept data type instead of the Reference.)
          */
-        public Reference getChargeItem() { 
-          if (this.chargeItem == null)
-            if (Configuration.errorOnAutoCreate())
-              throw new Error("Attempt to auto-create InvoiceLineItemComponent.chargeItem");
-            else if (Configuration.doAutoCreate())
-              this.chargeItem = new Reference(); // cc
+        public Type getChargeItem() { 
           return this.chargeItem;
+        }
+
+        /**
+         * @return {@link #chargeItem} (The ChargeItem contains information such as the billing code, date, amount etc. If no further details are required for the lineItem, inline billing codes can be added using the CodeableConcept data type instead of the Reference.)
+         */
+        public Reference getChargeItemReference() throws FHIRException { 
+          if (this.chargeItem == null)
+            this.chargeItem = new Reference();
+          if (!(this.chargeItem instanceof Reference))
+            throw new FHIRException("Type mismatch: the type Reference was expected, but "+this.chargeItem.getClass().getName()+" was encountered");
+          return (Reference) this.chargeItem;
+        }
+
+        public boolean hasChargeItemReference() { 
+          return this != null && this.chargeItem instanceof Reference;
+        }
+
+        /**
+         * @return {@link #chargeItem} (The ChargeItem contains information such as the billing code, date, amount etc. If no further details are required for the lineItem, inline billing codes can be added using the CodeableConcept data type instead of the Reference.)
+         */
+        public CodeableConcept getChargeItemCodeableConcept() throws FHIRException { 
+          if (this.chargeItem == null)
+            this.chargeItem = new CodeableConcept();
+          if (!(this.chargeItem instanceof CodeableConcept))
+            throw new FHIRException("Type mismatch: the type CodeableConcept was expected, but "+this.chargeItem.getClass().getName()+" was encountered");
+          return (CodeableConcept) this.chargeItem;
+        }
+
+        public boolean hasChargeItemCodeableConcept() { 
+          return this != null && this.chargeItem instanceof CodeableConcept;
         }
 
         public boolean hasChargeItem() { 
@@ -677,35 +697,17 @@ public class Invoice extends DomainResource {
         }
 
         /**
-         * @param value {@link #chargeItem} (The ChargeItem contains information such as the billing code, date, amount etc.)
+         * @param value {@link #chargeItem} (The ChargeItem contains information such as the billing code, date, amount etc. If no further details are required for the lineItem, inline billing codes can be added using the CodeableConcept data type instead of the Reference.)
          */
-        public InvoiceLineItemComponent setChargeItem(Reference value) { 
+        public InvoiceLineItemComponent setChargeItem(Type value) { 
+          if (value != null && !(value instanceof Reference || value instanceof CodeableConcept))
+            throw new Error("Not the right type for Invoice.lineItem.chargeItem[x]: "+value.fhirType());
           this.chargeItem = value;
           return this;
         }
 
         /**
-         * @return {@link #chargeItem} The actual object that is the target of the reference. The reference library doesn't populate this, but you can use it to hold the resource if you resolve it. (The ChargeItem contains information such as the billing code, date, amount etc.)
-         */
-        public ChargeItem getChargeItemTarget() { 
-          if (this.chargeItemTarget == null)
-            if (Configuration.errorOnAutoCreate())
-              throw new Error("Attempt to auto-create InvoiceLineItemComponent.chargeItem");
-            else if (Configuration.doAutoCreate())
-              this.chargeItemTarget = new ChargeItem(); // aa
-          return this.chargeItemTarget;
-        }
-
-        /**
-         * @param value {@link #chargeItem} The actual object that is the target of the reference. The reference library doesn't use these, but you can use it to hold the resource if you resolve it. (The ChargeItem contains information such as the billing code, date, amount etc.)
-         */
-        public InvoiceLineItemComponent setChargeItemTarget(ChargeItem value) { 
-          this.chargeItemTarget = value;
-          return this;
-        }
-
-        /**
-         * @return {@link #priceComponent} (The price for a ChargeItem may be calculated as a base price with surcharges/deductions that apply in certain conditions. A ChargeItemDefinition resource that defines the prices, factors and conditions that apply to a billing code is currently under developement. The priceComponent element can be used to offer transparency to the recipient of the Invoice of how the prices have been calculated.)
+         * @return {@link #priceComponent} (The price for a ChargeItem may be calculated as a base price with surcharges/deductions that apply in certain conditions. A ChargeItemDefinition resource that defines the prices, factors and conditions that apply to a billing code is currently under development. The priceComponent element can be used to offer transparency to the recipient of the Invoice as to how the prices have been calculated.)
          */
         public List<InvoiceLineItemPriceComponentComponent> getPriceComponent() { 
           if (this.priceComponent == null)
@@ -760,16 +762,19 @@ public class Invoice extends DomainResource {
         protected void listChildren(List<Property> children) {
           super.listChildren(children);
           children.add(new Property("sequence", "positiveInt", "Sequence in which the items appear on the invoice.", 0, 1, sequence));
-          children.add(new Property("chargeItem", "Reference(ChargeItem)", "The ChargeItem contains information such as the billing code, date, amount etc.", 0, 1, chargeItem));
-          children.add(new Property("priceComponent", "", "The price for a ChargeItem may be calculated as a base price with surcharges/deductions that apply in certain conditions. A ChargeItemDefinition resource that defines the prices, factors and conditions that apply to a billing code is currently under developement. The priceComponent element can be used to offer transparency to the recipient of the Invoice of how the prices have been calculated.", 0, java.lang.Integer.MAX_VALUE, priceComponent));
+          children.add(new Property("chargeItem[x]", "Reference(ChargeItem)|CodeableConcept", "The ChargeItem contains information such as the billing code, date, amount etc. If no further details are required for the lineItem, inline billing codes can be added using the CodeableConcept data type instead of the Reference.", 0, 1, chargeItem));
+          children.add(new Property("priceComponent", "", "The price for a ChargeItem may be calculated as a base price with surcharges/deductions that apply in certain conditions. A ChargeItemDefinition resource that defines the prices, factors and conditions that apply to a billing code is currently under development. The priceComponent element can be used to offer transparency to the recipient of the Invoice as to how the prices have been calculated.", 0, java.lang.Integer.MAX_VALUE, priceComponent));
         }
 
         @Override
         public Property getNamedProperty(int _hash, String _name, boolean _checkValid) throws FHIRException {
           switch (_hash) {
           case 1349547969: /*sequence*/  return new Property("sequence", "positiveInt", "Sequence in which the items appear on the invoice.", 0, 1, sequence);
-          case 1417779175: /*chargeItem*/  return new Property("chargeItem", "Reference(ChargeItem)", "The ChargeItem contains information such as the billing code, date, amount etc.", 0, 1, chargeItem);
-          case 1219095988: /*priceComponent*/  return new Property("priceComponent", "", "The price for a ChargeItem may be calculated as a base price with surcharges/deductions that apply in certain conditions. A ChargeItemDefinition resource that defines the prices, factors and conditions that apply to a billing code is currently under developement. The priceComponent element can be used to offer transparency to the recipient of the Invoice of how the prices have been calculated.", 0, java.lang.Integer.MAX_VALUE, priceComponent);
+          case 351104825: /*chargeItem[x]*/  return new Property("chargeItem[x]", "Reference(ChargeItem)|CodeableConcept", "The ChargeItem contains information such as the billing code, date, amount etc. If no further details are required for the lineItem, inline billing codes can be added using the CodeableConcept data type instead of the Reference.", 0, 1, chargeItem);
+          case 1417779175: /*chargeItem*/  return new Property("chargeItem[x]", "Reference(ChargeItem)|CodeableConcept", "The ChargeItem contains information such as the billing code, date, amount etc. If no further details are required for the lineItem, inline billing codes can be added using the CodeableConcept data type instead of the Reference.", 0, 1, chargeItem);
+          case 753580836: /*chargeItemReference*/  return new Property("chargeItem[x]", "Reference(ChargeItem)|CodeableConcept", "The ChargeItem contains information such as the billing code, date, amount etc. If no further details are required for the lineItem, inline billing codes can be added using the CodeableConcept data type instead of the Reference.", 0, 1, chargeItem);
+          case 1226532026: /*chargeItemCodeableConcept*/  return new Property("chargeItem[x]", "Reference(ChargeItem)|CodeableConcept", "The ChargeItem contains information such as the billing code, date, amount etc. If no further details are required for the lineItem, inline billing codes can be added using the CodeableConcept data type instead of the Reference.", 0, 1, chargeItem);
+          case 1219095988: /*priceComponent*/  return new Property("priceComponent", "", "The price for a ChargeItem may be calculated as a base price with surcharges/deductions that apply in certain conditions. A ChargeItemDefinition resource that defines the prices, factors and conditions that apply to a billing code is currently under development. The priceComponent element can be used to offer transparency to the recipient of the Invoice as to how the prices have been calculated.", 0, java.lang.Integer.MAX_VALUE, priceComponent);
           default: return super.getNamedProperty(_hash, _name, _checkValid);
           }
 
@@ -779,7 +784,7 @@ public class Invoice extends DomainResource {
       public Base[] getProperty(int hash, String name, boolean checkValid) throws FHIRException {
         switch (hash) {
         case 1349547969: /*sequence*/ return this.sequence == null ? new Base[0] : new Base[] {this.sequence}; // PositiveIntType
-        case 1417779175: /*chargeItem*/ return this.chargeItem == null ? new Base[0] : new Base[] {this.chargeItem}; // Reference
+        case 1417779175: /*chargeItem*/ return this.chargeItem == null ? new Base[0] : new Base[] {this.chargeItem}; // Type
         case 1219095988: /*priceComponent*/ return this.priceComponent == null ? new Base[0] : this.priceComponent.toArray(new Base[this.priceComponent.size()]); // InvoiceLineItemPriceComponentComponent
         default: return super.getProperty(hash, name, checkValid);
         }
@@ -793,7 +798,7 @@ public class Invoice extends DomainResource {
           this.sequence = castToPositiveInt(value); // PositiveIntType
           return value;
         case 1417779175: // chargeItem
-          this.chargeItem = castToReference(value); // Reference
+          this.chargeItem = castToType(value); // Type
           return value;
         case 1219095988: // priceComponent
           this.getPriceComponent().add((InvoiceLineItemPriceComponentComponent) value); // InvoiceLineItemPriceComponentComponent
@@ -807,8 +812,8 @@ public class Invoice extends DomainResource {
       public Base setProperty(String name, Base value) throws FHIRException {
         if (name.equals("sequence")) {
           this.sequence = castToPositiveInt(value); // PositiveIntType
-        } else if (name.equals("chargeItem")) {
-          this.chargeItem = castToReference(value); // Reference
+        } else if (name.equals("chargeItem[x]")) {
+          this.chargeItem = castToType(value); // Type
         } else if (name.equals("priceComponent")) {
           this.getPriceComponent().add((InvoiceLineItemPriceComponentComponent) value);
         } else
@@ -820,6 +825,7 @@ public class Invoice extends DomainResource {
       public Base makeProperty(int hash, String name) throws FHIRException {
         switch (hash) {
         case 1349547969:  return getSequenceElement();
+        case 351104825:  return getChargeItem(); 
         case 1417779175:  return getChargeItem(); 
         case 1219095988:  return addPriceComponent(); 
         default: return super.makeProperty(hash, name);
@@ -831,7 +837,7 @@ public class Invoice extends DomainResource {
       public String[] getTypesForProperty(int hash, String name) throws FHIRException {
         switch (hash) {
         case 1349547969: /*sequence*/ return new String[] {"positiveInt"};
-        case 1417779175: /*chargeItem*/ return new String[] {"Reference"};
+        case 1417779175: /*chargeItem*/ return new String[] {"Reference", "CodeableConcept"};
         case 1219095988: /*priceComponent*/ return new String[] {};
         default: return super.getTypesForProperty(hash, name);
         }
@@ -843,8 +849,12 @@ public class Invoice extends DomainResource {
         if (name.equals("sequence")) {
           throw new FHIRException("Cannot call addChild on a primitive type Invoice.sequence");
         }
-        else if (name.equals("chargeItem")) {
+        else if (name.equals("chargeItemReference")) {
           this.chargeItem = new Reference();
+          return this.chargeItem;
+        }
+        else if (name.equals("chargeItemCodeableConcept")) {
+          this.chargeItem = new CodeableConcept();
           return this.chargeItem;
         }
         else if (name.equals("priceComponent")) {
@@ -918,20 +928,20 @@ public class Invoice extends DomainResource {
         protected CodeableConcept code;
 
         /**
-         * The amount calculated for this component.
-         */
-        @Child(name = "factor", type = {Money.class}, order=3, min=0, max=1, modifier=false, summary=false)
-        @Description(shortDefinition="Monetary amount associated with this component", formalDefinition="The amount calculated for this component." )
-        protected Money factor;
-
-        /**
          * The factor that has been applied on the base price for calculating this component.
          */
-        @Child(name = "amount", type = {DecimalType.class}, order=4, min=0, max=1, modifier=false, summary=false)
+        @Child(name = "factor", type = {DecimalType.class}, order=3, min=0, max=1, modifier=false, summary=false)
         @Description(shortDefinition="Factor used for calculating this component", formalDefinition="The factor that has been applied on the base price for calculating this component." )
-        protected DecimalType amount;
+        protected DecimalType factor;
 
-        private static final long serialVersionUID = -39471852L;
+        /**
+         * The amount calculated for this component.
+         */
+        @Child(name = "amount", type = {Money.class}, order=4, min=0, max=1, modifier=false, summary=false)
+        @Description(shortDefinition="Monetary amount associated with this component", formalDefinition="The amount calculated for this component." )
+        protected Money amount;
+
+        private static final long serialVersionUID = 1223988958L;
 
     /**
      * Constructor
@@ -1018,15 +1028,19 @@ public class Invoice extends DomainResource {
         }
 
         /**
-         * @return {@link #factor} (The amount calculated for this component.)
+         * @return {@link #factor} (The factor that has been applied on the base price for calculating this component.). This is the underlying object with id, value and extensions. The accessor "getFactor" gives direct access to the value
          */
-        public Money getFactor() { 
+        public DecimalType getFactorElement() { 
           if (this.factor == null)
             if (Configuration.errorOnAutoCreate())
               throw new Error("Attempt to auto-create InvoiceLineItemPriceComponentComponent.factor");
             else if (Configuration.doAutoCreate())
-              this.factor = new Money(); // cc
+              this.factor = new DecimalType(); // bb
           return this.factor;
+        }
+
+        public boolean hasFactorElement() { 
+          return this.factor != null && !this.factor.isEmpty();
         }
 
         public boolean hasFactor() { 
@@ -1034,58 +1048,30 @@ public class Invoice extends DomainResource {
         }
 
         /**
-         * @param value {@link #factor} (The amount calculated for this component.)
+         * @param value {@link #factor} (The factor that has been applied on the base price for calculating this component.). This is the underlying object with id, value and extensions. The accessor "getFactor" gives direct access to the value
          */
-        public InvoiceLineItemPriceComponentComponent setFactor(Money value) { 
+        public InvoiceLineItemPriceComponentComponent setFactorElement(DecimalType value) { 
           this.factor = value;
-          return this;
-        }
-
-        /**
-         * @return {@link #amount} (The factor that has been applied on the base price for calculating this component.). This is the underlying object with id, value and extensions. The accessor "getAmount" gives direct access to the value
-         */
-        public DecimalType getAmountElement() { 
-          if (this.amount == null)
-            if (Configuration.errorOnAutoCreate())
-              throw new Error("Attempt to auto-create InvoiceLineItemPriceComponentComponent.amount");
-            else if (Configuration.doAutoCreate())
-              this.amount = new DecimalType(); // bb
-          return this.amount;
-        }
-
-        public boolean hasAmountElement() { 
-          return this.amount != null && !this.amount.isEmpty();
-        }
-
-        public boolean hasAmount() { 
-          return this.amount != null && !this.amount.isEmpty();
-        }
-
-        /**
-         * @param value {@link #amount} (The factor that has been applied on the base price for calculating this component.). This is the underlying object with id, value and extensions. The accessor "getAmount" gives direct access to the value
-         */
-        public InvoiceLineItemPriceComponentComponent setAmountElement(DecimalType value) { 
-          this.amount = value;
           return this;
         }
 
         /**
          * @return The factor that has been applied on the base price for calculating this component.
          */
-        public BigDecimal getAmount() { 
-          return this.amount == null ? null : this.amount.getValue();
+        public BigDecimal getFactor() { 
+          return this.factor == null ? null : this.factor.getValue();
         }
 
         /**
          * @param value The factor that has been applied on the base price for calculating this component.
          */
-        public InvoiceLineItemPriceComponentComponent setAmount(BigDecimal value) { 
+        public InvoiceLineItemPriceComponentComponent setFactor(BigDecimal value) { 
           if (value == null)
-            this.amount = null;
+            this.factor = null;
           else {
-            if (this.amount == null)
-              this.amount = new DecimalType();
-            this.amount.setValue(value);
+            if (this.factor == null)
+              this.factor = new DecimalType();
+            this.factor.setValue(value);
           }
           return this;
         }
@@ -1093,18 +1079,42 @@ public class Invoice extends DomainResource {
         /**
          * @param value The factor that has been applied on the base price for calculating this component.
          */
-        public InvoiceLineItemPriceComponentComponent setAmount(long value) { 
-              this.amount = new DecimalType();
-            this.amount.setValue(value);
+        public InvoiceLineItemPriceComponentComponent setFactor(long value) { 
+              this.factor = new DecimalType();
+            this.factor.setValue(value);
           return this;
         }
 
         /**
          * @param value The factor that has been applied on the base price for calculating this component.
          */
-        public InvoiceLineItemPriceComponentComponent setAmount(double value) { 
-              this.amount = new DecimalType();
-            this.amount.setValue(value);
+        public InvoiceLineItemPriceComponentComponent setFactor(double value) { 
+              this.factor = new DecimalType();
+            this.factor.setValue(value);
+          return this;
+        }
+
+        /**
+         * @return {@link #amount} (The amount calculated for this component.)
+         */
+        public Money getAmount() { 
+          if (this.amount == null)
+            if (Configuration.errorOnAutoCreate())
+              throw new Error("Attempt to auto-create InvoiceLineItemPriceComponentComponent.amount");
+            else if (Configuration.doAutoCreate())
+              this.amount = new Money(); // cc
+          return this.amount;
+        }
+
+        public boolean hasAmount() { 
+          return this.amount != null && !this.amount.isEmpty();
+        }
+
+        /**
+         * @param value {@link #amount} (The amount calculated for this component.)
+         */
+        public InvoiceLineItemPriceComponentComponent setAmount(Money value) { 
+          this.amount = value;
           return this;
         }
 
@@ -1112,8 +1122,8 @@ public class Invoice extends DomainResource {
           super.listChildren(children);
           children.add(new Property("type", "code", "This code identifies the type of the component.", 0, 1, type));
           children.add(new Property("code", "CodeableConcept", "A code that identifies the component. Codes may be used to differentiate between kinds of taxes, surcharges, discounts etc.", 0, 1, code));
-          children.add(new Property("factor", "Money", "The amount calculated for this component.", 0, 1, factor));
-          children.add(new Property("amount", "decimal", "The factor that has been applied on the base price for calculating this component.", 0, 1, amount));
+          children.add(new Property("factor", "decimal", "The factor that has been applied on the base price for calculating this component.", 0, 1, factor));
+          children.add(new Property("amount", "Money", "The amount calculated for this component.", 0, 1, amount));
         }
 
         @Override
@@ -1121,8 +1131,8 @@ public class Invoice extends DomainResource {
           switch (_hash) {
           case 3575610: /*type*/  return new Property("type", "code", "This code identifies the type of the component.", 0, 1, type);
           case 3059181: /*code*/  return new Property("code", "CodeableConcept", "A code that identifies the component. Codes may be used to differentiate between kinds of taxes, surcharges, discounts etc.", 0, 1, code);
-          case -1282148017: /*factor*/  return new Property("factor", "Money", "The amount calculated for this component.", 0, 1, factor);
-          case -1413853096: /*amount*/  return new Property("amount", "decimal", "The factor that has been applied on the base price for calculating this component.", 0, 1, amount);
+          case -1282148017: /*factor*/  return new Property("factor", "decimal", "The factor that has been applied on the base price for calculating this component.", 0, 1, factor);
+          case -1413853096: /*amount*/  return new Property("amount", "Money", "The amount calculated for this component.", 0, 1, amount);
           default: return super.getNamedProperty(_hash, _name, _checkValid);
           }
 
@@ -1133,8 +1143,8 @@ public class Invoice extends DomainResource {
         switch (hash) {
         case 3575610: /*type*/ return this.type == null ? new Base[0] : new Base[] {this.type}; // Enumeration<InvoicePriceComponentType>
         case 3059181: /*code*/ return this.code == null ? new Base[0] : new Base[] {this.code}; // CodeableConcept
-        case -1282148017: /*factor*/ return this.factor == null ? new Base[0] : new Base[] {this.factor}; // Money
-        case -1413853096: /*amount*/ return this.amount == null ? new Base[0] : new Base[] {this.amount}; // DecimalType
+        case -1282148017: /*factor*/ return this.factor == null ? new Base[0] : new Base[] {this.factor}; // DecimalType
+        case -1413853096: /*amount*/ return this.amount == null ? new Base[0] : new Base[] {this.amount}; // Money
         default: return super.getProperty(hash, name, checkValid);
         }
 
@@ -1151,10 +1161,10 @@ public class Invoice extends DomainResource {
           this.code = castToCodeableConcept(value); // CodeableConcept
           return value;
         case -1282148017: // factor
-          this.factor = castToMoney(value); // Money
+          this.factor = castToDecimal(value); // DecimalType
           return value;
         case -1413853096: // amount
-          this.amount = castToDecimal(value); // DecimalType
+          this.amount = castToMoney(value); // Money
           return value;
         default: return super.setProperty(hash, name, value);
         }
@@ -1169,9 +1179,9 @@ public class Invoice extends DomainResource {
         } else if (name.equals("code")) {
           this.code = castToCodeableConcept(value); // CodeableConcept
         } else if (name.equals("factor")) {
-          this.factor = castToMoney(value); // Money
+          this.factor = castToDecimal(value); // DecimalType
         } else if (name.equals("amount")) {
-          this.amount = castToDecimal(value); // DecimalType
+          this.amount = castToMoney(value); // Money
         } else
           return super.setProperty(name, value);
         return value;
@@ -1182,8 +1192,8 @@ public class Invoice extends DomainResource {
         switch (hash) {
         case 3575610:  return getTypeElement();
         case 3059181:  return getCode(); 
-        case -1282148017:  return getFactor(); 
-        case -1413853096:  return getAmountElement();
+        case -1282148017:  return getFactorElement();
+        case -1413853096:  return getAmount(); 
         default: return super.makeProperty(hash, name);
         }
 
@@ -1194,8 +1204,8 @@ public class Invoice extends DomainResource {
         switch (hash) {
         case 3575610: /*type*/ return new String[] {"code"};
         case 3059181: /*code*/ return new String[] {"CodeableConcept"};
-        case -1282148017: /*factor*/ return new String[] {"Money"};
-        case -1413853096: /*amount*/ return new String[] {"decimal"};
+        case -1282148017: /*factor*/ return new String[] {"decimal"};
+        case -1413853096: /*amount*/ return new String[] {"Money"};
         default: return super.getTypesForProperty(hash, name);
         }
 
@@ -1211,11 +1221,11 @@ public class Invoice extends DomainResource {
           return this.code;
         }
         else if (name.equals("factor")) {
-          this.factor = new Money();
-          return this.factor;
+          throw new FHIRException("Cannot call addChild on a primitive type Invoice.factor");
         }
         else if (name.equals("amount")) {
-          throw new FHIRException("Cannot call addChild on a primitive type Invoice.amount");
+          this.amount = new Money();
+          return this.amount;
         }
         else
           return super.addChild(name);
@@ -1249,7 +1259,7 @@ public class Invoice extends DomainResource {
         if (!(other_ instanceof InvoiceLineItemPriceComponentComponent))
           return false;
         InvoiceLineItemPriceComponentComponent o = (InvoiceLineItemPriceComponentComponent) other_;
-        return compareValues(type, o.type, true) && compareValues(amount, o.amount, true);
+        return compareValues(type, o.type, true) && compareValues(factor, o.factor, true);
       }
 
       public boolean isEmpty() {
@@ -1265,10 +1275,10 @@ public class Invoice extends DomainResource {
   }
 
     /**
-     * Identifier of this Invoice, often used for reference in corresponcence about this invoice or for tracking of payments.
+     * Identifier of this Invoice, often used for reference in correspondence about this invoice or for tracking of payments.
      */
     @Child(name = "identifier", type = {Identifier.class}, order=0, min=0, max=Child.MAX_UNLIMITED, modifier=false, summary=true)
-    @Description(shortDefinition="Business Identifier for item", formalDefinition="Identifier of this Invoice, often used for reference in corresponcence about this invoice or for tracking of payments." )
+    @Description(shortDefinition="Business Identifier for item", formalDefinition="Identifier of this Invoice, often used for reference in correspondence about this invoice or for tracking of payments." )
     protected List<Identifier> identifier;
 
     /**
@@ -1287,10 +1297,10 @@ public class Invoice extends DomainResource {
     protected StringType cancelledReason;
 
     /**
-     * Type of Invoice depending on domain, realm an usage (eg. internal/external, dental, preliminary).
+     * Type of Invoice depending on domain, realm an usage (e.g. internal/external, dental, preliminary).
      */
     @Child(name = "type", type = {CodeableConcept.class}, order=3, min=0, max=1, modifier=false, summary=true)
-    @Description(shortDefinition="Type of Invoice", formalDefinition="Type of Invoice depending on domain, realm an usage (eg. internal/external, dental, preliminary)." )
+    @Description(shortDefinition="Type of Invoice", formalDefinition="Type of Invoice depending on domain, realm an usage (e.g. internal/external, dental, preliminary)." )
     protected CodeableConcept type;
 
     /**
@@ -1356,10 +1366,10 @@ public class Invoice extends DomainResource {
     protected Account accountTarget;
 
     /**
-     * Each line item represents one charge for goods ond services rendered. Details such as date, code and amount are found in the referenced ChargeItem resource.
+     * Each line item represents one charge for goods and services rendered. Details such as date, code and amount are found in the referenced ChargeItem resource.
      */
     @Child(name = "lineItem", type = {}, order=10, min=0, max=Child.MAX_UNLIMITED, modifier=false, summary=false)
-    @Description(shortDefinition="Line items of this Invoice", formalDefinition="Each line item represents one charge for goods ond services rendered. Details such as date, code and amount are found in the referenced ChargeItem resource." )
+    @Description(shortDefinition="Line items of this Invoice", formalDefinition="Each line item represents one charge for goods and services rendered. Details such as date, code and amount are found in the referenced ChargeItem resource." )
     protected List<InvoiceLineItemComponent> lineItem;
 
     /**
@@ -1380,21 +1390,21 @@ public class Invoice extends DomainResource {
      * Invoice total, tax included.
      */
     @Child(name = "totalGross", type = {Money.class}, order=13, min=0, max=1, modifier=false, summary=true)
-    @Description(shortDefinition="Gross toal of this Invoice", formalDefinition="Invoice total, tax included." )
+    @Description(shortDefinition="Gross total of this Invoice", formalDefinition="Invoice total, tax included." )
     protected Money totalGross;
 
     /**
-     * Payment details such as banking details, period of payment, deductables, methods of payment.
+     * Payment details such as banking details, period of payment, deductibles, methods of payment.
      */
     @Child(name = "paymentTerms", type = {MarkdownType.class}, order=14, min=0, max=1, modifier=false, summary=false)
-    @Description(shortDefinition="Payment details", formalDefinition="Payment details such as banking details, period of payment, deductables, methods of payment." )
+    @Description(shortDefinition="Payment details", formalDefinition="Payment details such as banking details, period of payment, deductibles, methods of payment." )
     protected MarkdownType paymentTerms;
 
     /**
-     * Comments made about the invoice by the issuer, subject or other participants.
+     * Comments made about the invoice by the issuer, subject, or other participants.
      */
     @Child(name = "note", type = {Annotation.class}, order=15, min=0, max=Child.MAX_UNLIMITED, modifier=false, summary=false)
-    @Description(shortDefinition="Comments made about the invoice", formalDefinition="Comments made about the invoice by the issuer, subject or other participants." )
+    @Description(shortDefinition="Comments made about the invoice", formalDefinition="Comments made about the invoice by the issuer, subject, or other participants." )
     protected List<Annotation> note;
 
     private static final long serialVersionUID = -62357265L;
@@ -1415,7 +1425,7 @@ public class Invoice extends DomainResource {
     }
 
     /**
-     * @return {@link #identifier} (Identifier of this Invoice, often used for reference in corresponcence about this invoice or for tracking of payments.)
+     * @return {@link #identifier} (Identifier of this Invoice, often used for reference in correspondence about this invoice or for tracking of payments.)
      */
     public List<Identifier> getIdentifier() { 
       if (this.identifier == null)
@@ -1562,7 +1572,7 @@ public class Invoice extends DomainResource {
     }
 
     /**
-     * @return {@link #type} (Type of Invoice depending on domain, realm an usage (eg. internal/external, dental, preliminary).)
+     * @return {@link #type} (Type of Invoice depending on domain, realm an usage (e.g. internal/external, dental, preliminary).)
      */
     public CodeableConcept getType() { 
       if (this.type == null)
@@ -1578,7 +1588,7 @@ public class Invoice extends DomainResource {
     }
 
     /**
-     * @param value {@link #type} (Type of Invoice depending on domain, realm an usage (eg. internal/external, dental, preliminary).)
+     * @param value {@link #type} (Type of Invoice depending on domain, realm an usage (e.g. internal/external, dental, preliminary).)
      */
     public Invoice setType(CodeableConcept value) { 
       this.type = value;
@@ -1854,7 +1864,7 @@ public class Invoice extends DomainResource {
     }
 
     /**
-     * @return {@link #lineItem} (Each line item represents one charge for goods ond services rendered. Details such as date, code and amount are found in the referenced ChargeItem resource.)
+     * @return {@link #lineItem} (Each line item represents one charge for goods and services rendered. Details such as date, code and amount are found in the referenced ChargeItem resource.)
      */
     public List<InvoiceLineItemComponent> getLineItem() { 
       if (this.lineItem == null)
@@ -2008,7 +2018,7 @@ public class Invoice extends DomainResource {
     }
 
     /**
-     * @return {@link #paymentTerms} (Payment details such as banking details, period of payment, deductables, methods of payment.). This is the underlying object with id, value and extensions. The accessor "getPaymentTerms" gives direct access to the value
+     * @return {@link #paymentTerms} (Payment details such as banking details, period of payment, deductibles, methods of payment.). This is the underlying object with id, value and extensions. The accessor "getPaymentTerms" gives direct access to the value
      */
     public MarkdownType getPaymentTermsElement() { 
       if (this.paymentTerms == null)
@@ -2028,7 +2038,7 @@ public class Invoice extends DomainResource {
     }
 
     /**
-     * @param value {@link #paymentTerms} (Payment details such as banking details, period of payment, deductables, methods of payment.). This is the underlying object with id, value and extensions. The accessor "getPaymentTerms" gives direct access to the value
+     * @param value {@link #paymentTerms} (Payment details such as banking details, period of payment, deductibles, methods of payment.). This is the underlying object with id, value and extensions. The accessor "getPaymentTerms" gives direct access to the value
      */
     public Invoice setPaymentTermsElement(MarkdownType value) { 
       this.paymentTerms = value;
@@ -2036,14 +2046,14 @@ public class Invoice extends DomainResource {
     }
 
     /**
-     * @return Payment details such as banking details, period of payment, deductables, methods of payment.
+     * @return Payment details such as banking details, period of payment, deductibles, methods of payment.
      */
     public String getPaymentTerms() { 
       return this.paymentTerms == null ? null : this.paymentTerms.getValue();
     }
 
     /**
-     * @param value Payment details such as banking details, period of payment, deductables, methods of payment.
+     * @param value Payment details such as banking details, period of payment, deductibles, methods of payment.
      */
     public Invoice setPaymentTerms(String value) { 
       if (value == null)
@@ -2057,7 +2067,7 @@ public class Invoice extends DomainResource {
     }
 
     /**
-     * @return {@link #note} (Comments made about the invoice by the issuer, subject or other participants.)
+     * @return {@link #note} (Comments made about the invoice by the issuer, subject, or other participants.)
      */
     public List<Annotation> getNote() { 
       if (this.note == null)
@@ -2111,43 +2121,43 @@ public class Invoice extends DomainResource {
 
       protected void listChildren(List<Property> children) {
         super.listChildren(children);
-        children.add(new Property("identifier", "Identifier", "Identifier of this Invoice, often used for reference in corresponcence about this invoice or for tracking of payments.", 0, java.lang.Integer.MAX_VALUE, identifier));
+        children.add(new Property("identifier", "Identifier", "Identifier of this Invoice, often used for reference in correspondence about this invoice or for tracking of payments.", 0, java.lang.Integer.MAX_VALUE, identifier));
         children.add(new Property("status", "code", "The current state of the Invoice.", 0, 1, status));
         children.add(new Property("cancelledReason", "string", "In case of Invoice cancellation a reason must be given (entered in error, superseded by corrected invoice etc.).", 0, 1, cancelledReason));
-        children.add(new Property("type", "CodeableConcept", "Type of Invoice depending on domain, realm an usage (eg. internal/external, dental, preliminary).", 0, 1, type));
+        children.add(new Property("type", "CodeableConcept", "Type of Invoice depending on domain, realm an usage (e.g. internal/external, dental, preliminary).", 0, 1, type));
         children.add(new Property("subject", "Reference(Patient|Group)", "The individual or set of individuals receiving the goods and services billed in this invoice.", 0, 1, subject));
         children.add(new Property("recipient", "Reference(Organization|Patient|RelatedPerson)", "The individual or Organization responsible for balancing of this invoice.", 0, 1, recipient));
         children.add(new Property("date", "dateTime", "Date/time(s) of when this Invoice was posted.", 0, 1, date));
         children.add(new Property("participant", "", "Indicates who or what performed or participated in the charged service.", 0, java.lang.Integer.MAX_VALUE, participant));
         children.add(new Property("issuer", "Reference(Organization)", "The organizationissuing the Invoice.", 0, 1, issuer));
         children.add(new Property("account", "Reference(Account)", "Account which is supposed to be balanced with this Invoice.", 0, 1, account));
-        children.add(new Property("lineItem", "", "Each line item represents one charge for goods ond services rendered. Details such as date, code and amount are found in the referenced ChargeItem resource.", 0, java.lang.Integer.MAX_VALUE, lineItem));
+        children.add(new Property("lineItem", "", "Each line item represents one charge for goods and services rendered. Details such as date, code and amount are found in the referenced ChargeItem resource.", 0, java.lang.Integer.MAX_VALUE, lineItem));
         children.add(new Property("totalPriceComponent", "@Invoice.lineItem.priceComponent", "The total amount for the Invoice may be calculated as the sum of the line items with surcharges/deductions that apply in certain conditions.  The priceComponent element can be used to offer transparency to the recipient of the Invoice of how the total price was calculated.", 0, java.lang.Integer.MAX_VALUE, totalPriceComponent));
         children.add(new Property("totalNet", "Money", "Invoice total , taxes excluded.", 0, 1, totalNet));
         children.add(new Property("totalGross", "Money", "Invoice total, tax included.", 0, 1, totalGross));
-        children.add(new Property("paymentTerms", "markdown", "Payment details such as banking details, period of payment, deductables, methods of payment.", 0, 1, paymentTerms));
-        children.add(new Property("note", "Annotation", "Comments made about the invoice by the issuer, subject or other participants.", 0, java.lang.Integer.MAX_VALUE, note));
+        children.add(new Property("paymentTerms", "markdown", "Payment details such as banking details, period of payment, deductibles, methods of payment.", 0, 1, paymentTerms));
+        children.add(new Property("note", "Annotation", "Comments made about the invoice by the issuer, subject, or other participants.", 0, java.lang.Integer.MAX_VALUE, note));
       }
 
       @Override
       public Property getNamedProperty(int _hash, String _name, boolean _checkValid) throws FHIRException {
         switch (_hash) {
-        case -1618432855: /*identifier*/  return new Property("identifier", "Identifier", "Identifier of this Invoice, often used for reference in corresponcence about this invoice or for tracking of payments.", 0, java.lang.Integer.MAX_VALUE, identifier);
+        case -1618432855: /*identifier*/  return new Property("identifier", "Identifier", "Identifier of this Invoice, often used for reference in correspondence about this invoice or for tracking of payments.", 0, java.lang.Integer.MAX_VALUE, identifier);
         case -892481550: /*status*/  return new Property("status", "code", "The current state of the Invoice.", 0, 1, status);
         case 1550362357: /*cancelledReason*/  return new Property("cancelledReason", "string", "In case of Invoice cancellation a reason must be given (entered in error, superseded by corrected invoice etc.).", 0, 1, cancelledReason);
-        case 3575610: /*type*/  return new Property("type", "CodeableConcept", "Type of Invoice depending on domain, realm an usage (eg. internal/external, dental, preliminary).", 0, 1, type);
+        case 3575610: /*type*/  return new Property("type", "CodeableConcept", "Type of Invoice depending on domain, realm an usage (e.g. internal/external, dental, preliminary).", 0, 1, type);
         case -1867885268: /*subject*/  return new Property("subject", "Reference(Patient|Group)", "The individual or set of individuals receiving the goods and services billed in this invoice.", 0, 1, subject);
         case 820081177: /*recipient*/  return new Property("recipient", "Reference(Organization|Patient|RelatedPerson)", "The individual or Organization responsible for balancing of this invoice.", 0, 1, recipient);
         case 3076014: /*date*/  return new Property("date", "dateTime", "Date/time(s) of when this Invoice was posted.", 0, 1, date);
         case 767422259: /*participant*/  return new Property("participant", "", "Indicates who or what performed or participated in the charged service.", 0, java.lang.Integer.MAX_VALUE, participant);
         case -1179159879: /*issuer*/  return new Property("issuer", "Reference(Organization)", "The organizationissuing the Invoice.", 0, 1, issuer);
         case -1177318867: /*account*/  return new Property("account", "Reference(Account)", "Account which is supposed to be balanced with this Invoice.", 0, 1, account);
-        case 1188332839: /*lineItem*/  return new Property("lineItem", "", "Each line item represents one charge for goods ond services rendered. Details such as date, code and amount are found in the referenced ChargeItem resource.", 0, java.lang.Integer.MAX_VALUE, lineItem);
+        case 1188332839: /*lineItem*/  return new Property("lineItem", "", "Each line item represents one charge for goods and services rendered. Details such as date, code and amount are found in the referenced ChargeItem resource.", 0, java.lang.Integer.MAX_VALUE, lineItem);
         case 1731497496: /*totalPriceComponent*/  return new Property("totalPriceComponent", "@Invoice.lineItem.priceComponent", "The total amount for the Invoice may be calculated as the sum of the line items with surcharges/deductions that apply in certain conditions.  The priceComponent element can be used to offer transparency to the recipient of the Invoice of how the total price was calculated.", 0, java.lang.Integer.MAX_VALUE, totalPriceComponent);
         case -849911879: /*totalNet*/  return new Property("totalNet", "Money", "Invoice total , taxes excluded.", 0, 1, totalNet);
         case -727607968: /*totalGross*/  return new Property("totalGross", "Money", "Invoice total, tax included.", 0, 1, totalGross);
-        case -507544799: /*paymentTerms*/  return new Property("paymentTerms", "markdown", "Payment details such as banking details, period of payment, deductables, methods of payment.", 0, 1, paymentTerms);
-        case 3387378: /*note*/  return new Property("note", "Annotation", "Comments made about the invoice by the issuer, subject or other participants.", 0, java.lang.Integer.MAX_VALUE, note);
+        case -507544799: /*paymentTerms*/  return new Property("paymentTerms", "markdown", "Payment details such as banking details, period of payment, deductibles, methods of payment.", 0, 1, paymentTerms);
+        case 3387378: /*note*/  return new Property("note", "Annotation", "Comments made about the invoice by the issuer, subject, or other participants.", 0, java.lang.Integer.MAX_VALUE, note);
         default: return super.getNamedProperty(_hash, _name, _checkValid);
         }
 
@@ -2514,17 +2524,17 @@ public class Invoice extends DomainResource {
  /**
    * Search parameter: <b>totalgross</b>
    * <p>
-   * Description: <b>Gross toal of this Invoice</b><br>
+   * Description: <b>Gross total of this Invoice</b><br>
    * Type: <b>quantity</b><br>
    * Path: <b>Invoice.totalGross</b><br>
    * </p>
    */
-  @SearchParamDefinition(name="totalgross", path="Invoice.totalGross", description="Gross toal of this Invoice", type="quantity" )
+  @SearchParamDefinition(name="totalgross", path="Invoice.totalGross", description="Gross total of this Invoice", type="quantity" )
   public static final String SP_TOTALGROSS = "totalgross";
  /**
    * <b>Fluent Client</b> search parameter constant for <b>totalgross</b>
    * <p>
-   * Description: <b>Gross toal of this Invoice</b><br>
+   * Description: <b>Gross total of this Invoice</b><br>
    * Type: <b>quantity</b><br>
    * Path: <b>Invoice.totalGross</b><br>
    * </p>
@@ -2560,17 +2570,17 @@ public class Invoice extends DomainResource {
  /**
    * Search parameter: <b>participant-role</b>
    * <p>
-   * Description: <b>Type of involevent in creation of this Invoice</b><br>
+   * Description: <b>Type of involvement in creation of this Invoice</b><br>
    * Type: <b>token</b><br>
    * Path: <b>Invoice.participant.role</b><br>
    * </p>
    */
-  @SearchParamDefinition(name="participant-role", path="Invoice.participant.role", description="Type of involevent in creation of this Invoice", type="token" )
+  @SearchParamDefinition(name="participant-role", path="Invoice.participant.role", description="Type of involvement in creation of this Invoice", type="token" )
   public static final String SP_PARTICIPANT_ROLE = "participant-role";
  /**
    * <b>Fluent Client</b> search parameter constant for <b>participant-role</b>
    * <p>
-   * Description: <b>Type of involevent in creation of this Invoice</b><br>
+   * Description: <b>Type of involvement in creation of this Invoice</b><br>
    * Type: <b>token</b><br>
    * Path: <b>Invoice.participant.role</b><br>
    * </p>
@@ -2631,7 +2641,7 @@ public class Invoice extends DomainResource {
    * Path: <b>Invoice.participant.actor</b><br>
    * </p>
    */
-  @SearchParamDefinition(name="participant", path="Invoice.participant.actor", description="Individual who was involved", type="reference", providesMembershipIn={ @ca.uhn.fhir.model.api.annotation.Compartment(name="Device"), @ca.uhn.fhir.model.api.annotation.Compartment(name="Practitioner") }, target={Device.class, Organization.class, Patient.class, Practitioner.class, RelatedPerson.class } )
+  @SearchParamDefinition(name="participant", path="Invoice.participant.actor", description="Individual who was involved", type="reference", providesMembershipIn={ @ca.uhn.fhir.model.api.annotation.Compartment(name="Device"), @ca.uhn.fhir.model.api.annotation.Compartment(name="Practitioner") }, target={Device.class, Organization.class, Patient.class, Practitioner.class, PractitionerRole.class, RelatedPerson.class } )
   public static final String SP_PARTICIPANT = "participant";
  /**
    * <b>Fluent Client</b> search parameter constant for <b>participant</b>
@@ -2677,7 +2687,7 @@ public class Invoice extends DomainResource {
    * Path: <b>Invoice.subject</b><br>
    * </p>
    */
-  @SearchParamDefinition(name="patient", path="Invoice.subject", description="Recipient(s) of goods and services", type="reference", providesMembershipIn={ @ca.uhn.fhir.model.api.annotation.Compartment(name="Patient") }, target={Patient.class } )
+  @SearchParamDefinition(name="patient", path="Invoice.subject.where(resolve() is Patient)", description="Recipient(s) of goods and services", type="reference", providesMembershipIn={ @ca.uhn.fhir.model.api.annotation.Compartment(name="Patient") }, target={Patient.class } )
   public static final String SP_PATIENT = "patient";
  /**
    * <b>Fluent Client</b> search parameter constant for <b>patient</b>

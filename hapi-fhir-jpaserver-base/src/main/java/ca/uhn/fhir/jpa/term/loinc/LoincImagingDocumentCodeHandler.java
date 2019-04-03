@@ -4,7 +4,7 @@ package ca.uhn.fhir.jpa.term.loinc;
  * #%L
  * HAPI FHIR JPA Server
  * %%
- * Copyright (C) 2014 - 2018 University Health Network
+ * Copyright (C) 2014 - 2019 University Health Network
  * %%
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -36,7 +36,7 @@ import static org.apache.commons.lang3.StringUtils.trim;
 public class LoincImagingDocumentCodeHandler extends BaseLoincHandler implements IRecordHandler {
 
 	public static final String VS_ID = "loinc-imaging-document-codes";
-	public static final String VS_URI = "http://loinc.org/fhir/loinc-imaging-document-codes";
+	public static final String VS_URI = "http://loinc.org/vs/loinc-imaging-document-codes";
 	public static final String VS_NAME = "LOINC Imaging Document Codes";
 
 	public LoincImagingDocumentCodeHandler(Map<String, TermConcept> theCode2concept, List<ValueSet> theValueSets, List<ConceptMap> theConceptMaps, Properties theUploadProperties) {

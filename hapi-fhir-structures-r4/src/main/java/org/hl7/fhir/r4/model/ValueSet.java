@@ -29,7 +29,7 @@ package org.hl7.fhir.r4.model;
   
 */
 
-// Generated on Sun, May 6, 2018 17:51-0400 for FHIR v3.4.0
+// Generated on Thu, Dec 27, 2018 10:06-0500 for FHIR v4.0.0
 
 import java.util.*;
 
@@ -44,10 +44,10 @@ import ca.uhn.fhir.model.api.annotation.Block;
 import org.hl7.fhir.instance.model.api.*;
 import org.hl7.fhir.exceptions.FHIRException;
 /**
- * A ValueSet resource specifies a set of codes drawn from one or more code systems, intended for use in a particular context. Value sets link between [[[CodeSystem]]] definitions and their use in [coded elements](terminologies.html).
+ * A ValueSet resource instance specifies a set of codes drawn from one or more code systems, intended for use in a particular context. Value sets link between [[[CodeSystem]]] definitions and their use in [coded elements](terminologies.html).
  */
-@ResourceDef(name="ValueSet", profile="http://hl7.org/fhir/Profile/ValueSet")
-@ChildOrder(names={"url", "identifier", "version", "name", "title", "status", "experimental", "date", "publisher", "contact", "description", "useContext", "jurisdiction", "immutable", "purpose", "copyright", "extensible", "compose", "expansion"})
+@ResourceDef(name="ValueSet", profile="http://hl7.org/fhir/StructureDefinition/ValueSet")
+@ChildOrder(names={"url", "identifier", "version", "name", "title", "status", "experimental", "date", "publisher", "contact", "description", "useContext", "jurisdiction", "immutable", "purpose", "copyright", "compose", "expansion"})
 public class ValueSet extends MetadataResource {
 
     public enum FilterOperator {
@@ -56,11 +56,11 @@ public class ValueSet extends MetadataResource {
          */
         EQUAL, 
         /**
-         * Includes all concept ids that have a transitive is-a relationship with the concept Id provided as the value, including the provided concept itself (i.e. include child codes)
+         * Includes all concept ids that have a transitive is-a relationship with the concept Id provided as the value, including the provided concept itself (include descendant codes and self).
          */
         ISA, 
         /**
-         * Includes all concept ids that have a transitive is-a relationship with the concept Id provided as the value, excluding the provided concept itself (i.e. include child codes)
+         * Includes all concept ids that have a transitive is-a relationship with the concept Id provided as the value, excluding the provided concept itself i.e. include descendant codes only).
          */
         DESCENDENTOF, 
         /**
@@ -80,11 +80,11 @@ public class ValueSet extends MetadataResource {
          */
         NOTIN, 
         /**
-         * Includes all concept ids that have a transitive is-a relationship from the concept Id provided as the value, including the provided concept itself (e.g. include parent codes)
+         * Includes all concept ids that have a transitive is-a relationship from the concept Id provided as the value, including the provided concept itself (i.e. include ancestor codes and self).
          */
         GENERALIZES, 
         /**
-         * The specified property of the code has at least one value (if the specified value is true; if the specified value is false, then matches when the specified property of the code has no values)
+         * The specified property of the code has at least one value (if the specified value is true; if the specified value is false, then matches when the specified property of the code has no values).
          */
         EXISTS, 
         /**
@@ -148,14 +148,14 @@ public class ValueSet extends MetadataResource {
         public String getDefinition() {
           switch (this) {
             case EQUAL: return "The specified property of the code equals the provided value.";
-            case ISA: return "Includes all concept ids that have a transitive is-a relationship with the concept Id provided as the value, including the provided concept itself (i.e. include child codes)";
-            case DESCENDENTOF: return "Includes all concept ids that have a transitive is-a relationship with the concept Id provided as the value, excluding the provided concept itself (i.e. include child codes)";
+            case ISA: return "Includes all concept ids that have a transitive is-a relationship with the concept Id provided as the value, including the provided concept itself (include descendant codes and self).";
+            case DESCENDENTOF: return "Includes all concept ids that have a transitive is-a relationship with the concept Id provided as the value, excluding the provided concept itself i.e. include descendant codes only).";
             case ISNOTA: return "The specified property of the code does not have an is-a relationship with the provided value.";
             case REGEX: return "The specified property of the code  matches the regex specified in the provided value.";
             case IN: return "The specified property of the code is in the set of codes or concepts specified in the provided value (comma separated list).";
             case NOTIN: return "The specified property of the code is not in the set of codes or concepts specified in the provided value (comma separated list).";
-            case GENERALIZES: return "Includes all concept ids that have a transitive is-a relationship from the concept Id provided as the value, including the provided concept itself (e.g. include parent codes)";
-            case EXISTS: return "The specified property of the code has at least one value (if the specified value is true; if the specified value is false, then matches when the specified property of the code has no values)";
+            case GENERALIZES: return "Includes all concept ids that have a transitive is-a relationship from the concept Id provided as the value, including the provided concept itself (i.e. include ancestor codes and self).";
+            case EXISTS: return "The specified property of the code has at least one value (if the specified value is true; if the specified value is false, then matches when the specified property of the code has no values).";
             default: return "?";
           }
         }
@@ -257,17 +257,17 @@ public class ValueSet extends MetadataResource {
     @Block()
     public static class ValueSetComposeComponent extends BackboneElement implements IBaseBackboneElement {
         /**
-         * If a locked date is defined, then the Content Logical Definition must be evaluated using the current version as of the locked date for referenced code system(s) and value set instances where ValueSet.compose.include.version is not defined.
+         * The Locked Date is  the effective date that is used to determine the version of all referenced Code Systems and Value Set Definitions included in the compose that are not already tied to a specific version.
          */
         @Child(name = "lockedDate", type = {DateType.class}, order=1, min=0, max=1, modifier=false, summary=true)
-        @Description(shortDefinition="Fixed date for version-less references (transitive)", formalDefinition="If a locked date is defined, then the Content Logical Definition must be evaluated using the current version as of the locked date for referenced code system(s) and value set instances where ValueSet.compose.include.version is not defined." )
+        @Description(shortDefinition="Fixed date for references with no specified version (transitive)", formalDefinition="The Locked Date is  the effective date that is used to determine the version of all referenced Code Systems and Value Set Definitions included in the compose that are not already tied to a specific version." )
         protected DateType lockedDate;
 
         /**
-         * Whether inactive codes - codes that are not approved for current use - are in the value set. If inactive = true, inactive codes are to be included in the expansion, if inactive = false, the inactive codes will not be included in the expansion. If absent, the behavior is determined by the implementation, or by the applicable ExpansionProfile (but generally, inactive codes would be expected to be included).
+         * Whether inactive codes - codes that are not approved for current use - are in the value set. If inactive = true, inactive codes are to be included in the expansion, if inactive = false, the inactive codes will not be included in the expansion. If absent, the behavior is determined by the implementation, or by the applicable $expand parameters (but generally, inactive codes would be expected to be included).
          */
         @Child(name = "inactive", type = {BooleanType.class}, order=2, min=0, max=1, modifier=false, summary=true)
-        @Description(shortDefinition="Whether inactive codes are in the value set", formalDefinition="Whether inactive codes - codes that are not approved for current use - are in the value set. If inactive = true, inactive codes are to be included in the expansion, if inactive = false, the inactive codes will not be included in the expansion. If absent, the behavior is determined by the implementation, or by the applicable ExpansionProfile (but generally, inactive codes would be expected to be included)." )
+        @Description(shortDefinition="Whether inactive codes are in the value set", formalDefinition="Whether inactive codes - codes that are not approved for current use - are in the value set. If inactive = true, inactive codes are to be included in the expansion, if inactive = false, the inactive codes will not be included in the expansion. If absent, the behavior is determined by the implementation, or by the applicable $expand parameters (but generally, inactive codes would be expected to be included)." )
         protected BooleanType inactive;
 
         /**
@@ -294,7 +294,7 @@ public class ValueSet extends MetadataResource {
       }
 
         /**
-         * @return {@link #lockedDate} (If a locked date is defined, then the Content Logical Definition must be evaluated using the current version as of the locked date for referenced code system(s) and value set instances where ValueSet.compose.include.version is not defined.). This is the underlying object with id, value and extensions. The accessor "getLockedDate" gives direct access to the value
+         * @return {@link #lockedDate} (The Locked Date is  the effective date that is used to determine the version of all referenced Code Systems and Value Set Definitions included in the compose that are not already tied to a specific version.). This is the underlying object with id, value and extensions. The accessor "getLockedDate" gives direct access to the value
          */
         public DateType getLockedDateElement() { 
           if (this.lockedDate == null)
@@ -314,7 +314,7 @@ public class ValueSet extends MetadataResource {
         }
 
         /**
-         * @param value {@link #lockedDate} (If a locked date is defined, then the Content Logical Definition must be evaluated using the current version as of the locked date for referenced code system(s) and value set instances where ValueSet.compose.include.version is not defined.). This is the underlying object with id, value and extensions. The accessor "getLockedDate" gives direct access to the value
+         * @param value {@link #lockedDate} (The Locked Date is  the effective date that is used to determine the version of all referenced Code Systems and Value Set Definitions included in the compose that are not already tied to a specific version.). This is the underlying object with id, value and extensions. The accessor "getLockedDate" gives direct access to the value
          */
         public ValueSetComposeComponent setLockedDateElement(DateType value) { 
           this.lockedDate = value;
@@ -322,14 +322,14 @@ public class ValueSet extends MetadataResource {
         }
 
         /**
-         * @return If a locked date is defined, then the Content Logical Definition must be evaluated using the current version as of the locked date for referenced code system(s) and value set instances where ValueSet.compose.include.version is not defined.
+         * @return The Locked Date is  the effective date that is used to determine the version of all referenced Code Systems and Value Set Definitions included in the compose that are not already tied to a specific version.
          */
         public Date getLockedDate() { 
           return this.lockedDate == null ? null : this.lockedDate.getValue();
         }
 
         /**
-         * @param value If a locked date is defined, then the Content Logical Definition must be evaluated using the current version as of the locked date for referenced code system(s) and value set instances where ValueSet.compose.include.version is not defined.
+         * @param value The Locked Date is  the effective date that is used to determine the version of all referenced Code Systems and Value Set Definitions included in the compose that are not already tied to a specific version.
          */
         public ValueSetComposeComponent setLockedDate(Date value) { 
           if (value == null)
@@ -343,7 +343,7 @@ public class ValueSet extends MetadataResource {
         }
 
         /**
-         * @return {@link #inactive} (Whether inactive codes - codes that are not approved for current use - are in the value set. If inactive = true, inactive codes are to be included in the expansion, if inactive = false, the inactive codes will not be included in the expansion. If absent, the behavior is determined by the implementation, or by the applicable ExpansionProfile (but generally, inactive codes would be expected to be included).). This is the underlying object with id, value and extensions. The accessor "getInactive" gives direct access to the value
+         * @return {@link #inactive} (Whether inactive codes - codes that are not approved for current use - are in the value set. If inactive = true, inactive codes are to be included in the expansion, if inactive = false, the inactive codes will not be included in the expansion. If absent, the behavior is determined by the implementation, or by the applicable $expand parameters (but generally, inactive codes would be expected to be included).). This is the underlying object with id, value and extensions. The accessor "getInactive" gives direct access to the value
          */
         public BooleanType getInactiveElement() { 
           if (this.inactive == null)
@@ -363,7 +363,7 @@ public class ValueSet extends MetadataResource {
         }
 
         /**
-         * @param value {@link #inactive} (Whether inactive codes - codes that are not approved for current use - are in the value set. If inactive = true, inactive codes are to be included in the expansion, if inactive = false, the inactive codes will not be included in the expansion. If absent, the behavior is determined by the implementation, or by the applicable ExpansionProfile (but generally, inactive codes would be expected to be included).). This is the underlying object with id, value and extensions. The accessor "getInactive" gives direct access to the value
+         * @param value {@link #inactive} (Whether inactive codes - codes that are not approved for current use - are in the value set. If inactive = true, inactive codes are to be included in the expansion, if inactive = false, the inactive codes will not be included in the expansion. If absent, the behavior is determined by the implementation, or by the applicable $expand parameters (but generally, inactive codes would be expected to be included).). This is the underlying object with id, value and extensions. The accessor "getInactive" gives direct access to the value
          */
         public ValueSetComposeComponent setInactiveElement(BooleanType value) { 
           this.inactive = value;
@@ -371,14 +371,14 @@ public class ValueSet extends MetadataResource {
         }
 
         /**
-         * @return Whether inactive codes - codes that are not approved for current use - are in the value set. If inactive = true, inactive codes are to be included in the expansion, if inactive = false, the inactive codes will not be included in the expansion. If absent, the behavior is determined by the implementation, or by the applicable ExpansionProfile (but generally, inactive codes would be expected to be included).
+         * @return Whether inactive codes - codes that are not approved for current use - are in the value set. If inactive = true, inactive codes are to be included in the expansion, if inactive = false, the inactive codes will not be included in the expansion. If absent, the behavior is determined by the implementation, or by the applicable $expand parameters (but generally, inactive codes would be expected to be included).
          */
         public boolean getInactive() { 
           return this.inactive == null || this.inactive.isEmpty() ? false : this.inactive.getValue();
         }
 
         /**
-         * @param value Whether inactive codes - codes that are not approved for current use - are in the value set. If inactive = true, inactive codes are to be included in the expansion, if inactive = false, the inactive codes will not be included in the expansion. If absent, the behavior is determined by the implementation, or by the applicable ExpansionProfile (but generally, inactive codes would be expected to be included).
+         * @param value Whether inactive codes - codes that are not approved for current use - are in the value set. If inactive = true, inactive codes are to be included in the expansion, if inactive = false, the inactive codes will not be included in the expansion. If absent, the behavior is determined by the implementation, or by the applicable $expand parameters (but generally, inactive codes would be expected to be included).
          */
         public ValueSetComposeComponent setInactive(boolean value) { 
             if (this.inactive == null)
@@ -495,8 +495,8 @@ public class ValueSet extends MetadataResource {
 
         protected void listChildren(List<Property> children) {
           super.listChildren(children);
-          children.add(new Property("lockedDate", "date", "If a locked date is defined, then the Content Logical Definition must be evaluated using the current version as of the locked date for referenced code system(s) and value set instances where ValueSet.compose.include.version is not defined.", 0, 1, lockedDate));
-          children.add(new Property("inactive", "boolean", "Whether inactive codes - codes that are not approved for current use - are in the value set. If inactive = true, inactive codes are to be included in the expansion, if inactive = false, the inactive codes will not be included in the expansion. If absent, the behavior is determined by the implementation, or by the applicable ExpansionProfile (but generally, inactive codes would be expected to be included).", 0, 1, inactive));
+          children.add(new Property("lockedDate", "date", "The Locked Date is  the effective date that is used to determine the version of all referenced Code Systems and Value Set Definitions included in the compose that are not already tied to a specific version.", 0, 1, lockedDate));
+          children.add(new Property("inactive", "boolean", "Whether inactive codes - codes that are not approved for current use - are in the value set. If inactive = true, inactive codes are to be included in the expansion, if inactive = false, the inactive codes will not be included in the expansion. If absent, the behavior is determined by the implementation, or by the applicable $expand parameters (but generally, inactive codes would be expected to be included).", 0, 1, inactive));
           children.add(new Property("include", "", "Include one or more codes from a code system or other value set(s).", 0, java.lang.Integer.MAX_VALUE, include));
           children.add(new Property("exclude", "@ValueSet.compose.include", "Exclude one or more codes from the value set based on code system filters and/or other value sets.", 0, java.lang.Integer.MAX_VALUE, exclude));
         }
@@ -504,8 +504,8 @@ public class ValueSet extends MetadataResource {
         @Override
         public Property getNamedProperty(int _hash, String _name, boolean _checkValid) throws FHIRException {
           switch (_hash) {
-          case 1391591896: /*lockedDate*/  return new Property("lockedDate", "date", "If a locked date is defined, then the Content Logical Definition must be evaluated using the current version as of the locked date for referenced code system(s) and value set instances where ValueSet.compose.include.version is not defined.", 0, 1, lockedDate);
-          case 24665195: /*inactive*/  return new Property("inactive", "boolean", "Whether inactive codes - codes that are not approved for current use - are in the value set. If inactive = true, inactive codes are to be included in the expansion, if inactive = false, the inactive codes will not be included in the expansion. If absent, the behavior is determined by the implementation, or by the applicable ExpansionProfile (but generally, inactive codes would be expected to be included).", 0, 1, inactive);
+          case 1391591896: /*lockedDate*/  return new Property("lockedDate", "date", "The Locked Date is  the effective date that is used to determine the version of all referenced Code Systems and Value Set Definitions included in the compose that are not already tied to a specific version.", 0, 1, lockedDate);
+          case 24665195: /*inactive*/  return new Property("inactive", "boolean", "Whether inactive codes - codes that are not approved for current use - are in the value set. If inactive = true, inactive codes are to be included in the expansion, if inactive = false, the inactive codes will not be included in the expansion. If absent, the behavior is determined by the implementation, or by the applicable $expand parameters (but generally, inactive codes would be expected to be included).", 0, 1, inactive);
           case 1942574248: /*include*/  return new Property("include", "", "Include one or more codes from a code system or other value set(s).", 0, java.lang.Integer.MAX_VALUE, include);
           case -1321148966: /*exclude*/  return new Property("exclude", "@ValueSet.compose.include", "Exclude one or more codes from the value set based on code system filters and/or other value sets.", 0, java.lang.Integer.MAX_VALUE, exclude);
           default: return super.getNamedProperty(_hash, _name, _checkValid);
@@ -663,10 +663,10 @@ public class ValueSet extends MetadataResource {
         protected UriType system;
 
         /**
-         * The version of the code system that the codes are selected from.
+         * The version of the code system that the codes are selected from, or the special version '*' for all versions.
          */
         @Child(name = "version", type = {StringType.class}, order=2, min=0, max=1, modifier=false, summary=true)
-        @Description(shortDefinition="Specific version of the code system referred to", formalDefinition="The version of the code system that the codes are selected from." )
+        @Description(shortDefinition="Specific version of the code system referred to", formalDefinition="The version of the code system that the codes are selected from, or the special version '*' for all versions." )
         protected StringType version;
 
         /**
@@ -677,10 +677,10 @@ public class ValueSet extends MetadataResource {
         protected List<ConceptReferenceComponent> concept;
 
         /**
-         * Select concepts by specify a matching criteria based on the properties (including relationships) defined by the system. If multiple filters are specified, they SHALL all be true.
+         * Select concepts by specify a matching criterion based on the properties (including relationships) defined by the system, or on filters defined by the system. If multiple filters are specified, they SHALL all be true.
          */
         @Child(name = "filter", type = {}, order=4, min=0, max=Child.MAX_UNLIMITED, modifier=false, summary=true)
-        @Description(shortDefinition="Select codes/concepts by their properties (including relationships)", formalDefinition="Select concepts by specify a matching criteria based on the properties (including relationships) defined by the system. If multiple filters are specified, they SHALL all be true." )
+        @Description(shortDefinition="Select codes/concepts by their properties (including relationships)", formalDefinition="Select concepts by specify a matching criterion based on the properties (including relationships) defined by the system, or on filters defined by the system. If multiple filters are specified, they SHALL all be true." )
         protected List<ConceptSetFilterComponent> filter;
 
         /**
@@ -749,7 +749,7 @@ public class ValueSet extends MetadataResource {
         }
 
         /**
-         * @return {@link #version} (The version of the code system that the codes are selected from.). This is the underlying object with id, value and extensions. The accessor "getVersion" gives direct access to the value
+         * @return {@link #version} (The version of the code system that the codes are selected from, or the special version '*' for all versions.). This is the underlying object with id, value and extensions. The accessor "getVersion" gives direct access to the value
          */
         public StringType getVersionElement() { 
           if (this.version == null)
@@ -769,7 +769,7 @@ public class ValueSet extends MetadataResource {
         }
 
         /**
-         * @param value {@link #version} (The version of the code system that the codes are selected from.). This is the underlying object with id, value and extensions. The accessor "getVersion" gives direct access to the value
+         * @param value {@link #version} (The version of the code system that the codes are selected from, or the special version '*' for all versions.). This is the underlying object with id, value and extensions. The accessor "getVersion" gives direct access to the value
          */
         public ConceptSetComponent setVersionElement(StringType value) { 
           this.version = value;
@@ -777,14 +777,14 @@ public class ValueSet extends MetadataResource {
         }
 
         /**
-         * @return The version of the code system that the codes are selected from.
+         * @return The version of the code system that the codes are selected from, or the special version '*' for all versions.
          */
         public String getVersion() { 
           return this.version == null ? null : this.version.getValue();
         }
 
         /**
-         * @param value The version of the code system that the codes are selected from.
+         * @param value The version of the code system that the codes are selected from, or the special version '*' for all versions.
          */
         public ConceptSetComponent setVersion(String value) { 
           if (Utilities.noString(value))
@@ -851,7 +851,7 @@ public class ValueSet extends MetadataResource {
         }
 
         /**
-         * @return {@link #filter} (Select concepts by specify a matching criteria based on the properties (including relationships) defined by the system. If multiple filters are specified, they SHALL all be true.)
+         * @return {@link #filter} (Select concepts by specify a matching criterion based on the properties (including relationships) defined by the system, or on filters defined by the system. If multiple filters are specified, they SHALL all be true.)
          */
         public List<ConceptSetFilterComponent> getFilter() { 
           if (this.filter == null)
@@ -967,9 +967,9 @@ public class ValueSet extends MetadataResource {
         protected void listChildren(List<Property> children) {
           super.listChildren(children);
           children.add(new Property("system", "uri", "An absolute URI which is the code system from which the selected codes come from.", 0, 1, system));
-          children.add(new Property("version", "string", "The version of the code system that the codes are selected from.", 0, 1, version));
+          children.add(new Property("version", "string", "The version of the code system that the codes are selected from, or the special version '*' for all versions.", 0, 1, version));
           children.add(new Property("concept", "", "Specifies a concept to be included or excluded.", 0, java.lang.Integer.MAX_VALUE, concept));
-          children.add(new Property("filter", "", "Select concepts by specify a matching criteria based on the properties (including relationships) defined by the system. If multiple filters are specified, they SHALL all be true.", 0, java.lang.Integer.MAX_VALUE, filter));
+          children.add(new Property("filter", "", "Select concepts by specify a matching criterion based on the properties (including relationships) defined by the system, or on filters defined by the system. If multiple filters are specified, they SHALL all be true.", 0, java.lang.Integer.MAX_VALUE, filter));
           children.add(new Property("valueSet", "canonical(ValueSet)", "Selects the concepts found in this value set (based on its value set definition). This is an absolute URI that is a reference to ValueSet.url.  If multiple value sets are specified this includes the union of the contents of all of the referenced value sets.", 0, java.lang.Integer.MAX_VALUE, valueSet));
         }
 
@@ -977,9 +977,9 @@ public class ValueSet extends MetadataResource {
         public Property getNamedProperty(int _hash, String _name, boolean _checkValid) throws FHIRException {
           switch (_hash) {
           case -887328209: /*system*/  return new Property("system", "uri", "An absolute URI which is the code system from which the selected codes come from.", 0, 1, system);
-          case 351608024: /*version*/  return new Property("version", "string", "The version of the code system that the codes are selected from.", 0, 1, version);
+          case 351608024: /*version*/  return new Property("version", "string", "The version of the code system that the codes are selected from, or the special version '*' for all versions.", 0, 1, version);
           case 951024232: /*concept*/  return new Property("concept", "", "Specifies a concept to be included or excluded.", 0, java.lang.Integer.MAX_VALUE, concept);
-          case -1274492040: /*filter*/  return new Property("filter", "", "Select concepts by specify a matching criteria based on the properties (including relationships) defined by the system. If multiple filters are specified, they SHALL all be true.", 0, java.lang.Integer.MAX_VALUE, filter);
+          case -1274492040: /*filter*/  return new Property("filter", "", "Select concepts by specify a matching criterion based on the properties (including relationships) defined by the system, or on filters defined by the system. If multiple filters are specified, they SHALL all be true.", 0, java.lang.Integer.MAX_VALUE, filter);
           case -1410174671: /*valueSet*/  return new Property("valueSet", "canonical(ValueSet)", "Selects the concepts found in this value set (based on its value set definition). This is an absolute URI that is a reference to ValueSet.url.  If multiple value sets are specified this includes the union of the contents of all of the referenced value sets.", 0, java.lang.Integer.MAX_VALUE, valueSet);
           default: return super.getNamedProperty(_hash, _name, _checkValid);
           }
@@ -1482,10 +1482,10 @@ public class ValueSet extends MetadataResource {
         protected CodeType language;
 
         /**
-         * A code that details how this designation would be used.
+         * A code that represents types of uses of designations.
          */
         @Child(name = "use", type = {Coding.class}, order=2, min=0, max=1, modifier=false, summary=false)
-        @Description(shortDefinition="Details how this designation would be used", formalDefinition="A code that details how this designation would be used." )
+        @Description(shortDefinition="Types of uses of designations", formalDefinition="A code that represents types of uses of designations." )
         @ca.uhn.fhir.model.api.annotation.Binding(valueSet="http://hl7.org/fhir/ValueSet/designation-use")
         protected Coding use;
 
@@ -1563,7 +1563,7 @@ public class ValueSet extends MetadataResource {
         }
 
         /**
-         * @return {@link #use} (A code that details how this designation would be used.)
+         * @return {@link #use} (A code that represents types of uses of designations.)
          */
         public Coding getUse() { 
           if (this.use == null)
@@ -1579,7 +1579,7 @@ public class ValueSet extends MetadataResource {
         }
 
         /**
-         * @param value {@link #use} (A code that details how this designation would be used.)
+         * @param value {@link #use} (A code that represents types of uses of designations.)
          */
         public ConceptReferenceDesignationComponent setUse(Coding value) { 
           this.use = value;
@@ -1634,7 +1634,7 @@ public class ValueSet extends MetadataResource {
         protected void listChildren(List<Property> children) {
           super.listChildren(children);
           children.add(new Property("language", "code", "The language this designation is defined for.", 0, 1, language));
-          children.add(new Property("use", "Coding", "A code that details how this designation would be used.", 0, 1, use));
+          children.add(new Property("use", "Coding", "A code that represents types of uses of designations.", 0, 1, use));
           children.add(new Property("value", "string", "The text value for this designation.", 0, 1, value));
         }
 
@@ -1642,7 +1642,7 @@ public class ValueSet extends MetadataResource {
         public Property getNamedProperty(int _hash, String _name, boolean _checkValid) throws FHIRException {
           switch (_hash) {
           case -1613589672: /*language*/  return new Property("language", "code", "The language this designation is defined for.", 0, 1, language);
-          case 116103: /*use*/  return new Property("use", "Coding", "A code that details how this designation would be used.", 0, 1, use);
+          case 116103: /*use*/  return new Property("use", "Coding", "A code that represents types of uses of designations.", 0, 1, use);
           case 111972721: /*value*/  return new Property("value", "string", "The text value for this designation.", 0, 1, value);
           default: return super.getNamedProperty(_hash, _name, _checkValid);
           }
@@ -1772,10 +1772,10 @@ public class ValueSet extends MetadataResource {
     @Block()
     public static class ConceptSetFilterComponent extends BackboneElement implements IBaseBackboneElement {
         /**
-         * A code that identifies a property defined in the code system.
+         * A code that identifies a property or a filter defined in the code system.
          */
         @Child(name = "property", type = {CodeType.class}, order=1, min=1, max=1, modifier=false, summary=true)
-        @Description(shortDefinition="A property defined by the code system", formalDefinition="A code that identifies a property defined in the code system." )
+        @Description(shortDefinition="A property/filter defined by the code system", formalDefinition="A code that identifies a property or a filter defined in the code system." )
         protected CodeType property;
 
         /**
@@ -1787,10 +1787,10 @@ public class ValueSet extends MetadataResource {
         protected Enumeration<FilterOperator> op;
 
         /**
-         * The match value may be either a code defined by the system, or a string value, which is a regex match on the literal string of the property value when the operation is 'regex', or one of the values (true and false), when the operation is 'exists'.
+         * The match value may be either a code defined by the system, or a string value, which is a regex match on the literal string of the property value  (if the filter represents a property defined in CodeSystem) or of the system filter value (if the filter represents a filter defined in CodeSystem) when the operation is 'regex', or one of the values (true and false), when the operation is 'exists'.
          */
         @Child(name = "value", type = {StringType.class}, order=3, min=1, max=1, modifier=false, summary=true)
-        @Description(shortDefinition="Code from the system, or regex criteria, or boolean value for exists", formalDefinition="The match value may be either a code defined by the system, or a string value, which is a regex match on the literal string of the property value when the operation is 'regex', or one of the values (true and false), when the operation is 'exists'." )
+        @Description(shortDefinition="Code from the system, or regex criteria, or boolean value for exists", formalDefinition="The match value may be either a code defined by the system, or a string value, which is a regex match on the literal string of the property value  (if the filter represents a property defined in CodeSystem) or of the system filter value (if the filter represents a filter defined in CodeSystem) when the operation is 'regex', or one of the values (true and false), when the operation is 'exists'." )
         protected StringType value;
 
         private static final long serialVersionUID = 1259153492L;
@@ -1813,7 +1813,7 @@ public class ValueSet extends MetadataResource {
       }
 
         /**
-         * @return {@link #property} (A code that identifies a property defined in the code system.). This is the underlying object with id, value and extensions. The accessor "getProperty" gives direct access to the value
+         * @return {@link #property} (A code that identifies a property or a filter defined in the code system.). This is the underlying object with id, value and extensions. The accessor "getProperty" gives direct access to the value
          */
         public CodeType getPropertyElement() { 
           if (this.property == null)
@@ -1833,7 +1833,7 @@ public class ValueSet extends MetadataResource {
         }
 
         /**
-         * @param value {@link #property} (A code that identifies a property defined in the code system.). This is the underlying object with id, value and extensions. The accessor "getProperty" gives direct access to the value
+         * @param value {@link #property} (A code that identifies a property or a filter defined in the code system.). This is the underlying object with id, value and extensions. The accessor "getProperty" gives direct access to the value
          */
         public ConceptSetFilterComponent setPropertyElement(CodeType value) { 
           this.property = value;
@@ -1841,14 +1841,14 @@ public class ValueSet extends MetadataResource {
         }
 
         /**
-         * @return A code that identifies a property defined in the code system.
+         * @return A code that identifies a property or a filter defined in the code system.
          */
         public String getProperty() { 
           return this.property == null ? null : this.property.getValue();
         }
 
         /**
-         * @param value A code that identifies a property defined in the code system.
+         * @param value A code that identifies a property or a filter defined in the code system.
          */
         public ConceptSetFilterComponent setProperty(String value) { 
             if (this.property == null)
@@ -1903,7 +1903,7 @@ public class ValueSet extends MetadataResource {
         }
 
         /**
-         * @return {@link #value} (The match value may be either a code defined by the system, or a string value, which is a regex match on the literal string of the property value when the operation is 'regex', or one of the values (true and false), when the operation is 'exists'.). This is the underlying object with id, value and extensions. The accessor "getValue" gives direct access to the value
+         * @return {@link #value} (The match value may be either a code defined by the system, or a string value, which is a regex match on the literal string of the property value  (if the filter represents a property defined in CodeSystem) or of the system filter value (if the filter represents a filter defined in CodeSystem) when the operation is 'regex', or one of the values (true and false), when the operation is 'exists'.). This is the underlying object with id, value and extensions. The accessor "getValue" gives direct access to the value
          */
         public StringType getValueElement() { 
           if (this.value == null)
@@ -1923,7 +1923,7 @@ public class ValueSet extends MetadataResource {
         }
 
         /**
-         * @param value {@link #value} (The match value may be either a code defined by the system, or a string value, which is a regex match on the literal string of the property value when the operation is 'regex', or one of the values (true and false), when the operation is 'exists'.). This is the underlying object with id, value and extensions. The accessor "getValue" gives direct access to the value
+         * @param value {@link #value} (The match value may be either a code defined by the system, or a string value, which is a regex match on the literal string of the property value  (if the filter represents a property defined in CodeSystem) or of the system filter value (if the filter represents a filter defined in CodeSystem) when the operation is 'regex', or one of the values (true and false), when the operation is 'exists'.). This is the underlying object with id, value and extensions. The accessor "getValue" gives direct access to the value
          */
         public ConceptSetFilterComponent setValueElement(StringType value) { 
           this.value = value;
@@ -1931,14 +1931,14 @@ public class ValueSet extends MetadataResource {
         }
 
         /**
-         * @return The match value may be either a code defined by the system, or a string value, which is a regex match on the literal string of the property value when the operation is 'regex', or one of the values (true and false), when the operation is 'exists'.
+         * @return The match value may be either a code defined by the system, or a string value, which is a regex match on the literal string of the property value  (if the filter represents a property defined in CodeSystem) or of the system filter value (if the filter represents a filter defined in CodeSystem) when the operation is 'regex', or one of the values (true and false), when the operation is 'exists'.
          */
         public String getValue() { 
           return this.value == null ? null : this.value.getValue();
         }
 
         /**
-         * @param value The match value may be either a code defined by the system, or a string value, which is a regex match on the literal string of the property value when the operation is 'regex', or one of the values (true and false), when the operation is 'exists'.
+         * @param value The match value may be either a code defined by the system, or a string value, which is a regex match on the literal string of the property value  (if the filter represents a property defined in CodeSystem) or of the system filter value (if the filter represents a filter defined in CodeSystem) when the operation is 'regex', or one of the values (true and false), when the operation is 'exists'.
          */
         public ConceptSetFilterComponent setValue(String value) { 
             if (this.value == null)
@@ -1949,17 +1949,17 @@ public class ValueSet extends MetadataResource {
 
         protected void listChildren(List<Property> children) {
           super.listChildren(children);
-          children.add(new Property("property", "code", "A code that identifies a property defined in the code system.", 0, 1, property));
+          children.add(new Property("property", "code", "A code that identifies a property or a filter defined in the code system.", 0, 1, property));
           children.add(new Property("op", "code", "The kind of operation to perform as a part of the filter criteria.", 0, 1, op));
-          children.add(new Property("value", "string", "The match value may be either a code defined by the system, or a string value, which is a regex match on the literal string of the property value when the operation is 'regex', or one of the values (true and false), when the operation is 'exists'.", 0, 1, value));
+          children.add(new Property("value", "string", "The match value may be either a code defined by the system, or a string value, which is a regex match on the literal string of the property value  (if the filter represents a property defined in CodeSystem) or of the system filter value (if the filter represents a filter defined in CodeSystem) when the operation is 'regex', or one of the values (true and false), when the operation is 'exists'.", 0, 1, value));
         }
 
         @Override
         public Property getNamedProperty(int _hash, String _name, boolean _checkValid) throws FHIRException {
           switch (_hash) {
-          case -993141291: /*property*/  return new Property("property", "code", "A code that identifies a property defined in the code system.", 0, 1, property);
+          case -993141291: /*property*/  return new Property("property", "code", "A code that identifies a property or a filter defined in the code system.", 0, 1, property);
           case 3553: /*op*/  return new Property("op", "code", "The kind of operation to perform as a part of the filter criteria.", 0, 1, op);
-          case 111972721: /*value*/  return new Property("value", "string", "The match value may be either a code defined by the system, or a string value, which is a regex match on the literal string of the property value when the operation is 'regex', or one of the values (true and false), when the operation is 'exists'.", 0, 1, value);
+          case 111972721: /*value*/  return new Property("value", "string", "The match value may be either a code defined by the system, or a string value, which is a regex match on the literal string of the property value  (if the filter represents a property defined in CodeSystem) or of the system filter value (if the filter represents a filter defined in CodeSystem) when the operation is 'regex', or one of the values (true and false), when the operation is 'exists'.", 0, 1, value);
           default: return super.getNamedProperty(_hash, _name, _checkValid);
           }
 
@@ -2090,10 +2090,10 @@ public class ValueSet extends MetadataResource {
     @Block()
     public static class ValueSetExpansionComponent extends BackboneElement implements IBaseBackboneElement {
         /**
-         * An identifier that uniquely identifies this expansion of the valueset. Systems may re-use the same identifier as long as the expansion and the definition remain the same, but are not required to do so.
+         * An identifier that uniquely identifies this expansion of the valueset, based on a unique combination of the provided parameters, the system default parameters, and the underlying system code system versions etc. Systems may re-use the same identifier as long as those factors remain the same, and the expansion is the same, but are not required to do so. This is a business identifier.
          */
         @Child(name = "identifier", type = {UriType.class}, order=1, min=0, max=1, modifier=false, summary=false)
-        @Description(shortDefinition="Uniquely identifies this expansion", formalDefinition="An identifier that uniquely identifies this expansion of the valueset. Systems may re-use the same identifier as long as the expansion and the definition remain the same, but are not required to do so." )
+        @Description(shortDefinition="Identifies the value set expansion (business identifier)", formalDefinition="An identifier that uniquely identifies this expansion of the valueset, based on a unique combination of the provided parameters, the system default parameters, and the underlying system code system versions etc. Systems may re-use the same identifier as long as those factors remain the same, and the expansion is the same, but are not required to do so. This is a business identifier." )
         protected UriType identifier;
 
         /**
@@ -2111,10 +2111,10 @@ public class ValueSet extends MetadataResource {
         protected IntegerType total;
 
         /**
-         * If paging is being used, the offset at which this resource starts.  I.e. this resource is a partial view into the expansion. If paging is not being used, this element SHALL not be present.
+         * If paging is being used, the offset at which this resource starts.  I.e. this resource is a partial view into the expansion. If paging is not being used, this element SHALL NOT be present.
          */
         @Child(name = "offset", type = {IntegerType.class}, order=4, min=0, max=1, modifier=false, summary=false)
-        @Description(shortDefinition="Offset at which this resource starts", formalDefinition="If paging is being used, the offset at which this resource starts.  I.e. this resource is a partial view into the expansion. If paging is not being used, this element SHALL not be present." )
+        @Description(shortDefinition="Offset at which this resource starts", formalDefinition="If paging is being used, the offset at which this resource starts.  I.e. this resource is a partial view into the expansion. If paging is not being used, this element SHALL NOT be present." )
         protected IntegerType offset;
 
         /**
@@ -2149,7 +2149,7 @@ public class ValueSet extends MetadataResource {
       }
 
         /**
-         * @return {@link #identifier} (An identifier that uniquely identifies this expansion of the valueset. Systems may re-use the same identifier as long as the expansion and the definition remain the same, but are not required to do so.). This is the underlying object with id, value and extensions. The accessor "getIdentifier" gives direct access to the value
+         * @return {@link #identifier} (An identifier that uniquely identifies this expansion of the valueset, based on a unique combination of the provided parameters, the system default parameters, and the underlying system code system versions etc. Systems may re-use the same identifier as long as those factors remain the same, and the expansion is the same, but are not required to do so. This is a business identifier.). This is the underlying object with id, value and extensions. The accessor "getIdentifier" gives direct access to the value
          */
         public UriType getIdentifierElement() { 
           if (this.identifier == null)
@@ -2169,7 +2169,7 @@ public class ValueSet extends MetadataResource {
         }
 
         /**
-         * @param value {@link #identifier} (An identifier that uniquely identifies this expansion of the valueset. Systems may re-use the same identifier as long as the expansion and the definition remain the same, but are not required to do so.). This is the underlying object with id, value and extensions. The accessor "getIdentifier" gives direct access to the value
+         * @param value {@link #identifier} (An identifier that uniquely identifies this expansion of the valueset, based on a unique combination of the provided parameters, the system default parameters, and the underlying system code system versions etc. Systems may re-use the same identifier as long as those factors remain the same, and the expansion is the same, but are not required to do so. This is a business identifier.). This is the underlying object with id, value and extensions. The accessor "getIdentifier" gives direct access to the value
          */
         public ValueSetExpansionComponent setIdentifierElement(UriType value) { 
           this.identifier = value;
@@ -2177,14 +2177,14 @@ public class ValueSet extends MetadataResource {
         }
 
         /**
-         * @return An identifier that uniquely identifies this expansion of the valueset. Systems may re-use the same identifier as long as the expansion and the definition remain the same, but are not required to do so.
+         * @return An identifier that uniquely identifies this expansion of the valueset, based on a unique combination of the provided parameters, the system default parameters, and the underlying system code system versions etc. Systems may re-use the same identifier as long as those factors remain the same, and the expansion is the same, but are not required to do so. This is a business identifier.
          */
         public String getIdentifier() { 
           return this.identifier == null ? null : this.identifier.getValue();
         }
 
         /**
-         * @param value An identifier that uniquely identifies this expansion of the valueset. Systems may re-use the same identifier as long as the expansion and the definition remain the same, but are not required to do so.
+         * @param value An identifier that uniquely identifies this expansion of the valueset, based on a unique combination of the provided parameters, the system default parameters, and the underlying system code system versions etc. Systems may re-use the same identifier as long as those factors remain the same, and the expansion is the same, but are not required to do so. This is a business identifier.
          */
         public ValueSetExpansionComponent setIdentifier(String value) { 
           if (Utilities.noString(value))
@@ -2288,7 +2288,7 @@ public class ValueSet extends MetadataResource {
         }
 
         /**
-         * @return {@link #offset} (If paging is being used, the offset at which this resource starts.  I.e. this resource is a partial view into the expansion. If paging is not being used, this element SHALL not be present.). This is the underlying object with id, value and extensions. The accessor "getOffset" gives direct access to the value
+         * @return {@link #offset} (If paging is being used, the offset at which this resource starts.  I.e. this resource is a partial view into the expansion. If paging is not being used, this element SHALL NOT be present.). This is the underlying object with id, value and extensions. The accessor "getOffset" gives direct access to the value
          */
         public IntegerType getOffsetElement() { 
           if (this.offset == null)
@@ -2308,7 +2308,7 @@ public class ValueSet extends MetadataResource {
         }
 
         /**
-         * @param value {@link #offset} (If paging is being used, the offset at which this resource starts.  I.e. this resource is a partial view into the expansion. If paging is not being used, this element SHALL not be present.). This is the underlying object with id, value and extensions. The accessor "getOffset" gives direct access to the value
+         * @param value {@link #offset} (If paging is being used, the offset at which this resource starts.  I.e. this resource is a partial view into the expansion. If paging is not being used, this element SHALL NOT be present.). This is the underlying object with id, value and extensions. The accessor "getOffset" gives direct access to the value
          */
         public ValueSetExpansionComponent setOffsetElement(IntegerType value) { 
           this.offset = value;
@@ -2316,14 +2316,14 @@ public class ValueSet extends MetadataResource {
         }
 
         /**
-         * @return If paging is being used, the offset at which this resource starts.  I.e. this resource is a partial view into the expansion. If paging is not being used, this element SHALL not be present.
+         * @return If paging is being used, the offset at which this resource starts.  I.e. this resource is a partial view into the expansion. If paging is not being used, this element SHALL NOT be present.
          */
         public int getOffset() { 
           return this.offset == null || this.offset.isEmpty() ? 0 : this.offset.getValue();
         }
 
         /**
-         * @param value If paging is being used, the offset at which this resource starts.  I.e. this resource is a partial view into the expansion. If paging is not being used, this element SHALL not be present.
+         * @param value If paging is being used, the offset at which this resource starts.  I.e. this resource is a partial view into the expansion. If paging is not being used, this element SHALL NOT be present.
          */
         public ValueSetExpansionComponent setOffset(int value) { 
             if (this.offset == null)
@@ -2440,10 +2440,10 @@ public class ValueSet extends MetadataResource {
 
         protected void listChildren(List<Property> children) {
           super.listChildren(children);
-          children.add(new Property("identifier", "uri", "An identifier that uniquely identifies this expansion of the valueset. Systems may re-use the same identifier as long as the expansion and the definition remain the same, but are not required to do so.", 0, 1, identifier));
+          children.add(new Property("identifier", "uri", "An identifier that uniquely identifies this expansion of the valueset, based on a unique combination of the provided parameters, the system default parameters, and the underlying system code system versions etc. Systems may re-use the same identifier as long as those factors remain the same, and the expansion is the same, but are not required to do so. This is a business identifier.", 0, 1, identifier));
           children.add(new Property("timestamp", "dateTime", "The time at which the expansion was produced by the expanding system.", 0, 1, timestamp));
           children.add(new Property("total", "integer", "The total number of concepts in the expansion. If the number of concept nodes in this resource is less than the stated number, then the server can return more using the offset parameter.", 0, 1, total));
-          children.add(new Property("offset", "integer", "If paging is being used, the offset at which this resource starts.  I.e. this resource is a partial view into the expansion. If paging is not being used, this element SHALL not be present.", 0, 1, offset));
+          children.add(new Property("offset", "integer", "If paging is being used, the offset at which this resource starts.  I.e. this resource is a partial view into the expansion. If paging is not being used, this element SHALL NOT be present.", 0, 1, offset));
           children.add(new Property("parameter", "", "A parameter that controlled the expansion process. These parameters may be used by users of expanded value sets to check whether the expansion is suitable for a particular purpose, or to pick the correct expansion.", 0, java.lang.Integer.MAX_VALUE, parameter));
           children.add(new Property("contains", "", "The codes that are contained in the value set expansion.", 0, java.lang.Integer.MAX_VALUE, contains));
         }
@@ -2451,10 +2451,10 @@ public class ValueSet extends MetadataResource {
         @Override
         public Property getNamedProperty(int _hash, String _name, boolean _checkValid) throws FHIRException {
           switch (_hash) {
-          case -1618432855: /*identifier*/  return new Property("identifier", "uri", "An identifier that uniquely identifies this expansion of the valueset. Systems may re-use the same identifier as long as the expansion and the definition remain the same, but are not required to do so.", 0, 1, identifier);
+          case -1618432855: /*identifier*/  return new Property("identifier", "uri", "An identifier that uniquely identifies this expansion of the valueset, based on a unique combination of the provided parameters, the system default parameters, and the underlying system code system versions etc. Systems may re-use the same identifier as long as those factors remain the same, and the expansion is the same, but are not required to do so. This is a business identifier.", 0, 1, identifier);
           case 55126294: /*timestamp*/  return new Property("timestamp", "dateTime", "The time at which the expansion was produced by the expanding system.", 0, 1, timestamp);
           case 110549828: /*total*/  return new Property("total", "integer", "The total number of concepts in the expansion. If the number of concept nodes in this resource is less than the stated number, then the server can return more using the offset parameter.", 0, 1, total);
-          case -1019779949: /*offset*/  return new Property("offset", "integer", "If paging is being used, the offset at which this resource starts.  I.e. this resource is a partial view into the expansion. If paging is not being used, this element SHALL not be present.", 0, 1, offset);
+          case -1019779949: /*offset*/  return new Property("offset", "integer", "If paging is being used, the offset at which this resource starts.  I.e. this resource is a partial view into the expansion. If paging is not being used, this element SHALL NOT be present.", 0, 1, offset);
           case 1954460585: /*parameter*/  return new Property("parameter", "", "A parameter that controlled the expansion process. These parameters may be used by users of expanded value sets to check whether the expansion is suitable for a particular purpose, or to pick the correct expansion.", 0, java.lang.Integer.MAX_VALUE, parameter);
           case -567445985: /*contains*/  return new Property("contains", "", "The codes that are contained in the value set expansion.", 0, java.lang.Integer.MAX_VALUE, contains);
           default: return super.getNamedProperty(_hash, _name, _checkValid);
@@ -2631,16 +2631,16 @@ public class ValueSet extends MetadataResource {
     @Block()
     public static class ValueSetExpansionParameterComponent extends BackboneElement implements IBaseBackboneElement {
         /**
-         * The name of the parameter.
+         * Name of the input parameter to the $expand operation; may be a server-assigned name for additional default or other server-supplied parameters used to control the expansion process.
          */
         @Child(name = "name", type = {StringType.class}, order=1, min=1, max=1, modifier=false, summary=false)
-        @Description(shortDefinition="Name as assigned by the server", formalDefinition="The name of the parameter." )
+        @Description(shortDefinition="Name as assigned by the client or server", formalDefinition="Name of the input parameter to the $expand operation; may be a server-assigned name for additional default or other server-supplied parameters used to control the expansion process." )
         protected StringType name;
 
         /**
          * The value of the parameter.
          */
-        @Child(name = "value", type = {StringType.class, BooleanType.class, IntegerType.class, DecimalType.class, UriType.class, CodeType.class}, order=2, min=0, max=1, modifier=false, summary=false)
+        @Child(name = "value", type = {StringType.class, BooleanType.class, IntegerType.class, DecimalType.class, UriType.class, CodeType.class, DateTimeType.class}, order=2, min=0, max=1, modifier=false, summary=false)
         @Description(shortDefinition="Value of the named parameter", formalDefinition="The value of the parameter." )
         protected Type value;
 
@@ -2662,7 +2662,7 @@ public class ValueSet extends MetadataResource {
       }
 
         /**
-         * @return {@link #name} (The name of the parameter.). This is the underlying object with id, value and extensions. The accessor "getName" gives direct access to the value
+         * @return {@link #name} (Name of the input parameter to the $expand operation; may be a server-assigned name for additional default or other server-supplied parameters used to control the expansion process.). This is the underlying object with id, value and extensions. The accessor "getName" gives direct access to the value
          */
         public StringType getNameElement() { 
           if (this.name == null)
@@ -2682,7 +2682,7 @@ public class ValueSet extends MetadataResource {
         }
 
         /**
-         * @param value {@link #name} (The name of the parameter.). This is the underlying object with id, value and extensions. The accessor "getName" gives direct access to the value
+         * @param value {@link #name} (Name of the input parameter to the $expand operation; may be a server-assigned name for additional default or other server-supplied parameters used to control the expansion process.). This is the underlying object with id, value and extensions. The accessor "getName" gives direct access to the value
          */
         public ValueSetExpansionParameterComponent setNameElement(StringType value) { 
           this.name = value;
@@ -2690,14 +2690,14 @@ public class ValueSet extends MetadataResource {
         }
 
         /**
-         * @return The name of the parameter.
+         * @return Name of the input parameter to the $expand operation; may be a server-assigned name for additional default or other server-supplied parameters used to control the expansion process.
          */
         public String getName() { 
           return this.name == null ? null : this.name.getValue();
         }
 
         /**
-         * @param value The name of the parameter.
+         * @param value Name of the input parameter to the $expand operation; may be a server-assigned name for additional default or other server-supplied parameters used to control the expansion process.
          */
         public ValueSetExpansionParameterComponent setName(String value) { 
             if (this.name == null)
@@ -2718,7 +2718,7 @@ public class ValueSet extends MetadataResource {
          */
         public StringType getValueStringType() throws FHIRException { 
           if (this.value == null)
-            return null;
+            this.value = new StringType();
           if (!(this.value instanceof StringType))
             throw new FHIRException("Type mismatch: the type StringType was expected, but "+this.value.getClass().getName()+" was encountered");
           return (StringType) this.value;
@@ -2733,7 +2733,7 @@ public class ValueSet extends MetadataResource {
          */
         public BooleanType getValueBooleanType() throws FHIRException { 
           if (this.value == null)
-            return null;
+            this.value = new BooleanType();
           if (!(this.value instanceof BooleanType))
             throw new FHIRException("Type mismatch: the type BooleanType was expected, but "+this.value.getClass().getName()+" was encountered");
           return (BooleanType) this.value;
@@ -2748,7 +2748,7 @@ public class ValueSet extends MetadataResource {
          */
         public IntegerType getValueIntegerType() throws FHIRException { 
           if (this.value == null)
-            return null;
+            this.value = new IntegerType();
           if (!(this.value instanceof IntegerType))
             throw new FHIRException("Type mismatch: the type IntegerType was expected, but "+this.value.getClass().getName()+" was encountered");
           return (IntegerType) this.value;
@@ -2763,7 +2763,7 @@ public class ValueSet extends MetadataResource {
          */
         public DecimalType getValueDecimalType() throws FHIRException { 
           if (this.value == null)
-            return null;
+            this.value = new DecimalType();
           if (!(this.value instanceof DecimalType))
             throw new FHIRException("Type mismatch: the type DecimalType was expected, but "+this.value.getClass().getName()+" was encountered");
           return (DecimalType) this.value;
@@ -2778,7 +2778,7 @@ public class ValueSet extends MetadataResource {
          */
         public UriType getValueUriType() throws FHIRException { 
           if (this.value == null)
-            return null;
+            this.value = new UriType();
           if (!(this.value instanceof UriType))
             throw new FHIRException("Type mismatch: the type UriType was expected, but "+this.value.getClass().getName()+" was encountered");
           return (UriType) this.value;
@@ -2793,7 +2793,7 @@ public class ValueSet extends MetadataResource {
          */
         public CodeType getValueCodeType() throws FHIRException { 
           if (this.value == null)
-            return null;
+            this.value = new CodeType();
           if (!(this.value instanceof CodeType))
             throw new FHIRException("Type mismatch: the type CodeType was expected, but "+this.value.getClass().getName()+" was encountered");
           return (CodeType) this.value;
@@ -2801,6 +2801,21 @@ public class ValueSet extends MetadataResource {
 
         public boolean hasValueCodeType() { 
           return this != null && this.value instanceof CodeType;
+        }
+
+        /**
+         * @return {@link #value} (The value of the parameter.)
+         */
+        public DateTimeType getValueDateTimeType() throws FHIRException { 
+          if (this.value == null)
+            this.value = new DateTimeType();
+          if (!(this.value instanceof DateTimeType))
+            throw new FHIRException("Type mismatch: the type DateTimeType was expected, but "+this.value.getClass().getName()+" was encountered");
+          return (DateTimeType) this.value;
+        }
+
+        public boolean hasValueDateTimeType() { 
+          return this != null && this.value instanceof DateTimeType;
         }
 
         public boolean hasValue() { 
@@ -2811,7 +2826,7 @@ public class ValueSet extends MetadataResource {
          * @param value {@link #value} (The value of the parameter.)
          */
         public ValueSetExpansionParameterComponent setValue(Type value) { 
-          if (value != null && !(value instanceof StringType || value instanceof BooleanType || value instanceof IntegerType || value instanceof DecimalType || value instanceof UriType || value instanceof CodeType))
+          if (value != null && !(value instanceof StringType || value instanceof BooleanType || value instanceof IntegerType || value instanceof DecimalType || value instanceof UriType || value instanceof CodeType || value instanceof DateTimeType))
             throw new Error("Not the right type for ValueSet.expansion.parameter.value[x]: "+value.fhirType());
           this.value = value;
           return this;
@@ -2819,22 +2834,23 @@ public class ValueSet extends MetadataResource {
 
         protected void listChildren(List<Property> children) {
           super.listChildren(children);
-          children.add(new Property("name", "string", "The name of the parameter.", 0, 1, name));
-          children.add(new Property("value[x]", "string|boolean|integer|decimal|uri|code", "The value of the parameter.", 0, 1, value));
+          children.add(new Property("name", "string", "Name of the input parameter to the $expand operation; may be a server-assigned name for additional default or other server-supplied parameters used to control the expansion process.", 0, 1, name));
+          children.add(new Property("value[x]", "string|boolean|integer|decimal|uri|code|dateTime", "The value of the parameter.", 0, 1, value));
         }
 
         @Override
         public Property getNamedProperty(int _hash, String _name, boolean _checkValid) throws FHIRException {
           switch (_hash) {
-          case 3373707: /*name*/  return new Property("name", "string", "The name of the parameter.", 0, 1, name);
-          case -1410166417: /*value[x]*/  return new Property("value[x]", "string|boolean|integer|decimal|uri|code", "The value of the parameter.", 0, 1, value);
-          case 111972721: /*value*/  return new Property("value[x]", "string|boolean|integer|decimal|uri|code", "The value of the parameter.", 0, 1, value);
-          case -1424603934: /*valueString*/  return new Property("value[x]", "string|boolean|integer|decimal|uri|code", "The value of the parameter.", 0, 1, value);
-          case 733421943: /*valueBoolean*/  return new Property("value[x]", "string|boolean|integer|decimal|uri|code", "The value of the parameter.", 0, 1, value);
-          case -1668204915: /*valueInteger*/  return new Property("value[x]", "string|boolean|integer|decimal|uri|code", "The value of the parameter.", 0, 1, value);
-          case -2083993440: /*valueDecimal*/  return new Property("value[x]", "string|boolean|integer|decimal|uri|code", "The value of the parameter.", 0, 1, value);
-          case -1410172357: /*valueUri*/  return new Property("value[x]", "string|boolean|integer|decimal|uri|code", "The value of the parameter.", 0, 1, value);
-          case -766209282: /*valueCode*/  return new Property("value[x]", "string|boolean|integer|decimal|uri|code", "The value of the parameter.", 0, 1, value);
+          case 3373707: /*name*/  return new Property("name", "string", "Name of the input parameter to the $expand operation; may be a server-assigned name for additional default or other server-supplied parameters used to control the expansion process.", 0, 1, name);
+          case -1410166417: /*value[x]*/  return new Property("value[x]", "string|boolean|integer|decimal|uri|code|dateTime", "The value of the parameter.", 0, 1, value);
+          case 111972721: /*value*/  return new Property("value[x]", "string|boolean|integer|decimal|uri|code|dateTime", "The value of the parameter.", 0, 1, value);
+          case -1424603934: /*valueString*/  return new Property("value[x]", "string|boolean|integer|decimal|uri|code|dateTime", "The value of the parameter.", 0, 1, value);
+          case 733421943: /*valueBoolean*/  return new Property("value[x]", "string|boolean|integer|decimal|uri|code|dateTime", "The value of the parameter.", 0, 1, value);
+          case -1668204915: /*valueInteger*/  return new Property("value[x]", "string|boolean|integer|decimal|uri|code|dateTime", "The value of the parameter.", 0, 1, value);
+          case -2083993440: /*valueDecimal*/  return new Property("value[x]", "string|boolean|integer|decimal|uri|code|dateTime", "The value of the parameter.", 0, 1, value);
+          case -1410172357: /*valueUri*/  return new Property("value[x]", "string|boolean|integer|decimal|uri|code|dateTime", "The value of the parameter.", 0, 1, value);
+          case -766209282: /*valueCode*/  return new Property("value[x]", "string|boolean|integer|decimal|uri|code|dateTime", "The value of the parameter.", 0, 1, value);
+          case 1047929900: /*valueDateTime*/  return new Property("value[x]", "string|boolean|integer|decimal|uri|code|dateTime", "The value of the parameter.", 0, 1, value);
           default: return super.getNamedProperty(_hash, _name, _checkValid);
           }
 
@@ -2890,7 +2906,7 @@ public class ValueSet extends MetadataResource {
       public String[] getTypesForProperty(int hash, String name) throws FHIRException {
         switch (hash) {
         case 3373707: /*name*/ return new String[] {"string"};
-        case 111972721: /*value*/ return new String[] {"string", "boolean", "integer", "decimal", "uri", "code"};
+        case 111972721: /*value*/ return new String[] {"string", "boolean", "integer", "decimal", "uri", "code", "dateTime"};
         default: return super.getTypesForProperty(hash, name);
         }
 
@@ -2923,6 +2939,10 @@ public class ValueSet extends MetadataResource {
         }
         else if (name.equals("valueCode")) {
           this.value = new CodeType();
+          return this.value;
+        }
+        else if (name.equals("valueDateTime")) {
+          this.value = new DateTimeType();
           return this.value;
         }
         else
@@ -2992,10 +3012,10 @@ public class ValueSet extends MetadataResource {
         protected BooleanType inactive;
 
         /**
-         * The version of this code system that defined this code and/or display. This should only be used with code systems that do not enforce concept permanence.
+         * The version of the code system from this code was taken. Note that a well-maintained code system does not need the version reported, because the meaning of codes is consistent across versions. However this cannot consistently be assured, and when the meaning is not guaranteed to be consistent, the version SHOULD be exchanged.
          */
         @Child(name = "version", type = {StringType.class}, order=4, min=0, max=1, modifier=false, summary=false)
-        @Description(shortDefinition="Version in which this code/display is defined", formalDefinition="The version of this code system that defined this code and/or display. This should only be used with code systems that do not enforce concept permanence." )
+        @Description(shortDefinition="Version in which this code/display is defined", formalDefinition="The version of the code system from this code was taken. Note that a well-maintained code system does not need the version reported, because the meaning of codes is consistent across versions. However this cannot consistently be assured, and when the meaning is not guaranteed to be consistent, the version SHOULD be exchanged." )
         protected StringType version;
 
         /**
@@ -3175,7 +3195,7 @@ public class ValueSet extends MetadataResource {
         }
 
         /**
-         * @return {@link #version} (The version of this code system that defined this code and/or display. This should only be used with code systems that do not enforce concept permanence.). This is the underlying object with id, value and extensions. The accessor "getVersion" gives direct access to the value
+         * @return {@link #version} (The version of the code system from this code was taken. Note that a well-maintained code system does not need the version reported, because the meaning of codes is consistent across versions. However this cannot consistently be assured, and when the meaning is not guaranteed to be consistent, the version SHOULD be exchanged.). This is the underlying object with id, value and extensions. The accessor "getVersion" gives direct access to the value
          */
         public StringType getVersionElement() { 
           if (this.version == null)
@@ -3195,7 +3215,7 @@ public class ValueSet extends MetadataResource {
         }
 
         /**
-         * @param value {@link #version} (The version of this code system that defined this code and/or display. This should only be used with code systems that do not enforce concept permanence.). This is the underlying object with id, value and extensions. The accessor "getVersion" gives direct access to the value
+         * @param value {@link #version} (The version of the code system from this code was taken. Note that a well-maintained code system does not need the version reported, because the meaning of codes is consistent across versions. However this cannot consistently be assured, and when the meaning is not guaranteed to be consistent, the version SHOULD be exchanged.). This is the underlying object with id, value and extensions. The accessor "getVersion" gives direct access to the value
          */
         public ValueSetExpansionContainsComponent setVersionElement(StringType value) { 
           this.version = value;
@@ -3203,14 +3223,14 @@ public class ValueSet extends MetadataResource {
         }
 
         /**
-         * @return The version of this code system that defined this code and/or display. This should only be used with code systems that do not enforce concept permanence.
+         * @return The version of the code system from this code was taken. Note that a well-maintained code system does not need the version reported, because the meaning of codes is consistent across versions. However this cannot consistently be assured, and when the meaning is not guaranteed to be consistent, the version SHOULD be exchanged.
          */
         public String getVersion() { 
           return this.version == null ? null : this.version.getValue();
         }
 
         /**
-         * @param value The version of this code system that defined this code and/or display. This should only be used with code systems that do not enforce concept permanence.
+         * @param value The version of the code system from this code was taken. Note that a well-maintained code system does not need the version reported, because the meaning of codes is consistent across versions. However this cannot consistently be assured, and when the meaning is not guaranteed to be consistent, the version SHOULD be exchanged.
          */
         public ValueSetExpansionContainsComponent setVersion(String value) { 
           if (Utilities.noString(value))
@@ -3432,7 +3452,7 @@ public class ValueSet extends MetadataResource {
           children.add(new Property("system", "uri", "An absolute URI which is the code system in which the code for this item in the expansion is defined.", 0, 1, system));
           children.add(new Property("abstract", "boolean", "If true, this entry is included in the expansion for navigational purposes, and the user cannot select the code directly as a proper value.", 0, 1, abstract_));
           children.add(new Property("inactive", "boolean", "If the concept is inactive in the code system that defines it. Inactive codes are those that are no longer to be used, but are maintained by the code system for understanding legacy data. It might not be known or specified whether an concept is inactive (and it may depend on the context of use).", 0, 1, inactive));
-          children.add(new Property("version", "string", "The version of this code system that defined this code and/or display. This should only be used with code systems that do not enforce concept permanence.", 0, 1, version));
+          children.add(new Property("version", "string", "The version of the code system from this code was taken. Note that a well-maintained code system does not need the version reported, because the meaning of codes is consistent across versions. However this cannot consistently be assured, and when the meaning is not guaranteed to be consistent, the version SHOULD be exchanged.", 0, 1, version));
           children.add(new Property("code", "code", "The code for this item in the expansion hierarchy. If this code is missing the entry in the hierarchy is a place holder (abstract) and does not represent a valid code in the value set.", 0, 1, code));
           children.add(new Property("display", "string", "The recommended display for this item in the expansion.", 0, 1, display));
           children.add(new Property("designation", "@ValueSet.compose.include.concept.designation", "Additional representations for this item - other languages, aliases, specialized purposes, used for particular purposes, etc. These are relevant when the conditions of the expansion do not fix to a single correct representation.", 0, java.lang.Integer.MAX_VALUE, designation));
@@ -3445,7 +3465,7 @@ public class ValueSet extends MetadataResource {
           case -887328209: /*system*/  return new Property("system", "uri", "An absolute URI which is the code system in which the code for this item in the expansion is defined.", 0, 1, system);
           case 1732898850: /*abstract*/  return new Property("abstract", "boolean", "If true, this entry is included in the expansion for navigational purposes, and the user cannot select the code directly as a proper value.", 0, 1, abstract_);
           case 24665195: /*inactive*/  return new Property("inactive", "boolean", "If the concept is inactive in the code system that defines it. Inactive codes are those that are no longer to be used, but are maintained by the code system for understanding legacy data. It might not be known or specified whether an concept is inactive (and it may depend on the context of use).", 0, 1, inactive);
-          case 351608024: /*version*/  return new Property("version", "string", "The version of this code system that defined this code and/or display. This should only be used with code systems that do not enforce concept permanence.", 0, 1, version);
+          case 351608024: /*version*/  return new Property("version", "string", "The version of the code system from this code was taken. Note that a well-maintained code system does not need the version reported, because the meaning of codes is consistent across versions. However this cannot consistently be assured, and when the meaning is not guaranteed to be consistent, the version SHOULD be exchanged.", 0, 1, version);
           case 3059181: /*code*/  return new Property("code", "code", "The code for this item in the expansion hierarchy. If this code is missing the entry in the hierarchy is a place holder (abstract) and does not represent a valid code in the value set.", 0, 1, code);
           case 1671764162: /*display*/  return new Property("display", "string", "The recommended display for this item in the expansion.", 0, 1, display);
           case -900931593: /*designation*/  return new Property("designation", "@ValueSet.compose.include.concept.designation", "Additional representations for this item - other languages, aliases, specialized purposes, used for particular purposes, etc. These are relevant when the conditions of the expansion do not fix to a single correct representation.", 0, java.lang.Integer.MAX_VALUE, designation);
@@ -3675,27 +3695,20 @@ public class ValueSet extends MetadataResource {
     protected MarkdownType copyright;
 
     /**
-     * Whether this is intended to be used with an extensible binding or not.
-     */
-    @Child(name = "extensible", type = {BooleanType.class}, order=4, min=0, max=1, modifier=false, summary=true)
-    @Description(shortDefinition="Whether this is intended to be used with an extensible binding", formalDefinition="Whether this is intended to be used with an extensible binding or not." )
-    protected BooleanType extensible;
-
-    /**
      * A set of criteria that define the contents of the value set by including or excluding codes selected from the specified code system(s) that the value set draws from. This is also known as the Content Logical Definition (CLD).
      */
-    @Child(name = "compose", type = {}, order=5, min=0, max=1, modifier=false, summary=false)
-    @Description(shortDefinition="Definition of the content of the value set", formalDefinition="A set of criteria that define the contents of the value set by including or excluding codes selected from the specified code system(s) that the value set draws from. This is also known as the Content Logical Definition (CLD)." )
+    @Child(name = "compose", type = {}, order=4, min=0, max=1, modifier=false, summary=false)
+    @Description(shortDefinition="Content logical definition of the value set (CLD)", formalDefinition="A set of criteria that define the contents of the value set by including or excluding codes selected from the specified code system(s) that the value set draws from. This is also known as the Content Logical Definition (CLD)." )
     protected ValueSetComposeComponent compose;
 
     /**
      * A value set can also be "expanded", where the value set is turned into a simple collection of enumerated codes. This element holds the expansion, if it has been performed.
      */
-    @Child(name = "expansion", type = {}, order=6, min=0, max=1, modifier=false, summary=false)
+    @Child(name = "expansion", type = {}, order=5, min=0, max=1, modifier=false, summary=false)
     @Description(shortDefinition="Used when the value set is \"expanded\"", formalDefinition="A value set can also be \"expanded\", where the value set is turned into a simple collection of enumerated codes. This element holds the expansion, if it has been performed." )
     protected ValueSetExpansionComponent expansion;
 
-    private static final long serialVersionUID = -173192200L;
+    private static final long serialVersionUID = 786712949L;
 
   /**
    * Constructor
@@ -3713,7 +3726,7 @@ public class ValueSet extends MetadataResource {
     }
 
     /**
-     * @return {@link #url} (An absolute URI that is used to identify this value set when it is referenced in a specification, model, design or an instance; also called its canonical identifier. This SHOULD be globally unique and SHOULD be a literal address at which this value set is (or will be) published.). This is the underlying object with id, value and extensions. The accessor "getUrl" gives direct access to the value
+     * @return {@link #url} (An absolute URI that is used to identify this value set when it is referenced in a specification, model, design or an instance; also called its canonical identifier. This SHOULD be globally unique and SHOULD be a literal address at which at which an authoritative instance of this value set is (or will be) published. This URL can be the target of a canonical reference. It SHALL remain the same when the value set is stored on different servers.). This is the underlying object with id, value and extensions. The accessor "getUrl" gives direct access to the value
      */
     public UriType getUrlElement() { 
       if (this.url == null)
@@ -3733,7 +3746,7 @@ public class ValueSet extends MetadataResource {
     }
 
     /**
-     * @param value {@link #url} (An absolute URI that is used to identify this value set when it is referenced in a specification, model, design or an instance; also called its canonical identifier. This SHOULD be globally unique and SHOULD be a literal address at which this value set is (or will be) published.). This is the underlying object with id, value and extensions. The accessor "getUrl" gives direct access to the value
+     * @param value {@link #url} (An absolute URI that is used to identify this value set when it is referenced in a specification, model, design or an instance; also called its canonical identifier. This SHOULD be globally unique and SHOULD be a literal address at which at which an authoritative instance of this value set is (or will be) published. This URL can be the target of a canonical reference. It SHALL remain the same when the value set is stored on different servers.). This is the underlying object with id, value and extensions. The accessor "getUrl" gives direct access to the value
      */
     public ValueSet setUrlElement(UriType value) { 
       this.url = value;
@@ -3741,14 +3754,14 @@ public class ValueSet extends MetadataResource {
     }
 
     /**
-     * @return An absolute URI that is used to identify this value set when it is referenced in a specification, model, design or an instance; also called its canonical identifier. This SHOULD be globally unique and SHOULD be a literal address at which this value set is (or will be) published.
+     * @return An absolute URI that is used to identify this value set when it is referenced in a specification, model, design or an instance; also called its canonical identifier. This SHOULD be globally unique and SHOULD be a literal address at which at which an authoritative instance of this value set is (or will be) published. This URL can be the target of a canonical reference. It SHALL remain the same when the value set is stored on different servers.
      */
     public String getUrl() { 
       return this.url == null ? null : this.url.getValue();
     }
 
     /**
-     * @param value An absolute URI that is used to identify this value set when it is referenced in a specification, model, design or an instance; also called its canonical identifier. This SHOULD be globally unique and SHOULD be a literal address at which this value set is (or will be) published.
+     * @param value An absolute URI that is used to identify this value set when it is referenced in a specification, model, design or an instance; also called its canonical identifier. This SHOULD be globally unique and SHOULD be a literal address at which at which an authoritative instance of this value set is (or will be) published. This URL can be the target of a canonical reference. It SHALL remain the same when the value set is stored on different servers.
      */
     public ValueSet setUrl(String value) { 
       if (Utilities.noString(value))
@@ -3962,7 +3975,7 @@ public class ValueSet extends MetadataResource {
     }
 
     /**
-     * @return {@link #status} (The status of this value set. Enables tracking the life-cycle of the content.). This is the underlying object with id, value and extensions. The accessor "getStatus" gives direct access to the value
+     * @return {@link #status} (The status of this value set. Enables tracking the life-cycle of the content. The status of the value set applies to the value set definition (ValueSet.compose) and the associated ValueSet metadata. Expansions do not have a state.). This is the underlying object with id, value and extensions. The accessor "getStatus" gives direct access to the value
      */
     public Enumeration<PublicationStatus> getStatusElement() { 
       if (this.status == null)
@@ -3982,7 +3995,7 @@ public class ValueSet extends MetadataResource {
     }
 
     /**
-     * @param value {@link #status} (The status of this value set. Enables tracking the life-cycle of the content.). This is the underlying object with id, value and extensions. The accessor "getStatus" gives direct access to the value
+     * @param value {@link #status} (The status of this value set. Enables tracking the life-cycle of the content. The status of the value set applies to the value set definition (ValueSet.compose) and the associated ValueSet metadata. Expansions do not have a state.). This is the underlying object with id, value and extensions. The accessor "getStatus" gives direct access to the value
      */
     public ValueSet setStatusElement(Enumeration<PublicationStatus> value) { 
       this.status = value;
@@ -3990,14 +4003,14 @@ public class ValueSet extends MetadataResource {
     }
 
     /**
-     * @return The status of this value set. Enables tracking the life-cycle of the content.
+     * @return The status of this value set. Enables tracking the life-cycle of the content. The status of the value set applies to the value set definition (ValueSet.compose) and the associated ValueSet metadata. Expansions do not have a state.
      */
     public PublicationStatus getStatus() { 
       return this.status == null ? null : this.status.getValue();
     }
 
     /**
-     * @param value The status of this value set. Enables tracking the life-cycle of the content.
+     * @param value The status of this value set. Enables tracking the life-cycle of the content. The status of the value set applies to the value set definition (ValueSet.compose) and the associated ValueSet metadata. Expansions do not have a state.
      */
     public ValueSet setStatus(PublicationStatus value) { 
         if (this.status == null)
@@ -4052,7 +4065,7 @@ public class ValueSet extends MetadataResource {
     }
 
     /**
-     * @return {@link #date} (The date  (and optionally time) when the value set was published. The date must change when the business version changes and it must change if the status code changes. In addition, it should change when the substantive content of the value set changes. (e.g. the 'content logical definition').). This is the underlying object with id, value and extensions. The accessor "getDate" gives direct access to the value
+     * @return {@link #date} (The date (and optionally time) when the value set was created or revised (e.g. the 'content logical definition').). This is the underlying object with id, value and extensions. The accessor "getDate" gives direct access to the value
      */
     public DateTimeType getDateElement() { 
       if (this.date == null)
@@ -4072,7 +4085,7 @@ public class ValueSet extends MetadataResource {
     }
 
     /**
-     * @param value {@link #date} (The date  (and optionally time) when the value set was published. The date must change when the business version changes and it must change if the status code changes. In addition, it should change when the substantive content of the value set changes. (e.g. the 'content logical definition').). This is the underlying object with id, value and extensions. The accessor "getDate" gives direct access to the value
+     * @param value {@link #date} (The date (and optionally time) when the value set was created or revised (e.g. the 'content logical definition').). This is the underlying object with id, value and extensions. The accessor "getDate" gives direct access to the value
      */
     public ValueSet setDateElement(DateTimeType value) { 
       this.date = value;
@@ -4080,14 +4093,14 @@ public class ValueSet extends MetadataResource {
     }
 
     /**
-     * @return The date  (and optionally time) when the value set was published. The date must change when the business version changes and it must change if the status code changes. In addition, it should change when the substantive content of the value set changes. (e.g. the 'content logical definition').
+     * @return The date (and optionally time) when the value set was created or revised (e.g. the 'content logical definition').
      */
     public Date getDate() { 
       return this.date == null ? null : this.date.getValue();
     }
 
     /**
-     * @param value The date  (and optionally time) when the value set was published. The date must change when the business version changes and it must change if the status code changes. In addition, it should change when the substantive content of the value set changes. (e.g. the 'content logical definition').
+     * @param value The date (and optionally time) when the value set was created or revised (e.g. the 'content logical definition').
      */
     public ValueSet setDate(Date value) { 
       if (value == null)
@@ -4203,7 +4216,7 @@ public class ValueSet extends MetadataResource {
     }
 
     /**
-     * @return {@link #description} (A free text natural language description of the value set from a consumer's perspective.). This is the underlying object with id, value and extensions. The accessor "getDescription" gives direct access to the value
+     * @return {@link #description} (A free text natural language description of the value set from a consumer's perspective. The textual description specifies the span of meanings for concepts to be included within the Value Set Expansion, and also may specify the intended use and limitations of the Value Set.). This is the underlying object with id, value and extensions. The accessor "getDescription" gives direct access to the value
      */
     public MarkdownType getDescriptionElement() { 
       if (this.description == null)
@@ -4223,7 +4236,7 @@ public class ValueSet extends MetadataResource {
     }
 
     /**
-     * @param value {@link #description} (A free text natural language description of the value set from a consumer's perspective.). This is the underlying object with id, value and extensions. The accessor "getDescription" gives direct access to the value
+     * @param value {@link #description} (A free text natural language description of the value set from a consumer's perspective. The textual description specifies the span of meanings for concepts to be included within the Value Set Expansion, and also may specify the intended use and limitations of the Value Set.). This is the underlying object with id, value and extensions. The accessor "getDescription" gives direct access to the value
      */
     public ValueSet setDescriptionElement(MarkdownType value) { 
       this.description = value;
@@ -4231,14 +4244,14 @@ public class ValueSet extends MetadataResource {
     }
 
     /**
-     * @return A free text natural language description of the value set from a consumer's perspective.
+     * @return A free text natural language description of the value set from a consumer's perspective. The textual description specifies the span of meanings for concepts to be included within the Value Set Expansion, and also may specify the intended use and limitations of the Value Set.
      */
     public String getDescription() { 
       return this.description == null ? null : this.description.getValue();
     }
 
     /**
-     * @param value A free text natural language description of the value set from a consumer's perspective.
+     * @param value A free text natural language description of the value set from a consumer's perspective. The textual description specifies the span of meanings for concepts to be included within the Value Set Expansion, and also may specify the intended use and limitations of the Value Set.
      */
     public ValueSet setDescription(String value) { 
       if (value == null)
@@ -4252,7 +4265,7 @@ public class ValueSet extends MetadataResource {
     }
 
     /**
-     * @return {@link #useContext} (The content was developed with a focus and intent of supporting the contexts that are listed. These terms may be used to assist with indexing and searching for appropriate value set instances.)
+     * @return {@link #useContext} (The content was developed with a focus and intent of supporting the contexts that are listed. These contexts may be general categories (gender, age, ...) or may be references to specific programs (insurance plans, studies, ...) and may be used to assist with indexing and searching for appropriate value set instances.)
      */
     public List<UsageContext> getUseContext() { 
       if (this.useContext == null)
@@ -4501,51 +4514,6 @@ public class ValueSet extends MetadataResource {
     }
 
     /**
-     * @return {@link #extensible} (Whether this is intended to be used with an extensible binding or not.). This is the underlying object with id, value and extensions. The accessor "getExtensible" gives direct access to the value
-     */
-    public BooleanType getExtensibleElement() { 
-      if (this.extensible == null)
-        if (Configuration.errorOnAutoCreate())
-          throw new Error("Attempt to auto-create ValueSet.extensible");
-        else if (Configuration.doAutoCreate())
-          this.extensible = new BooleanType(); // bb
-      return this.extensible;
-    }
-
-    public boolean hasExtensibleElement() { 
-      return this.extensible != null && !this.extensible.isEmpty();
-    }
-
-    public boolean hasExtensible() { 
-      return this.extensible != null && !this.extensible.isEmpty();
-    }
-
-    /**
-     * @param value {@link #extensible} (Whether this is intended to be used with an extensible binding or not.). This is the underlying object with id, value and extensions. The accessor "getExtensible" gives direct access to the value
-     */
-    public ValueSet setExtensibleElement(BooleanType value) { 
-      this.extensible = value;
-      return this;
-    }
-
-    /**
-     * @return Whether this is intended to be used with an extensible binding or not.
-     */
-    public boolean getExtensible() { 
-      return this.extensible == null || this.extensible.isEmpty() ? false : this.extensible.getValue();
-    }
-
-    /**
-     * @param value Whether this is intended to be used with an extensible binding or not.
-     */
-    public ValueSet setExtensible(boolean value) { 
-        if (this.extensible == null)
-          this.extensible = new BooleanType();
-        this.extensible.setValue(value);
-      return this;
-    }
-
-    /**
      * @return {@link #compose} (A set of criteria that define the contents of the value set by including or excluding codes selected from the specified code system(s) that the value set draws from. This is also known as the Content Logical Definition (CLD).)
      */
     public ValueSetComposeComponent getCompose() { 
@@ -4595,23 +4563,22 @@ public class ValueSet extends MetadataResource {
 
       protected void listChildren(List<Property> children) {
         super.listChildren(children);
-        children.add(new Property("url", "uri", "An absolute URI that is used to identify this value set when it is referenced in a specification, model, design or an instance; also called its canonical identifier. This SHOULD be globally unique and SHOULD be a literal address at which this value set is (or will be) published.", 0, 1, url));
+        children.add(new Property("url", "uri", "An absolute URI that is used to identify this value set when it is referenced in a specification, model, design or an instance; also called its canonical identifier. This SHOULD be globally unique and SHOULD be a literal address at which at which an authoritative instance of this value set is (or will be) published. This URL can be the target of a canonical reference. It SHALL remain the same when the value set is stored on different servers.", 0, 1, url));
         children.add(new Property("identifier", "Identifier", "A formal identifier that is used to identify this value set when it is represented in other formats, or referenced in a specification, model, design or an instance.", 0, java.lang.Integer.MAX_VALUE, identifier));
         children.add(new Property("version", "string", "The identifier that is used to identify this version of the value set when it is referenced in a specification, model, design or instance. This is an arbitrary value managed by the value set author and is not expected to be globally unique. For example, it might be a timestamp (e.g. yyyymmdd) if a managed version is not available. There is also no expectation that versions can be placed in a lexicographical sequence.", 0, 1, version));
         children.add(new Property("name", "string", "A natural language name identifying the value set. This name should be usable as an identifier for the module by machine processing applications such as code generation.", 0, 1, name));
         children.add(new Property("title", "string", "A short, descriptive, user-friendly title for the value set.", 0, 1, title));
-        children.add(new Property("status", "code", "The status of this value set. Enables tracking the life-cycle of the content.", 0, 1, status));
+        children.add(new Property("status", "code", "The status of this value set. Enables tracking the life-cycle of the content. The status of the value set applies to the value set definition (ValueSet.compose) and the associated ValueSet metadata. Expansions do not have a state.", 0, 1, status));
         children.add(new Property("experimental", "boolean", "A Boolean value to indicate that this value set is authored for testing purposes (or education/evaluation/marketing) and is not intended to be used for genuine usage.", 0, 1, experimental));
-        children.add(new Property("date", "dateTime", "The date  (and optionally time) when the value set was published. The date must change when the business version changes and it must change if the status code changes. In addition, it should change when the substantive content of the value set changes. (e.g. the 'content logical definition').", 0, 1, date));
+        children.add(new Property("date", "dateTime", "The date (and optionally time) when the value set was created or revised (e.g. the 'content logical definition').", 0, 1, date));
         children.add(new Property("publisher", "string", "The name of the organization or individual that published the value set.", 0, 1, publisher));
         children.add(new Property("contact", "ContactDetail", "Contact details to assist a user in finding and communicating with the publisher.", 0, java.lang.Integer.MAX_VALUE, contact));
-        children.add(new Property("description", "markdown", "A free text natural language description of the value set from a consumer's perspective.", 0, 1, description));
-        children.add(new Property("useContext", "UsageContext", "The content was developed with a focus and intent of supporting the contexts that are listed. These terms may be used to assist with indexing and searching for appropriate value set instances.", 0, java.lang.Integer.MAX_VALUE, useContext));
+        children.add(new Property("description", "markdown", "A free text natural language description of the value set from a consumer's perspective. The textual description specifies the span of meanings for concepts to be included within the Value Set Expansion, and also may specify the intended use and limitations of the Value Set.", 0, 1, description));
+        children.add(new Property("useContext", "UsageContext", "The content was developed with a focus and intent of supporting the contexts that are listed. These contexts may be general categories (gender, age, ...) or may be references to specific programs (insurance plans, studies, ...) and may be used to assist with indexing and searching for appropriate value set instances.", 0, java.lang.Integer.MAX_VALUE, useContext));
         children.add(new Property("jurisdiction", "CodeableConcept", "A legal or geographic region in which the value set is intended to be used.", 0, java.lang.Integer.MAX_VALUE, jurisdiction));
         children.add(new Property("immutable", "boolean", "If this is set to 'true', then no new versions of the content logical definition can be created.  Note: Other metadata might still change.", 0, 1, immutable));
         children.add(new Property("purpose", "markdown", "Explanation of why this value set is needed and why it has been designed as it has.", 0, 1, purpose));
         children.add(new Property("copyright", "markdown", "A copyright statement relating to the value set and/or its contents. Copyright statements are generally legal restrictions on the use and publishing of the value set.", 0, 1, copyright));
-        children.add(new Property("extensible", "boolean", "Whether this is intended to be used with an extensible binding or not.", 0, 1, extensible));
         children.add(new Property("compose", "", "A set of criteria that define the contents of the value set by including or excluding codes selected from the specified code system(s) that the value set draws from. This is also known as the Content Logical Definition (CLD).", 0, 1, compose));
         children.add(new Property("expansion", "", "A value set can also be \"expanded\", where the value set is turned into a simple collection of enumerated codes. This element holds the expansion, if it has been performed.", 0, 1, expansion));
       }
@@ -4619,23 +4586,22 @@ public class ValueSet extends MetadataResource {
       @Override
       public Property getNamedProperty(int _hash, String _name, boolean _checkValid) throws FHIRException {
         switch (_hash) {
-        case 116079: /*url*/  return new Property("url", "uri", "An absolute URI that is used to identify this value set when it is referenced in a specification, model, design or an instance; also called its canonical identifier. This SHOULD be globally unique and SHOULD be a literal address at which this value set is (or will be) published.", 0, 1, url);
+        case 116079: /*url*/  return new Property("url", "uri", "An absolute URI that is used to identify this value set when it is referenced in a specification, model, design or an instance; also called its canonical identifier. This SHOULD be globally unique and SHOULD be a literal address at which at which an authoritative instance of this value set is (or will be) published. This URL can be the target of a canonical reference. It SHALL remain the same when the value set is stored on different servers.", 0, 1, url);
         case -1618432855: /*identifier*/  return new Property("identifier", "Identifier", "A formal identifier that is used to identify this value set when it is represented in other formats, or referenced in a specification, model, design or an instance.", 0, java.lang.Integer.MAX_VALUE, identifier);
         case 351608024: /*version*/  return new Property("version", "string", "The identifier that is used to identify this version of the value set when it is referenced in a specification, model, design or instance. This is an arbitrary value managed by the value set author and is not expected to be globally unique. For example, it might be a timestamp (e.g. yyyymmdd) if a managed version is not available. There is also no expectation that versions can be placed in a lexicographical sequence.", 0, 1, version);
         case 3373707: /*name*/  return new Property("name", "string", "A natural language name identifying the value set. This name should be usable as an identifier for the module by machine processing applications such as code generation.", 0, 1, name);
         case 110371416: /*title*/  return new Property("title", "string", "A short, descriptive, user-friendly title for the value set.", 0, 1, title);
-        case -892481550: /*status*/  return new Property("status", "code", "The status of this value set. Enables tracking the life-cycle of the content.", 0, 1, status);
+        case -892481550: /*status*/  return new Property("status", "code", "The status of this value set. Enables tracking the life-cycle of the content. The status of the value set applies to the value set definition (ValueSet.compose) and the associated ValueSet metadata. Expansions do not have a state.", 0, 1, status);
         case -404562712: /*experimental*/  return new Property("experimental", "boolean", "A Boolean value to indicate that this value set is authored for testing purposes (or education/evaluation/marketing) and is not intended to be used for genuine usage.", 0, 1, experimental);
-        case 3076014: /*date*/  return new Property("date", "dateTime", "The date  (and optionally time) when the value set was published. The date must change when the business version changes and it must change if the status code changes. In addition, it should change when the substantive content of the value set changes. (e.g. the 'content logical definition').", 0, 1, date);
+        case 3076014: /*date*/  return new Property("date", "dateTime", "The date (and optionally time) when the value set was created or revised (e.g. the 'content logical definition').", 0, 1, date);
         case 1447404028: /*publisher*/  return new Property("publisher", "string", "The name of the organization or individual that published the value set.", 0, 1, publisher);
         case 951526432: /*contact*/  return new Property("contact", "ContactDetail", "Contact details to assist a user in finding and communicating with the publisher.", 0, java.lang.Integer.MAX_VALUE, contact);
-        case -1724546052: /*description*/  return new Property("description", "markdown", "A free text natural language description of the value set from a consumer's perspective.", 0, 1, description);
-        case -669707736: /*useContext*/  return new Property("useContext", "UsageContext", "The content was developed with a focus and intent of supporting the contexts that are listed. These terms may be used to assist with indexing and searching for appropriate value set instances.", 0, java.lang.Integer.MAX_VALUE, useContext);
+        case -1724546052: /*description*/  return new Property("description", "markdown", "A free text natural language description of the value set from a consumer's perspective. The textual description specifies the span of meanings for concepts to be included within the Value Set Expansion, and also may specify the intended use and limitations of the Value Set.", 0, 1, description);
+        case -669707736: /*useContext*/  return new Property("useContext", "UsageContext", "The content was developed with a focus and intent of supporting the contexts that are listed. These contexts may be general categories (gender, age, ...) or may be references to specific programs (insurance plans, studies, ...) and may be used to assist with indexing and searching for appropriate value set instances.", 0, java.lang.Integer.MAX_VALUE, useContext);
         case -507075711: /*jurisdiction*/  return new Property("jurisdiction", "CodeableConcept", "A legal or geographic region in which the value set is intended to be used.", 0, java.lang.Integer.MAX_VALUE, jurisdiction);
         case 1596987778: /*immutable*/  return new Property("immutable", "boolean", "If this is set to 'true', then no new versions of the content logical definition can be created.  Note: Other metadata might still change.", 0, 1, immutable);
         case -220463842: /*purpose*/  return new Property("purpose", "markdown", "Explanation of why this value set is needed and why it has been designed as it has.", 0, 1, purpose);
         case 1522889671: /*copyright*/  return new Property("copyright", "markdown", "A copyright statement relating to the value set and/or its contents. Copyright statements are generally legal restrictions on the use and publishing of the value set.", 0, 1, copyright);
-        case -1809433861: /*extensible*/  return new Property("extensible", "boolean", "Whether this is intended to be used with an extensible binding or not.", 0, 1, extensible);
         case 950497682: /*compose*/  return new Property("compose", "", "A set of criteria that define the contents of the value set by including or excluding codes selected from the specified code system(s) that the value set draws from. This is also known as the Content Logical Definition (CLD).", 0, 1, compose);
         case 17878207: /*expansion*/  return new Property("expansion", "", "A value set can also be \"expanded\", where the value set is turned into a simple collection of enumerated codes. This element holds the expansion, if it has been performed.", 0, 1, expansion);
         default: return super.getNamedProperty(_hash, _name, _checkValid);
@@ -4662,7 +4628,6 @@ public class ValueSet extends MetadataResource {
         case 1596987778: /*immutable*/ return this.immutable == null ? new Base[0] : new Base[] {this.immutable}; // BooleanType
         case -220463842: /*purpose*/ return this.purpose == null ? new Base[0] : new Base[] {this.purpose}; // MarkdownType
         case 1522889671: /*copyright*/ return this.copyright == null ? new Base[0] : new Base[] {this.copyright}; // MarkdownType
-        case -1809433861: /*extensible*/ return this.extensible == null ? new Base[0] : new Base[] {this.extensible}; // BooleanType
         case 950497682: /*compose*/ return this.compose == null ? new Base[0] : new Base[] {this.compose}; // ValueSetComposeComponent
         case 17878207: /*expansion*/ return this.expansion == null ? new Base[0] : new Base[] {this.expansion}; // ValueSetExpansionComponent
         default: return super.getProperty(hash, name, checkValid);
@@ -4722,9 +4687,6 @@ public class ValueSet extends MetadataResource {
         case 1522889671: // copyright
           this.copyright = castToMarkdown(value); // MarkdownType
           return value;
-        case -1809433861: // extensible
-          this.extensible = castToBoolean(value); // BooleanType
-          return value;
         case 950497682: // compose
           this.compose = (ValueSetComposeComponent) value; // ValueSetComposeComponent
           return value;
@@ -4771,8 +4733,6 @@ public class ValueSet extends MetadataResource {
           this.purpose = castToMarkdown(value); // MarkdownType
         } else if (name.equals("copyright")) {
           this.copyright = castToMarkdown(value); // MarkdownType
-        } else if (name.equals("extensible")) {
-          this.extensible = castToBoolean(value); // BooleanType
         } else if (name.equals("compose")) {
           this.compose = (ValueSetComposeComponent) value; // ValueSetComposeComponent
         } else if (name.equals("expansion")) {
@@ -4801,7 +4761,6 @@ public class ValueSet extends MetadataResource {
         case 1596987778:  return getImmutableElement();
         case -220463842:  return getPurposeElement();
         case 1522889671:  return getCopyrightElement();
-        case -1809433861:  return getExtensibleElement();
         case 950497682:  return getCompose(); 
         case 17878207:  return getExpansion(); 
         default: return super.makeProperty(hash, name);
@@ -4828,7 +4787,6 @@ public class ValueSet extends MetadataResource {
         case 1596987778: /*immutable*/ return new String[] {"boolean"};
         case -220463842: /*purpose*/ return new String[] {"markdown"};
         case 1522889671: /*copyright*/ return new String[] {"markdown"};
-        case -1809433861: /*extensible*/ return new String[] {"boolean"};
         case 950497682: /*compose*/ return new String[] {};
         case 17878207: /*expansion*/ return new String[] {};
         default: return super.getTypesForProperty(hash, name);
@@ -4886,9 +4844,6 @@ public class ValueSet extends MetadataResource {
         else if (name.equals("copyright")) {
           throw new FHIRException("Cannot call addChild on a primitive type ValueSet.copyright");
         }
-        else if (name.equals("extensible")) {
-          throw new FHIRException("Cannot call addChild on a primitive type ValueSet.extensible");
-        }
         else if (name.equals("compose")) {
           this.compose = new ValueSetComposeComponent();
           return this.compose;
@@ -4941,7 +4896,6 @@ public class ValueSet extends MetadataResource {
         dst.immutable = immutable == null ? null : immutable.copy();
         dst.purpose = purpose == null ? null : purpose.copy();
         dst.copyright = copyright == null ? null : copyright.copy();
-        dst.extensible = extensible == null ? null : extensible.copy();
         dst.compose = compose == null ? null : compose.copy();
         dst.expansion = expansion == null ? null : expansion.copy();
         return dst;
@@ -4959,8 +4913,8 @@ public class ValueSet extends MetadataResource {
           return false;
         ValueSet o = (ValueSet) other_;
         return compareDeep(identifier, o.identifier, true) && compareDeep(immutable, o.immutable, true)
-           && compareDeep(purpose, o.purpose, true) && compareDeep(copyright, o.copyright, true) && compareDeep(extensible, o.extensible, true)
-           && compareDeep(compose, o.compose, true) && compareDeep(expansion, o.expansion, true);
+           && compareDeep(purpose, o.purpose, true) && compareDeep(copyright, o.copyright, true) && compareDeep(compose, o.compose, true)
+           && compareDeep(expansion, o.expansion, true);
       }
 
       @Override
@@ -4971,12 +4925,12 @@ public class ValueSet extends MetadataResource {
           return false;
         ValueSet o = (ValueSet) other_;
         return compareValues(immutable, o.immutable, true) && compareValues(purpose, o.purpose, true) && compareValues(copyright, o.copyright, true)
-           && compareValues(extensible, o.extensible, true);
+          ;
       }
 
       public boolean isEmpty() {
         return super.isEmpty() && ca.uhn.fhir.util.ElementUtil.isEmpty(identifier, immutable, purpose
-          , copyright, extensible, compose, expansion);
+          , copyright, compose, expansion);
       }
 
   @Override
@@ -5045,6 +4999,26 @@ public class ValueSet extends MetadataResource {
   public static final ca.uhn.fhir.rest.gclient.TokenClientParam CODE = new ca.uhn.fhir.rest.gclient.TokenClientParam(SP_CODE);
 
  /**
+   * Search parameter: <b>context-type-value</b>
+   * <p>
+   * Description: <b>A use context type and value assigned to the value set</b><br>
+   * Type: <b>composite</b><br>
+   * Path: <b></b><br>
+   * </p>
+   */
+  @SearchParamDefinition(name="context-type-value", path="ValueSet.useContext", description="A use context type and value assigned to the value set", type="composite", compositeOf={"context-type", "context"} )
+  public static final String SP_CONTEXT_TYPE_VALUE = "context-type-value";
+ /**
+   * <b>Fluent Client</b> search parameter constant for <b>context-type-value</b>
+   * <p>
+   * Description: <b>A use context type and value assigned to the value set</b><br>
+   * Type: <b>composite</b><br>
+   * Path: <b></b><br>
+   * </p>
+   */
+  public static final ca.uhn.fhir.rest.gclient.CompositeClientParam<ca.uhn.fhir.rest.gclient.TokenClientParam, ca.uhn.fhir.rest.gclient.TokenClientParam> CONTEXT_TYPE_VALUE = new ca.uhn.fhir.rest.gclient.CompositeClientParam<ca.uhn.fhir.rest.gclient.TokenClientParam, ca.uhn.fhir.rest.gclient.TokenClientParam>(SP_CONTEXT_TYPE_VALUE);
+
+ /**
    * Search parameter: <b>jurisdiction</b>
    * <p>
    * Description: <b>Intended jurisdiction for the value set</b><br>
@@ -5083,6 +5057,26 @@ public class ValueSet extends MetadataResource {
    * </p>
    */
   public static final ca.uhn.fhir.rest.gclient.StringClientParam DESCRIPTION = new ca.uhn.fhir.rest.gclient.StringClientParam(SP_DESCRIPTION);
+
+ /**
+   * Search parameter: <b>context-type</b>
+   * <p>
+   * Description: <b>A type of use context assigned to the value set</b><br>
+   * Type: <b>token</b><br>
+   * Path: <b>ValueSet.useContext.code</b><br>
+   * </p>
+   */
+  @SearchParamDefinition(name="context-type", path="ValueSet.useContext.code", description="A type of use context assigned to the value set", type="token" )
+  public static final String SP_CONTEXT_TYPE = "context-type";
+ /**
+   * <b>Fluent Client</b> search parameter constant for <b>context-type</b>
+   * <p>
+   * Description: <b>A type of use context assigned to the value set</b><br>
+   * Type: <b>token</b><br>
+   * Path: <b>ValueSet.useContext.code</b><br>
+   * </p>
+   */
+  public static final ca.uhn.fhir.rest.gclient.TokenClientParam CONTEXT_TYPE = new ca.uhn.fhir.rest.gclient.TokenClientParam(SP_CONTEXT_TYPE);
 
  /**
    * Search parameter: <b>title</b>
@@ -5147,17 +5141,17 @@ public class ValueSet extends MetadataResource {
  /**
    * Search parameter: <b>expansion</b>
    * <p>
-   * Description: <b>Uniquely identifies this expansion</b><br>
+   * Description: <b>Identifies the value set expansion (business identifier)</b><br>
    * Type: <b>uri</b><br>
    * Path: <b>ValueSet.expansion.identifier</b><br>
    * </p>
    */
-  @SearchParamDefinition(name="expansion", path="ValueSet.expansion.identifier", description="Uniquely identifies this expansion", type="uri" )
+  @SearchParamDefinition(name="expansion", path="ValueSet.expansion.identifier", description="Identifies the value set expansion (business identifier)", type="uri" )
   public static final String SP_EXPANSION = "expansion";
  /**
    * <b>Fluent Client</b> search parameter constant for <b>expansion</b>
    * <p>
-   * Description: <b>Uniquely identifies this expansion</b><br>
+   * Description: <b>Identifies the value set expansion (business identifier)</b><br>
    * Type: <b>uri</b><br>
    * Path: <b>ValueSet.expansion.identifier</b><br>
    * </p>
@@ -5185,6 +5179,26 @@ public class ValueSet extends MetadataResource {
   public static final ca.uhn.fhir.rest.gclient.UriClientParam REFERENCE = new ca.uhn.fhir.rest.gclient.UriClientParam(SP_REFERENCE);
 
  /**
+   * Search parameter: <b>context-quantity</b>
+   * <p>
+   * Description: <b>A quantity- or range-valued use context assigned to the value set</b><br>
+   * Type: <b>quantity</b><br>
+   * Path: <b>ValueSet.useContext.valueQuantity, ValueSet.useContext.valueRange</b><br>
+   * </p>
+   */
+  @SearchParamDefinition(name="context-quantity", path="(ValueSet.useContext.value as Quantity) | (ValueSet.useContext.value as Range)", description="A quantity- or range-valued use context assigned to the value set", type="quantity" )
+  public static final String SP_CONTEXT_QUANTITY = "context-quantity";
+ /**
+   * <b>Fluent Client</b> search parameter constant for <b>context-quantity</b>
+   * <p>
+   * Description: <b>A quantity- or range-valued use context assigned to the value set</b><br>
+   * Type: <b>quantity</b><br>
+   * Path: <b>ValueSet.useContext.valueQuantity, ValueSet.useContext.valueRange</b><br>
+   * </p>
+   */
+  public static final ca.uhn.fhir.rest.gclient.QuantityClientParam CONTEXT_QUANTITY = new ca.uhn.fhir.rest.gclient.QuantityClientParam(SP_CONTEXT_QUANTITY);
+
+ /**
    * Search parameter: <b>name</b>
    * <p>
    * Description: <b>Computationally friendly name of the value set</b><br>
@@ -5205,6 +5219,26 @@ public class ValueSet extends MetadataResource {
   public static final ca.uhn.fhir.rest.gclient.StringClientParam NAME = new ca.uhn.fhir.rest.gclient.StringClientParam(SP_NAME);
 
  /**
+   * Search parameter: <b>context</b>
+   * <p>
+   * Description: <b>A use context assigned to the value set</b><br>
+   * Type: <b>token</b><br>
+   * Path: <b>ValueSet.useContext.valueCodeableConcept</b><br>
+   * </p>
+   */
+  @SearchParamDefinition(name="context", path="(ValueSet.useContext.value as CodeableConcept)", description="A use context assigned to the value set", type="token" )
+  public static final String SP_CONTEXT = "context";
+ /**
+   * <b>Fluent Client</b> search parameter constant for <b>context</b>
+   * <p>
+   * Description: <b>A use context assigned to the value set</b><br>
+   * Type: <b>token</b><br>
+   * Path: <b>ValueSet.useContext.valueCodeableConcept</b><br>
+   * </p>
+   */
+  public static final ca.uhn.fhir.rest.gclient.TokenClientParam CONTEXT = new ca.uhn.fhir.rest.gclient.TokenClientParam(SP_CONTEXT);
+
+ /**
    * Search parameter: <b>publisher</b>
    * <p>
    * Description: <b>Name of the publisher of the value set</b><br>
@@ -5223,6 +5257,26 @@ public class ValueSet extends MetadataResource {
    * </p>
    */
   public static final ca.uhn.fhir.rest.gclient.StringClientParam PUBLISHER = new ca.uhn.fhir.rest.gclient.StringClientParam(SP_PUBLISHER);
+
+ /**
+   * Search parameter: <b>context-type-quantity</b>
+   * <p>
+   * Description: <b>A use context type and quantity- or range-based value assigned to the value set</b><br>
+   * Type: <b>composite</b><br>
+   * Path: <b></b><br>
+   * </p>
+   */
+  @SearchParamDefinition(name="context-type-quantity", path="ValueSet.useContext", description="A use context type and quantity- or range-based value assigned to the value set", type="composite", compositeOf={"context-type", "context-quantity"} )
+  public static final String SP_CONTEXT_TYPE_QUANTITY = "context-type-quantity";
+ /**
+   * <b>Fluent Client</b> search parameter constant for <b>context-type-quantity</b>
+   * <p>
+   * Description: <b>A use context type and quantity- or range-based value assigned to the value set</b><br>
+   * Type: <b>composite</b><br>
+   * Path: <b></b><br>
+   * </p>
+   */
+  public static final ca.uhn.fhir.rest.gclient.CompositeClientParam<ca.uhn.fhir.rest.gclient.TokenClientParam, ca.uhn.fhir.rest.gclient.QuantityClientParam> CONTEXT_TYPE_QUANTITY = new ca.uhn.fhir.rest.gclient.CompositeClientParam<ca.uhn.fhir.rest.gclient.TokenClientParam, ca.uhn.fhir.rest.gclient.QuantityClientParam>(SP_CONTEXT_TYPE_QUANTITY);
 
  /**
    * Search parameter: <b>status</b>

@@ -29,7 +29,7 @@ package org.hl7.fhir.r4.model.codesystems;
   
 */
 
-// Generated on Sun, May 6, 2018 17:51-0400 for FHIR v3.4.0
+// Generated on Thu, Dec 27, 2018 10:06-0500 for FHIR v4.0.0
 
 
 import org.hl7.fhir.exceptions.FHIRException;
@@ -49,11 +49,11 @@ public enum AccountStatus {
          */
         ENTEREDINERROR, 
         /**
-         * This account is on hold
+         * This account is on hold.
          */
         ONHOLD, 
         /**
-         * The ccount status is unknown
+         * The account status is unknown.
          */
         UNKNOWN, 
         /**
@@ -93,8 +93,8 @@ public enum AccountStatus {
             case ACTIVE: return "This account is active and may be used.";
             case INACTIVE: return "This account is inactive and should not be used to track financial information.";
             case ENTEREDINERROR: return "This instance should not have been part of this patient's medical record.";
-            case ONHOLD: return "This account is on hold";
-            case UNKNOWN: return "The ccount status is unknown";
+            case ONHOLD: return "This account is on hold.";
+            case UNKNOWN: return "The account status is unknown.";
             default: return "?";
           }
         }

@@ -4,7 +4,7 @@ package ca.uhn.hapi.converters.server;
  * #%L
  * HAPI FHIR - Converter
  * %%
- * Copyright (C) 2014 - 2018 University Health Network
+ * Copyright (C) 2014 - 2019 University Health Network
  * %%
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -98,9 +98,9 @@ public class VersionedApiConverterInterceptor extends InterceptorAdapter {
 		IBaseResource converted = null;
 		try {
 			if (wantVersion == FhirVersionEnum.R4 && haveVersion == FhirVersionEnum.DSTU3) {
-				converted = myVersionConvertor_30_40.convertResource(toDstu3(responseResource));
+				converted = myVersionConvertor_30_40.convertResource(toDstu3(responseResource), true);
 			} else if (wantVersion == FhirVersionEnum.DSTU3 && haveVersion == FhirVersionEnum.R4) {
-				converted = myVersionConvertor_30_40.convertResource(toR4(responseResource));
+				converted = myVersionConvertor_30_40.convertResource(toR4(responseResource), true);
 			} else if (wantVersion == FhirVersionEnum.DSTU2 && haveVersion == FhirVersionEnum.R4) {
 				converted = myVersionConvertor_10_40.convertResource(toR4(responseResource));
 			} else if (wantVersion == FhirVersionEnum.R4 && haveVersion == FhirVersionEnum.DSTU2) {

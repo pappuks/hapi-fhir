@@ -6,7 +6,7 @@ import static org.apache.commons.lang3.StringUtils.isNotBlank;
  * #%L
  * HAPI FHIR - Core Library
  * %%
- * Copyright (C) 2014 - 2018 University Health Network
+ * Copyright (C) 2014 - 2019 University Health Network
  * %%
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -154,11 +154,11 @@ public class BundleUtil {
 		BaseRuntimeChildDefinition urlChild = requestElem.getChildByName("url");
 		BaseRuntimeChildDefinition methodChild = requestElem.getChildByName("method");
 		
-		IBaseResource resource = null;
-		String url = null;
-		RequestTypeEnum requestType = null;
-		
 		for (IBase nextEntry : entries) {
+			IBaseResource resource = null;
+			String url = null;
+			RequestTypeEnum requestType = null;
+
 			for (IBase next : resourceChild.getAccessor().getValues(nextEntry)) {
 				resource = (IBaseResource) next;
 			}

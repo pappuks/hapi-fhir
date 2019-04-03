@@ -29,7 +29,7 @@ package org.hl7.fhir.r4.model;
   
 */
 
-// Generated on Sun, May 6, 2018 17:51-0400 for FHIR v3.4.0
+// Generated on Thu, Dec 27, 2018 10:06-0500 for FHIR v4.0.0
 
 import java.util.*;
 
@@ -46,7 +46,7 @@ import org.hl7.fhir.exceptions.FHIRException;
 /**
  * A photo, video, or audio recording acquired or used in healthcare. The actual content may be inline or provided by direct reference.
  */
-@ResourceDef(name="Media", profile="http://hl7.org/fhir/Profile/Media")
+@ResourceDef(name="Media", profile="http://hl7.org/fhir/StructureDefinition/Media")
 public class Media extends DomainResource {
 
     public enum MediaStatus {
@@ -55,31 +55,31 @@ public class Media extends DomainResource {
          */
         PREPARATION, 
         /**
-         * The event is currently occurring
+         * The event is currently occurring.
          */
         INPROGRESS, 
         /**
-         * The event was terminated prior to any impact on the subject (though preparatory actions may have been taken)
+         * The event was terminated prior to any activity beyond preparation.  I.e. The 'main' activity has not yet begun.  The boundary between preparatory and the 'main' activity is context-specific.
          */
         NOTDONE, 
         /**
-         * The event has been temporarily stopped but is expected to resume in the future
+         * The event has been temporarily stopped but is expected to resume in the future.
          */
-        SUSPENDED, 
+        ONHOLD, 
         /**
-         * The event was  terminated prior to the full completion of the intended actions but after having at least some impact on the subject.
+         * The event was terminated prior to the full completion of the intended activity but after at least some of the 'main' activity (beyond preparation) has occurred.
          */
-        ABORTED, 
+        STOPPED, 
         /**
-         * The event has now concluded
+         * The event has now concluded.
          */
         COMPLETED, 
         /**
-         * This electronic record should never have existed, though it is possible that real-world decisions were based on it.  (If real-world activity has occurred, the status should be "cancelled" rather than "entered-in-error".)
+         * This electronic record should never have existed, though it is possible that real-world decisions were based on it.  (If real-world activity has occurred, the status should be "cancelled" rather than "entered-in-error".).
          */
         ENTEREDINERROR, 
         /**
-         * The authoring system does not know which of the status values currently applies for this request.  Note: This concept is not to be used for "other" - one of the listed statuses is presumed to apply, it's just not known which one.
+         * The authoring/source system does not know which of the status values currently applies for this event.  Note: This concept is not to be used for "other" - one of the listed statuses is presumed to apply,  but the authoring/source system does not know which.
          */
         UNKNOWN, 
         /**
@@ -95,10 +95,10 @@ public class Media extends DomainResource {
           return INPROGRESS;
         if ("not-done".equals(codeString))
           return NOTDONE;
-        if ("suspended".equals(codeString))
-          return SUSPENDED;
-        if ("aborted".equals(codeString))
-          return ABORTED;
+        if ("on-hold".equals(codeString))
+          return ONHOLD;
+        if ("stopped".equals(codeString))
+          return STOPPED;
         if ("completed".equals(codeString))
           return COMPLETED;
         if ("entered-in-error".equals(codeString))
@@ -115,8 +115,8 @@ public class Media extends DomainResource {
             case PREPARATION: return "preparation";
             case INPROGRESS: return "in-progress";
             case NOTDONE: return "not-done";
-            case SUSPENDED: return "suspended";
-            case ABORTED: return "aborted";
+            case ONHOLD: return "on-hold";
+            case STOPPED: return "stopped";
             case COMPLETED: return "completed";
             case ENTEREDINERROR: return "entered-in-error";
             case UNKNOWN: return "unknown";
@@ -128,8 +128,8 @@ public class Media extends DomainResource {
             case PREPARATION: return "http://hl7.org/fhir/event-status";
             case INPROGRESS: return "http://hl7.org/fhir/event-status";
             case NOTDONE: return "http://hl7.org/fhir/event-status";
-            case SUSPENDED: return "http://hl7.org/fhir/event-status";
-            case ABORTED: return "http://hl7.org/fhir/event-status";
+            case ONHOLD: return "http://hl7.org/fhir/event-status";
+            case STOPPED: return "http://hl7.org/fhir/event-status";
             case COMPLETED: return "http://hl7.org/fhir/event-status";
             case ENTEREDINERROR: return "http://hl7.org/fhir/event-status";
             case UNKNOWN: return "http://hl7.org/fhir/event-status";
@@ -139,13 +139,13 @@ public class Media extends DomainResource {
         public String getDefinition() {
           switch (this) {
             case PREPARATION: return "The core event has not started yet, but some staging activities have begun (e.g. surgical suite preparation).  Preparation stages may be tracked for billing purposes.";
-            case INPROGRESS: return "The event is currently occurring";
-            case NOTDONE: return "The event was terminated prior to any impact on the subject (though preparatory actions may have been taken)";
-            case SUSPENDED: return "The event has been temporarily stopped but is expected to resume in the future";
-            case ABORTED: return "The event was  terminated prior to the full completion of the intended actions but after having at least some impact on the subject.";
-            case COMPLETED: return "The event has now concluded";
-            case ENTEREDINERROR: return "This electronic record should never have existed, though it is possible that real-world decisions were based on it.  (If real-world activity has occurred, the status should be \"cancelled\" rather than \"entered-in-error\".)";
-            case UNKNOWN: return "The authoring system does not know which of the status values currently applies for this request.  Note: This concept is not to be used for \"other\" - one of the listed statuses is presumed to apply, it's just not known which one.";
+            case INPROGRESS: return "The event is currently occurring.";
+            case NOTDONE: return "The event was terminated prior to any activity beyond preparation.  I.e. The 'main' activity has not yet begun.  The boundary between preparatory and the 'main' activity is context-specific.";
+            case ONHOLD: return "The event has been temporarily stopped but is expected to resume in the future.";
+            case STOPPED: return "The event was terminated prior to the full completion of the intended activity but after at least some of the 'main' activity (beyond preparation) has occurred.";
+            case COMPLETED: return "The event has now concluded.";
+            case ENTEREDINERROR: return "This electronic record should never have existed, though it is possible that real-world decisions were based on it.  (If real-world activity has occurred, the status should be \"cancelled\" rather than \"entered-in-error\".).";
+            case UNKNOWN: return "The authoring/source system does not know which of the status values currently applies for this event.  Note: This concept is not to be used for \"other\" - one of the listed statuses is presumed to apply,  but the authoring/source system does not know which.";
             default: return "?";
           }
         }
@@ -154,8 +154,8 @@ public class Media extends DomainResource {
             case PREPARATION: return "Preparation";
             case INPROGRESS: return "In Progress";
             case NOTDONE: return "Not Done";
-            case SUSPENDED: return "Suspended";
-            case ABORTED: return "Aborted";
+            case ONHOLD: return "On Hold";
+            case STOPPED: return "Stopped";
             case COMPLETED: return "Completed";
             case ENTEREDINERROR: return "Entered in Error";
             case UNKNOWN: return "Unknown";
@@ -175,10 +175,10 @@ public class Media extends DomainResource {
           return MediaStatus.INPROGRESS;
         if ("not-done".equals(codeString))
           return MediaStatus.NOTDONE;
-        if ("suspended".equals(codeString))
-          return MediaStatus.SUSPENDED;
-        if ("aborted".equals(codeString))
-          return MediaStatus.ABORTED;
+        if ("on-hold".equals(codeString))
+          return MediaStatus.ONHOLD;
+        if ("stopped".equals(codeString))
+          return MediaStatus.STOPPED;
         if ("completed".equals(codeString))
           return MediaStatus.COMPLETED;
         if ("entered-in-error".equals(codeString))
@@ -201,10 +201,10 @@ public class Media extends DomainResource {
           return new Enumeration<MediaStatus>(this, MediaStatus.INPROGRESS);
         if ("not-done".equals(codeString))
           return new Enumeration<MediaStatus>(this, MediaStatus.NOTDONE);
-        if ("suspended".equals(codeString))
-          return new Enumeration<MediaStatus>(this, MediaStatus.SUSPENDED);
-        if ("aborted".equals(codeString))
-          return new Enumeration<MediaStatus>(this, MediaStatus.ABORTED);
+        if ("on-hold".equals(codeString))
+          return new Enumeration<MediaStatus>(this, MediaStatus.ONHOLD);
+        if ("stopped".equals(codeString))
+          return new Enumeration<MediaStatus>(this, MediaStatus.STOPPED);
         if ("completed".equals(codeString))
           return new Enumeration<MediaStatus>(this, MediaStatus.COMPLETED);
         if ("entered-in-error".equals(codeString))
@@ -220,10 +220,10 @@ public class Media extends DomainResource {
         return "in-progress";
       if (code == MediaStatus.NOTDONE)
         return "not-done";
-      if (code == MediaStatus.SUSPENDED)
-        return "suspended";
-      if (code == MediaStatus.ABORTED)
-        return "aborted";
+      if (code == MediaStatus.ONHOLD)
+        return "on-hold";
+      if (code == MediaStatus.STOPPED)
+        return "stopped";
       if (code == MediaStatus.COMPLETED)
         return "completed";
       if (code == MediaStatus.ENTEREDINERROR)
@@ -303,7 +303,7 @@ public class Media extends DomainResource {
     /**
      * Who/What this Media is a record of.
      */
-    @Child(name = "subject", type = {Patient.class, Practitioner.class, Group.class, Device.class, Specimen.class, Location.class}, order=7, min=0, max=1, modifier=false, summary=true)
+    @Child(name = "subject", type = {Patient.class, Practitioner.class, PractitionerRole.class, Group.class, Device.class, Specimen.class, Location.class}, order=7, min=0, max=1, modifier=false, summary=true)
     @Description(shortDefinition="Who/What this Media is a record of", formalDefinition="Who/What this Media is a record of." )
     protected Reference subject;
 
@@ -313,16 +313,16 @@ public class Media extends DomainResource {
     protected Resource subjectTarget;
 
     /**
-     * The encounter or episode of care that establishes the context for this media.
+     * The encounter that establishes the context for this media.
      */
-    @Child(name = "context", type = {Encounter.class, EpisodeOfCare.class}, order=8, min=0, max=1, modifier=false, summary=true)
-    @Description(shortDefinition="Encounter / Episode associated with media", formalDefinition="The encounter or episode of care that establishes the context for this media." )
-    protected Reference context;
+    @Child(name = "encounter", type = {Encounter.class}, order=8, min=0, max=1, modifier=false, summary=true)
+    @Description(shortDefinition="Encounter associated with media", formalDefinition="The encounter that establishes the context for this media." )
+    protected Reference encounter;
 
     /**
-     * The actual object that is the target of the reference (The encounter or episode of care that establishes the context for this media.)
+     * The actual object that is the target of the reference (The encounter that establishes the context for this media.)
      */
-    protected Resource contextTarget;
+    protected Encounter encounterTarget;
 
     /**
      * The date and time(s) at which the media was collected.
@@ -376,7 +376,7 @@ public class Media extends DomainResource {
     /**
      * The device used to collect the media.
      */
-    @Child(name = "device", type = {Device.class, DeviceMetric.class, DeviceComponent.class}, order=15, min=0, max=1, modifier=false, summary=true)
+    @Child(name = "device", type = {Device.class, DeviceMetric.class, Device.class}, order=15, min=0, max=1, modifier=false, summary=true)
     @Description(shortDefinition="Observing Device", formalDefinition="The device used to collect the media." )
     protected Reference device;
 
@@ -427,7 +427,7 @@ public class Media extends DomainResource {
     @Description(shortDefinition="Comments made about the media", formalDefinition="Comments made about the media by the performer, subject or other participants." )
     protected List<Annotation> note;
 
-    private static final long serialVersionUID = 413873607L;
+    private static final long serialVersionUID = 2069980126L;
 
   /**
    * Constructor
@@ -781,41 +781,46 @@ public class Media extends DomainResource {
     }
 
     /**
-     * @return {@link #context} (The encounter or episode of care that establishes the context for this media.)
+     * @return {@link #encounter} (The encounter that establishes the context for this media.)
      */
-    public Reference getContext() { 
-      if (this.context == null)
+    public Reference getEncounter() { 
+      if (this.encounter == null)
         if (Configuration.errorOnAutoCreate())
-          throw new Error("Attempt to auto-create Media.context");
+          throw new Error("Attempt to auto-create Media.encounter");
         else if (Configuration.doAutoCreate())
-          this.context = new Reference(); // cc
-      return this.context;
+          this.encounter = new Reference(); // cc
+      return this.encounter;
     }
 
-    public boolean hasContext() { 
-      return this.context != null && !this.context.isEmpty();
+    public boolean hasEncounter() { 
+      return this.encounter != null && !this.encounter.isEmpty();
     }
 
     /**
-     * @param value {@link #context} (The encounter or episode of care that establishes the context for this media.)
+     * @param value {@link #encounter} (The encounter that establishes the context for this media.)
      */
-    public Media setContext(Reference value) { 
-      this.context = value;
+    public Media setEncounter(Reference value) { 
+      this.encounter = value;
       return this;
     }
 
     /**
-     * @return {@link #context} The actual object that is the target of the reference. The reference library doesn't populate this, but you can use it to hold the resource if you resolve it. (The encounter or episode of care that establishes the context for this media.)
+     * @return {@link #encounter} The actual object that is the target of the reference. The reference library doesn't populate this, but you can use it to hold the resource if you resolve it. (The encounter that establishes the context for this media.)
      */
-    public Resource getContextTarget() { 
-      return this.contextTarget;
+    public Encounter getEncounterTarget() { 
+      if (this.encounterTarget == null)
+        if (Configuration.errorOnAutoCreate())
+          throw new Error("Attempt to auto-create Media.encounter");
+        else if (Configuration.doAutoCreate())
+          this.encounterTarget = new Encounter(); // aa
+      return this.encounterTarget;
     }
 
     /**
-     * @param value {@link #context} The actual object that is the target of the reference. The reference library doesn't use these, but you can use it to hold the resource if you resolve it. (The encounter or episode of care that establishes the context for this media.)
+     * @param value {@link #encounter} The actual object that is the target of the reference. The reference library doesn't use these, but you can use it to hold the resource if you resolve it. (The encounter that establishes the context for this media.)
      */
-    public Media setContextTarget(Resource value) { 
-      this.contextTarget = value;
+    public Media setEncounterTarget(Encounter value) { 
+      this.encounterTarget = value;
       return this;
     }
 
@@ -831,7 +836,7 @@ public class Media extends DomainResource {
      */
     public DateTimeType getCreatedDateTimeType() throws FHIRException { 
       if (this.created == null)
-        return null;
+        this.created = new DateTimeType();
       if (!(this.created instanceof DateTimeType))
         throw new FHIRException("Type mismatch: the type DateTimeType was expected, but "+this.created.getClass().getName()+" was encountered");
       return (DateTimeType) this.created;
@@ -846,7 +851,7 @@ public class Media extends DomainResource {
      */
     public Period getCreatedPeriod() throws FHIRException { 
       if (this.created == null)
-        return null;
+        this.created = new Period();
       if (!(this.created instanceof Period))
         throw new FHIRException("Type mismatch: the type Period was expected, but "+this.created.getClass().getName()+" was encountered");
       return (Period) this.created;
@@ -1411,15 +1416,15 @@ public class Media extends DomainResource {
         children.add(new Property("type", "CodeableConcept", "A code that classifies whether the media is an image, video or audio recording or some other media category.", 0, 1, type));
         children.add(new Property("modality", "CodeableConcept", "Details of the type of the media - usually, how it was acquired (what type of device). If images sourced from a DICOM system, are wrapped in a Media resource, then this is the modality.", 0, 1, modality));
         children.add(new Property("view", "CodeableConcept", "The name of the imaging view e.g. Lateral or Antero-posterior (AP).", 0, 1, view));
-        children.add(new Property("subject", "Reference(Patient|Practitioner|Group|Device|Specimen|Location)", "Who/What this Media is a record of.", 0, 1, subject));
-        children.add(new Property("context", "Reference(Encounter|EpisodeOfCare)", "The encounter or episode of care that establishes the context for this media.", 0, 1, context));
+        children.add(new Property("subject", "Reference(Patient|Practitioner|PractitionerRole|Group|Device|Specimen|Location)", "Who/What this Media is a record of.", 0, 1, subject));
+        children.add(new Property("encounter", "Reference(Encounter)", "The encounter that establishes the context for this media.", 0, 1, encounter));
         children.add(new Property("created[x]", "dateTime|Period", "The date and time(s) at which the media was collected.", 0, 1, created));
         children.add(new Property("issued", "instant", "The date and time this version of the media was made available to providers, typically after having been reviewed.", 0, 1, issued));
         children.add(new Property("operator", "Reference(Practitioner|PractitionerRole|Organization|CareTeam|Patient|Device|RelatedPerson)", "The person who administered the collection of the image.", 0, 1, operator));
         children.add(new Property("reasonCode", "CodeableConcept", "Describes why the event occurred in coded or textual form.", 0, java.lang.Integer.MAX_VALUE, reasonCode));
         children.add(new Property("bodySite", "CodeableConcept", "Indicates the site on the subject's body where the observation was made (i.e. the target site).", 0, 1, bodySite));
         children.add(new Property("deviceName", "string", "The name of the device / manufacturer of the device  that was used to make the recording.", 0, 1, deviceName));
-        children.add(new Property("device", "Reference(Device|DeviceMetric|DeviceComponent)", "The device used to collect the media.", 0, 1, device));
+        children.add(new Property("device", "Reference(Device|DeviceMetric|Device)", "The device used to collect the media.", 0, 1, device));
         children.add(new Property("height", "positiveInt", "Height of the image in pixels (photo/video).", 0, 1, height));
         children.add(new Property("width", "positiveInt", "Width of the image in pixels (photo/video).", 0, 1, width));
         children.add(new Property("frames", "positiveInt", "The number of frames in a photo. This is used with a multi-page fax, or an imaging acquisition context that takes multiple slices in a single image, or an animated gif. If there is more than one frame, this SHALL have a value in order to alert interface software that a multi-frame capable rendering widget is required.", 0, 1, frames));
@@ -1438,8 +1443,8 @@ public class Media extends DomainResource {
         case 3575610: /*type*/  return new Property("type", "CodeableConcept", "A code that classifies whether the media is an image, video or audio recording or some other media category.", 0, 1, type);
         case -622722335: /*modality*/  return new Property("modality", "CodeableConcept", "Details of the type of the media - usually, how it was acquired (what type of device). If images sourced from a DICOM system, are wrapped in a Media resource, then this is the modality.", 0, 1, modality);
         case 3619493: /*view*/  return new Property("view", "CodeableConcept", "The name of the imaging view e.g. Lateral or Antero-posterior (AP).", 0, 1, view);
-        case -1867885268: /*subject*/  return new Property("subject", "Reference(Patient|Practitioner|Group|Device|Specimen|Location)", "Who/What this Media is a record of.", 0, 1, subject);
-        case 951530927: /*context*/  return new Property("context", "Reference(Encounter|EpisodeOfCare)", "The encounter or episode of care that establishes the context for this media.", 0, 1, context);
+        case -1867885268: /*subject*/  return new Property("subject", "Reference(Patient|Practitioner|PractitionerRole|Group|Device|Specimen|Location)", "Who/What this Media is a record of.", 0, 1, subject);
+        case 1524132147: /*encounter*/  return new Property("encounter", "Reference(Encounter)", "The encounter that establishes the context for this media.", 0, 1, encounter);
         case 1369676952: /*created[x]*/  return new Property("created[x]", "dateTime|Period", "The date and time(s) at which the media was collected.", 0, 1, created);
         case 1028554472: /*created*/  return new Property("created[x]", "dateTime|Period", "The date and time(s) at which the media was collected.", 0, 1, created);
         case -1968526685: /*createdDateTime*/  return new Property("created[x]", "dateTime|Period", "The date and time(s) at which the media was collected.", 0, 1, created);
@@ -1449,7 +1454,7 @@ public class Media extends DomainResource {
         case 722137681: /*reasonCode*/  return new Property("reasonCode", "CodeableConcept", "Describes why the event occurred in coded or textual form.", 0, java.lang.Integer.MAX_VALUE, reasonCode);
         case 1702620169: /*bodySite*/  return new Property("bodySite", "CodeableConcept", "Indicates the site on the subject's body where the observation was made (i.e. the target site).", 0, 1, bodySite);
         case 780988929: /*deviceName*/  return new Property("deviceName", "string", "The name of the device / manufacturer of the device  that was used to make the recording.", 0, 1, deviceName);
-        case -1335157162: /*device*/  return new Property("device", "Reference(Device|DeviceMetric|DeviceComponent)", "The device used to collect the media.", 0, 1, device);
+        case -1335157162: /*device*/  return new Property("device", "Reference(Device|DeviceMetric|Device)", "The device used to collect the media.", 0, 1, device);
         case -1221029593: /*height*/  return new Property("height", "positiveInt", "Height of the image in pixels (photo/video).", 0, 1, height);
         case 113126854: /*width*/  return new Property("width", "positiveInt", "Width of the image in pixels (photo/video).", 0, 1, width);
         case -1266514778: /*frames*/  return new Property("frames", "positiveInt", "The number of frames in a photo. This is used with a multi-page fax, or an imaging acquisition context that takes multiple slices in a single image, or an animated gif. If there is more than one frame, this SHALL have a value in order to alert interface software that a multi-frame capable rendering widget is required.", 0, 1, frames);
@@ -1472,7 +1477,7 @@ public class Media extends DomainResource {
         case -622722335: /*modality*/ return this.modality == null ? new Base[0] : new Base[] {this.modality}; // CodeableConcept
         case 3619493: /*view*/ return this.view == null ? new Base[0] : new Base[] {this.view}; // CodeableConcept
         case -1867885268: /*subject*/ return this.subject == null ? new Base[0] : new Base[] {this.subject}; // Reference
-        case 951530927: /*context*/ return this.context == null ? new Base[0] : new Base[] {this.context}; // Reference
+        case 1524132147: /*encounter*/ return this.encounter == null ? new Base[0] : new Base[] {this.encounter}; // Reference
         case 1028554472: /*created*/ return this.created == null ? new Base[0] : new Base[] {this.created}; // Type
         case -1179159893: /*issued*/ return this.issued == null ? new Base[0] : new Base[] {this.issued}; // InstantType
         case -500553564: /*operator*/ return this.operator == null ? new Base[0] : new Base[] {this.operator}; // Reference
@@ -1519,8 +1524,8 @@ public class Media extends DomainResource {
         case -1867885268: // subject
           this.subject = castToReference(value); // Reference
           return value;
-        case 951530927: // context
-          this.context = castToReference(value); // Reference
+        case 1524132147: // encounter
+          this.encounter = castToReference(value); // Reference
           return value;
         case 1028554472: // created
           this.created = castToType(value); // Type
@@ -1585,8 +1590,8 @@ public class Media extends DomainResource {
           this.view = castToCodeableConcept(value); // CodeableConcept
         } else if (name.equals("subject")) {
           this.subject = castToReference(value); // Reference
-        } else if (name.equals("context")) {
-          this.context = castToReference(value); // Reference
+        } else if (name.equals("encounter")) {
+          this.encounter = castToReference(value); // Reference
         } else if (name.equals("created[x]")) {
           this.created = castToType(value); // Type
         } else if (name.equals("issued")) {
@@ -1629,7 +1634,7 @@ public class Media extends DomainResource {
         case -622722335:  return getModality(); 
         case 3619493:  return getView(); 
         case -1867885268:  return getSubject(); 
-        case 951530927:  return getContext(); 
+        case 1524132147:  return getEncounter(); 
         case 1369676952:  return getCreated(); 
         case 1028554472:  return getCreated(); 
         case -1179159893:  return getIssuedElement();
@@ -1660,7 +1665,7 @@ public class Media extends DomainResource {
         case -622722335: /*modality*/ return new String[] {"CodeableConcept"};
         case 3619493: /*view*/ return new String[] {"CodeableConcept"};
         case -1867885268: /*subject*/ return new String[] {"Reference"};
-        case 951530927: /*context*/ return new String[] {"Reference"};
+        case 1524132147: /*encounter*/ return new String[] {"Reference"};
         case 1028554472: /*created*/ return new String[] {"dateTime", "Period"};
         case -1179159893: /*issued*/ return new String[] {"instant"};
         case -500553564: /*operator*/ return new String[] {"Reference"};
@@ -1709,9 +1714,9 @@ public class Media extends DomainResource {
           this.subject = new Reference();
           return this.subject;
         }
-        else if (name.equals("context")) {
-          this.context = new Reference();
-          return this.context;
+        else if (name.equals("encounter")) {
+          this.encounter = new Reference();
+          return this.encounter;
         }
         else if (name.equals("createdDateTime")) {
           this.created = new DateTimeType();
@@ -1793,7 +1798,7 @@ public class Media extends DomainResource {
         dst.modality = modality == null ? null : modality.copy();
         dst.view = view == null ? null : view.copy();
         dst.subject = subject == null ? null : subject.copy();
-        dst.context = context == null ? null : context.copy();
+        dst.encounter = encounter == null ? null : encounter.copy();
         dst.created = created == null ? null : created.copy();
         dst.issued = issued == null ? null : issued.copy();
         dst.operator = operator == null ? null : operator.copy();
@@ -1831,7 +1836,7 @@ public class Media extends DomainResource {
         Media o = (Media) other_;
         return compareDeep(identifier, o.identifier, true) && compareDeep(basedOn, o.basedOn, true) && compareDeep(partOf, o.partOf, true)
            && compareDeep(status, o.status, true) && compareDeep(type, o.type, true) && compareDeep(modality, o.modality, true)
-           && compareDeep(view, o.view, true) && compareDeep(subject, o.subject, true) && compareDeep(context, o.context, true)
+           && compareDeep(view, o.view, true) && compareDeep(subject, o.subject, true) && compareDeep(encounter, o.encounter, true)
            && compareDeep(created, o.created, true) && compareDeep(issued, o.issued, true) && compareDeep(operator, o.operator, true)
            && compareDeep(reasonCode, o.reasonCode, true) && compareDeep(bodySite, o.bodySite, true) && compareDeep(deviceName, o.deviceName, true)
            && compareDeep(device, o.device, true) && compareDeep(height, o.height, true) && compareDeep(width, o.width, true)
@@ -1853,7 +1858,7 @@ public class Media extends DomainResource {
 
       public boolean isEmpty() {
         return super.isEmpty() && ca.uhn.fhir.util.ElementUtil.isEmpty(identifier, basedOn, partOf
-          , status, type, modality, view, subject, context, created, issued, operator
+          , status, type, modality, view, subject, encounter, created, issued, operator
           , reasonCode, bodySite, deviceName, device, height, width, frames, duration
           , content, note);
       }
@@ -1911,7 +1916,7 @@ public class Media extends DomainResource {
    * Path: <b>Media.subject</b><br>
    * </p>
    */
-  @SearchParamDefinition(name="subject", path="Media.subject", description="Who/What this Media is a record of", type="reference", providesMembershipIn={ @ca.uhn.fhir.model.api.annotation.Compartment(name="Device"), @ca.uhn.fhir.model.api.annotation.Compartment(name="Patient"), @ca.uhn.fhir.model.api.annotation.Compartment(name="Practitioner") }, target={Device.class, Group.class, Location.class, Patient.class, Practitioner.class, Specimen.class } )
+  @SearchParamDefinition(name="subject", path="Media.subject", description="Who/What this Media is a record of", type="reference", providesMembershipIn={ @ca.uhn.fhir.model.api.annotation.Compartment(name="Device"), @ca.uhn.fhir.model.api.annotation.Compartment(name="Patient"), @ca.uhn.fhir.model.api.annotation.Compartment(name="Practitioner") }, target={Device.class, Group.class, Location.class, Patient.class, Practitioner.class, PractitionerRole.class, Specimen.class } )
   public static final String SP_SUBJECT = "subject";
  /**
    * <b>Fluent Client</b> search parameter constant for <b>subject</b>
@@ -1948,6 +1953,32 @@ public class Media extends DomainResource {
    * </p>
    */
   public static final ca.uhn.fhir.rest.gclient.DateClientParam CREATED = new ca.uhn.fhir.rest.gclient.DateClientParam(SP_CREATED);
+
+ /**
+   * Search parameter: <b>encounter</b>
+   * <p>
+   * Description: <b>Encounter associated with media</b><br>
+   * Type: <b>reference</b><br>
+   * Path: <b>Media.encounter</b><br>
+   * </p>
+   */
+  @SearchParamDefinition(name="encounter", path="Media.encounter", description="Encounter associated with media", type="reference", providesMembershipIn={ @ca.uhn.fhir.model.api.annotation.Compartment(name="Encounter") }, target={Encounter.class } )
+  public static final String SP_ENCOUNTER = "encounter";
+ /**
+   * <b>Fluent Client</b> search parameter constant for <b>encounter</b>
+   * <p>
+   * Description: <b>Encounter associated with media</b><br>
+   * Type: <b>reference</b><br>
+   * Path: <b>Media.encounter</b><br>
+   * </p>
+   */
+  public static final ca.uhn.fhir.rest.gclient.ReferenceClientParam ENCOUNTER = new ca.uhn.fhir.rest.gclient.ReferenceClientParam(SP_ENCOUNTER);
+
+/**
+   * Constant for fluent queries to be used to add include statements. Specifies
+   * the path value of "<b>Media:encounter</b>".
+   */
+  public static final ca.uhn.fhir.model.api.Include INCLUDE_ENCOUNTER = new ca.uhn.fhir.model.api.Include("Media:encounter").toLocked();
 
  /**
    * Search parameter: <b>type</b>
@@ -2069,7 +2100,7 @@ public class Media extends DomainResource {
    * Path: <b>Media.subject</b><br>
    * </p>
    */
-  @SearchParamDefinition(name="patient", path="Media.subject", description="Who/What this Media is a record of", type="reference", target={Patient.class } )
+  @SearchParamDefinition(name="patient", path="Media.subject.where(resolve() is Patient)", description="Who/What this Media is a record of", type="reference", target={Patient.class } )
   public static final String SP_PATIENT = "patient";
  /**
    * <b>Fluent Client</b> search parameter constant for <b>patient</b>
@@ -2088,32 +2119,6 @@ public class Media extends DomainResource {
   public static final ca.uhn.fhir.model.api.Include INCLUDE_PATIENT = new ca.uhn.fhir.model.api.Include("Media:patient").toLocked();
 
  /**
-   * Search parameter: <b>context</b>
-   * <p>
-   * Description: <b>Encounter / Episode associated with media</b><br>
-   * Type: <b>reference</b><br>
-   * Path: <b>Media.context</b><br>
-   * </p>
-   */
-  @SearchParamDefinition(name="context", path="Media.context", description="Encounter / Episode associated with media", type="reference", target={Encounter.class, EpisodeOfCare.class } )
-  public static final String SP_CONTEXT = "context";
- /**
-   * <b>Fluent Client</b> search parameter constant for <b>context</b>
-   * <p>
-   * Description: <b>Encounter / Episode associated with media</b><br>
-   * Type: <b>reference</b><br>
-   * Path: <b>Media.context</b><br>
-   * </p>
-   */
-  public static final ca.uhn.fhir.rest.gclient.ReferenceClientParam CONTEXT = new ca.uhn.fhir.rest.gclient.ReferenceClientParam(SP_CONTEXT);
-
-/**
-   * Constant for fluent queries to be used to add include statements. Specifies
-   * the path value of "<b>Media:context</b>".
-   */
-  public static final ca.uhn.fhir.model.api.Include INCLUDE_CONTEXT = new ca.uhn.fhir.model.api.Include("Media:context").toLocked();
-
- /**
    * Search parameter: <b>device</b>
    * <p>
    * Description: <b>Observing Device</b><br>
@@ -2121,7 +2126,7 @@ public class Media extends DomainResource {
    * Path: <b>Media.device</b><br>
    * </p>
    */
-  @SearchParamDefinition(name="device", path="Media.device", description="Observing Device", type="reference", target={Device.class, DeviceComponent.class, DeviceMetric.class } )
+  @SearchParamDefinition(name="device", path="Media.device", description="Observing Device", type="reference", target={Device.class, DeviceMetric.class } )
   public static final String SP_DEVICE = "device";
  /**
    * <b>Fluent Client</b> search parameter constant for <b>device</b>

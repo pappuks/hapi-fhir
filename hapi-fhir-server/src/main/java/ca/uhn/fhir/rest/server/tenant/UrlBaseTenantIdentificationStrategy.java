@@ -4,7 +4,7 @@ package ca.uhn.fhir.rest.server.tenant;
  * #%L
  * HAPI FHIR - Server Framework
  * %%
- * Copyright (C) 2014 - 2018 University Health Network
+ * Copyright (C) 2014 - 2019 University Health Network
  * %%
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -43,7 +43,7 @@ public class UrlBaseTenantIdentificationStrategy implements ITenantIdentificatio
 	public void extractTenant(UrlPathTokenizer theUrlPathTokenizer, RequestDetails theRequestDetails) {
 		String tenantId = null;
 		if (theUrlPathTokenizer.hasMoreTokens()) {
-			tenantId = defaultIfBlank(theUrlPathTokenizer.nextToken(), null);
+			tenantId = defaultIfBlank(theUrlPathTokenizer.nextTokenUnescapedAndSanitized(), null);
 			ourLog.trace("Found tenant ID {} in request string", tenantId);
 			theRequestDetails.setTenantId(tenantId);
 		}

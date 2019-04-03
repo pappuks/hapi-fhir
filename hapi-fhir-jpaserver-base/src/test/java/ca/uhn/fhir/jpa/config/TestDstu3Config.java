@@ -1,47 +1,39 @@
 package ca.uhn.fhir.jpa.config;
 
-import ca.uhn.fhir.jpa.dao.DaoConfig;
 import ca.uhn.fhir.jpa.search.LuceneSearchMappingFactory;
-import ca.uhn.fhir.jpa.subscription.email.IEmailSender;
-import ca.uhn.fhir.jpa.subscription.email.JavaMailEmailSender;
+import ca.uhn.fhir.jpa.subscription.module.subscriber.email.IEmailSender;
+import ca.uhn.fhir.jpa.subscription.module.subscriber.email.JavaMailEmailSender;
+import ca.uhn.fhir.jpa.util.CircularQueueCaptureQueriesListener;
 import ca.uhn.fhir.rest.server.interceptor.RequestValidatingInterceptor;
 import ca.uhn.fhir.validation.ResultSeverityEnum;
-import net.ttddyy.dsproxy.listener.logging.SLF4JLogLevel;
 import net.ttddyy.dsproxy.support.ProxyDataSourceBuilder;
 import org.apache.commons.dbcp2.BasicDataSource;
-import org.hibernate.jpa.HibernatePersistenceProvider;
-import org.springframework.beans.BeansException;
-import org.springframework.beans.factory.config.BeanFactoryPostProcessor;
-import org.springframework.beans.factory.config.ConfigurableListableBeanFactory;
-import org.springframework.beans.factory.support.DefaultListableBeanFactory;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Lazy;
-import org.springframework.context.annotation.Primary;
+import org.springframework.context.annotation.*;
 import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
-import org.springframework.core.env.Environment;
-import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
-import org.springframework.scheduling.annotation.ScheduledAnnotationBeanPostProcessor;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
-import javax.persistence.EntityManagerFactory;
 import javax.sql.DataSource;
 import java.sql.Connection;
-import java.sql.SQLException;
 import java.util.Properties;
 import java.util.concurrent.TimeUnit;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.fail;
 
 @Configuration
+@Import(TestJPAConfig.class)
 @EnableTransactionManagement()
 public class TestDstu3Config extends BaseJavaConfigDstu3 {
 
 	static final org.slf4j.Logger ourLog = org.slf4j.LoggerFactory.getLogger(TestDstu3Config.class);
 	private Exception myLastStackTrace;
 
-	@Bean()
+	@Bean
+	public CircularQueueCaptureQueriesListener captureQueriesListener() {
+		return new CircularQueueCaptureQueriesListener();
+	}
+
+	@Bean
 	public BasicDataSource basicDataSource() {
 		BasicDataSource retVal = new BasicDataSource() {
 
@@ -106,12 +98,7 @@ public class TestDstu3Config extends BaseJavaConfigDstu3 {
 		return retVal;
 	}
 
-	@Bean()
-	public DaoConfig daoConfig() {
-		return new DaoConfig();
-	}
-
-	@Bean()
+	@Bean
 	@Primary()
 	public DataSource dataSource() {
 
@@ -119,6 +106,7 @@ public class TestDstu3Config extends BaseJavaConfigDstu3 {
 			.create(basicDataSource())
 //			.logQueryBySlf4j(SLF4JLogLevel.INFO, "SQL")
 			.logSlowQueryBySlf4j(1000, TimeUnit.MILLISECONDS)
+			.afterQuery(captureQueriesListener())
 			.countQuery()
 			.build();
 
@@ -134,12 +122,11 @@ public class TestDstu3Config extends BaseJavaConfigDstu3 {
 	}
 
 	@Override
-	@Bean()
+	@Bean
 	public LocalContainerEntityManagerFactoryBean entityManagerFactory() {
 		LocalContainerEntityManagerFactoryBean retVal = super.entityManagerFactory();
 		retVal.setPersistenceUnitName("PU_HapiFhirJpaDstu3");
 		retVal.setDataSource(dataSource());
-		retVal.setPersistenceProvider(new HibernatePersistenceProvider());
 		retVal.setJpaProperties(jpaProperties());
 		return retVal;
 	}
@@ -173,18 +160,6 @@ public class TestDstu3Config extends BaseJavaConfigDstu3 {
 		return requestValidator;
 	}
 
-	@Bean()
-	public JpaTransactionManager transactionManager(EntityManagerFactory entityManagerFactory) {
-		JpaTransactionManager retVal = new JpaTransactionManager();
-		retVal.setEntityManagerFactory(entityManagerFactory);
-		return retVal;
-	}
-
-	@Bean
-	public UnregisterScheduledProcessor unregisterScheduledProcessor(Environment theEnv) {
-		return new UnregisterScheduledProcessor(theEnv);
-	}
-
 	/**
 	 * This lets the "@Value" fields reference properties from the properties file
 	 */
@@ -193,24 +168,5 @@ public class TestDstu3Config extends BaseJavaConfigDstu3 {
 		return new PropertySourcesPlaceholderConfigurer();
 	}
 
-
-	public class UnregisterScheduledProcessor implements BeanFactoryPostProcessor {
-
-		private final Environment myEnvironment;
-
-		public UnregisterScheduledProcessor(Environment theEnv) {
-			myEnvironment = theEnv;
-		}
-
-		@Override
-		public void postProcessBeanFactory(final ConfigurableListableBeanFactory beanFactory) throws BeansException {
-			String schedulingDisabled = myEnvironment.getProperty("scheduling_disabled");
-			if ("true".equals(schedulingDisabled)) {
-				for (String beanName : beanFactory.getBeanNamesForType(ScheduledAnnotationBeanPostProcessor.class)) {
-					((DefaultListableBeanFactory) beanFactory).removeBeanDefinition(beanName);
-				}
-			}
-		}
-	}
 
 }

@@ -4,7 +4,7 @@ package ca.uhn.fhir.rest.server.interceptor.auth;
  * #%L
  * HAPI FHIR - Server Framework
  * %%
- * Copyright (C) 2014 - 2018 University Health Network
+ * Copyright (C) 2014 - 2019 University Health Network
  * %%
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -33,7 +33,6 @@ public class RuleImplConditional extends BaseRule implements IAuthRule {
 	private AppliesTypeEnum myAppliesTo;
 	private Set<?> myAppliesToTypes;
 	private RestOperationTypeEnum myOperationType;
-	private RuleBuilder.ITenantApplicabilityChecker myTenantApplicabilityChecker;
 
 	RuleImplConditional(String theRuleName) {
 		super(theRuleName);
@@ -41,7 +40,11 @@ public class RuleImplConditional extends BaseRule implements IAuthRule {
 
 	@Override
 	public Verdict applyRule(RestOperationTypeEnum theOperation, RequestDetails theRequestDetails, IBaseResource theInputResource, IIdType theInputResourceId, IBaseResource theOutputResource,
-									 IRuleApplier theRuleApplier) {
+									 IRuleApplier theRuleApplier, Set<AuthorizationFlagsEnum> theFlags) {
+
+		if (isOtherTenant(theRequestDetails)) {
+			return null;
+		}
 
 		if (theInputResourceId != null) {
 			return null;
@@ -63,8 +66,8 @@ public class RuleImplConditional extends BaseRule implements IAuthRule {
 				return null;
 			}
 
-			if (myTenantApplicabilityChecker != null) {
-				if (!myTenantApplicabilityChecker.applies(theRequestDetails)) {
+			if (getTenantApplicabilityChecker() != null) {
+				if (!getTenantApplicabilityChecker().applies(theRequestDetails)) {
 					return null;
 				}
 			}
@@ -89,10 +92,6 @@ public class RuleImplConditional extends BaseRule implements IAuthRule {
 
 	void setOperationType(RestOperationTypeEnum theOperationType) {
 		myOperationType = theOperationType;
-	}
-
-	public void setTenantApplicabilityChecker(RuleBuilder.ITenantApplicabilityChecker theTenantApplicabilityChecker) {
-		myTenantApplicabilityChecker = theTenantApplicabilityChecker;
 	}
 
 }

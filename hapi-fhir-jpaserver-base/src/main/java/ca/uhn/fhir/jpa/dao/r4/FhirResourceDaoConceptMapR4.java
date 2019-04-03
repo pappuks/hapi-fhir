@@ -4,7 +4,7 @@ package ca.uhn.fhir.jpa.dao.r4;
  * #%L
  * HAPI FHIR JPA Server
  * %%
- * Copyright (C) 2014 - 2018 University Health Network
+ * Copyright (C) 2014 - 2019 University Health Network
  * %%
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -21,7 +21,7 @@ package ca.uhn.fhir.jpa.dao.r4;
  */
 
 import ca.uhn.fhir.jpa.dao.IFhirResourceDaoConceptMap;
-import ca.uhn.fhir.jpa.entity.ResourceTable;
+import ca.uhn.fhir.jpa.model.entity.ResourceTable;
 import ca.uhn.fhir.jpa.entity.TermConceptMapGroupElement;
 import ca.uhn.fhir.jpa.entity.TermConceptMapGroupElementTarget;
 import ca.uhn.fhir.jpa.term.IHapiTerminologySvc;
@@ -83,7 +83,9 @@ public class FhirResourceDaoConceptMapR4 extends FhirResourceDaoR4<ConceptMap> i
 				if (targetsToReturn.add(target)) {
 					translationMatch = new TranslationMatch();
 
-					translationMatch.setEquivalence(new CodeType(target.getEquivalence().toCode()));
+					if (target.getEquivalence() != null) {
+						translationMatch.setEquivalence(new CodeType(target.getEquivalence().toCode()));
+					}
 
 					translationMatch.setConcept(
 						new Coding()
@@ -143,6 +145,10 @@ public class FhirResourceDaoConceptMapR4 extends FhirResourceDaoR4<ConceptMap> i
 
 					translationMatch.setSource(new UriType(element.getConceptMapUrl()));
 
+					if (element.getConceptMapGroupElementTargets().size() == 1) {
+						translationMatch.setEquivalence(new CodeType(element.getConceptMapGroupElementTargets().get(0).getEquivalence().toCode()));
+					}
+
 					retVal.addMatch(translationMatch);
 				}
 			}
@@ -156,9 +162,12 @@ public class FhirResourceDaoConceptMapR4 extends FhirResourceDaoR4<ConceptMap> i
 													 boolean theUpdateVersion, Date theUpdateTime, boolean theForceUpdate, boolean theCreateNewHistoryEntry) {
 		ResourceTable retVal = super.updateEntity(theRequestDetails, theResource, theEntity, theDeletedTimestampOrNull, thePerformIndexing, theUpdateVersion, theUpdateTime, theForceUpdate, theCreateNewHistoryEntry);
 
-		ConceptMap conceptMap = (ConceptMap) theResource;
-
-		myHapiTerminologySvc.storeTermConceptMapAndChildren(retVal, conceptMap);
+		if (retVal.getDeleted() == null) {
+			ConceptMap conceptMap = (ConceptMap) theResource;
+			myHapiTerminologySvc.storeTermConceptMapAndChildren(retVal, conceptMap);
+		} else {
+			myHapiTerminologySvc.deleteConceptMapAndChildren(retVal);
+		}
 
 		return retVal;
 	}

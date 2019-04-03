@@ -4,7 +4,7 @@ package ca.uhn.fhir.rest.api;
  * #%L
  * HAPI FHIR - Core Library
  * %%
- * Copyright (C) 2014 - 2018 University Health Network
+ * Copyright (C) 2014 - 2019 University Health Network
  * %%
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -106,6 +106,9 @@ public enum EncodingEnum {
 		myFormatContentType = theFormatContentType;
 	}
 
+	/**
+	 * Returns <code>xml</code> or <code>json</code> as used on the <code>_format</code> search parameter
+	 */
 	public String getFormatContentType() {
 		return myFormatContentType;
 	}
@@ -156,7 +159,12 @@ public enum EncodingEnum {
 	 * </p>
 	 */
 	public static EncodingEnum forContentType(String theContentType) {
-		return ourContentTypeToEncoding.get(theContentType);
+		String contentTypeSplitted = getTypeWithoutCharset(theContentType);
+		if (contentTypeSplitted == null) {
+			return null;
+		} else {
+			return ourContentTypeToEncoding.get(contentTypeSplitted );
+		}
 	}
 
 
@@ -170,14 +178,33 @@ public enum EncodingEnum {
 	 * @see #forContentType(String)
 	 */
 	public static EncodingEnum forContentTypeStrict(String theContentType) {
-		return ourContentTypeToEncodingStrict.get(theContentType);
+		String contentTypeSplitted = getTypeWithoutCharset(theContentType);
+		if (contentTypeSplitted == null) {
+			return null;
+		} else {
+			return ourContentTypeToEncodingStrict.get(contentTypeSplitted);
+		}
+	}
+
+	private static String getTypeWithoutCharset(String theContentType) {
+		if (theContentType == null) {
+			return null;
+		} else {
+			String[] contentTypeSplitted = theContentType.split(";");
+			return contentTypeSplitted[0];
+		}
 	}
 
 	/**
 	 * Is the given type a FHIR legacy (pre-DSTU3) content type?
 	 */
-	public static boolean isLegacy(String theFormat) {
-		return ourContentTypeToEncodingLegacy.containsKey(theFormat);
+	public static boolean isLegacy(String theContentType) {
+		String contentTypeSplitted = getTypeWithoutCharset(theContentType);
+		if (contentTypeSplitted == null) {
+			return false;
+		} else {
+			return ourContentTypeToEncodingLegacy.containsKey(contentTypeSplitted);
+		}
 	}
 
 

@@ -29,7 +29,7 @@ package org.hl7.fhir.r4.model.codesystems;
   
 */
 
-// Generated on Sun, May 6, 2018 17:51-0400 for FHIR v3.4.0
+// Generated on Thu, Dec 27, 2018 10:06-0500 for FHIR v4.0.0
 
 
 import org.hl7.fhir.r4.model.EnumFactory;
@@ -71,8 +71,8 @@ public class TestscriptOperationCodesEnumFactory implements EnumFactory<Testscri
       return TestscriptOperationCodes.APPLY;
     if ("closure".equals(codeString))
       return TestscriptOperationCodes.CLOSURE;
-    if ("compose".equals(codeString))
-      return TestscriptOperationCodes.COMPOSE;
+    if ("find-matches".equals(codeString))
+      return TestscriptOperationCodes.FINDMATCHES;
     if ("conforms".equals(codeString))
       return TestscriptOperationCodes.CONFORMS;
     if ("data-requirements".equals(codeString))
@@ -165,8 +165,8 @@ public class TestscriptOperationCodesEnumFactory implements EnumFactory<Testscri
       return "apply";
     if (code == TestscriptOperationCodes.CLOSURE)
       return "closure";
-    if (code == TestscriptOperationCodes.COMPOSE)
-      return "compose";
+    if (code == TestscriptOperationCodes.FINDMATCHES)
+      return "find-matches";
     if (code == TestscriptOperationCodes.CONFORMS)
       return "conforms";
     if (code == TestscriptOperationCodes.DATAREQUIREMENTS)

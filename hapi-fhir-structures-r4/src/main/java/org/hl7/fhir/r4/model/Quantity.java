@@ -29,7 +29,7 @@ package org.hl7.fhir.r4.model;
   
 */
 
-// Generated on Tue, Apr 3, 2018 06:39+1000 for FHIR v3.4.0
+// Generated on Thu, Dec 27, 2018 10:06-0500 for FHIR v4.0.0
 
 import java.util.*;
 
@@ -734,7 +734,7 @@ public class Quantity extends Type implements ICompositeType, ICoding {
         return false;
       }
 
-    public static Quantity fromUcum(String v, String code) {
+   public static Quantity fromUcum(String v, String code) {
       Quantity res = new Quantity();
       res.setValue(new BigDecimal(v));
       res.setSystem("http://unitsofmeasure.org");

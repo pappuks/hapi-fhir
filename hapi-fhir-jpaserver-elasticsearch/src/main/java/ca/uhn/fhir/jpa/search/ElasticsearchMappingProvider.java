@@ -4,7 +4,7 @@ package ca.uhn.fhir.jpa.search;
  * #%L
  * HAPI FHIR JPA Server - ElasticSearch Integration
  * %%
- * Copyright (C) 2014 - 2018 University Health Network
+ * Copyright (C) 2014 - 2019 University Health Network
  * %%
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,6 +20,7 @@ package ca.uhn.fhir.jpa.search;
  * #L%
  */
 
+import org.apache.lucene.analysis.core.WhitespaceTokenizerFactory;
 import org.hibernate.search.elasticsearch.analyzer.definition.ElasticsearchAnalysisDefinitionRegistryBuilder;
 import org.hibernate.search.elasticsearch.analyzer.definition.ElasticsearchAnalysisDefinitionProvider;
 
@@ -57,5 +58,8 @@ public class ElasticsearchMappingProvider implements ElasticsearchAnalysisDefini
 		builder.analyzer("exactAnalyzer").withTokenizer("standard");
 
 		builder.analyzer("conceptParentPidsAnalyzer").withTokenizer("whitespace");
+
+		builder.analyzer("termConceptPropertyAnalyzer").withTokenizer("whitespace");
+
 	}
 }

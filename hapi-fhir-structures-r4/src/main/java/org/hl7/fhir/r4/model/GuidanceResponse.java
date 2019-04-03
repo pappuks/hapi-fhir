@@ -29,7 +29,7 @@ package org.hl7.fhir.r4.model;
   
 */
 
-// Generated on Sun, May 6, 2018 17:51-0400 for FHIR v3.4.0
+// Generated on Thu, Dec 27, 2018 10:06-0500 for FHIR v4.0.0
 
 import java.util.*;
 
@@ -45,32 +45,32 @@ import org.hl7.fhir.exceptions.FHIRException;
 /**
  * A guidance response is the formal response to a guidance request, including any output parameters returned by the evaluation, as well as the description of any proposed actions to be taken.
  */
-@ResourceDef(name="GuidanceResponse", profile="http://hl7.org/fhir/Profile/GuidanceResponse")
+@ResourceDef(name="GuidanceResponse", profile="http://hl7.org/fhir/StructureDefinition/GuidanceResponse")
 public class GuidanceResponse extends DomainResource {
 
     public enum GuidanceResponseStatus {
         /**
-         * The request was processed successfully
+         * The request was processed successfully.
          */
         SUCCESS, 
         /**
-         * The request was processed successfully, but more data may result in a more complete evaluation
+         * The request was processed successfully, but more data may result in a more complete evaluation.
          */
         DATAREQUESTED, 
         /**
-         * The request was processed, but more data is required to complete the evaluation
+         * The request was processed, but more data is required to complete the evaluation.
          */
         DATAREQUIRED, 
         /**
-         * The request is currently being processed
+         * The request is currently being processed.
          */
         INPROGRESS, 
         /**
-         * The request was not processed successfully
+         * The request was not processed successfully.
          */
         FAILURE, 
         /**
-         * The response was entered in error
+         * The response was entered in error.
          */
         ENTEREDINERROR, 
         /**
@@ -121,12 +121,12 @@ public class GuidanceResponse extends DomainResource {
         }
         public String getDefinition() {
           switch (this) {
-            case SUCCESS: return "The request was processed successfully";
-            case DATAREQUESTED: return "The request was processed successfully, but more data may result in a more complete evaluation";
-            case DATAREQUIRED: return "The request was processed, but more data is required to complete the evaluation";
-            case INPROGRESS: return "The request is currently being processed";
-            case FAILURE: return "The request was not processed successfully";
-            case ENTEREDINERROR: return "The response was entered in error";
+            case SUCCESS: return "The request was processed successfully.";
+            case DATAREQUESTED: return "The request was processed successfully, but more data may result in a more complete evaluation.";
+            case DATAREQUIRED: return "The request was processed, but more data is required to complete the evaluation.";
+            case INPROGRESS: return "The request is currently being processed.";
+            case FAILURE: return "The request was not processed successfully.";
+            case ENTEREDINERROR: return "The response was entered in error.";
             default: return "?";
           }
         }
@@ -205,11 +205,11 @@ public class GuidanceResponse extends DomainResource {
     }
 
     /**
-     * The id of the request associated with this response. If an id was given as part of the request, it will be reproduced here to enable the requester to more easily identify the response in a multi-request scenario.
+     * The identifier of the request associated with this response. If an identifier was given as part of the request, it will be reproduced here to enable the requester to more easily identify the response in a multi-request scenario.
      */
-    @Child(name = "requestId", type = {IdType.class}, order=0, min=0, max=1, modifier=false, summary=true)
-    @Description(shortDefinition="The id of the request associated with this response, if any", formalDefinition="The id of the request associated with this response. If an id was given as part of the request, it will be reproduced here to enable the requester to more easily identify the response in a multi-request scenario." )
-    protected IdType requestId;
+    @Child(name = "requestIdentifier", type = {Identifier.class}, order=0, min=0, max=1, modifier=false, summary=true)
+    @Description(shortDefinition="The identifier of the request associated with this response, if any", formalDefinition="The identifier of the request associated with this response. If an identifier was given as part of the request, it will be reproduced here to enable the requester to more easily identify the response in a multi-request scenario." )
+    protected Identifier requestIdentifier;
 
     /**
      * Allows a service to provide  unique, business identifiers for the response.
@@ -246,16 +246,16 @@ public class GuidanceResponse extends DomainResource {
     protected Resource subjectTarget;
 
     /**
-     * Allows the context of the guidance response to be provided if available. In a service context, this would likely be unavailable.
+     * The encounter during which this response was created or to which the creation of this record is tightly associated.
      */
-    @Child(name = "context", type = {Encounter.class, EpisodeOfCare.class}, order=5, min=0, max=1, modifier=false, summary=false)
-    @Description(shortDefinition="Encounter or Episode during which the response was returned", formalDefinition="Allows the context of the guidance response to be provided if available. In a service context, this would likely be unavailable." )
-    protected Reference context;
+    @Child(name = "encounter", type = {Encounter.class}, order=5, min=0, max=1, modifier=false, summary=false)
+    @Description(shortDefinition="Encounter during which the response was returned", formalDefinition="The encounter during which this response was created or to which the creation of this record is tightly associated." )
+    protected Reference encounter;
 
     /**
-     * The actual object that is the target of the reference (Allows the context of the guidance response to be provided if available. In a service context, this would likely be unavailable.)
+     * The actual object that is the target of the reference (The encounter during which this response was created or to which the creation of this record is tightly associated.)
      */
-    protected Resource contextTarget;
+    protected Encounter encounterTarget;
 
     /**
      * Indicates when the guidance response was processed.
@@ -345,7 +345,7 @@ public class GuidanceResponse extends DomainResource {
     @Description(shortDefinition="Additional required data", formalDefinition="If the evaluation could not be completed due to lack of information, or additional information would potentially result in a more accurate response, this element will a description of the data required in order to proceed with the evaluation. A subsequent request to the service should include this data." )
     protected List<DataRequirement> dataRequirement;
 
-    private static final long serialVersionUID = -1809604960L;
+    private static final long serialVersionUID = -760182193L;
 
   /**
    * Constructor
@@ -364,51 +364,26 @@ public class GuidanceResponse extends DomainResource {
     }
 
     /**
-     * @return {@link #requestId} (The id of the request associated with this response. If an id was given as part of the request, it will be reproduced here to enable the requester to more easily identify the response in a multi-request scenario.). This is the underlying object with id, value and extensions. The accessor "getRequestId" gives direct access to the value
+     * @return {@link #requestIdentifier} (The identifier of the request associated with this response. If an identifier was given as part of the request, it will be reproduced here to enable the requester to more easily identify the response in a multi-request scenario.)
      */
-    public IdType getRequestIdElement() { 
-      if (this.requestId == null)
+    public Identifier getRequestIdentifier() { 
+      if (this.requestIdentifier == null)
         if (Configuration.errorOnAutoCreate())
-          throw new Error("Attempt to auto-create GuidanceResponse.requestId");
+          throw new Error("Attempt to auto-create GuidanceResponse.requestIdentifier");
         else if (Configuration.doAutoCreate())
-          this.requestId = new IdType(); // bb
-      return this.requestId;
+          this.requestIdentifier = new Identifier(); // cc
+      return this.requestIdentifier;
     }
 
-    public boolean hasRequestIdElement() { 
-      return this.requestId != null && !this.requestId.isEmpty();
-    }
-
-    public boolean hasRequestId() { 
-      return this.requestId != null && !this.requestId.isEmpty();
+    public boolean hasRequestIdentifier() { 
+      return this.requestIdentifier != null && !this.requestIdentifier.isEmpty();
     }
 
     /**
-     * @param value {@link #requestId} (The id of the request associated with this response. If an id was given as part of the request, it will be reproduced here to enable the requester to more easily identify the response in a multi-request scenario.). This is the underlying object with id, value and extensions. The accessor "getRequestId" gives direct access to the value
+     * @param value {@link #requestIdentifier} (The identifier of the request associated with this response. If an identifier was given as part of the request, it will be reproduced here to enable the requester to more easily identify the response in a multi-request scenario.)
      */
-    public GuidanceResponse setRequestIdElement(IdType value) { 
-      this.requestId = value;
-      return this;
-    }
-
-    /**
-     * @return The id of the request associated with this response. If an id was given as part of the request, it will be reproduced here to enable the requester to more easily identify the response in a multi-request scenario.
-     */
-    public String getRequestId() { 
-      return this.requestId == null ? null : this.requestId.getValue();
-    }
-
-    /**
-     * @param value The id of the request associated with this response. If an id was given as part of the request, it will be reproduced here to enable the requester to more easily identify the response in a multi-request scenario.
-     */
-    public GuidanceResponse setRequestId(String value) { 
-      if (Utilities.noString(value))
-        this.requestId = null;
-      else {
-        if (this.requestId == null)
-          this.requestId = new IdType();
-        this.requestId.setValue(value);
-      }
+    public GuidanceResponse setRequestIdentifier(Identifier value) { 
+      this.requestIdentifier = value;
       return this;
     }
 
@@ -477,7 +452,7 @@ public class GuidanceResponse extends DomainResource {
      */
     public UriType getModuleUriType() throws FHIRException { 
       if (this.module == null)
-        return null;
+        this.module = new UriType();
       if (!(this.module instanceof UriType))
         throw new FHIRException("Type mismatch: the type UriType was expected, but "+this.module.getClass().getName()+" was encountered");
       return (UriType) this.module;
@@ -492,7 +467,7 @@ public class GuidanceResponse extends DomainResource {
      */
     public CanonicalType getModuleCanonicalType() throws FHIRException { 
       if (this.module == null)
-        return null;
+        this.module = new CanonicalType();
       if (!(this.module instanceof CanonicalType))
         throw new FHIRException("Type mismatch: the type CanonicalType was expected, but "+this.module.getClass().getName()+" was encountered");
       return (CanonicalType) this.module;
@@ -507,7 +482,7 @@ public class GuidanceResponse extends DomainResource {
      */
     public CodeableConcept getModuleCodeableConcept() throws FHIRException { 
       if (this.module == null)
-        return null;
+        this.module = new CodeableConcept();
       if (!(this.module instanceof CodeableConcept))
         throw new FHIRException("Type mismatch: the type CodeableConcept was expected, but "+this.module.getClass().getName()+" was encountered");
       return (CodeableConcept) this.module;
@@ -616,41 +591,46 @@ public class GuidanceResponse extends DomainResource {
     }
 
     /**
-     * @return {@link #context} (Allows the context of the guidance response to be provided if available. In a service context, this would likely be unavailable.)
+     * @return {@link #encounter} (The encounter during which this response was created or to which the creation of this record is tightly associated.)
      */
-    public Reference getContext() { 
-      if (this.context == null)
+    public Reference getEncounter() { 
+      if (this.encounter == null)
         if (Configuration.errorOnAutoCreate())
-          throw new Error("Attempt to auto-create GuidanceResponse.context");
+          throw new Error("Attempt to auto-create GuidanceResponse.encounter");
         else if (Configuration.doAutoCreate())
-          this.context = new Reference(); // cc
-      return this.context;
+          this.encounter = new Reference(); // cc
+      return this.encounter;
     }
 
-    public boolean hasContext() { 
-      return this.context != null && !this.context.isEmpty();
+    public boolean hasEncounter() { 
+      return this.encounter != null && !this.encounter.isEmpty();
     }
 
     /**
-     * @param value {@link #context} (Allows the context of the guidance response to be provided if available. In a service context, this would likely be unavailable.)
+     * @param value {@link #encounter} (The encounter during which this response was created or to which the creation of this record is tightly associated.)
      */
-    public GuidanceResponse setContext(Reference value) { 
-      this.context = value;
+    public GuidanceResponse setEncounter(Reference value) { 
+      this.encounter = value;
       return this;
     }
 
     /**
-     * @return {@link #context} The actual object that is the target of the reference. The reference library doesn't populate this, but you can use it to hold the resource if you resolve it. (Allows the context of the guidance response to be provided if available. In a service context, this would likely be unavailable.)
+     * @return {@link #encounter} The actual object that is the target of the reference. The reference library doesn't populate this, but you can use it to hold the resource if you resolve it. (The encounter during which this response was created or to which the creation of this record is tightly associated.)
      */
-    public Resource getContextTarget() { 
-      return this.contextTarget;
+    public Encounter getEncounterTarget() { 
+      if (this.encounterTarget == null)
+        if (Configuration.errorOnAutoCreate())
+          throw new Error("Attempt to auto-create GuidanceResponse.encounter");
+        else if (Configuration.doAutoCreate())
+          this.encounterTarget = new Encounter(); // aa
+      return this.encounterTarget;
     }
 
     /**
-     * @param value {@link #context} The actual object that is the target of the reference. The reference library doesn't use these, but you can use it to hold the resource if you resolve it. (Allows the context of the guidance response to be provided if available. In a service context, this would likely be unavailable.)
+     * @param value {@link #encounter} The actual object that is the target of the reference. The reference library doesn't use these, but you can use it to hold the resource if you resolve it. (The encounter during which this response was created or to which the creation of this record is tightly associated.)
      */
-    public GuidanceResponse setContextTarget(Resource value) { 
-      this.contextTarget = value;
+    public GuidanceResponse setEncounterTarget(Encounter value) { 
+      this.encounterTarget = value;
       return this;
     }
 
@@ -1129,12 +1109,12 @@ public class GuidanceResponse extends DomainResource {
 
       protected void listChildren(List<Property> children) {
         super.listChildren(children);
-        children.add(new Property("requestId", "id", "The id of the request associated with this response. If an id was given as part of the request, it will be reproduced here to enable the requester to more easily identify the response in a multi-request scenario.", 0, 1, requestId));
+        children.add(new Property("requestIdentifier", "Identifier", "The identifier of the request associated with this response. If an identifier was given as part of the request, it will be reproduced here to enable the requester to more easily identify the response in a multi-request scenario.", 0, 1, requestIdentifier));
         children.add(new Property("identifier", "Identifier", "Allows a service to provide  unique, business identifiers for the response.", 0, java.lang.Integer.MAX_VALUE, identifier));
         children.add(new Property("module[x]", "uri|canonical|CodeableConcept", "An identifier, CodeableConcept or canonical reference to the guidance that was requested.", 0, 1, module));
         children.add(new Property("status", "code", "The status of the response. If the evaluation is completed successfully, the status will indicate success. However, in order to complete the evaluation, the engine may require more information. In this case, the status will be data-required, and the response will contain a description of the additional required information. If the evaluation completed successfully, but the engine determines that a potentially more accurate response could be provided if more data was available, the status will be data-requested, and the response will contain a description of the additional requested information.", 0, 1, status));
         children.add(new Property("subject", "Reference(Patient|Group)", "The patient for which the request was processed.", 0, 1, subject));
-        children.add(new Property("context", "Reference(Encounter|EpisodeOfCare)", "Allows the context of the guidance response to be provided if available. In a service context, this would likely be unavailable.", 0, 1, context));
+        children.add(new Property("encounter", "Reference(Encounter)", "The encounter during which this response was created or to which the creation of this record is tightly associated.", 0, 1, encounter));
         children.add(new Property("occurrenceDateTime", "dateTime", "Indicates when the guidance response was processed.", 0, 1, occurrenceDateTime));
         children.add(new Property("performer", "Reference(Device)", "Provides a reference to the device that performed the guidance.", 0, 1, performer));
         children.add(new Property("reasonCode", "CodeableConcept", "Describes the reason for the guidance response in coded or textual form.", 0, java.lang.Integer.MAX_VALUE, reasonCode));
@@ -1149,7 +1129,7 @@ public class GuidanceResponse extends DomainResource {
       @Override
       public Property getNamedProperty(int _hash, String _name, boolean _checkValid) throws FHIRException {
         switch (_hash) {
-        case 693933066: /*requestId*/  return new Property("requestId", "id", "The id of the request associated with this response. If an id was given as part of the request, it will be reproduced here to enable the requester to more easily identify the response in a multi-request scenario.", 0, 1, requestId);
+        case -354233192: /*requestIdentifier*/  return new Property("requestIdentifier", "Identifier", "The identifier of the request associated with this response. If an identifier was given as part of the request, it will be reproduced here to enable the requester to more easily identify the response in a multi-request scenario.", 0, 1, requestIdentifier);
         case -1618432855: /*identifier*/  return new Property("identifier", "Identifier", "Allows a service to provide  unique, business identifiers for the response.", 0, java.lang.Integer.MAX_VALUE, identifier);
         case -1552083308: /*module[x]*/  return new Property("module[x]", "uri|canonical|CodeableConcept", "An identifier, CodeableConcept or canonical reference to the guidance that was requested.", 0, 1, module);
         case -1068784020: /*module*/  return new Property("module[x]", "uri|canonical|CodeableConcept", "An identifier, CodeableConcept or canonical reference to the guidance that was requested.", 0, 1, module);
@@ -1158,7 +1138,7 @@ public class GuidanceResponse extends DomainResource {
         case -1157899371: /*moduleCodeableConcept*/  return new Property("module[x]", "uri|canonical|CodeableConcept", "An identifier, CodeableConcept or canonical reference to the guidance that was requested.", 0, 1, module);
         case -892481550: /*status*/  return new Property("status", "code", "The status of the response. If the evaluation is completed successfully, the status will indicate success. However, in order to complete the evaluation, the engine may require more information. In this case, the status will be data-required, and the response will contain a description of the additional required information. If the evaluation completed successfully, but the engine determines that a potentially more accurate response could be provided if more data was available, the status will be data-requested, and the response will contain a description of the additional requested information.", 0, 1, status);
         case -1867885268: /*subject*/  return new Property("subject", "Reference(Patient|Group)", "The patient for which the request was processed.", 0, 1, subject);
-        case 951530927: /*context*/  return new Property("context", "Reference(Encounter|EpisodeOfCare)", "Allows the context of the guidance response to be provided if available. In a service context, this would likely be unavailable.", 0, 1, context);
+        case 1524132147: /*encounter*/  return new Property("encounter", "Reference(Encounter)", "The encounter during which this response was created or to which the creation of this record is tightly associated.", 0, 1, encounter);
         case -298443636: /*occurrenceDateTime*/  return new Property("occurrenceDateTime", "dateTime", "Indicates when the guidance response was processed.", 0, 1, occurrenceDateTime);
         case 481140686: /*performer*/  return new Property("performer", "Reference(Device)", "Provides a reference to the device that performed the guidance.", 0, 1, performer);
         case 722137681: /*reasonCode*/  return new Property("reasonCode", "CodeableConcept", "Describes the reason for the guidance response in coded or textual form.", 0, java.lang.Integer.MAX_VALUE, reasonCode);
@@ -1176,12 +1156,12 @@ public class GuidanceResponse extends DomainResource {
       @Override
       public Base[] getProperty(int hash, String name, boolean checkValid) throws FHIRException {
         switch (hash) {
-        case 693933066: /*requestId*/ return this.requestId == null ? new Base[0] : new Base[] {this.requestId}; // IdType
+        case -354233192: /*requestIdentifier*/ return this.requestIdentifier == null ? new Base[0] : new Base[] {this.requestIdentifier}; // Identifier
         case -1618432855: /*identifier*/ return this.identifier == null ? new Base[0] : this.identifier.toArray(new Base[this.identifier.size()]); // Identifier
         case -1068784020: /*module*/ return this.module == null ? new Base[0] : new Base[] {this.module}; // Type
         case -892481550: /*status*/ return this.status == null ? new Base[0] : new Base[] {this.status}; // Enumeration<GuidanceResponseStatus>
         case -1867885268: /*subject*/ return this.subject == null ? new Base[0] : new Base[] {this.subject}; // Reference
-        case 951530927: /*context*/ return this.context == null ? new Base[0] : new Base[] {this.context}; // Reference
+        case 1524132147: /*encounter*/ return this.encounter == null ? new Base[0] : new Base[] {this.encounter}; // Reference
         case -298443636: /*occurrenceDateTime*/ return this.occurrenceDateTime == null ? new Base[0] : new Base[] {this.occurrenceDateTime}; // DateTimeType
         case 481140686: /*performer*/ return this.performer == null ? new Base[0] : new Base[] {this.performer}; // Reference
         case 722137681: /*reasonCode*/ return this.reasonCode == null ? new Base[0] : this.reasonCode.toArray(new Base[this.reasonCode.size()]); // CodeableConcept
@@ -1199,8 +1179,8 @@ public class GuidanceResponse extends DomainResource {
       @Override
       public Base setProperty(int hash, String name, Base value) throws FHIRException {
         switch (hash) {
-        case 693933066: // requestId
-          this.requestId = castToId(value); // IdType
+        case -354233192: // requestIdentifier
+          this.requestIdentifier = castToIdentifier(value); // Identifier
           return value;
         case -1618432855: // identifier
           this.getIdentifier().add(castToIdentifier(value)); // Identifier
@@ -1215,8 +1195,8 @@ public class GuidanceResponse extends DomainResource {
         case -1867885268: // subject
           this.subject = castToReference(value); // Reference
           return value;
-        case 951530927: // context
-          this.context = castToReference(value); // Reference
+        case 1524132147: // encounter
+          this.encounter = castToReference(value); // Reference
           return value;
         case -298443636: // occurrenceDateTime
           this.occurrenceDateTime = castToDateTime(value); // DateTimeType
@@ -1252,8 +1232,8 @@ public class GuidanceResponse extends DomainResource {
 
       @Override
       public Base setProperty(String name, Base value) throws FHIRException {
-        if (name.equals("requestId")) {
-          this.requestId = castToId(value); // IdType
+        if (name.equals("requestIdentifier")) {
+          this.requestIdentifier = castToIdentifier(value); // Identifier
         } else if (name.equals("identifier")) {
           this.getIdentifier().add(castToIdentifier(value));
         } else if (name.equals("module[x]")) {
@@ -1263,8 +1243,8 @@ public class GuidanceResponse extends DomainResource {
           this.status = (Enumeration) value; // Enumeration<GuidanceResponseStatus>
         } else if (name.equals("subject")) {
           this.subject = castToReference(value); // Reference
-        } else if (name.equals("context")) {
-          this.context = castToReference(value); // Reference
+        } else if (name.equals("encounter")) {
+          this.encounter = castToReference(value); // Reference
         } else if (name.equals("occurrenceDateTime")) {
           this.occurrenceDateTime = castToDateTime(value); // DateTimeType
         } else if (name.equals("performer")) {
@@ -1291,13 +1271,13 @@ public class GuidanceResponse extends DomainResource {
       @Override
       public Base makeProperty(int hash, String name) throws FHIRException {
         switch (hash) {
-        case 693933066:  return getRequestIdElement();
+        case -354233192:  return getRequestIdentifier(); 
         case -1618432855:  return addIdentifier(); 
         case -1552083308:  return getModule(); 
         case -1068784020:  return getModule(); 
         case -892481550:  return getStatusElement();
         case -1867885268:  return getSubject(); 
-        case 951530927:  return getContext(); 
+        case 1524132147:  return getEncounter(); 
         case -298443636:  return getOccurrenceDateTimeElement();
         case 481140686:  return getPerformer(); 
         case 722137681:  return addReasonCode(); 
@@ -1315,12 +1295,12 @@ public class GuidanceResponse extends DomainResource {
       @Override
       public String[] getTypesForProperty(int hash, String name) throws FHIRException {
         switch (hash) {
-        case 693933066: /*requestId*/ return new String[] {"id"};
+        case -354233192: /*requestIdentifier*/ return new String[] {"Identifier"};
         case -1618432855: /*identifier*/ return new String[] {"Identifier"};
         case -1068784020: /*module*/ return new String[] {"uri", "canonical", "CodeableConcept"};
         case -892481550: /*status*/ return new String[] {"code"};
         case -1867885268: /*subject*/ return new String[] {"Reference"};
-        case 951530927: /*context*/ return new String[] {"Reference"};
+        case 1524132147: /*encounter*/ return new String[] {"Reference"};
         case -298443636: /*occurrenceDateTime*/ return new String[] {"dateTime"};
         case 481140686: /*performer*/ return new String[] {"Reference"};
         case 722137681: /*reasonCode*/ return new String[] {"CodeableConcept"};
@@ -1337,8 +1317,9 @@ public class GuidanceResponse extends DomainResource {
 
       @Override
       public Base addChild(String name) throws FHIRException {
-        if (name.equals("requestId")) {
-          throw new FHIRException("Cannot call addChild on a primitive type GuidanceResponse.requestId");
+        if (name.equals("requestIdentifier")) {
+          this.requestIdentifier = new Identifier();
+          return this.requestIdentifier;
         }
         else if (name.equals("identifier")) {
           return addIdentifier();
@@ -1362,9 +1343,9 @@ public class GuidanceResponse extends DomainResource {
           this.subject = new Reference();
           return this.subject;
         }
-        else if (name.equals("context")) {
-          this.context = new Reference();
-          return this.context;
+        else if (name.equals("encounter")) {
+          this.encounter = new Reference();
+          return this.encounter;
         }
         else if (name.equals("occurrenceDateTime")) {
           throw new FHIRException("Cannot call addChild on a primitive type GuidanceResponse.occurrenceDateTime");
@@ -1408,7 +1389,7 @@ public class GuidanceResponse extends DomainResource {
       public GuidanceResponse copy() {
         GuidanceResponse dst = new GuidanceResponse();
         copyValues(dst);
-        dst.requestId = requestId == null ? null : requestId.copy();
+        dst.requestIdentifier = requestIdentifier == null ? null : requestIdentifier.copy();
         if (identifier != null) {
           dst.identifier = new ArrayList<Identifier>();
           for (Identifier i : identifier)
@@ -1417,7 +1398,7 @@ public class GuidanceResponse extends DomainResource {
         dst.module = module == null ? null : module.copy();
         dst.status = status == null ? null : status.copy();
         dst.subject = subject == null ? null : subject.copy();
-        dst.context = context == null ? null : context.copy();
+        dst.encounter = encounter == null ? null : encounter.copy();
         dst.occurrenceDateTime = occurrenceDateTime == null ? null : occurrenceDateTime.copy();
         dst.performer = performer == null ? null : performer.copy();
         if (reasonCode != null) {
@@ -1461,9 +1442,9 @@ public class GuidanceResponse extends DomainResource {
         if (!(other_ instanceof GuidanceResponse))
           return false;
         GuidanceResponse o = (GuidanceResponse) other_;
-        return compareDeep(requestId, o.requestId, true) && compareDeep(identifier, o.identifier, true)
+        return compareDeep(requestIdentifier, o.requestIdentifier, true) && compareDeep(identifier, o.identifier, true)
            && compareDeep(module, o.module, true) && compareDeep(status, o.status, true) && compareDeep(subject, o.subject, true)
-           && compareDeep(context, o.context, true) && compareDeep(occurrenceDateTime, o.occurrenceDateTime, true)
+           && compareDeep(encounter, o.encounter, true) && compareDeep(occurrenceDateTime, o.occurrenceDateTime, true)
            && compareDeep(performer, o.performer, true) && compareDeep(reasonCode, o.reasonCode, true) && compareDeep(reasonReference, o.reasonReference, true)
            && compareDeep(note, o.note, true) && compareDeep(evaluationMessage, o.evaluationMessage, true)
            && compareDeep(outputParameters, o.outputParameters, true) && compareDeep(result, o.result, true)
@@ -1477,14 +1458,15 @@ public class GuidanceResponse extends DomainResource {
         if (!(other_ instanceof GuidanceResponse))
           return false;
         GuidanceResponse o = (GuidanceResponse) other_;
-        return compareValues(requestId, o.requestId, true) && compareValues(status, o.status, true) && compareValues(occurrenceDateTime, o.occurrenceDateTime, true)
+        return compareValues(status, o.status, true) && compareValues(occurrenceDateTime, o.occurrenceDateTime, true)
           ;
       }
 
       public boolean isEmpty() {
-        return super.isEmpty() && ca.uhn.fhir.util.ElementUtil.isEmpty(requestId, identifier, module
-          , status, subject, context, occurrenceDateTime, performer, reasonCode, reasonReference
-          , note, evaluationMessage, outputParameters, result, dataRequirement);
+        return super.isEmpty() && ca.uhn.fhir.util.ElementUtil.isEmpty(requestIdentifier, identifier
+          , module, status, subject, encounter, occurrenceDateTime, performer, reasonCode
+          , reasonReference, note, evaluationMessage, outputParameters, result, dataRequirement
+          );
       }
 
   @Override
@@ -1497,17 +1479,17 @@ public class GuidanceResponse extends DomainResource {
    * <p>
    * Description: <b>The identifier of the request associated with the response</b><br>
    * Type: <b>token</b><br>
-   * Path: <b>GuidanceResponse.requestId</b><br>
+   * Path: <b>GuidanceResponse.requestIdentifier</b><br>
    * </p>
    */
-  @SearchParamDefinition(name="request", path="GuidanceResponse.requestId", description="The identifier of the request associated with the response", type="token" )
+  @SearchParamDefinition(name="request", path="GuidanceResponse.requestIdentifier", description="The identifier of the request associated with the response", type="token" )
   public static final String SP_REQUEST = "request";
  /**
    * <b>Fluent Client</b> search parameter constant for <b>request</b>
    * <p>
    * Description: <b>The identifier of the request associated with the response</b><br>
    * Type: <b>token</b><br>
-   * Path: <b>GuidanceResponse.requestId</b><br>
+   * Path: <b>GuidanceResponse.requestIdentifier</b><br>
    * </p>
    */
   public static final ca.uhn.fhir.rest.gclient.TokenClientParam REQUEST = new ca.uhn.fhir.rest.gclient.TokenClientParam(SP_REQUEST);
@@ -1540,7 +1522,7 @@ public class GuidanceResponse extends DomainResource {
    * Path: <b>GuidanceResponse.subject</b><br>
    * </p>
    */
-  @SearchParamDefinition(name="patient", path="GuidanceResponse.subject", description="The identity of a patient to search for guidance response results", type="reference", target={Patient.class } )
+  @SearchParamDefinition(name="patient", path="GuidanceResponse.subject.where(resolve() is Patient)", description="The identity of a patient to search for guidance response results", type="reference", target={Patient.class } )
   public static final String SP_PATIENT = "patient";
  /**
    * <b>Fluent Client</b> search parameter constant for <b>patient</b>

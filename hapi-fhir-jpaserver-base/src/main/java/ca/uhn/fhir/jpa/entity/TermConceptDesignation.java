@@ -4,7 +4,7 @@ package ca.uhn.fhir.jpa.entity;
  * #%L
  * HAPI FHIR JPA Server
  * %%
- * Copyright (C) 2014 - 2018 University Health Network
+ * Copyright (C) 2014 - 2019 University Health Network
  * %%
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -48,6 +48,14 @@ public class TermConceptDesignation implements Serializable {
 	private String myUseDisplay;
 	@Column(name = "VAL", length = 500, nullable = false)
 	private String myValue;
+	/**
+	 * TODO: Make this non-null
+	 *
+	 * @since 3.5.0
+	 */
+	@ManyToOne
+	@JoinColumn(name = "CS_VER_PID", nullable = true, referencedColumnName = "PID", foreignKey = @ForeignKey(name = "FK_CONCEPTDESIG_CSV"))
+	private TermCodeSystemVersion myCodeSystemVersion;
 
 	public String getLanguage() {
 		return myLanguage;
@@ -91,6 +99,11 @@ public class TermConceptDesignation implements Serializable {
 
 	public TermConceptDesignation setValue(String theValue) {
 		myValue = theValue;
+		return this;
+	}
+
+	public TermConceptDesignation setCodeSystemVersion(TermCodeSystemVersion theCodeSystemVersion) {
+		myCodeSystemVersion = theCodeSystemVersion;
 		return this;
 	}
 

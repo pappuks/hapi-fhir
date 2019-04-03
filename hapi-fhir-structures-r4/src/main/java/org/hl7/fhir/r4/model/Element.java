@@ -29,7 +29,7 @@ package org.hl7.fhir.r4.model;
   
 */
 
-// Generated on Tue, Apr 3, 2018 06:39+1000 for FHIR v3.4.0
+// Generated on Thu, Dec 27, 2018 10:06-0500 for FHIR v4.0.0
 
 import java.util.*;
 
@@ -50,7 +50,7 @@ public abstract class Element extends Base implements IBaseHasExtensions, IBaseE
      * Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.
      */
     @Child(name = "id", type = {StringType.class}, order=0, min=0, max=1, modifier=false, summary=false)
-    @Description(shortDefinition="xml:id (or equivalent in JSON)", formalDefinition="Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces." )
+    @Description(shortDefinition="Unique id for inter-element referencing", formalDefinition="Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces." )
     protected StringType id;
 
     /**
@@ -362,7 +362,13 @@ public abstract class Element extends Base implements IBaseHasExtensions, IBaseE
      }
    }
   
-
+   public void removeExtension(String theUrl) {
+     for (int i = getExtension().size()-1; i >= 0; i--) {
+       if (theUrl.equals(getExtension().get(i).getUrl()))
+         getExtension().remove(i);
+     }
+   }
+   
    /**
     * This is used in the FHIRPath engine to record that no extensions are allowed for this item in the context in which it is used.
     * todo: enforce this....
@@ -377,11 +383,13 @@ public abstract class Element extends Base implements IBaseHasExtensions, IBaseE
     this.disallowExtensions = disallowExtensions;
     return this;
   }
-   
+
   public Element noExtensions() {
     this.disallowExtensions = true;
     return this;
   }
+  
+
 // end addition
 
 }

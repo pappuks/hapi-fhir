@@ -4,7 +4,7 @@ package ca.uhn.fhir.util;
  * #%L
  * HAPI FHIR - Core Library
  * %%
- * Copyright (C) 2014 - 2018 University Health Network
+ * Copyright (C) 2014 - 2019 University Health Network
  * %%
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -27,7 +27,7 @@ import ca.uhn.fhir.util.jar.DependencyLogFactory;
 import ca.uhn.fhir.util.jar.IDependencyLog;
 import com.ctc.wstx.api.WstxInputProperties;
 import com.ctc.wstx.stax.WstxOutputFactory;
-import org.apache.commons.lang3.StringEscapeUtils;
+import org.apache.commons.text.StringEscapeUtils;
 import org.codehaus.stax2.XMLOutputFactory2;
 import org.codehaus.stax2.io.EscapingWriterFactory;
 
@@ -54,7 +54,7 @@ public class XmlUtil {
 	private static volatile XMLOutputFactory ourOutputFactory;
 
 	static {
-		HashMap<String, Integer> validEntityNames = new HashMap<String, Integer>(1448);
+		HashMap<String, Integer> validEntityNames = new HashMap<>(1448);
 		validEntityNames.put("AElig", 0x000C6);
 		validEntityNames.put("Aacute", 0x000C1);
 		validEntityNames.put("Abreve", 0x00102);
@@ -1687,6 +1687,9 @@ public class XmlUtil {
 		XMLInputFactory inputFactory;
 		try {
 			inputFactory = XMLInputFactory.newInstance();
+			if (inputFactory.isPropertySupported(XMLInputFactory.IS_REPLACING_ENTITY_REFERENCES)) {
+				inputFactory.setProperty(XMLInputFactory.IS_REPLACING_ENTITY_REFERENCES, true);
+			}
 			throwUnitTestExceptionIfConfiguredToDoSo();
 		} catch (Throwable e) {
 			throw new ConfigurationException("Unable to initialize StAX - XML processing is disabled", e);
