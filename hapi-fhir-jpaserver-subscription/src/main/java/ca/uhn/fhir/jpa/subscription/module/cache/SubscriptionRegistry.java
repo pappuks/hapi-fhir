@@ -4,14 +4,14 @@ package ca.uhn.fhir.jpa.subscription.module.cache;
  * #%L
  * HAPI FHIR Subscription Server
  * %%
- * Copyright (C) 2014 - 2019 University Health Network
+ * Copyright (C) 2014 - 2020 University Health Network
  * %%
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  *      http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -20,22 +20,25 @@ package ca.uhn.fhir.jpa.subscription.module.cache;
  * #L%
  */
 
-import ca.uhn.fhir.jpa.model.entity.ModelConfig;
-import ca.uhn.fhir.jpa.model.interceptor.api.IInterceptorBroadcaster;
-import ca.uhn.fhir.jpa.model.interceptor.api.Pointcut;
+import ca.uhn.fhir.interceptor.api.HookParams;
+import ca.uhn.fhir.interceptor.api.IInterceptorBroadcaster;
+import ca.uhn.fhir.interceptor.api.Pointcut;
 import ca.uhn.fhir.jpa.subscription.module.CanonicalSubscription;
+import ca.uhn.fhir.jpa.subscription.module.channel.ISubscriptionDeliveryChannelNamer;
+import ca.uhn.fhir.jpa.subscription.module.channel.SubscriptionChannelRegistry;
 import org.apache.commons.lang3.Validate;
 import org.hl7.fhir.instance.model.api.IBaseResource;
 import org.hl7.fhir.instance.model.api.IIdType;
 import org.hl7.fhir.r4.model.Subscription;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.messaging.MessageHandler;
-import org.springframework.messaging.SubscribableChannel;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.PreDestroy;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.List;
 import java.util.Optional;
 
 /**
@@ -47,16 +50,14 @@ import java.util.Optional;
 // TODO KHS Does jpa need a subscription registry if matching is disabled?
 @Component
 public class SubscriptionRegistry {
-	private static final org.slf4j.Logger ourLog = org.slf4j.LoggerFactory.getLogger(SubscriptionRegistry.class);
+	private static final Logger ourLog = LoggerFactory.getLogger(SubscriptionRegistry.class);
 	private final ActiveSubscriptionCache myActiveSubscriptionCache = new ActiveSubscriptionCache();
 	@Autowired
-	SubscriptionCanonicalizer<IBaseResource> mySubscriptionCanonicalizer;
+	private SubscriptionCanonicalizer mySubscriptionCanonicalizer;
 	@Autowired
-	SubscriptionDeliveryHandlerFactory mySubscriptionDeliveryHandlerFactory;
+	private ISubscriptionDeliveryChannelNamer mySubscriptionDeliveryChannelNamer;
 	@Autowired
-	SubscriptionChannelFactory mySubscriptionDeliveryChannelFactory;
-	@Autowired
-	ModelConfig myModelConfig;
+	private SubscriptionChannelRegistry mySubscriptionChannelRegistry;
 	@Autowired
 	private IInterceptorBroadcaster myInterceptorBroadcaster;
 
@@ -90,41 +91,46 @@ public class SubscriptionRegistry {
 		Validate.notNull(theSubscription);
 
 		CanonicalSubscription canonicalized = mySubscriptionCanonicalizer.canonicalize(theSubscription);
-		SubscribableChannel deliveryChannel;
-		Optional<MessageHandler> deliveryHandler;
 
-		if (myModelConfig.isSubscriptionMatchingEnabled()) {
-			deliveryChannel = mySubscriptionDeliveryChannelFactory.newDeliveryChannel(subscriptionId, canonicalized.getChannelType().toCode().toLowerCase());
-			deliveryHandler = mySubscriptionDeliveryHandlerFactory.createDeliveryHandler(canonicalized);
-		} else {
-			deliveryChannel = null;
-			deliveryHandler = Optional.empty();
-		}
+		String channelName = mySubscriptionDeliveryChannelNamer.nameFromSubscription(canonicalized);
 
-		ActiveSubscription activeSubscription = new ActiveSubscription(canonicalized, deliveryChannel);
-		deliveryHandler.ifPresent(activeSubscription::register);
-
+		ourLog.info("Registering active subscription {}", subscriptionId);
+		ActiveSubscription activeSubscription = new ActiveSubscription(canonicalized, channelName);
+		mySubscriptionChannelRegistry.add(activeSubscription);
 		myActiveSubscriptionCache.put(subscriptionId, activeSubscription);
 
 		// Interceptor call: SUBSCRIPTION_AFTER_ACTIVE_SUBSCRIPTION_REGISTERED
-		myInterceptorBroadcaster.callHooks(Pointcut.SUBSCRIPTION_AFTER_ACTIVE_SUBSCRIPTION_REGISTERED, canonicalized);
+		HookParams params = new HookParams()
+			.add(CanonicalSubscription.class, canonicalized);
+		myInterceptorBroadcaster.callHooks(Pointcut.SUBSCRIPTION_AFTER_ACTIVE_SUBSCRIPTION_REGISTERED, params);
 
 		return canonicalized;
 	}
 
-	public void unregisterSubscription(IIdType theId) {
-		Validate.notNull(theId);
-		String subscriptionId = theId.getIdPart();
-		myActiveSubscriptionCache.remove(subscriptionId);
+	public void unregisterSubscription(String theSubscriptionId) {
+		Validate.notNull(theSubscriptionId);
+
+		ourLog.info("Unregistering active subscription {}", theSubscriptionId);
+		ActiveSubscription activeSubscription = myActiveSubscriptionCache.remove(theSubscriptionId);
+		if (activeSubscription != null) {
+			mySubscriptionChannelRegistry.remove(activeSubscription);
+		}
 	}
 
 	@PreDestroy
 	public void unregisterAllSubscriptions() {
+		// Once to set flag
+		unregisterAllSubscriptionsNotInCollection(Collections.emptyList());
+		// Twice to remove
 		unregisterAllSubscriptionsNotInCollection(Collections.emptyList());
 	}
 
 	void unregisterAllSubscriptionsNotInCollection(Collection<String> theAllIds) {
-		myActiveSubscriptionCache.unregisterAllSubscriptionsNotInCollection(theAllIds);
+
+		List<String> idsToDelete = myActiveSubscriptionCache.markAllSubscriptionsNotInCollectionForDeletionAndReturnIdsToDelete(theAllIds);
+		for (String id : idsToDelete) {
+			unregisterSubscription(id);
+		}
 	}
 
 	public synchronized boolean registerSubscriptionUnlessAlreadyRegistered(IBaseResource theSubscription) {
@@ -142,9 +148,7 @@ public class SubscriptionRegistry {
 				updateSubscription(theSubscription);
 				return true;
 			}
-			unregisterSubscription(theSubscription.getIdElement());
-		} else {
-			ourLog.info("Registering active subscription {}", theSubscription.getIdElement().toUnqualified().getValue());
+			unregisterSubscription(theSubscription.getIdElement().getIdPart());
 		}
 		if (Subscription.SubscriptionStatus.ACTIVE.equals(newSubscription.getStatus())) {
 			registerSubscription(theSubscription.getIdElement(), theSubscription);
@@ -164,7 +168,9 @@ public class SubscriptionRegistry {
 		activeSubscription.setSubscription(canonicalized);
 
 		// Interceptor call: SUBSCRIPTION_AFTER_ACTIVE_SUBSCRIPTION_REGISTERED
-		myInterceptorBroadcaster.callHooks(Pointcut.SUBSCRIPTION_AFTER_ACTIVE_SUBSCRIPTION_REGISTERED, canonicalized);
+		HookParams params = new HookParams()
+			.add(CanonicalSubscription.class, canonicalized);
+		myInterceptorBroadcaster.callHooks(Pointcut.SUBSCRIPTION_AFTER_ACTIVE_SUBSCRIPTION_REGISTERED, params);
 	}
 
 	private boolean channelTypeSame(CanonicalSubscription theExistingSubscription, CanonicalSubscription theNewSubscription) {
@@ -174,7 +180,7 @@ public class SubscriptionRegistry {
 	public boolean unregisterSubscriptionIfRegistered(IBaseResource theSubscription, String theStatusString) {
 		if (hasSubscription(theSubscription.getIdElement()).isPresent()) {
 			ourLog.info("Removing {} subscription {}", theStatusString, theSubscription.getIdElement().toUnqualified().getValue());
-			unregisterSubscription(theSubscription.getIdElement());
+			unregisterSubscription(theSubscription.getIdElement().getIdPart());
 			return true;
 		}
 		return false;

@@ -1,34 +1,39 @@
 package ca.uhn.fhir.jpa.dao;
 
+import ca.uhn.fhir.jpa.interceptor.CascadingDeleteInterceptor;
 import ca.uhn.fhir.jpa.model.entity.ModelConfig;
 import ca.uhn.fhir.jpa.model.entity.ResourceEncodingEnum;
 import ca.uhn.fhir.jpa.search.warm.WarmCacheEntry;
 import ca.uhn.fhir.jpa.searchparam.SearchParamConstants;
 import ca.uhn.fhir.rest.api.SearchTotalModeEnum;
-import ca.uhn.fhir.rest.server.interceptor.IServerInterceptor;
 import com.google.common.annotations.VisibleForTesting;
 import com.google.common.collect.Sets;
 import org.apache.commons.lang3.Validate;
 import org.apache.commons.lang3.time.DateUtils;
-import org.hl7.fhir.instance.model.Subscription;
+import org.hl7.fhir.dstu2.model.Subscription;
 import org.hl7.fhir.r4.model.Bundle;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+import java.util.Set;
+import java.util.TreeSet;
 
 /*
  * #%L
  * HAPI FHIR JPA Server
  * %%
- * Copyright (C) 2014 - 2019 University Health Network
+ * Copyright (C) 2014 - 2020 University Health Network
  * %%
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  * http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -54,12 +59,6 @@ public class DaoConfig {
 	 */
 	public static final String DISABLE_STATUS_BASED_REINDEX = "disable_status_based_reindex";
 	/**
-	 * Default value for {@link #setMaximumSearchResultCountInTransaction(Integer)}
-	 *
-	 * @see #setMaximumSearchResultCountInTransaction(Integer)
-	 */
-	private static final Integer DEFAULT_MAXIMUM_SEARCH_RESULT_COUNT_IN_TRANSACTION = null;
-	/**
 	 * Default {@link #setBundleTypesAllowedForStorage(Set)} value:
 	 * <ul>
 	 * <li>collection</li>
@@ -67,12 +66,22 @@ public class DaoConfig {
 	 * <li>message</li>
 	 * </ul>
 	 */
-	private static final Set<String> DEFAULT_BUNDLE_TYPES_ALLOWED_FOR_STORAGE = Collections.unmodifiableSet(new TreeSet<>(Sets.newHashSet(
+	@SuppressWarnings("WeakerAccess")
+	public static final Set<String> DEFAULT_BUNDLE_TYPES_ALLOWED_FOR_STORAGE = Collections.unmodifiableSet(new TreeSet<>(Sets.newHashSet(
 		Bundle.BundleType.COLLECTION.toCode(),
 		Bundle.BundleType.DOCUMENT.toCode(),
 		Bundle.BundleType.MESSAGE.toCode()
 	)));
+	// update setter javadoc if default changes
+	public static final int DEFAULT_MAX_EXPANSION_SIZE = 1000;
+	/**
+	 * Default value for {@link #setMaximumSearchResultCountInTransaction(Integer)}
+	 *
+	 * @see #setMaximumSearchResultCountInTransaction(Integer)
+	 */
+	private static final Integer DEFAULT_MAXIMUM_SEARCH_RESULT_COUNT_IN_TRANSACTION = null;
 	private static final Logger ourLog = LoggerFactory.getLogger(DaoConfig.class);
+	private static final int DEFAULT_EXPUNGE_BATCH_SIZE = 800;
 	private IndexEnabledEnum myIndexMissingFieldsEnabled = IndexEnabledEnum.DISABLED;
 
 	/**
@@ -93,7 +102,7 @@ public class DaoConfig {
 	/**
 	 * update setter javadoc if default changes
 	 */
-	private int myDeferIndexingForCodesystemsOfSize = 2000;
+	private int myDeferIndexingForCodesystemsOfSize = 100;
 	private boolean myDeleteStaleSearches = true;
 	private boolean myEnforceReferentialIntegrityOnDelete = true;
 	private boolean myUniqueIndexesEnabled = true;
@@ -114,11 +123,7 @@ public class DaoConfig {
 	 * update setter javadoc if default changes
 	 */
 	private boolean myIndexContainedResources = true;
-	private List<IServerInterceptor> myInterceptors = new ArrayList<>();
-	/**
-	 * update setter javadoc if default changes
-	 */
-	private int myMaximumExpansionSize = 5000;
+	private int myMaximumExpansionSize = DEFAULT_MAX_EXPANSION_SIZE;
 	private Integer myMaximumSearchResultCountInTransaction = DEFAULT_MAXIMUM_SEARCH_RESULT_COUNT_IN_TRANSACTION;
 	private ResourceEncodingEnum myResourceEncoding = ResourceEncodingEnum.JSONC;
 	/**
@@ -135,7 +140,9 @@ public class DaoConfig {
 	private IdStrategyEnum myResourceServerIdStrategy = IdStrategyEnum.SEQUENTIAL_NUMERIC;
 	private boolean myMarkResourcesForReindexingUponSearchParameterChange;
 	private boolean myExpungeEnabled;
+	private int myExpungeBatchSize = DEFAULT_EXPUNGE_BATCH_SIZE;
 	private int myReindexThreadCount;
+	private int myExpungeThreadCount;
 	private Set<String> myBundleTypesAllowedForStorage;
 	private boolean myValidateSearchParameterExpressionsOnSave = true;
 	private List<Integer> mySearchPreFetchThresholds = Arrays.asList(500, 2000, -1);
@@ -144,6 +151,37 @@ public class DaoConfig {
 	private boolean myEnableInMemorySubscriptionMatching = true;
 	private boolean myEnforceReferenceTargetTypes = true;
 	private ClientIdStrategyEnum myResourceClientIdStrategy = ClientIdStrategyEnum.ALPHANUMERIC;
+	private boolean myFilterParameterEnabled = false;
+	private StoreMetaSourceInformationEnum myStoreMetaSourceInformation = StoreMetaSourceInformationEnum.SOURCE_URI_AND_REQUEST_ID;
+	/**
+	 * Do not change default of {@code true}!
+	 *
+	 * @since 4.1.0
+	 */
+	private boolean myPreExpandValueSets = true;
+	/**
+	 * Do not change default of {@code 0}!
+	 *
+	 * @since 4.1.0
+	 */
+	private int myPreExpandValueSetsDefaultOffset = 0;
+	/**
+	 * Do not change default of {@code 1000}!
+	 *
+	 * @since 4.1.0
+	 */
+	private int myPreExpandValueSetsDefaultCount = 1000;
+	/**
+	 * Do not change default of {@code 1000}!
+	 *
+	 * @since 4.1.0
+	 */
+	private int myPreExpandValueSetsMaxCount = 1000;
+
+	/**
+	 * @since 4.2.0
+	 */
+	private boolean myPopulateIdentifierInAutoCreatedPlaceholderReferenceTargets;
 
 	/**
 	 * Constructor
@@ -154,6 +192,7 @@ public class DaoConfig {
 		setSubscriptionPurgeInactiveAfterMillis(Long.MAX_VALUE);
 		setMarkResourcesForReindexingUponSearchParameterChange(true);
 		setReindexThreadCount(Runtime.getRuntime().availableProcessors());
+		setExpungeThreadCount(Runtime.getRuntime().availableProcessors());
 		setBundleTypesAllowedForStorage(DEFAULT_BUNDLE_TYPES_ALLOWED_FOR_STORAGE);
 
 		if ("true".equalsIgnoreCase(System.getProperty(DISABLE_STATUS_BASED_REINDEX))) {
@@ -353,7 +392,7 @@ public class DaoConfig {
 	 * the code system will be indexed later in an incremental process in order to
 	 * avoid overwhelming Lucene with a huge number of codes in a single operation.
 	 * <p>
-	 * Defaults to 2000
+	 * Defaults to 100
 	 * </p>
 	 */
 	public int getDeferIndexingForCodesystemsOfSize() {
@@ -365,7 +404,7 @@ public class DaoConfig {
 	 * the code system will be indexed later in an incremental process in order to
 	 * avoid overwhelming Lucene with a huge number of codes in a single operation.
 	 * <p>
-	 * Defaults to 2000
+	 * Defaults to 100
 	 * </p>
 	 */
 	public void setDeferIndexingForCodesystemsOfSize(int theDeferIndexingForCodesystemsOfSize) {
@@ -528,47 +567,6 @@ public class DaoConfig {
 	}
 
 	/**
-	 * Returns the interceptors which will be notified of operations.
-	 *
-	 * @see #setInterceptors(List)
-	 * @deprecated Marked as deprecated as of HAPI 3.7.0.  Use {@link #registerInterceptor} or {@link #unregisterInterceptor}instead.
-	 */
-
-	@Deprecated
-	public List<IServerInterceptor> getInterceptors() {
-		return myInterceptors;
-	}
-
-	/**
-	 * This may be used to optionally register server interceptors directly against the DAOs.
-	 */
-	public void setInterceptors(List<IServerInterceptor> theInterceptors) {
-		myInterceptors = theInterceptors;
-	}
-
-	/**
-	 * This may be used to optionally register server interceptors directly against the DAOs.
-	 */
-	public void setInterceptors(IServerInterceptor... theInterceptor) {
-		setInterceptors(new ArrayList<>());
-		if (theInterceptor != null && theInterceptor.length != 0) {
-			getInterceptors().addAll(Arrays.asList(theInterceptor));
-		}
-	}
-
-	public void registerInterceptor(IServerInterceptor theInterceptor) {
-		Validate.notNull(theInterceptor, "Interceptor can not be null");
-		if (!myInterceptors.contains(theInterceptor)) {
-			myInterceptors.add(theInterceptor);
-		}
-	}
-
-	public void unregisterInterceptor(IServerInterceptor theInterceptor) {
-		Validate.notNull(theInterceptor, "Interceptor can not be null");
-		myInterceptors.remove(theInterceptor);
-	}
-
-	/**
 	 * See {@link #setMaximumExpansionSize(int)}
 	 */
 	public int getMaximumExpansionSize() {
@@ -576,8 +574,12 @@ public class DaoConfig {
 	}
 
 	/**
-	 * Sets the maximum number of codes that will be added to a valueset expansion before
-	 * the operation will be failed as too costly
+	 * Sets the maximum number of codes that will be added to an in-memory valueset expansion before
+	 * the operation will be failed as too costly. Note that this setting applies only to
+	 * in-memory expansions and does not apply to expansions that are being pre-calculated.
+	 * <p>
+	 * The default value for this setting is 1000.
+	 * </p>
 	 */
 	public void setMaximumExpansionSize(int theMaximumExpansionSize) {
 		Validate.isTrue(theMaximumExpansionSize > 0, "theMaximumExpansionSize must be > 0");
@@ -641,6 +643,31 @@ public class DaoConfig {
 	public void setReindexThreadCount(int theReindexThreadCount) {
 		myReindexThreadCount = theReindexThreadCount;
 		myReindexThreadCount = Math.max(myReindexThreadCount, 1); // Minimum of 1
+	}
+
+	/**
+	 * This setting controls the number of threads allocated to the expunge operation
+	 * <p>
+	 * The default value is set to the number of available processors
+	 * (via <code>Runtime.getRuntime().availableProcessors()</code>). Value
+	 * for this setting must be a positive integer.
+	 * </p>
+	 */
+	public int getExpungeThreadCount() {
+		return myExpungeThreadCount;
+	}
+
+	/**
+	 * This setting controls the number of threads allocated to the expunge operation
+	 * <p>
+	 * The default value is set to the number of available processors
+	 * (via <code>Runtime.getRuntime().availableProcessors()</code>). Value
+	 * for this setting must be a positive integer.
+	 * </p>
+	 */
+	public void setExpungeThreadCount(int theExpungeThreadCount) {
+		myExpungeThreadCount = theExpungeThreadCount;
+		myExpungeThreadCount = Math.max(myExpungeThreadCount, 1); // Minimum of 1
 	}
 
 	public ResourceEncodingEnum getResourceEncoding() {
@@ -915,7 +942,7 @@ public class DaoConfig {
 	 * <p>
 	 * Default is {@literal true} beginning in HAPI FHIR 2.4, since this
 	 * feature is now specified in the FHIR specification. (Previously it
-	 * was an experimental/rpposed feature)
+	 * was an experimental/proposed feature)
 	 * </p>
 	 *
 	 * @since 1.5
@@ -975,6 +1002,108 @@ public class DaoConfig {
 	}
 
 	/**
+	 * When {@link #setAutoCreatePlaceholderReferenceTargets(boolean)} is enabled, if this
+	 * setting is set to <code>true</code> (default is <code>false</code>) and the source
+	 * reference has an identifier populated, the identifier will be copied to the target
+	 * resource.
+	 * <p>
+	 * When enabled, if an Observation contains a reference like the one below,
+	 * and no existing resource was found that matches the given ID, a new
+	 * one will be created and its <code>Patient.identifier</code> value will be
+	 * populated using the value from <code>Observation.subject.identifier</code>.
+	 * </p>
+	 * <pre>
+	 * {
+	 *   "resourceType": "Observation",
+	 *   "subject": {
+	 *     "reference": "Patient/ABC",
+	 *     "identifier": {
+	 *       "system": "http://foo",
+	 *       "value": "123"
+	 *     }
+	 *   }
+	 * }
+	 * </pre>
+	 * <p>
+	 * This method is often combined with {@link #setAllowInlineMatchUrlReferences(boolean)}.
+	 * </p>
+	 * <p>
+	 * In other words if an Observation contains a reference like the one below,
+	 * and no existing resource was found that matches the given match URL, a new
+	 * one will be created and its <code>Patient.identifier</code> value will be
+	 * populated using the value from <code>Observation.subject.identifier</code>.
+	 * </p>
+	 * <pre>
+	 * {
+	 *   "resourceType": "Observation",
+	 *   "subject": {
+	 *     "reference": "Patient?identifier=http://foo|123",
+	 *     "identifier": {
+	 *       "system": "http://foo",
+	 *       "value": "123"
+	 *     }
+	 *   }
+	 * }
+	 * </pre>
+	 *
+	 * @since 4.2.0
+	 */
+	public boolean isPopulateIdentifierInAutoCreatedPlaceholderReferenceTargets() {
+		return myPopulateIdentifierInAutoCreatedPlaceholderReferenceTargets;
+	}
+
+	/**
+	 * When {@link #setAutoCreatePlaceholderReferenceTargets(boolean)} is enabled, if this
+	 * setting is set to <code>true</code> (default is <code>false</code>) and the source
+	 * reference has an identifier populated, the identifier will be copied to the target
+	 * resource.
+	 * <p>
+	 * When enabled, if an Observation contains a reference like the one below,
+	 * and no existing resource was found that matches the given ID, a new
+	 * one will be created and its <code>Patient.identifier</code> value will be
+	 * populated using the value from <code>Observation.subject.identifier</code>.
+	 * </p>
+	 * <pre>
+	 * {
+	 *   "resourceType": "Observation",
+	 *   "subject": {
+	 *     "reference": "Patient/ABC",
+	 *     "identifier": {
+	 *       "system": "http://foo",
+	 *       "value": "123"
+	 *     }
+	 *   }
+	 * }
+	 * </pre>
+	 * <p>
+	 * This method is often combined with {@link #setAllowInlineMatchUrlReferences(boolean)}.
+	 * </p>
+	 * <p>
+	 * In other words if an Observation contains a reference like the one below,
+	 * and no existing resource was found that matches the given match URL, a new
+	 * one will be created and its <code>Patient.identifier</code> value will be
+	 * populated using the value from <code>Observation.subject.identifier</code>.
+	 * </p>
+	 * <pre>
+	 * {
+	 *   "resourceType": "Observation",
+	 *   "subject": {
+	 *     "reference": "Patient?identifier=http://foo|123",
+	 *     "identifier": {
+	 *       "system": "http://foo",
+	 *       "value": "123"
+	 *     }
+	 *   }
+	 * }
+	 * </pre>
+	 *
+	 * @since 4.2.0
+	 */
+	public void setPopulateIdentifierInAutoCreatedPlaceholderReferenceTargets(boolean thePopulateIdentifierInAutoCreatedPlaceholderReferenceTargets) {
+		myPopulateIdentifierInAutoCreatedPlaceholderReferenceTargets = thePopulateIdentifierInAutoCreatedPlaceholderReferenceTargets;
+	}
+
+	/**
 	 * If set to <code>false</code> (default is <code>true</code>) resources will be permitted to be
 	 * deleted even if other resources currently contain references to them.
 	 * <p>
@@ -982,6 +1111,8 @@ public class DaoConfig {
 	 * and other FHIR features may not behave as expected when referential integrity is not
 	 * preserved. Use this feature with caution.
 	 * </p>
+	 *
+	 * @see CascadingDeleteInterceptor
 	 */
 	public boolean isEnforceReferentialIntegrityOnDelete() {
 		return myEnforceReferentialIntegrityOnDelete;
@@ -995,6 +1126,8 @@ public class DaoConfig {
 	 * and other FHIR features may not behave as expected when referential integrity is not
 	 * preserved. Use this feature with caution.
 	 * </p>
+	 *
+	 * @see CascadingDeleteInterceptor
 	 */
 	public void setEnforceReferentialIntegrityOnDelete(boolean theEnforceReferentialIntegrityOnDelete) {
 		myEnforceReferentialIntegrityOnDelete = theEnforceReferentialIntegrityOnDelete;
@@ -1088,6 +1221,22 @@ public class DaoConfig {
 	 */
 	public void setExpungeEnabled(boolean theExpungeEnabled) {
 		myExpungeEnabled = theExpungeEnabled;
+	}
+
+	/**
+	 * The expunge batch size (default 800) determines the number of records deleted within a single transaction by the
+	 * expunge operation.
+	 */
+	public int getExpungeBatchSize() {
+		return myExpungeBatchSize;
+	}
+
+	/**
+	 * The expunge batch size (default 800) determines the number of records deleted within a single transaction by the
+	 * expunge operation.
+	 */
+	public void setExpungeBatchSize(int theExpungeBatchSize) {
+		myExpungeBatchSize = theExpungeBatchSize;
 	}
 
 	/**
@@ -1580,6 +1729,206 @@ public class DaoConfig {
 		myModelConfig.setEmailFromAddress(theEmailFromAddress);
 	}
 
+	/**
+	 * If websocket subscriptions are enabled, this defines the context path that listens to them.  Default value "/websocket".
+	 */
+
+	public String getWebsocketContextPath() {
+		return myModelConfig.getWebsocketContextPath();
+	}
+
+	/**
+	 * If websocket subscriptions are enabled, this defines the context path that listens to them.  Default value "/websocket".
+	 */
+
+	public void setWebsocketContextPath(String theWebsocketContextPath) {
+		myModelConfig.setWebsocketContextPath(theWebsocketContextPath);
+	}
+
+	/**
+	 * If set to <code>true</code> the _filter search parameter will be enabled on this server. Note that _filter
+	 * is very powerful, but also potentially dangerous as it can allow a user to create a query for which there
+	 * are no indexes or efficient query plans for the database to leverage while performing the query.
+	 * As a result, this feature is recommended only for servers where the querying applications are known in advance
+	 * and a database administrator can properly tune the database for the resulting queries.
+	 */
+	public boolean isFilterParameterEnabled() {
+		return myFilterParameterEnabled;
+	}
+
+	/**
+	 * If set to <code>true</code> the _filter search parameter will be enabled on this server. Note that _filter
+	 * is very powerful, but also potentially dangerous as it can allow a user to create a query for which there
+	 * are no indexes or efficient query plans for the database to leverage while performing the query.
+	 * As a result, this feature is recommended only for servers where the querying applications are known in advance
+	 * and a database administrator can properly tune the database for the resulting queries.
+	 */
+	public void setFilterParameterEnabled(boolean theFilterParameterEnabled) {
+		myFilterParameterEnabled = theFilterParameterEnabled;
+	}
+
+	/**
+	 * If enabled, resource source information (<code>Resource.meta.source</code>) will be persisted along with
+	 * each resource. This adds extra table and index space so it should be disabled if it is not being
+	 * used.
+	 * <p>
+	 * Default is {@link StoreMetaSourceInformationEnum#SOURCE_URI_AND_REQUEST_ID}
+	 * </p>
+	 */
+	public StoreMetaSourceInformationEnum getStoreMetaSourceInformation() {
+		return myStoreMetaSourceInformation;
+	}
+
+	/**
+	 * If enabled, resource source information (<code>Resource.meta.source</code>) will be persisted along with
+	 * each resource. This adds extra table and index space so it should be disabled if it is not being
+	 * used.
+	 * <p>
+	 * Default is {@link StoreMetaSourceInformationEnum#SOURCE_URI_AND_REQUEST_ID}
+	 * </p>
+	 */
+	public void setStoreMetaSourceInformation(StoreMetaSourceInformationEnum theStoreMetaSourceInformation) {
+		Validate.notNull(theStoreMetaSourceInformation, "theStoreMetaSourceInformation must not be null");
+		myStoreMetaSourceInformation = theStoreMetaSourceInformation;
+	}
+
+	/**
+	 * <p>
+	 * If set to {@code true}, ValueSets and expansions are stored in terminology tables. This is to facilitate
+	 * optimization of the $expand operation on large ValueSets.
+	 * </p>
+	 * <p>
+	 * The default value for this setting is {@code true}.
+	 * </p>
+	 *
+	 * @since 4.1.0
+	 */
+	public boolean isPreExpandValueSets() {
+		return myPreExpandValueSets;
+	}
+
+	/**
+	 * <p>
+	 * If set to {@code true}, ValueSets and expansions are stored in terminology tables. This is to facilitate
+	 * optimization of the $expand operation on large ValueSets.
+	 * </p>
+	 * <p>
+	 * The default value for this setting is {@code true}.
+	 * </p>
+	 *
+	 * @since 4.1.0
+	 */
+	public void setPreExpandValueSets(boolean thePreExpandValueSets) {
+		myPreExpandValueSets = thePreExpandValueSets;
+	}
+
+	/**
+	 * <p>
+	 * This is the default value of {@code offset} parameter for the ValueSet {@code $expand} operation when
+	 * {@link DaoConfig#isPreExpandValueSets()} returns {@code true}.
+	 * </p>
+	 * <p>
+	 * The default value for this setting is {@code 0}.
+	 * </p>
+	 *
+	 * @since 4.1.0
+	 */
+	public int getPreExpandValueSetsDefaultOffset() {
+		return myPreExpandValueSetsDefaultOffset;
+	}
+
+	/**
+	 * <p>
+	 * This is the default value of {@code count} parameter for the ValueSet {@code $expand} operation when
+	 * {@link DaoConfig#isPreExpandValueSets()} returns {@code true}.
+	 * </p>
+	 * <p>
+	 * The default value for this setting is {@code 1000}.
+	 * </p>
+	 *
+	 * @since 4.1.0
+	 */
+	public int getPreExpandValueSetsDefaultCount() {
+		return myPreExpandValueSetsDefaultCount;
+	}
+
+	/**
+	 * <p>
+	 * This is the default value of {@code count} parameter for the ValueSet {@code $expand} operation when
+	 * {@link DaoConfig#isPreExpandValueSets()} returns {@code true}.
+	 * </p>
+	 * <p>
+	 * If {@code thePreExpandValueSetsDefaultCount} is greater than
+	 * {@link DaoConfig#getPreExpandValueSetsMaxCount()}, the lesser value is used.
+	 * </p>
+	 * <p>
+	 * The default value for this setting is {@code 1000}.
+	 * </p>
+	 *
+	 * @since 4.1.0
+	 */
+	public void setPreExpandValueSetsDefaultCount(int thePreExpandValueSetsDefaultCount) {
+		myPreExpandValueSetsDefaultCount = Math.min(thePreExpandValueSetsDefaultCount, getPreExpandValueSetsMaxCount());
+	}
+
+	/**
+	 * <p>
+	 * This is the max value of {@code count} parameter for the ValueSet {@code $expand} operation when
+	 * {@link DaoConfig#isPreExpandValueSets()} returns {@code true}.
+	 * </p>
+	 * <p>
+	 * The default value for this setting is {@code 1000}.
+	 * </p>
+	 *
+	 * @since 4.1.0
+	 */
+	public int getPreExpandValueSetsMaxCount() {
+		return myPreExpandValueSetsMaxCount;
+	}
+
+	/**
+	 * <p>
+	 * This is the max value of {@code count} parameter for the ValueSet {@code $expand} operation when
+	 * {@link DaoConfig#isPreExpandValueSets()} returns {@code true}.
+	 * </p>
+	 * <p>
+	 * If {@code thePreExpandValueSetsMaxCount} is lesser than
+	 * {@link DaoConfig#getPreExpandValueSetsDefaultCount()}, the default {@code count} is lowered to the
+	 * new max {@code count}.
+	 * </p>
+	 * <p>
+	 * The default value for this setting is {@code 1000}.
+	 * </p>
+	 *
+	 * @since 4.1.0
+	 */
+	public void setPreExpandValueSetsMaxCount(int thePreExpandValueSetsMaxCount) {
+		myPreExpandValueSetsMaxCount = thePreExpandValueSetsMaxCount;
+		setPreExpandValueSetsDefaultCount(Math.min(getPreExpandValueSetsDefaultCount(), getPreExpandValueSetsMaxCount()));
+	}
+
+	public enum StoreMetaSourceInformationEnum {
+		NONE(false, false),
+		SOURCE_URI(true, false),
+		REQUEST_ID(false, true),
+		SOURCE_URI_AND_REQUEST_ID(true, true);
+
+		private final boolean myStoreSourceUri;
+		private final boolean myStoreRequestId;
+
+		StoreMetaSourceInformationEnum(boolean theStoreSourceUri, boolean theStoreRequestId) {
+			myStoreSourceUri = theStoreSourceUri;
+			myStoreRequestId = theStoreRequestId;
+		}
+
+		public boolean isStoreSourceUri() {
+			return myStoreSourceUri;
+		}
+
+		public boolean isStoreRequestId() {
+			return myStoreRequestId;
+		}
+	}
 
 	public enum IndexEnabledEnum {
 		ENABLED,

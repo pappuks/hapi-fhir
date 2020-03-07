@@ -4,14 +4,14 @@ package ca.uhn.fhir.jpa.subscription;
  * #%L
  * HAPI FHIR JPA Server
  * %%
- * Copyright (C) 2014 - 2019 University Health Network
+ * Copyright (C) 2014 - 2020 University Health Network
  * %%
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  *      http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -25,6 +25,10 @@ import ca.uhn.fhir.context.RuntimeResourceDefinition;
 import ca.uhn.fhir.jpa.dao.DaoConfig;
 import ca.uhn.fhir.jpa.dao.DaoRegistry;
 import ca.uhn.fhir.jpa.dao.IFhirResourceDao;
+import ca.uhn.fhir.jpa.model.cross.ResourcePersistentId;
+import ca.uhn.fhir.jpa.model.sched.HapiJob;
+import ca.uhn.fhir.jpa.model.sched.ISchedulerService;
+import ca.uhn.fhir.jpa.model.sched.ScheduledJobDefinition;
 import ca.uhn.fhir.jpa.provider.SubscriptionTriggeringProvider;
 import ca.uhn.fhir.jpa.search.ISearchCoordinatorSvc;
 import ca.uhn.fhir.jpa.searchparam.MatchUrlService;
@@ -34,8 +38,6 @@ import ca.uhn.fhir.model.dstu2.valueset.ResourceTypeEnum;
 import ca.uhn.fhir.rest.annotation.IdParam;
 import ca.uhn.fhir.rest.api.CacheControlDirective;
 import ca.uhn.fhir.rest.api.server.IBundleProvider;
-import ca.uhn.fhir.rest.param.StringParam;
-import ca.uhn.fhir.rest.param.UriParam;
 import ca.uhn.fhir.rest.server.exceptions.InternalErrorException;
 import ca.uhn.fhir.rest.server.exceptions.InvalidRequestException;
 import ca.uhn.fhir.rest.server.exceptions.PreconditionFailedException;
@@ -48,15 +50,15 @@ import org.apache.commons.lang3.Validate;
 import org.apache.commons.lang3.concurrent.BasicThreadFactory;
 import org.apache.commons.lang3.time.DateUtils;
 import org.apache.commons.lang3.tuple.Pair;
-import org.hl7.fhir.instance.model.IdType;
+import org.hl7.fhir.dstu2.model.IdType;
 import org.hl7.fhir.instance.model.api.IBaseParameters;
 import org.hl7.fhir.instance.model.api.IBaseResource;
 import org.hl7.fhir.instance.model.api.IIdType;
 import org.hl7.fhir.instance.model.api.IPrimitiveType;
+import org.quartz.JobExecutionContext;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
@@ -64,7 +66,13 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.UUID;
-import java.util.concurrent.*;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Future;
+import java.util.concurrent.LinkedBlockingQueue;
+import java.util.concurrent.RejectedExecutionException;
+import java.util.concurrent.RejectedExecutionHandler;
+import java.util.concurrent.ThreadPoolExecutor;
+import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 
 import static ca.uhn.fhir.jpa.provider.SubscriptionTriggeringProvider.RESOURCE_ID;
@@ -74,9 +82,8 @@ import static org.apache.commons.lang3.StringUtils.isNotBlank;
 @Service
 public class SubscriptionTriggeringSvcImpl implements ISubscriptionTriggeringSvc {
 	private static final Logger ourLog = LoggerFactory.getLogger(SubscriptionTriggeringProvider.class);
-
 	private static final int DEFAULT_MAX_SUBMIT = 10000;
-
+	private final List<SubscriptionTriggeringJobDetails> myActiveJobs = new ArrayList<>();
 	@Autowired
 	private FhirContext myFhirContext;
 	@Autowired
@@ -89,13 +96,14 @@ public class SubscriptionTriggeringSvcImpl implements ISubscriptionTriggeringSvc
 	private MatchUrlService myMatchUrlService;
 	@Autowired
 	private IResourceModifiedConsumer myResourceModifiedConsumer;
-
-	private final List<SubscriptionTriggeringJobDetails> myActiveJobs = new ArrayList<>();
 	private int myMaxSubmitPerPass = DEFAULT_MAX_SUBMIT;
 	private ExecutorService myExecutorService;
+	@Autowired
+	private ISchedulerService mySchedulerService;
 
 	@Override
-	public IBaseParameters triggerSubscription(List<UriParam> theResourceIds, List<StringParam> theSearchUrls, @IdParam IIdType theSubscriptionId) {
+	public IBaseParameters triggerSubscription(List<IPrimitiveType<String>> theResourceIds, List<IPrimitiveType<String>> theSearchUrls, @IdParam IIdType theSubscriptionId) {
+
 		if (myDaoConfig.getSupportedSubscriptionTypes().isEmpty()) {
 			throw new PreconditionFailedException("Subscription processing not active on this server");
 		}
@@ -110,8 +118,8 @@ public class SubscriptionTriggeringSvcImpl implements ISubscriptionTriggeringSvc
 			subscriptionDao.read(subscriptionId);
 		}
 
-		List<UriParam> resourceIds = ObjectUtils.defaultIfNull(theResourceIds, Collections.emptyList());
-		List<StringParam> searchUrls = ObjectUtils.defaultIfNull(theSearchUrls, Collections.emptyList());
+		List<IPrimitiveType<String>> resourceIds = ObjectUtils.defaultIfNull(theResourceIds, Collections.emptyList());
+		List<IPrimitiveType<String>> searchUrls = ObjectUtils.defaultIfNull(theSearchUrls, Collections.emptyList());
 
 		// Make sure we have at least one resource ID or search URL
 		if (resourceIds.size() == 0 && searchUrls.size() == 0) {
@@ -119,14 +127,14 @@ public class SubscriptionTriggeringSvcImpl implements ISubscriptionTriggeringSvc
 		}
 
 		// Resource URLs must be compete
-		for (UriParam next : resourceIds) {
+		for (IPrimitiveType<String> next : resourceIds) {
 			IdType resourceId = new IdType(next.getValue());
 			ValidateUtil.isTrueOrThrowInvalidRequest(resourceId.hasResourceType(), RESOURCE_ID + " parameter must have resource type");
 			ValidateUtil.isTrueOrThrowInvalidRequest(resourceId.hasIdPart(), RESOURCE_ID + " parameter must have resource ID part");
 		}
 
 		// Search URLs must be valid
-		for (StringParam next : searchUrls) {
+		for (IPrimitiveType<String> next : searchUrls) {
 			if (!next.getValue().contains("?")) {
 				throw new InvalidRequestException("Search URL is not valid (must be in the form \"[resource type]?[optional params]\")");
 			}
@@ -134,17 +142,17 @@ public class SubscriptionTriggeringSvcImpl implements ISubscriptionTriggeringSvc
 
 		SubscriptionTriggeringJobDetails jobDetails = new SubscriptionTriggeringJobDetails();
 		jobDetails.setJobId(UUID.randomUUID().toString());
-		jobDetails.setRemainingResourceIds(resourceIds.stream().map(UriParam::getValue).collect(Collectors.toList()));
-		jobDetails.setRemainingSearchUrls(searchUrls.stream().map(StringParam::getValue).collect(Collectors.toList()));
+		jobDetails.setRemainingResourceIds(resourceIds.stream().map(t -> t.getValue()).collect(Collectors.toList()));
+		jobDetails.setRemainingSearchUrls(searchUrls.stream().map(t -> t.getValue()).collect(Collectors.toList()));
 		if (theSubscriptionId != null) {
-			jobDetails.setSubscriptionId(theSubscriptionId.toUnqualifiedVersionless().getValue());
+			jobDetails.setSubscriptionId(theSubscriptionId.getIdPart());
 		}
 
 		// Submit job for processing
 		synchronized (myActiveJobs) {
 			myActiveJobs.add(jobDetails);
+			ourLog.info("Subscription triggering requested for {} resource and {} search - Gave job ID: {} and have {} jobs", resourceIds.size(), searchUrls.size(), jobDetails.getJobId(), myActiveJobs.size());
 		}
-		ourLog.info("Subscription triggering requested for {} resource and {} search - Gave job ID: {}", resourceIds.size(), searchUrls.size(), jobDetails.getJobId());
 
 		// Create a parameters response
 		IBaseParameters retVal = ParametersUtil.newInstance(myFhirContext);
@@ -154,10 +162,11 @@ public class SubscriptionTriggeringSvcImpl implements ISubscriptionTriggeringSvc
 		return retVal;
 	}
 
-	@Scheduled(fixedDelay = DateUtils.MILLIS_PER_SECOND)
+	@Override
 	public void runDeliveryPass() {
 
 		synchronized (myActiveJobs) {
+
 			if (myActiveJobs.isEmpty()) {
 				return;
 			}
@@ -218,7 +227,7 @@ public class SubscriptionTriggeringSvcImpl implements ISubscriptionTriggeringSvc
 
 			ourLog.info("Triggering job[{}] is starting a search for {}", theJobDetails.getJobId(), nextSearchUrl);
 
-			IBundleProvider search = mySearchCoordinatorSvc.registerSearch(callingDao, params, resourceType, new CacheControlDirective());
+			IBundleProvider search = mySearchCoordinatorSvc.registerSearch(callingDao, params, resourceType, new CacheControlDirective(), null);
 			theJobDetails.setCurrentSearchUuid(search.getUuid());
 			theJobDetails.setCurrentSearchResourceType(resourceType);
 			theJobDetails.setCurrentSearchCount(params.getCount());
@@ -237,12 +246,12 @@ public class SubscriptionTriggeringSvcImpl implements ISubscriptionTriggeringSvc
 				toIndex = Math.min(toIndex, theJobDetails.getCurrentSearchCount());
 			}
 			ourLog.info("Triggering job[{}] search {} requesting resources {} - {}", theJobDetails.getJobId(), theJobDetails.getCurrentSearchUuid(), fromIndex, toIndex);
-			List<Long> resourceIds = mySearchCoordinatorSvc.getResources(theJobDetails.getCurrentSearchUuid(), fromIndex, toIndex);
+			List<ResourcePersistentId> resourceIds = mySearchCoordinatorSvc.getResources(theJobDetails.getCurrentSearchUuid(), fromIndex, toIndex, null);
 
 			ourLog.info("Triggering job[{}] delivering {} resources", theJobDetails.getJobId(), resourceIds.size());
 			int highestIndexSubmitted = theJobDetails.getCurrentSearchLastUploadedIndex();
 
-			for (Long next : resourceIds) {
+			for (ResourcePersistentId next : resourceIds) {
 				IBaseResource nextResource = resourceDao.readByPid(next);
 				Future<Void> future = submitResource(theJobDetails.getSubscriptionId(), nextResource);
 				futures.add(Pair.of(nextResource.getIdElement().getIdPart(), future));
@@ -300,12 +309,12 @@ public class SubscriptionTriggeringSvcImpl implements ISubscriptionTriggeringSvc
 		ourLog.info("Submitting resource {} to subscription {}", theResourceToTrigger.getIdElement().toUnqualifiedVersionless().getValue(), theSubscriptionId);
 
 		ResourceModifiedMessage msg = new ResourceModifiedMessage(myFhirContext, theResourceToTrigger, ResourceModifiedMessage.OperationTypeEnum.UPDATE);
-		msg.setSubscriptionId(new IdType(theSubscriptionId).toUnqualifiedVersionless().getValue());
+		msg.setSubscriptionId(theSubscriptionId);
 
 		return myExecutorService.submit(() -> {
 			for (int i = 0; ; i++) {
 				try {
-						myResourceModifiedConsumer.submitResourceModified(msg);
+					myResourceModifiedConsumer.submitResourceModified(msg);
 					break;
 				} catch (Exception e) {
 					if (i >= 3) {
@@ -342,6 +351,11 @@ public class SubscriptionTriggeringSvcImpl implements ISubscriptionTriggeringSvc
 
 	@PostConstruct
 	public void start() {
+		createExecutorService();
+		scheduleJob();
+	}
+
+	private void createExecutorService() {
 		LinkedBlockingQueue<Runnable> executorQueue = new LinkedBlockingQueue<>(1000);
 		BasicThreadFactory threadFactory = new BasicThreadFactory.Builder()
 			.namingPattern("SubscriptionTriggering-%d")
@@ -372,7 +386,29 @@ public class SubscriptionTriggeringSvcImpl implements ISubscriptionTriggeringSvc
 			executorQueue,
 			threadFactory,
 			rejectedExecutionHandler);
+	}
 
+	private void scheduleJob() {
+		ScheduledJobDefinition jobDetail = new ScheduledJobDefinition();
+		jobDetail.setId(getClass().getName());
+		jobDetail.setJobClass(Job.class);
+		// Currently jobs ae kept in a local ArrayList so this should be a local job, and
+		// it can fire frequently without adding load
+		mySchedulerService.scheduleLocalJob(5 * DateUtils.MILLIS_PER_SECOND, jobDetail);
+	}
+
+	public int getActiveJobCount() {
+		return myActiveJobs.size();
+	}
+
+	public static class Job implements HapiJob {
+		@Autowired
+		private ISubscriptionTriggeringSvc myTarget;
+
+		@Override
+		public void execute(JobExecutionContext theContext) {
+			myTarget.runDeliveryPass();
+		}
 	}
 
 	private static class SubscriptionTriggeringJobDetails {
