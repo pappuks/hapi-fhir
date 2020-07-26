@@ -18,6 +18,7 @@ import org.apache.commons.lang3.builder.ToStringStyle;
 
 import java.io.Serializable;
 import java.util.*;
+import java.util.stream.Collectors;
 
 import static org.apache.commons.lang3.StringUtils.isBlank;
 import static org.apache.commons.lang3.StringUtils.isNotBlank;
@@ -60,6 +61,8 @@ public class SearchParameterMap implements Serializable {
 	private SummaryEnum mySummaryMode;
 	private SearchTotalModeEnum mySearchTotalMode;
 	private QuantityParam myNearDistanceParam;
+	private boolean myLastN;
+	private Integer myLastNMax;
 
 	/**
 	 * Constructor
@@ -156,8 +159,9 @@ public class SearchParameterMap implements Serializable {
 		}
 	}
 
-	public void addRevInclude(Include theInclude) {
+	public SearchParameterMap addRevInclude(Include theInclude) {
 		getRevIncludes().add(theInclude);
+		return this;
 	}
 
 	private void addUrlIncludeParams(StringBuilder b, String paramName, Set<Include> theList) {
@@ -265,8 +269,9 @@ public class SearchParameterMap implements Serializable {
 		return mySort;
 	}
 
-	public void setSort(SortSpec theSort) {
+	public SearchParameterMap setSort(SortSpec theSort) {
 		mySort = theSort;
+		return this;
 	}
 
 	/**
@@ -301,6 +306,42 @@ public class SearchParameterMap implements Serializable {
 		myLoadSynchronous = theLoadSynchronous;
 		return this;
 	}
+
+	/**
+	 * If set, tells the server to use an Elasticsearch query to generate a list of
+	 * Resource IDs for the LastN operation
+	 */
+	public boolean isLastN() {
+		return myLastN;
+	}
+
+	/**
+	 * If set, tells the server to use an Elasticsearch query to generate a list of
+	 * Resource IDs for the LastN operation
+	 */
+	public SearchParameterMap setLastN(boolean theLastN) {
+		myLastN = theLastN;
+		return this;
+	}
+
+
+	/**
+	 * If set, tells the server the maximum number of observations to return for each
+	 * observation code in the result set of a lastn operation
+	 */
+	public Integer getLastNMax() {
+		return myLastNMax;
+	}
+
+	/**
+	 * If set, tells the server the maximum number of observations to return for each
+	 * observation code in the result set of a lastn operation
+	 */
+	public SearchParameterMap setLastNMax(Integer theLastNMax) {
+		myLastNMax = theLastNMax;
+		return this;
+	}
+
 
 	/**
 	 * This method creates a URL query string representation of the parameters in this
@@ -455,45 +496,33 @@ public class SearchParameterMap implements Serializable {
 		return b.toString();
 	}
 
+
 	public void clean() {
 		for (Map.Entry<String, List<List<IQueryParameterType>>> nextParamEntry : this.entrySet()) {
 			String nextParamName = nextParamEntry.getKey();
 			List<List<IQueryParameterType>> andOrParams = nextParamEntry.getValue();
-			clean(nextParamName, andOrParams);
+			cleanParameter(nextParamName, andOrParams);
 		}
 	}
 
 	/*
-	 * Filter out
+	 * Given a particular named parameter, e.g. `name`, iterate over AndOrParams and remove any which are empty.
 	 */
-	private void clean(String theParamName, List<List<IQueryParameterType>> theAndOrParams) {
-		for (int andListIdx = 0; andListIdx < theAndOrParams.size(); andListIdx++) {
-			List<? extends IQueryParameterType> nextOrList = theAndOrParams.get(andListIdx);
+	private void cleanParameter(String theParamName, List<List<IQueryParameterType>> theAndOrParams) {
+		theAndOrParams
+			.forEach(
+				orList -> {
+					List<IQueryParameterType> emptyParameters = orList.stream()
+						.filter(nextOr -> nextOr.getMissing() == null)
+						.filter(nextOr -> nextOr instanceof QuantityParam)
+						.filter(nextOr -> isBlank(((QuantityParam) nextOr).getValueAsString()))
+						.collect(Collectors.toList());
 
-			for (int orListIdx = 0; orListIdx < nextOrList.size(); orListIdx++) {
-				IQueryParameterType nextOr = nextOrList.get(orListIdx);
-				boolean hasNoValue = false;
-				if (nextOr.getMissing() != null) {
-					continue;
-				}
-				if (nextOr instanceof QuantityParam) {
-					if (isBlank(((QuantityParam) nextOr).getValueAsString())) {
-						hasNoValue = true;
-					}
-				}
-
-				if (hasNoValue) {
 					ourLog.debug("Ignoring empty parameter: {}", theParamName);
-					nextOrList.remove(orListIdx);
-					orListIdx--;
+					orList.removeAll(emptyParameters);
 				}
-			}
-
-			if (nextOrList.isEmpty()) {
-				theAndOrParams.remove(andListIdx);
-				andListIdx--;
-			}
-		}
+			);
+		theAndOrParams.removeIf(List::isEmpty);
 	}
 
 	public void setNearDistanceParam(QuantityParam theQuantityParam) {
@@ -650,4 +679,18 @@ public class SearchParameterMap implements Serializable {
 	public int size() {
 		return mySearchParameterMap.size();
 	}
+
+	public static SearchParameterMap newSynchronous() {
+		SearchParameterMap retVal = new SearchParameterMap();
+		retVal.setLoadSynchronous(true);
+		return retVal;
+	}
+
+	public static SearchParameterMap newSynchronous(String theName, IQueryParameterType theParam) {
+		SearchParameterMap retVal = new SearchParameterMap();
+		retVal.setLoadSynchronous(true);
+		retVal.add(theName, theParam);
+		return retVal;
+	}
+
 }

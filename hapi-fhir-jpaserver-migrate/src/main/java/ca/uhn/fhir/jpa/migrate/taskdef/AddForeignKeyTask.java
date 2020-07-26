@@ -32,7 +32,7 @@ import java.util.Set;
 
 import static org.apache.commons.lang3.StringUtils.isNotBlank;
 
-public class AddForeignKeyTask extends BaseTableColumnTask<AddForeignKeyTask> {
+public class AddForeignKeyTask extends BaseTableColumnTask {
 
 	private static final Logger ourLog = LoggerFactory.getLogger(AddForeignKeyTask.class);
 	private String myConstraintName;
@@ -78,7 +78,8 @@ public class AddForeignKeyTask extends BaseTableColumnTask<AddForeignKeyTask> {
 		switch (getDriverType()) {
 			case MARIADB_10_1:
 			case MYSQL_5_7:
-				sql = "alter table " + getTableName() + " add constraint " + myConstraintName + " foreign key (" + getColumnName() + ") references " + myForeignTableName + " (" + myForeignColumnName + ")";
+				// Quote the column names as "SYSTEM" is a reserved word in MySQL
+				sql = "alter table " + getTableName() + " add constraint " + myConstraintName + " foreign key (`" + getColumnName() + "`) references " + myForeignTableName + " (`" + myForeignColumnName + "`)";
 				break;
 			case POSTGRES_9_4:
 			case DERBY_EMBEDDED:

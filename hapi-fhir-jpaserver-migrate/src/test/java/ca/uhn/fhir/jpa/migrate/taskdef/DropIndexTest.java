@@ -1,22 +1,29 @@
 package ca.uhn.fhir.jpa.migrate.taskdef;
 
 import ca.uhn.fhir.jpa.migrate.JdbcUtils;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.MethodSource;
 
 import java.sql.SQLException;
+import java.util.function.Supplier;
 
+import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.contains;
-import static org.junit.Assert.assertThat;
 
 public class DropIndexTest extends BaseTest {
 
-	@Test
-	public void testIndexAlreadyExists() throws SQLException {
+
+	@ParameterizedTest(name = "{index}: {0}")
+	@MethodSource("data")
+	public void testIndexAlreadyExists(Supplier<TestDatabaseDetails> theTestDatabaseDetails) throws SQLException {
+		before(theTestDatabaseDetails);
+
 		executeSql("create table SOMETABLE (PID bigint not null, TEXTCOL varchar(255))");
 		executeSql("create index IDX_ANINDEX on SOMETABLE (PID, TEXTCOL)");
 		executeSql("create index IDX_DIFINDEX on SOMETABLE (TEXTCOL)");
 
-		DropIndexTask task = new DropIndexTask("1",  "1");
+		DropIndexTask task = new DropIndexTask("1", "1");
 		task.setDescription("Drop an index");
 		task.setIndexName("IDX_ANINDEX");
 		task.setTableName("SOMETABLE");
@@ -27,12 +34,15 @@ public class DropIndexTest extends BaseTest {
 		assertThat(JdbcUtils.getIndexNames(getConnectionProperties(), "SOMETABLE"), contains("IDX_DIFINDEX"));
 	}
 
-	@Test
-	public void testIndexDoesntAlreadyExist() throws SQLException {
+	@ParameterizedTest(name = "{index}: {0}")
+	@MethodSource("data")
+	public void testIndexDoesntAlreadyExist(Supplier<TestDatabaseDetails> theTestDatabaseDetails) throws SQLException {
+		before(theTestDatabaseDetails);
+
 		executeSql("create table SOMETABLE (PID bigint not null, TEXTCOL varchar(255))");
 		executeSql("create index IDX_DIFINDEX on SOMETABLE (TEXTCOL)");
 
-		DropIndexTask task = new DropIndexTask("1",  "1");
+		DropIndexTask task = new DropIndexTask("1", "1");
 		task.setDescription("Drop an index");
 		task.setIndexName("IDX_ANINDEX");
 		task.setTableName("SOMETABLE");
@@ -44,13 +54,16 @@ public class DropIndexTest extends BaseTest {
 	}
 
 
-	@Test
-	public void testConstraintAlreadyExists() throws SQLException {
+	@ParameterizedTest(name = "{index}: {0}")
+	@MethodSource("data")
+	public void testConstraintAlreadyExists(Supplier<TestDatabaseDetails> theTestDatabaseDetails) throws SQLException {
+		before(theTestDatabaseDetails);
+
 		executeSql("create table SOMETABLE (PID bigint not null, TEXTCOL varchar(255))");
 		executeSql("create index IDX_ANINDEX on SOMETABLE (PID, TEXTCOL)");
 		executeSql("create index IDX_DIFINDEX on SOMETABLE (TEXTCOL)");
 
-		DropIndexTask task = new DropIndexTask("1",  "1");
+		DropIndexTask task = new DropIndexTask("1", "1");
 		task.setDescription("Drop an index");
 		task.setIndexName("IDX_ANINDEX");
 		task.setTableName("SOMETABLE");
@@ -61,12 +74,15 @@ public class DropIndexTest extends BaseTest {
 		assertThat(JdbcUtils.getIndexNames(getConnectionProperties(), "SOMETABLE"), contains("IDX_DIFINDEX"));
 	}
 
-	@Test
-	public void testConstraintDoesntAlreadyExist() throws SQLException {
+	@ParameterizedTest(name = "{index}: {0}")
+	@MethodSource("data")
+	public void testConstraintDoesntAlreadyExist(Supplier<TestDatabaseDetails> theTestDatabaseDetails) throws SQLException {
+		before(theTestDatabaseDetails);
+
 		executeSql("create table SOMETABLE (PID bigint not null, TEXTCOL varchar(255))");
 		executeSql("create index IDX_DIFINDEX on SOMETABLE (TEXTCOL)");
 
-		DropIndexTask task = new DropIndexTask("1",  "1");
+		DropIndexTask task = new DropIndexTask("1", "1");
 		task.setDescription("Drop an index");
 		task.setIndexName("IDX_ANINDEX");
 		task.setTableName("SOMETABLE");

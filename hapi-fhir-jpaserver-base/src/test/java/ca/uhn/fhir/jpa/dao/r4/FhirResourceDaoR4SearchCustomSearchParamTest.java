@@ -1,26 +1,60 @@
 package ca.uhn.fhir.jpa.dao.r4;
 
-import ca.uhn.fhir.interceptor.api.Hook;
 import ca.uhn.fhir.interceptor.api.HookParams;
 import ca.uhn.fhir.interceptor.api.IAnonymousInterceptor;
 import ca.uhn.fhir.interceptor.api.Pointcut;
-import ca.uhn.fhir.jpa.dao.DaoConfig;
+import ca.uhn.fhir.jpa.api.config.DaoConfig;
 import ca.uhn.fhir.jpa.model.entity.ModelConfig;
 import ca.uhn.fhir.jpa.model.entity.ResourceIndexedSearchParamToken;
 import ca.uhn.fhir.jpa.model.search.StorageProcessingMessage;
 import ca.uhn.fhir.jpa.searchparam.SearchParameterMap;
 import ca.uhn.fhir.model.api.Include;
 import ca.uhn.fhir.rest.api.server.IBundleProvider;
-import ca.uhn.fhir.rest.param.*;
+import ca.uhn.fhir.rest.param.DateParam;
+import ca.uhn.fhir.rest.param.NumberParam;
+import ca.uhn.fhir.rest.param.ReferenceOrListParam;
+import ca.uhn.fhir.rest.param.ReferenceParam;
+import ca.uhn.fhir.rest.param.StringParam;
+import ca.uhn.fhir.rest.param.TokenParam;
 import ca.uhn.fhir.rest.server.exceptions.InvalidRequestException;
 import ca.uhn.fhir.rest.server.exceptions.UnprocessableEntityException;
 import ca.uhn.fhir.util.TestUtil;
 import org.hamcrest.Matchers;
 import org.hl7.fhir.instance.model.api.IIdType;
-import org.hl7.fhir.r4.model.*;
+import org.hl7.fhir.r4.model.Appointment;
 import org.hl7.fhir.r4.model.Appointment.AppointmentStatus;
+import org.hl7.fhir.r4.model.Bundle;
+import org.hl7.fhir.r4.model.ChargeItem;
+import org.hl7.fhir.r4.model.CodeType;
+import org.hl7.fhir.r4.model.CodeableConcept;
+import org.hl7.fhir.r4.model.Coding;
+import org.hl7.fhir.r4.model.Composition;
+import org.hl7.fhir.r4.model.Condition;
+import org.hl7.fhir.r4.model.DateTimeType;
+import org.hl7.fhir.r4.model.DateType;
+import org.hl7.fhir.r4.model.DecimalType;
+import org.hl7.fhir.r4.model.DiagnosticReport;
+import org.hl7.fhir.r4.model.Encounter;
+import org.hl7.fhir.r4.model.Enumerations;
 import org.hl7.fhir.r4.model.Enumerations.AdministrativeGender;
-import org.junit.*;
+import org.hl7.fhir.r4.model.Extension;
+import org.hl7.fhir.r4.model.Group;
+import org.hl7.fhir.r4.model.IntegerType;
+import org.hl7.fhir.r4.model.MedicationRequest;
+import org.hl7.fhir.r4.model.MessageHeader;
+import org.hl7.fhir.r4.model.Observation;
+import org.hl7.fhir.r4.model.Patient;
+import org.hl7.fhir.r4.model.Practitioner;
+import org.hl7.fhir.r4.model.Reference;
+import org.hl7.fhir.r4.model.SearchParameter;
+import org.hl7.fhir.r4.model.ServiceRequest;
+import org.hl7.fhir.r4.model.Specimen;
+import org.hl7.fhir.r4.model.StringType;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
 import org.mockito.ArgumentCaptor;
 import org.mockito.internal.util.collections.ListUtil;
 import org.springframework.transaction.TransactionStatus;
@@ -30,24 +64,73 @@ import org.springframework.transaction.support.TransactionTemplate;
 
 import java.util.List;
 
-import static org.hamcrest.Matchers.startsWith;
+import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.contains;
-import static org.hamcrest.Matchers.*;
-import static org.junit.Assert.*;
-import static org.mockito.Mockito.*;
+import static org.hamcrest.Matchers.containsInAnyOrder;
+import static org.hamcrest.Matchers.containsString;
+import static org.hamcrest.Matchers.empty;
+import static org.hamcrest.Matchers.hasItems;
+import static org.hamcrest.Matchers.not;
+import static org.hamcrest.Matchers.startsWith;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.fail;
+import static org.mockito.Mockito.any;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
 
 public class FhirResourceDaoR4SearchCustomSearchParamTest extends BaseJpaR4Test {
 	private static final org.slf4j.Logger ourLog = org.slf4j.LoggerFactory.getLogger(FhirResourceDaoR4SearchCustomSearchParamTest.class);
 
-	@After
+	@AfterEach
 	public void after() {
 		myDaoConfig.setValidateSearchParameterExpressionsOnSave(new DaoConfig().isValidateSearchParameterExpressionsOnSave());
 	}
 
-	@Before
+	@BeforeEach
 	public void beforeDisableResultReuse() {
 		myDaoConfig.setReuseCachedSearchResultsForMillis(null);
 		myModelConfig.setDefaultSearchParamsCanBeOverridden(new ModelConfig().isDefaultSearchParamsCanBeOverridden());
+		myDaoConfig.setMarkResourcesForReindexingUponSearchParameterChange(new DaoConfig().isMarkResourcesForReindexingUponSearchParameterChange());
+	}
+
+	@Test
+	public void testStoreSearchParamWithBracketsInExpression() {
+		myDaoConfig.setMarkResourcesForReindexingUponSearchParameterChange(true);
+
+		SearchParameter fooSp = new SearchParameter();
+		fooSp.setCode("foo");
+		fooSp.addBase("ActivityDefinition");
+		fooSp.setType(Enumerations.SearchParamType.REFERENCE);
+		fooSp.setTitle("FOO SP");
+		fooSp.setExpression("(ActivityDefinition.useContext.value as Quantity) | (ActivityDefinition.useContext.value as Range)");
+		fooSp.setXpathUsage(org.hl7.fhir.r4.model.SearchParameter.XPathUsageType.NORMAL);
+		fooSp.setStatus(org.hl7.fhir.r4.model.Enumerations.PublicationStatus.ACTIVE);
+
+		// Ensure that no exceptions are thrown
+		mySearchParameterDao.create(fooSp, mySrd);
+		mySearchParamRegistry.forceRefresh();
+	}
+
+	/**
+	 * Draft search parameters should be ok even if they aren't completely valid
+	 */
+	@Test
+	public void testStoreDraftSearchParam_DontValidate() {
+		myDaoConfig.setMarkResourcesForReindexingUponSearchParameterChange(true);
+
+		SearchParameter fooSp = new SearchParameter();
+		fooSp.setCode("foo");
+		fooSp.addBase("ActivityDefinition");
+		fooSp.setType(Enumerations.SearchParamType.REFERENCE);
+		fooSp.setTitle("FOO SP");
+		fooSp.setExpression("FOO FOO FOO");
+		fooSp.setXpathUsage(org.hl7.fhir.r4.model.SearchParameter.XPathUsageType.NORMAL);
+		fooSp.setStatus(Enumerations.PublicationStatus.DRAFT);
+
+		// Ensure that no exceptions are thrown
+		mySearchParameterDao.create(fooSp, mySrd);
+		mySearchParamRegistry.forceRefresh();
 	}
 
 
@@ -110,7 +193,7 @@ public class FhirResourceDaoR4SearchCustomSearchParamTest extends BaseJpaR4Test 
 	}
 
 	@Test
-	@Ignore
+	@Disabled
 	public void testCreateInvalidParamInvalidResourceName() {
 		SearchParameter fooSp = new SearchParameter();
 		fooSp.addBase("Patient");
@@ -146,7 +229,7 @@ public class FhirResourceDaoR4SearchCustomSearchParamTest extends BaseJpaR4Test 
 	}
 
 	@Test
-	@Ignore
+	@Disabled
 	public void testCreateInvalidParamNoResourceName() {
 		SearchParameter fooSp = new SearchParameter();
 		fooSp.addBase("Patient");
@@ -254,6 +337,7 @@ public class FhirResourceDaoR4SearchCustomSearchParamTest extends BaseJpaR4Test 
 
 		MessageHeader messageHeader = new MessageHeader();
 		messageHeader.setId("123");
+		messageHeader.setDefinition("Hello");
 		Bundle bundle = new Bundle();
 		bundle.setType(Bundle.BundleType.MESSAGE);
 		bundle.addEntry()
@@ -345,34 +429,12 @@ public class FhirResourceDaoR4SearchCustomSearchParamTest extends BaseJpaR4Test 
 		memberSp.setType(Enumerations.SearchParamType.REFERENCE);
 		memberSp.setExpression("Group.member.entity");
 		memberSp.setStatus(Enumerations.PublicationStatus.RETIRED);
-		mySearchParameterDao.create(memberSp, mySrd);
-
-		SearchParameter identifierSp = new SearchParameter();
-		identifierSp.setCode("identifier");
-		identifierSp.addBase("Group");
-		identifierSp.setType(Enumerations.SearchParamType.TOKEN);
-		identifierSp.setExpression("Group.identifier");
-		identifierSp.setStatus(Enumerations.PublicationStatus.RETIRED);
-		mySearchParameterDao.create(identifierSp, mySrd);
-
-		mySearchParamRegistry.forceRefresh();
-
-		Patient p = new Patient();
-		p.addName().addGiven("G");
-		IIdType pid = myPatientDao.create(p).getId().toUnqualifiedVersionless();
-
-		Group g = new Group();
-		g.addIdentifier().setSystem("urn:foo").setValue("bar");
-		g.addMember().getEntity().setReferenceElement(pid);
-		myGroupDao.create(g);
-
-		assertThat(myResourceLinkDao.findAll(), not(empty()));
-		assertThat(ListUtil.filter(myResourceIndexedSearchParamTokenDao.findAll(), new ListUtil.Filter<ResourceIndexedSearchParamToken>() {
-			@Override
-			public boolean isOut(ResourceIndexedSearchParamToken object) {
-				return !object.getResourceType().equals("Group") || object.isMissing();
-			}
-		}), not(empty()));
+		try {
+			mySearchParameterDao.create(memberSp, mySrd);
+			fail();
+		} catch (UnprocessableEntityException e) {
+			assertEquals("Can not override built-in search parameter Group:member because overriding is disabled on this server", e.getMessage());
+		}
 	}
 
 	@Test
@@ -1300,7 +1362,7 @@ public class FhirResourceDaoR4SearchCustomSearchParamTest extends BaseJpaR4Test 
 			myPatientDao.search(map).size();
 			fail();
 		} catch (InvalidRequestException e) {
-			assertEquals("Unknown search parameter foo for resource type Patient", e.getMessage());
+			assertEquals("Unknown search parameter \"foo\" for resource type \"Patient\". Valid search parameters for this search are: [_id, _language, active, address, address-city, address-country, address-postalcode, address-state, address-use, birthdate, death-date, deceased, email, family, gender, general-practitioner, given, identifier, language, link, name, organization, phone, phonetic, telecom]", e.getMessage());
 		}
 	}
 
@@ -1338,7 +1400,7 @@ public class FhirResourceDaoR4SearchCustomSearchParamTest extends BaseJpaR4Test 
 			myPatientDao.search(map).size();
 			fail();
 		} catch (InvalidRequestException e) {
-			assertEquals("Unknown search parameter foo for resource type Patient", e.getMessage());
+			assertEquals("Unknown search parameter \"foo\" for resource type \"Patient\". Valid search parameters for this search are: [_id, _language, active, address, address-city, address-country, address-postalcode, address-state, address-use, birthdate, death-date, deceased, email, family, gender, general-practitioner, given, identifier, language, link, name, organization, phone, phonetic, telecom]", e.getMessage());
 		}
 
 		// Try with normal gender SP
@@ -1411,9 +1473,5 @@ public class FhirResourceDaoR4SearchCustomSearchParamTest extends BaseJpaR4Test 
 
 
 
-	@AfterClass
-	public static void afterClassClearContext() {
-		TestUtil.clearAllStaticFieldsForUnitTest();
-	}
 
 }
